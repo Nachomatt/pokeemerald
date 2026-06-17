@@ -4069,6 +4069,14 @@ u8 IsRunningFromBattleImpossible(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
         return BATTLE_RUN_FAILURE;
     }
+    i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_FOREST_GRIP, 0, 0);
+    if (i != 0 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GRASS))
+    {
+        gBattleScripting.battler = i - 1;
+        gLastUsedAbility = gBattleMons[i - 1].ability;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
+        return BATTLE_RUN_FAILURE;
+    }
     if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
         || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
@@ -4250,7 +4258,9 @@ static void HandleTurnActionSelectionState(void)
                                  && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
                                  && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
-                                 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))
+                                 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
+                             || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_FOREST_GRIP, 0, 0))
+                                 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GRASS)))
                     {
                         BtlController_EmitChoosePokemon(B_COMM_TO_CONTROLLER, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, PARTY_SIZE, gLastUsedAbility, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }

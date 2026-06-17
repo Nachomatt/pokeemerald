@@ -1368,6 +1368,7 @@ static void Cmd_get_ability(void)
         // abilities that prevent fleeing.
         if (gBattleMons[battler].ability == ABILITY_SHADOW_TAG
         || gBattleMons[battler].ability == ABILITY_MAGNET_PULL
+        || gBattleMons[battler].ability == ABILITY_FOREST_GRIP
         || gBattleMons[battler].ability == ABILITY_ARENA_TRAP)
         {
             AI_THINKING_STRUCT->funcResult = gBattleMons[battler].ability;
@@ -1419,6 +1420,7 @@ static void Cmd_check_ability(void)
         // Abilities that prevent fleeing.
         else if (gBattleMons[battler].ability == ABILITY_SHADOW_TAG
         || gBattleMons[battler].ability == ABILITY_MAGNET_PULL
+        || gBattleMons[battler].ability == ABILITY_FOREST_GRIP
         || gBattleMons[battler].ability == ABILITY_ARENA_TRAP)
         {
             ability = gBattleMons[battler].ability;

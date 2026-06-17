@@ -691,6 +691,8 @@ static const u16 sSoundMovesTable[] =
     MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, SOUND_MOVES_END
 };
 
+
+
 u8 GetBattlerForBattleScript(u8 caseId)
 {
     u8 ret = 0;
@@ -2672,6 +2674,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect = 1;
                 }
             }
+            
             break;
         case ABILITYEFFECT_ABSORBING: // 3
             if (move)

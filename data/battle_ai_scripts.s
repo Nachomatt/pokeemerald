@@ -60,6 +60,7 @@ AI_CBM_CheckIfNegatesType:
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
+	if_equal ABILITY_EARTH_EATER, CheckIfEarthEaterCancelsGround
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
 	goto AI_CheckBadMove_CheckSoundproof_
@@ -77,6 +78,11 @@ CheckIfWaterAbsorbCancelsWater:
 CheckIfFlashFireCancelsFire:
 	get_curr_move_type
 	if_equal_ TYPE_FIRE, Score_Minus12
+	goto AI_CheckBadMove_CheckSoundproof_
+
+CheckIfEarthEaterCancelsGround
+	get_curr_move_type
+	if_equal_ TYPE_GROUND, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfWonderGuardCancelsMove:

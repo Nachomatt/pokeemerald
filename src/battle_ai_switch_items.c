@@ -451,6 +451,11 @@ static bool8 ShouldSwitch(void)
         if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
             return FALSE;
     }
+    if (ABILITY_ON_FIELD2(ABILITY_FOREST_GRIP))
+    {
+        if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GRASS))
+            return FALSE;
+    }
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return FALSE;
 
