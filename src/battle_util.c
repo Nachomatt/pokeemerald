@@ -2682,7 +2682,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
 
                 case ABILITY_TOUGH_HIDE:
-                    for (i = 0; sWeakMovesTable[i] != SOUND_MOVES_END; i++)
+                    for (i = 0; sWeakMovesTable[i] != WEAK_MOVES_END; i++)
                     {
                     if (sWeakMovesTable[i] == move)
                         break;
@@ -2696,7 +2696,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
             }
-
             break;
         case ABILITYEFFECT_ABSORBING: // 3
             if (move)
