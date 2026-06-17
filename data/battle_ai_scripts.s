@@ -80,7 +80,7 @@ CheckIfFlashFireCancelsFire:
 	if_equal_ TYPE_FIRE, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof_
 
-CheckIfEarthEaterCancelsGround
+CheckIfEarthEaterCancelsGround:
 	get_curr_move_type
 	if_equal_ TYPE_GROUND, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof_

@@ -78,7 +78,7 @@ static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
 static const u8 sEarthEaterDescription[] = _("Changes Ground into HP.");
 static const u8 sForestGripDescription[] = _("Traps GRASS type Pokemon.");
-static const u8 sForestGripDescription[] = _("Shrugs off weak attacks.");
+static const u8 sToughHideDescription[] = _("Shrugs off weak attacks.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
