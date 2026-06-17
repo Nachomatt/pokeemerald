@@ -8148,16 +8148,18 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Crissy[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Rick[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_Rick[] = {
     {
     .iv = 0,
     .lvl = 4,
     .species = SPECIES_WURMPLE,
+    .moves = {MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_PECK}
     },
     {
     .iv = 0,
     .lvl = 4,
     .species = SPECIES_WURMPLE,
+    .moves = {MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_PECK}
     }
 };
 
