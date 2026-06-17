@@ -694,7 +694,7 @@ static const u16 sSoundMovesTable[] =
 
 static const u16 sWeakMovesTable[] =
 {
-    MOVE_TACKLE, MOVE_POUND, WEAK_MOVES_END
+    MOVE_TACKLE, MOVE_POUND, MOVE_VITAL_THROW, MOVE_SILVER_WIND, WEAK_MOVES_END
 };
 
 
