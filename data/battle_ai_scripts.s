@@ -95,6 +95,7 @@ CheckIfLevitateCancelsGroundMove:
 AI_CheckBadMove_CheckSoundproof_:
 	get_how_powerful_move_is
 	if_equal MOVE_POWER_OTHER, AI_CheckBadMove_CheckSoundproof  @ Pointless check
+
 AI_CheckBadMove_CheckSoundproof:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
@@ -107,6 +108,13 @@ AI_CheckBadMove_CheckSoundproof:
 	if_move MOVE_UPROAR, Score_Minus10
 	if_move MOVE_METAL_SOUND, Score_Minus10
 	if_move MOVE_GRASS_WHISTLE, Score_Minus10
+
+AI_CheckBadMove_CheckToughHide:
+	get_ability AI_TARGET
+	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckEffect
+	if_move MOVE_TACKLE, Score_Minus10
+	if_move MOVE_POUND, Score_Minus10
+
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
 	if_effect EFFECT_EXPLOSION, AI_CBM_Explosion
