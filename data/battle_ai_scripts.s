@@ -108,6 +108,7 @@ AI_CheckBadMove_CheckSoundproof:
 	if_move MOVE_UPROAR, Score_Minus10
 	if_move MOVE_METAL_SOUND, Score_Minus10
 	if_move MOVE_GRASS_WHISTLE, Score_Minus10
+	if_move MOVE_HYPER_VOICE, Score_Minus10
 
 AI_CheckBadMove_CheckToughHide:
 	get_ability AI_TARGET

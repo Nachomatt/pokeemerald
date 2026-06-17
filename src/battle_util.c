@@ -2668,17 +2668,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 case ABILITY_SOUNDPROOF:
                     for (i = 0; sSoundMovesTable[i] != SOUND_MOVES_END; i++)
-                {
+                    {
                     if (sSoundMovesTable[i] == move)
                         break;
-                }
-                if (sSoundMovesTable[i] != SOUND_MOVES_END)
-                {
-                    if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
-                        gHitMarker |= HITMARKER_NO_PPDEDUCT;
-                    gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
-                    effect = 1;
-                }
+                    }
+                    if (sSoundMovesTable[i] != SOUND_MOVES_END)
+                    {
+                        if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+                            gHitMarker |= HITMARKER_NO_PPDEDUCT;
+                        gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
+                        effect = 1;
+                    }
                     break;
 
                 case ABILITY_TOUGH_HIDE:
@@ -2687,12 +2687,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     if (sWeakMovesTable[i] == move)
                         break;
                     }
-                        if (sWeakMovesTable[i] != WEAK_MOVES_END)
+                    if (sWeakMovesTable[i] != WEAK_MOVES_END)
                     {
                         if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
-                        gHitMarker |= HITMARKER_NO_PPDEDUCT;
-                    gBattlescriptCurrInstr = BattleScript_ToughHideProtected;
-                    effect = 1;
+                            gHitMarker |= HITMARKER_NO_PPDEDUCT;
+                        gBattlescriptCurrInstr = BattleScript_ToughHideProtected;
+                        effect = 1;
                     }
                     break;
             }
