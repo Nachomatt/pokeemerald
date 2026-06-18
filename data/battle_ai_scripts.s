@@ -114,7 +114,8 @@ AI_CheckBadMove_CheckToughHide:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckEffect
 	get_move_power_from_result
-	if_less_than 65 and if_more_than 0 , Score_Minus10
+	if_less_than 65
+	if_more_than 0, Score_Minus10
 
 
 
