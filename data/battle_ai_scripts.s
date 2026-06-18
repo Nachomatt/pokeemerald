@@ -116,7 +116,6 @@ AI_CheckBadMove_CheckToughHide:
 	get_considered_move_power
 	if_equal 0, Score_Plus0
 	if_less_than 65, Score_Minus10
-	
 
 
 
