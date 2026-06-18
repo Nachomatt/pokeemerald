@@ -2692,7 +2692,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect = 1;
                     }
                     break;
-            }
+             }       
+                       
+           }
             break;
             
         case ABILITYEFFECT_ABSORBING: // 3
