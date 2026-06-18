@@ -113,8 +113,7 @@ AI_CheckBadMove_CheckSoundproof:
 AI_CheckBadMove_CheckToughHide:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckEffect
-	get_move_power_from_result
-	if_less_than 65,Score_Minus10
+
 
 
 
