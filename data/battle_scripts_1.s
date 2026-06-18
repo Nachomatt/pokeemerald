@@ -4167,7 +4167,7 @@ BattleScript_ToughHideProtected::
 	attackstring
 	ppreduce
 	pause B_WAIT_TIME_SHORT
-	printstring STRINGID_PKMNSXBLOCKSY2
+	printstring STRINGID_PKMNSXBLOCKSY3
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
