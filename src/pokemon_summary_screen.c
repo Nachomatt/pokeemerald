@@ -311,6 +311,7 @@ static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
+static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n);
 static void BufferIvOrEvStats(u8 mode);
 
 // const rom data
@@ -3499,7 +3500,6 @@ static void BufferIvOrEvStats(u8 mode)
     {
     case 0:
     default:
-        BufferStat(currHPString, 0, hp, 0, 3);
         BufferStat(gStringVar1, 0, hp2, 1, 3);
         BufferStat(gStringVar2, natureMod[STAT_ATK - 1], atk, 2, 7);
         BufferStat(gStringVar3, natureMod[STAT_DEF - 1], def, 3, 7);
