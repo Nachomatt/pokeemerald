@@ -692,10 +692,8 @@ static const u16 sSoundMovesTable[] =
     MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, SOUND_MOVES_END
 };
 
-static const u16 sWeakMovesTable[] =
-{
-    MOVE_TACKLE, MOVE_POUND, MOVE_VITAL_THROW, MOVE_SILVER_WIND, WEAK_MOVES_END
-};
+
+
 
 
 u8 GetBattlerForBattleScript(u8 caseId)
@@ -2664,6 +2662,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITYEFFECT_MOVES_BLOCK: // 2
+          if(move)
+          {
             switch(gLastUsedAbility)
             {
                 case ABILITY_SOUNDPROOF:
@@ -2682,12 +2682,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
 
                 case ABILITY_TOUGH_HIDE:
-                    for (i = 0; sWeakMovesTable[i] != WEAK_MOVES_END; i++)
-                    {
-                    if (sWeakMovesTable[i] == move)
+                    if (gBattleMoves[move].power <65 && gBattleMoves[move].power > 0)
                         break;
-                    }
-                    if (sWeakMovesTable[i] != WEAK_MOVES_END)
+                    if (gBattleMoves[move].power > 65 || gBattleMoves[move].power == 0)
                     {
                         if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
                             gHitMarker |= HITMARKER_NO_PPDEDUCT;
@@ -2697,6 +2694,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
             }
             break;
+            
         case ABILITYEFFECT_ABSORBING: // 3
             if (move)
             {
