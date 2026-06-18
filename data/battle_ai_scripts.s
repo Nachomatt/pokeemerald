@@ -98,7 +98,7 @@ AI_CheckBadMove_CheckSoundproof_:
 
 AI_CheckBadMove_CheckSoundproof:
 	get_ability AI_TARGET
-	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
+	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckToughHide
 	if_move MOVE_GROWL, Score_Minus10
 	if_move MOVE_ROAR, Score_Minus10
 	if_move MOVE_SING, Score_Minus10
