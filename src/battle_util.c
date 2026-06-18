@@ -2682,16 +2682,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     break;
 
                 case ABILITY_TOUGH_HIDE:
-                    if (gBattleMoves[move].power < 65 || gBattleMoves[move].power > 0)
+                    if (gBattleMoves[move].power < 65 && gBattleMoves[move].power > 0)
                     {
                         if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
                             gHitMarker |= HITMARKER_NO_PPDEDUCT;
                         gBattlescriptCurrInstr = BattleScript_ToughHideProtected;
-                    }
-                    else
-                    {
-                        gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
-                        effect = 1;
+                        effect = 1;      
                     }
              }       
                        
