@@ -311,6 +311,7 @@ static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
+static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n);
 static void BufferIvOrEvStats(u8 mode);
 
 // const rom data
@@ -3563,6 +3564,8 @@ static void PrintLeftColumnStats(void)
 
 static void BufferRightColumnStats(void)
 {
+    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
+
     ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.spatk, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, sMonSummaryScreen->summary.spdef, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar3, sMonSummaryScreen->summary.speed, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -3577,9 +3580,9 @@ static void BufferRightColumnStats(void)
     CopyBgTilemapBufferToVram(1);
 
     DynamicPlaceholderTextUtil_Reset();
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar3);
+    BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], sMonSummaryScreen->summary.spatk, 0, 3);
+    BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], sMonSummaryScreen->summary.spdef, 1, 3);
+    BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
 }
 
