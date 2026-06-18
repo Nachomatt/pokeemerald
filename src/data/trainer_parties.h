@@ -8153,7 +8153,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_Rick[] = {
     .iv = 0,
     .lvl = 4,
     .species = SPECIES_WURMPLE,
-    .moves = {MOVE_VITAL_THROW, MOVE_SILVER_WIND, MOVE_POUND, MOVE_PECK}
+    .moves = {MOVE_THUNDER_PUNCH, MOVE_SILVER_WIND, MOVE_POUND, MOVE_PECK}
     },
     {
     .iv = 0,

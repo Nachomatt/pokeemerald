@@ -113,10 +113,10 @@ AI_CheckBadMove_CheckSoundproof:
 AI_CheckBadMove_CheckToughHide:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckEffect
-	if_move MOVE_TACKLE, Score_Minus10
-	if_move MOVE_POUND, Score_Minus10
-	if_move MOVE_VITAL_THROW, Score_Minus10
-	if_move MOVE_SILVER_WIND, Score_Minus10
+	get_move_power_from_result
+	if_less_than 65, Score_Minus10
+
+
 
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
