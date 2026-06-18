@@ -311,11 +311,12 @@ static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
+static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n);
 static void BufferIvOrEvStats(u8 mode);
 
-// const rom data
-#include "data/text/move_descriptions.h"
-#include "data/text/nature_names.h"
+ // const rom data
+ #include "data/text/move_descriptions.h"
+ #include "data/text/nature_names.h"
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -745,7 +746,7 @@ static const TaskFunc sTextPrinterTasks[] =
 };
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
-static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
+static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}");
 static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 2}\n{DYNAMIC 3}");
 static const u8 sStatsLeftColumnLayoutIVEV[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
@@ -1531,6 +1532,7 @@ static void CloseSummaryScreen(u8 taskId)
     }
 }
 
+
 #define currentStat  taskData[3]
 #define STAT_STATS  0
 #define STAT_IVS    1
@@ -1576,36 +1578,38 @@ static void ChangeSummaryState(s16 *taskData, u8 taskId)
     gTasks[taskId].func = Task_HandleInput;
 }
 
-static void Task_HandleInput(u8 taskId)
-{
-    s16 *taskData = gTasks[taskId].data;
 
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
-    {
-        if (JOY_NEW(DPAD_UP))
-        {
+static void Task_HandleInput(u8 taskId)
+ {
+     s16 *taskData = gTasks[taskId].data;
+
+     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
+     {
+         if (JOY_NEW(DPAD_UP))
+         {
+             currentStat = STAT_STATS;
+             ChangeSummaryPokemon(taskId, -1);
+         }
+         else if (JOY_NEW(DPAD_DOWN))
+         {
             currentStat = STAT_STATS;
-            ChangeSummaryPokemon(taskId, -1);
-        }
-        else if (JOY_NEW(DPAD_DOWN))
-        {
+             ChangeSummaryPokemon(taskId, 1);
+         }
+         else if ((JOY_NEW(DPAD_LEFT)) || GetLRKeysPressed() == MENU_L_PRESSED)
+         {
             currentStat = STAT_STATS;
-            ChangeSummaryPokemon(taskId, 1);
-        }
-        else if ((JOY_NEW(DPAD_LEFT)) || GetLRKeysPressed() == MENU_L_PRESSED)
-        {
+             ChangePage(taskId, -1);
+         }
+         else if ((JOY_NEW(DPAD_RIGHT)) || GetLRKeysPressed() == MENU_R_PRESSED)
+         {
             currentStat = STAT_STATS;
-            ChangePage(taskId, -1);
-        }
-        else if ((JOY_NEW(DPAD_RIGHT)) || GetLRKeysPressed() == MENU_R_PRESSED)
-        {
-            currentStat = STAT_STATS;
-            ChangePage(taskId, 1);
-        }
-        else if (JOY_NEW(A_BUTTON))
-        {
+             ChangePage(taskId, 1);
+         }
+         else if (JOY_NEW(A_BUTTON))
+         {
             if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
-            {
+             {
+
                 // Cycle through IVs/EVs/stats on pressing A
                 PlaySE(SE_SELECT);
                 ChangeSummaryState(taskData, taskId);
@@ -1621,16 +1625,16 @@ static void Task_HandleInput(u8 taskId)
             {
                 PlaySE(SE_SELECT);
                 SwitchToMoveSelection(taskId);
-            }
-        }
-        else if (JOY_NEW(B_BUTTON))
-        {
-            StopPokemonAnimations();
-            PlaySE(SE_SELECT);
-            BeginCloseSummaryScreen(taskId);
-        }
-    }
-}
+             }
+         }
+         else if (JOY_NEW(B_BUTTON))
+         {
+             StopPokemonAnimations();
+             PlaySE(SE_SELECT);
+             BeginCloseSummaryScreen(taskId);
+         }
+     }
+ }
 
 static void ChangeSummaryPokemon(u8 taskId, s8 delta)
 {
@@ -2941,34 +2945,34 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Jam, 0, 17, 0, 1);
 }
 
-static void PutPageWindowTilemaps(u8 page)
-{
-    u8 i;
+ static void PutPageWindowTilemaps(u8 page)
+ {
+     u8 i;
 
     LZDecompressWram(gSummaryPage_Skills_Tilemap, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_SKILLS][1]);
     CopyBgTilemapBufferToVram(1);
 
-    ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TITLE);
-    ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE);
-    ClearWindowTilemap(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE);
-    ClearWindowTilemap(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE);
+     ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TITLE);
+     ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE);
+     ClearWindowTilemap(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE);
+     ClearWindowTilemap(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE);
 
-    switch (page)
-    {
-    case PSS_PAGE_INFO:
-        PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TITLE);
-        PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_CANCEL);
-        if (InBattleFactory() == TRUE || InSlateportBattleTent() == TRUE)
-            PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL);
-        PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE);
-        break;
-    case PSS_PAGE_SKILLS:
-        PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_SWITCH);
-        PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE);
-        PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT);
-        PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT);
-        PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP);
-        break;
+     switch (page)
+     {
+     case PSS_PAGE_INFO:
+         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TITLE);
+         PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_CANCEL);
+         if (InBattleFactory() == TRUE || InSlateportBattleTent() == TRUE)
+             PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL);
+         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE);
+         break;
+     case PSS_PAGE_SKILLS:
+         PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_SWITCH);
+         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE);
+         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT);
+         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT);
+         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP);
+         break;
     case PSS_PAGE_BATTLE_MOVES:
         PutWindowTilemap(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE);
         if (sMonSummaryScreen->mode == SUMMARY_MODE_SELECT_MOVE)
@@ -3001,25 +3005,25 @@ static void PutPageWindowTilemaps(u8 page)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void ClearPageWindowTilemaps(u8 page)
-{
-    u8 i;
+ static void ClearPageWindowTilemaps(u8 page)
+ {
+     u8 i;
 
-    switch (page)
-    {
-    case PSS_PAGE_INFO:
-        ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_CANCEL);
-        if (InBattleFactory() == TRUE || InSlateportBattleTent() == TRUE)
-            ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL);
-        ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE);
-        break;
-    case PSS_PAGE_SKILLS:
-        ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_SWITCH);
-        ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT);
-        ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT);
-        ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP);
+     switch (page)
+     {
+     case PSS_PAGE_INFO:
+         ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_CANCEL);
+         if (InBattleFactory() == TRUE || InSlateportBattleTent() == TRUE)
+             ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL);
+         ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE);
+         break;
+     case PSS_PAGE_SKILLS:
+         ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_SWITCH);
+         ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT);
+         ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT);
+         ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP);
         CopyBgTilemapBufferToVram(1);
-        break;
+         break;
     case PSS_PAGE_BATTLE_MOVES:
         if (sMonSummaryScreen->mode == SUMMARY_MODE_SELECT_MOVE)
         {
@@ -3499,6 +3503,7 @@ static void BufferIvOrEvStats(u8 mode)
     {
     case 0:
     default:
+        BufferStat(currHPString, 0, hp, 0, 3);
         BufferStat(gStringVar1, 0, hp2, 1, 3);
         BufferStat(gStringVar2, natureMod[STAT_ATK - 1], atk, 2, 7);
         BufferStat(gStringVar3, natureMod[STAT_DEF - 1], def, 3, 7);
@@ -3530,6 +3535,10 @@ static void BufferIvOrEvStats(u8 mode)
     Free(currHPString);
 }
 
+
+
+
+
 static void BufferLeftColumnStats(void)
 {
     u8 *currentHPString = Alloc(8);
@@ -3560,14 +3569,11 @@ static void PrintLeftColumnStats(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_LEFT), gStringVar4, 4, 1, 0, 0);
 }
 
-static void BufferRightColumnStats(void)
-{
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
+ static void BufferRightColumnStats(void)
+ {
+     const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
 
-    ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.spatk, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, sMonSummaryScreen->summary.spdef, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, sMonSummaryScreen->summary.speed, STR_CONV_MODE_RIGHT_ALIGN, 3);
-
+    // Reset to STATS graphics
     FillBgTilemapBufferRect(1, STATS_BLANK_BLOCK, STATS_CORD_X + 3, STATS_CORD_Y, 1, 1, 2);
     FillBgTilemapBufferRect(1, STATS_BLANK_BLOCK, STATS_CORD_X + 4, STATS_CORD_Y, 1, 1, 2);
     FillBgTilemapBufferRect(1, STATS_BLANK_BLOCK, STATS_CORD_X + 5, STATS_CORD_Y, 1, 1, 2);
@@ -3577,12 +3583,12 @@ static void BufferRightColumnStats(void)
     FillBgTilemapBufferRect(1, STATS_STATS_BLOCK + 3, STATS_CORD_X + 3, STATS_CORD_Y, 1, 1, 2);
     CopyBgTilemapBufferToVram(1);
 
-    DynamicPlaceholderTextUtil_Reset();
-    BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], sMonSummaryScreen->summary.spatk, 0, 3);
-    BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], sMonSummaryScreen->summary.spdef, 1, 3);
-    BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
-}
+     DynamicPlaceholderTextUtil_Reset();
+     BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], sMonSummaryScreen->summary.spatk, 0, 3);
+     BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], sMonSummaryScreen->summary.spdef, 1, 3);
+     BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
+     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
+ }
 
 static void PrintRightColumnStats(void)
 {
