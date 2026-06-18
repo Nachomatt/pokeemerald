@@ -647,6 +647,10 @@ Score_Minus30:
 	score -30
 	end
 
+Score_Plus0:
+	score +0
+	end
+
 Score_Plus1:
 	score +1
 	end
