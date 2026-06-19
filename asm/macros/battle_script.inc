@@ -1151,6 +1151,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro trygettangledhairtarget ptr:req
+	.byte B_SCR_OP_TRYGETTANGLEDHAIRTARGET
+	.4byte \ptr
+	.endm
+
 	.macro switchoutabilities battler:req
 	.byte B_SCR_OP_SWITCHOUTABILITIES
 	.byte \battler

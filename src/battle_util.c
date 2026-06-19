@@ -1963,6 +1963,7 @@ bool8 HandleFaintedMonActions(void)
         case 6:
             if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0)
              || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0)
+             || AbilityBattleEffects(ABILITYEFFECT_TANGLEDHAIR1, 0, 0, 0, 0)
              || ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE)
              || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
                 return TRUE;
@@ -2568,6 +2569,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].intimidatedMon = 1;
                 }
                 break;
+            case ABILITY_TANGLED_HAIR:
+                if (!(gSpecialStatuses[battler].tangledHairMon))
+                {
+                    gStatuses3[battler] |= STATUS3_TANGLEDHAIR_POKES;
+                    gSpecialStatuses[battler].tangledHairMon = 1;
+                }
+                break;
             case ABILITY_FORECAST:
                 effect = CastformDataTypeChange(battler);
                 if (effect != 0)
@@ -3047,6 +3055,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+        case ABILITYEFFECT_TANGLEDHAIR1: // 9
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_TANGLED_HAIR && gStatuses3[i] & STATUS3_TANGLEDHAIR_POKES)
+                {
+                    gLastUsedAbility = ABILITY_TANGLED_HAIR;
+                    gStatuses3[i] &= ~STATUS3_TANGLEDHAIR_POKES;
+                    BattleScriptPushCursorAndCallback(BattleScript_TangledHairActivatesEnd3);
+                    gBattleStruct->tangledHairBattler = i;
+                    effect++;
+                    break;
+                }
+            }
+            break;
         case ABILITYEFFECT_TRACE: // 11
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -3114,6 +3136,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
                     gBattleStruct->intimidateBattler = i;
+                    effect++;
+                    break;
+                }
+            }
+            break;
+        case ABILITYEFFECT_TANGLEDHAIR2: // 10
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_TANGLED_HAIR && (gStatuses3[i] & STATUS3_TANGLEDHAIR_POKES))
+                {
+                    gLastUsedAbility = ABILITY_TANGLED_HAIR;
+                    gStatuses3[i] &= ~STATUS3_TANGLEDHAIR_POKES;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_TangledHairActivates;
+                    gBattleStruct->tangledHairBattler = i;
                     effect++;
                     break;
                 }

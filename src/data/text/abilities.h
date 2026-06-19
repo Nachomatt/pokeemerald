@@ -80,6 +80,8 @@ static const u8 sEarthEaterDescription[] = _("Changes Ground into HP.");
 static const u8 sForestGripDescription[] = _("Traps GRASS type Pokemon.");
 static const u8 sToughHideDescription[] = _("Shrugs off weak attacks.");
 static const u8 sMigraineDescription[] = _("Ups SP.ATTACK if suffering.");
+static const u8 sTangledHairDescription[] = _("Lowers the foe's SPEED.");
+
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -165,6 +167,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_FOREST_GRIP] = _("FOREST GRIP"),
     [ABILITY_TOUGH_HIDE] = _("TOUGH HIDE"),
     [ABILITY_MIGRAINE] = _("MIGRAINE"),
+    [ABILITY_TANGLED_HAIR] = _("TANGLED HAIR"),
+
 
 
 };
@@ -253,4 +257,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_FOREST_GRIP] = sForestGripDescription,
     [ABILITY_TOUGH_HIDE] = sToughHideDescription,
     [ABILITY_MIGRAINE] = sMigraineDescription,
+    [ABILITY_TANGLED_HAIR] = sTangledHairDescription,
 };

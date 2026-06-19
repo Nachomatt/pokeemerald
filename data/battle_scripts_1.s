@@ -4047,6 +4047,40 @@ BattleScript_IntimidatePrevented:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_IntimidateActivatesLoopIncrement
 
+
+
+BattleScript_TangledHairActivatesEnd3::
+	call BattleScript_PauseTangledHairActivates
+	end3
+
+BattleScript_PauseTangledHairActivates:
+	pause B_WAIT_TIME_SHORT
+BattleScript_TangledHairActivates::
+	setbyte gBattlerTarget, 0
+	setstatchanger STAT_SPEED, 1, TRUE
+BattleScript_TangledHairActivatesLoop:
+	trygettangledhairtarget BattleScript_TangledHairActivatesReturn
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_TangledHairActivatesLoopIncrement
+	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_TangledHairPrevented
+	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_TangledHairPrevented
+	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_TangledHairPrevented
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_TangledHairActivatesLoopIncrement
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_TangledHairActivatesLoopIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSSPEEDWITH
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_TangledHairActivatesLoopIncrement:
+	addbyte gBattlerTarget, 1
+	goto BattleScript_TangledHairActivatesLoop
+BattleScript_TangledHairActivatesReturn:
+	return
+BattleScript_TangledHairPrevented:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PREVENTEDFROMWORKING
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_TangledHairActivatesLoopIncrement
+
 BattleScript_DroughtActivates::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
