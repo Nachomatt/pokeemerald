@@ -6698,6 +6698,8 @@ static void Cmd_setrain(void)
 
 static void Cmd_setreflect(void)
 {
+    u8 item;
+    item = gBattleMons[gBattlerAttacker].item;
     if (gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] & SIDE_STATUS_REFLECT)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
@@ -6706,7 +6708,14 @@ static void Cmd_setreflect(void)
     else
     {
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_REFLECT;
-        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = 5;
+        if(item == ITEM_LIGHT_CLAY)
+        {
+          gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = 8;  
+        }
+        else
+        {
+         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = 5;
+        }
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectBattlerId = gBattlerAttacker;
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
@@ -7469,6 +7478,8 @@ static void Cmd_givepaydaymoney(void)
 
 static void Cmd_setlightscreen(void)
 {
+    u8 item;
+    item = gBattleMons[gBattlerAttacker].item;
     if (gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] & SIDE_STATUS_LIGHTSCREEN)
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
@@ -7477,7 +7488,14 @@ static void Cmd_setlightscreen(void)
     else
     {
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_LIGHTSCREEN;
-        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = 5;
+        if(item == ITEM_LIGHT_CLAY)
+        {
+          gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = 8;  
+        }
+        else
+        {
+         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = 5;
+        }
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenBattlerId = gBattlerAttacker;
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)

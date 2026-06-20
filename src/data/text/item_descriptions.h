@@ -863,6 +863,11 @@ static const u8 sMagnetDesc[] = _(
     "boosts ELECTRIC-\n"
     "type moves.");
 
+static const u8 sLightClayDesc[] = _(
+    "A hold item that\n"
+    "makes Screen Moves\n"
+    "last longer.");
+
 static const u8 sMysticWaterDesc[] = _(
     "A hold item that\n"
     "raises the power of\n"
