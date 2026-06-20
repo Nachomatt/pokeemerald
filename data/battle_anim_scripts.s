@@ -410,6 +410,7 @@ gBattleAnims_General::
 	.4byte General_FocusPunchSetUp          @ B_ANIM_FOCUS_PUNCH_SETUP
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
+	.4byte General_Reflect					@ B_ANIM_REFLECT
 
 	.align 2
 gBattleAnims_Special::
@@ -10517,6 +10518,9 @@ General_Rain:
 
 General_Sun:
 	goto Move_SUNNY_DAY
+
+General_Reflect:
+	goto Move_REFLECT
 
 General_Sandstorm:
 	goto Move_SANDSTORM
