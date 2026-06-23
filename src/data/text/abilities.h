@@ -83,6 +83,8 @@ static const u8 sMigraineDescription[] = _("Ups SP.ATTACK if suffering.");
 static const u8 sTangledHairDescription[] = _("Lowers the foe's SPEED.");
 static const u8 sSnowWarningDescription[] = _("Summons hail in battle.");
 static const u8 sReflectorDescription[] = _("Summons screens in battle.");
+static const u8 sBlackHoleDescription[] = _("Scary-and evil protection.");
+static const u8 sCursedBodyDescription[] = _("May disable a move.");
 
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -172,7 +174,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_TANGLED_HAIR] = _("TANGLED HAIR"),
     [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
     [ABILITY_REFLECTOR] = _("REFLECTOR"),
-    
+    [ABILITY_BLACK_HOLE] = _("BLACK HOLE"),
+    [ABILITY_CURSED_BODY] = _("CURSED BODY"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -262,4 +265,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_TANGLED_HAIR] = sTangledHairDescription,
     [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
     [ABILITY_REFLECTOR] = sReflectorDescription,
+    [ABILITY_BLACK_HOLE] = sBlackHoleDescription,
+    [ABILITY_CURSED_BODY] = sCursedBodyDescription,
 };

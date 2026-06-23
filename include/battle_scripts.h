@@ -172,6 +172,7 @@ extern const u8 BattleScript_AbilityNoSpecificStatLoss[];
 extern const u8 BattleScript_StickyHoldActivates[];
 extern const u8 BattleScript_ColorChangeActivates[];
 extern const u8 BattleScript_RoughSkinActivates[];
+extern const u8 BattleScript_EffectCursedBody[];
 extern const u8 BattleScript_CuteCharmActivates[];
 extern const u8 BattleScript_ApplySecondaryEffect[];
 extern const u8 BattleScript_SynchronizeActivates[];

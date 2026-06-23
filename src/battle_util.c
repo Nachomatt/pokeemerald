@@ -2820,6 +2820,23 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_CURSED_BODY:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+            && move != MOVE_STRUGGLE
+            && gBattleMoves[move].power != 0
+            && TARGET_TURN_DAMAGED
+            && gBattleMons[gBattlerAttacker].hp != 0
+            && (Random() % 3) == 0)
+            {
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, gChosenMove);
+                gDisableStructs[gBattlerAttacker].disabledMove = gChosenMove;
+                gDisableStructs[gBattlerAttacker].disableTimer = (Random() & 3) + 2;
+                gDisableStructs[gBattlerAttacker].disableTimerStartValue = gDisableStructs[gBattlerAttacker].disableTimer; // used to save the random amount of turns?
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_EffectCursedBody;
+                effect++;
+            }
+            break;
             case ABILITY_ROUGH_SKIN:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && gBattleMons[gBattlerAttacker].hp != 0

@@ -1192,6 +1192,13 @@ BattleScript_EffectDisable::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+
+BattleScript_EffectCursedBody::
+	printstring STRINGID_CURSEDBODY
+	pause B_WAIT_TIME_LONG
+	return
+
+
 BattleScript_EffectLevelDamage::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
