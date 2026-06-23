@@ -4928,12 +4928,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_NOCTOWL] =
     {
-        .baseHP        = 100,
-        .baseAttack    = 50,
-        .baseDefense   = 50,
-        .baseSpeed     = 70,
-        .baseSpAttack  = 76,
-        .baseSpDefense = 96,
+        .baseHP        = 105,
+        .baseAttack    = 82,
+        .baseDefense   = 86,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 106,
         .types = { TYPE_GHOST, TYPE_FLYING },
         .catchRate = 90,
         .expYield = 162,
@@ -4950,7 +4950,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
-        .abilities = {ABILITY_INSOMNIA, ABILITY_KEEN_EYE},
+        .abilities = {ABILITY_CURSED_BODY, ABILITY_KEEN_EYE},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
