@@ -578,7 +578,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_RATTATA] =
     {
-        .baseHP        = 30,
+        .baseHP        = 40,
         .baseAttack    = 56,
         .baseDefense   = 35,
         .baseSpeed     = 72,
@@ -608,11 +608,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_RATICATE] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 81,
+        .baseHP        = 65,
+        .baseAttack    = 85,
         .baseDefense   = 60,
         .baseSpeed     = 97,
-        .baseSpAttack  = 50,
+        .baseSpAttack  = 80,
         .baseSpDefense = 70,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
         .catchRate = 127,
@@ -630,7 +630,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = {ABILITY_RUN_AWAY, ABILITY_GUTS},
+        .abilities = {ABILITY_MIGRAINE, ABILITY_GUTS},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
