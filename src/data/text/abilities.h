@@ -86,6 +86,7 @@ static const u8 sReflectorDescription[] = _("Summons screens in battle.");
 static const u8 sBlackHoleDescription[] = _("Scary-and evil protection.");
 static const u8 sCursedBodyDescription[] = _("May disable a move.");
 static const u8 sSkySplitterDescription[] = _("Ups FLYING moves.");
+static const u8 sSkySplitterDescription[] = _("Raises DEFENSE.");
 
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -178,6 +179,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_BLACK_HOLE] = _("BLACK HOLE"),
     [ABILITY_CURSED_BODY] = _("CURSED BODY"),
     [ABILITY_SKY_SPLITTER] = _("SKY SPLITTER"),
+    [ABILITY_FUR_COAT] = _("FUR COAT"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -270,4 +272,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_BLACK_HOLE] = sBlackHoleDescription,
     [ABILITY_CURSED_BODY] = sCursedBodyDescription,
     [ABILITY_SKY_SPLITTER] = sSkySplitterDescription,
+    [ABILITY_FUR_COAT] = sFurCoatDescription,
 };
