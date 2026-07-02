@@ -99,6 +99,11 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
     }
 }
 
+void ItemId_GetHoldEffectParam_Script()
+{
+    VarSet(VAR_RESULT, GetItemHoldEffectParam(VarGet(VAR_0x8004)));
+}
+
 void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
 {
     const u8 *berryString;
