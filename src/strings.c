@@ -1821,3 +1821,4 @@ const u8 gText_Berry[] = _("BERRY");
 const u8 gText_Berries[] = _("BERRIES");
 
 const u8 gText_PlayerUsedRepel[] = _("{PLAYER} used the\n{STR_VAR_2}.");
+const u8 gText_Nickname[] = _("NICKNAME");
