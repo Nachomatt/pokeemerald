@@ -1822,3 +1822,7 @@ const u8 gText_Berries[] = _("BERRIES");
 
 const u8 gText_PlayerUsedRepel[] = _("{PLAYER} used the\n{STR_VAR_2}.");
 const u8 gText_Nickname[] = _("NICKNAME");
+const u8 gMenuText_Move[] = _("MOVE");
+const u8 gText_MoveItemWhere[] = _("Move {STR_VAR_2} to where?");
+const u8 gText_XsYAnd[] = _("{STR_VAR_1}'s {STR_VAR_2} and\n");
+const u8 gText_XsYWereSwapped[] = _("{STR_VAR_1}'s {STR_VAR_2} were swapped!{PAUSE_UNTIL_PRESS}");

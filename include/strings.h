@@ -3030,6 +3030,10 @@ extern const u8 gText_TellHimTheWords[];
 
 // Nacho Stuff
 extern const u8 gText_PlayerUsedRepel[];
+extern const u8 gMenuText_Move[];
+extern const u8 gText_MoveItemWhere[];
+extern const u8 gText_XsYAnd[];
+extern const u8 gText_XsYWereSwapped[];
 
 
 #endif // GUARD_STRINGS_H
