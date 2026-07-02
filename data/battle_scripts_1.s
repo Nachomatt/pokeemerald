@@ -1806,6 +1806,15 @@ BattleScript_EffectPsychUp::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+
+BattleScript_MasterMindActivates::
+	pause B_WAIT_TIME_SHORT
+    playanimation BS_ATTACKER, B_ANIM_PSYCHUP
+    printstring STRINGID_MASTERMINDACTIVATES
+	pause B_WAIT_TIME_LONG
+    end3
+
+
 BattleScript_EffectMirrorCoat::
 	attackcanceler
 	mirrorcoatdamagecalculator BattleScript_FailedFromAtkString
@@ -4053,16 +4062,6 @@ BattleScript_IntimidateActivatesLoop:
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_IntimidateReverted::
-	setbyte gBattlerTarget, 0
-	setstatchanger STAT_ATK, 1, FALSE
-	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_IntimidateActivatesLoopIncrement
-	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_IntimidateActivatesLoopIncrement
-	setgraphicalstatchangevalues
-	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_GUARDDOGINTIMIDATE
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_IntimidateActivatesLoopIncrement
 
 BattleScript_IntimidateActivatesLoopIncrement:
 	addbyte gBattlerTarget, 1
@@ -4074,7 +4073,16 @@ BattleScript_IntimidatePrevented:
 	printstring STRINGID_PREVENTEDFROMWORKING
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_IntimidateActivatesLoopIncrement
-
+BattleScript_IntimidateReverted:
+	pause B_WAIT_TIME_SHORT
+	setstatchanger STAT_ATK, 1, FALSE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_IntimidateActivatesLoopIncrement
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_IntimidateActivatesLoopIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_GUARDDOGINTIMIDATE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_IntimidateActivatesLoopIncrement
 
 
 BattleScript_TangledHairActivatesEnd3::
@@ -4121,10 +4129,11 @@ BattleScript_ReflectorActivates::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSREFLECTORACTIVATES
 	waitstate
-	playanimation BS_BATTLER_0 B_ANIM_REFLECT
+	playanimation BS_ATTACKER B_ANIM_REFLECT
 	setreflect
 	setlightscreen
 	end3
+
 
 BattleScript_TookAttack::
 	attackstring

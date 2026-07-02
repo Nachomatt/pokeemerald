@@ -8148,12 +8148,13 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Crissy[] = {
     }
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_Rick[] = {
+static const struct TrainerMonItemCustomMoves sParty_Rick[] = {
     {
     .iv = 0,
     .lvl = 4,
-    .species = SPECIES_WURMPLE,
-    .moves = {MOVE_THUNDER_PUNCH, MOVE_SILVER_WIND, MOVE_METAL_SOUND, MOVE_PECK}
+    .species = SPECIES_POOCHYENA,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .moves = {MOVE_TRICK, MOVE_NONE, MOVE_NONE, MOVE_NONE}
     },
     {
     .iv = 0,

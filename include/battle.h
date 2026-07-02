@@ -136,6 +136,8 @@ struct SpecialStatus
     u32 restoredBattlerSprite: 1;
     u32 intimidatedMon:1;
     u32 tangledHairMon:1;
+    u32 psychupped:1;
+    u32 reflector:1;
     u32 traced:1;
     u32 ppNotAffectedByPressure:1;
     u32 faintedHasReplacement:1;

@@ -17,6 +17,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "trig.h"
+#include "mail.h"
 #include "window.h"
 #include "battle_message.h"
 #include "battle_ai_script_commands.h"
@@ -1963,6 +1964,8 @@ bool8 HandleFaintedMonActions(void)
         case 6:
             if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0)
              || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0)
+             || AbilityBattleEffects(ABILITYEFFECT_MASTERMIND, 0, 0, 0, 0)
+            //  || AbilityBattleEffects(ABILITYEFFECT_TRICKSTER, 0, 0, 0, 0)
              || AbilityBattleEffects(ABILITYEFFECT_TANGLEDHAIR1, 0, 0, 0, 0)
              || ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE)
              || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
@@ -2470,6 +2473,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     {
         u8 moveType;
         s32 i;
+        s32 j;
         u16 move;
         u8 side;
         u8 target1;
@@ -2528,6 +2532,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         }
                         break;
                     }
+                    case WEATHER_SNOW:
+                    if (!(gBattleWeather & B_WEATHER_HAIL))
+                    {
+                        gBattleWeather = B_WEATHER_HAIL;
+                        gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
+                        gBattleScripting.battler = battler;
+                        effect++;
+                    }
+                    break;
                 }
                 if (effect != 0)
                 {
@@ -2572,11 +2585,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
              case ABILITY_REFLECTOR:
-                    BattleScriptPushCursorAndCallback(BattleScript_ReflectorActivates);
-                    gBattleScripting.battler = battler;
-                    effect++;
-                
-                break;
+             if (!(gSpecialStatuses[battler].reflector) & (!(gSideStatuses[GET_BATTLER_SIDE(battler)] & SIDE_STATUS_REFLECT) || !(gSideStatuses[GET_BATTLER_SIDE(battler)] & SIDE_STATUS_LIGHTSCREEN)) )
+             {
+                        gStatuses3[battler] |= STATUS3_REFLECTOR;
+                        gSpecialStatuses[battler].reflector = 1;
+                        BattleScriptPushCursorAndCallback(BattleScript_ReflectorActivates);
+                        gStatuses3[battler] &= ~STATUS3_REFLECTOR;
+                        gBattleScripting.battler = battler;
+                        gBattlerAttacker = battler;
+                        effect++;
+             }
+            break;
+            
             case ABILITY_INTIMIDATE:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
                 {
@@ -2607,6 +2627,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].traced = 1;
                 }
                 break;
+            case ABILITY_MASTERMIND:
+                if (!(gSpecialStatuses[battler].psychupped))
+                {
+                    gStatuses3[battler] |= STATUS3_PSYCHUPPED;
+                    gSpecialStatuses[battler].psychupped = 1;
+                }
+                break;
+            // case ABILITY_TRICKSTER:
+            //     if (!(gSpecialStatuses[battler].tricksterMon))
+            //     {
+            //         gStatuses3[battler] |= STATUS3_TRICKSTER;
+            //         gSpecialStatuses[battler].tricksterMon = 1;
+            //     }
+            //     break;
             case ABILITY_CLOUD_NINE:
             case ABILITY_AIR_LOCK:
                 {
@@ -3158,6 +3192,182 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+            case ABILITYEFFECT_MASTERMIND: // 11
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_MASTERMIND && (gStatuses3[i] & STATUS3_PSYCHUPPED))
+                {
+                    u8 target2;
+                    gStatuses3[i] &= ~STATUS3_PSYCHUPPED;
+                    side = BATTLE_OPPOSITE(GetBattlerPosition(i)) & BIT_SIDE; // side of the opposing Pokémon
+                    target1 = GetBattlerAtPosition(side);
+                    target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                    {
+                            gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
+                            effect++;
+                    }
+                    else
+                    {
+                        gActiveBattler = target1;
+                        effect++;
+                    }
+                    if (effect != 0)
+                    {
+                        BattleScriptPushCursorAndCallback(BattleScript_MasterMindActivates);
+                        gBattleScripting.battler = i;
+                        gBattlerAttacker = i;
+                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
+                        for (j = 0; j < NUM_BATTLE_STATS; j++)
+                        {
+                            gBattleMons[gBattlerAttacker].statStages[j] = gBattleMons[gActiveBattler].statStages[j];
+                        }
+                        break;
+                    }
+                }
+            }
+            break;
+            //DONT UNCOMMENT THIS, THIS IS THE WORK OF THE DEVIL AND I DONT KNOW HOW IT WORKS.
+        // case ABILITYEFFECT_TRICKSTER: // 22
+        //     for (i = 0; i < gBattlersCount; i++)
+        //     {
+        //         //Check if the ability of the mon is trickster and the status flag has been raised <-- Unsure if that last one is correct
+        //         if (gBattleMons[i].ability == ABILITY_TRICKSTER && (gStatuses3[i] & STATUS3_TRICKSTER))
+        //         {
+        //             u8 target2;
+        //             side = BATTLE_OPPOSITE(GetBattlerPosition(i)) & BIT_SIDE; // side of the opposing Pokémon
+        //             target1 = GetBattlerAtPosition(side);
+        //             target2 = GetBattlerAtPosition(side + BIT_FLANK);
+        //             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        //             {
+        //                 //If either the trickster or the first opponent is holding an item and that item is not 
+        //                 //an enigma berry or a mail, AND the other opponent has the same AND
+        //                 //neither of the opponents has the sticky hold ability, pick one at random
+        //                 if ((gBattleMons[gBattlerAttacker].item != ITEM_NONE || gBattleMons[target1].item != ITEM_NONE)
+        //                     && gBattleMons[gBattlerAttacker].item != ITEM_ENIGMA_BERRY
+        //                     && gBattleMons[target1].item != ITEM_ENIGMA_BERRY
+        //                     && !IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
+        //                     && !IS_ITEM_MAIL(gBattleMons[target1].item)
+        //                     && gBattleMons[target1].ability != ABILITY_STICKY_HOLD
+        //                  && (gBattleMons[gBattlerAttacker].item != ITEM_NONE || gBattleMons[target2].item != ITEM_NONE)
+        //                     && gBattleMons[gBattlerAttacker].item != ITEM_ENIGMA_BERRY
+        //                     && gBattleMons[target2].item != ITEM_ENIGMA_BERRY
+        //                     && !IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
+        //                     && !IS_ITEM_MAIL(gBattleMons[target2].item)
+        //                     && (gBattleMons[target1].ability != ABILITY_STICKY_HOLD))
+        //                 {
+        //                     gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
+        //                     effect++;
+        //                 }
+        //                 //Else check target 1 seperately, also check for Sticky Hold
+        //                 else if ((gBattleMons[gBattlerAttacker].item != ITEM_NONE || gBattleMons[target1].item != ITEM_NONE)
+        //                     && gBattleMons[gBattlerAttacker].item != ITEM_ENIGMA_BERRY
+        //                     && gBattleMons[target1].item != ITEM_ENIGMA_BERRY
+        //                     && !IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
+        //                     && !IS_ITEM_MAIL(gBattleMons[target1].item))
+        //                 {
+        //                     if (gBattleMons[target1].ability == ABILITY_STICKY_HOLD)
+        //                     {
+        //                         //Display Sticky hold blocking trickster, make Sticky hold as last ability for AI purposes
+        //                         BattleScriptPushCursorAndCallback(BattleScript_StickyHoldAbilityActivates);
+        //                         gLastUsedAbility = gBattleMons[target1].ability;
+        //                         RecordAbilityBattle(target1, gLastUsedAbility);
+        //                     }
+        //                     else
+        //                     {
+        //                       gActiveBattler = target1;
+        //                       effect++;
+        //                     } 
+        //                 }
+        //                 //Else check target 2 seperately, also check for sticky hold                        
+        //                 else if ((gBattleMons[gBattlerAttacker].item != ITEM_NONE || gBattleMons[target2].item != ITEM_NONE)
+        //                     && gBattleMons[gBattlerAttacker].item != ITEM_ENIGMA_BERRY
+        //                     && gBattleMons[target2].item == ITEM_ENIGMA_BERRY
+        //                     && !IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
+        //                     && !IS_ITEM_MAIL(gBattleMons[target2].item))
+        //                 {
+        //                     if (gBattleMons[target2].ability == ABILITY_STICKY_HOLD)
+        //                     {
+        //                         //Display Sticky hold blocking trickster, make Sticky hold as last ability for AI purposes
+        //                         BattleScriptPushCursorAndCallback(BattleScript_StickyHoldAbilityActivates);
+        //                         gLastUsedAbility = gBattleMons[target2].ability;
+        //                         RecordAbilityBattle(target2, gLastUsedAbility);
+        //                     }
+        //                     else
+        //                     {
+        //                       gActiveBattler = target2;
+        //                       effect++;
+        //                     }
+        //                 }
+        //             }
+        //             //This is just to get the target in a single battle, still check for Sticky Hold
+        //             else
+        //             {
+        //                 if ((gBattleMons[gBattlerAttacker].item != ITEM_NONE || gBattleMons[target1].item != ITEM_NONE)
+        //                     && gBattleMons[gBattlerAttacker].item != ITEM_ENIGMA_BERRY
+        //                     && gBattleMons[target1].item != ITEM_ENIGMA_BERRY
+        //                     && !IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
+        //                     && !IS_ITEM_MAIL(gBattleMons[target1].item))
+        //                 {
+        //                     if (gBattleMons[target1].ability == ABILITY_STICKY_HOLD)
+        //                     {
+        //                         //Display Sticky hold blocking trickster, make Sticky hold as last ability for AI purposes
+        //                         BattleScriptPushCursorAndCallback(BattleScript_StickyHoldAbilityActivates);
+        //                         gLastUsedAbility = gBattleMons[target1].ability;
+        //                         RecordAbilityBattle(target1, gLastUsedAbility);
+        //                     }
+        //                     else
+        //                     {
+        //                       gActiveBattler = target1;
+        //                       effect++;
+        //                     } 
+        //                 }
+        //             }
+        //             //This is where the ability will do its thing, put the logic of item swapping here
+        //             if (effect != 0)
+        //             {
+        //                 u16 oldItemAtk, *newItemAtk;
+        //                 newItemAtk = &gBattleStruct->changedItems[gBattlerAttacker];
+        //                 oldItemAtk = gBattleMons[gBattlerAttacker].item;
+        //                 *newItemAtk = gBattleMons[gActiveBattler].item;
+
+        //                 gBattleMons[gBattlerAttacker].item = ITEM_NONE;
+        //                 gBattleMons[gActiveBattler].item = oldItemAtk;
+
+        //                 gActiveBattler = gBattlerAttacker;
+        //                 BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(*newItemAtk), newItemAtk);
+        //                 MarkBattlerForControllerExec(gBattlerAttacker);
+
+        //                 gActiveBattler = gBattlerTarget;
+        //                 BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].item), &gBattleMons[gActiveBattler].item);
+        //                 MarkBattlerForControllerExec(gActiveBattler);
+
+        //                 *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gActiveBattler]) + 0) = 0;
+        //                 *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gActiveBattler]) + 1) = 0;
+
+        //                 *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 0) = 0;
+        //                 *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 1) = 0;
+
+        //                 if (oldItemAtk != ITEM_NONE && *newItemAtk != ITEM_NONE)
+        //                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_BOTH;  // attacker's item -> <- target's item
+        //                 else if (oldItemAtk == ITEM_NONE && *newItemAtk != ITEM_NONE)
+        //                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_TAKEN; // nothing -> <- target's item
+        //                 else
+        //                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_GIVEN; // attacker's item -> <- nothing
+                        
+        //                 //Reset status to prevent infinite looping
+                        
+        //                 gLastUsedAbility = ABILITY_TRICKSTER;
+        //                 gStatuses3[i] &= ~STATUS3_TRICKSTER;
+
+        //                 PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
+        //                 PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
+        //                 BattleScriptPushCursorAndCallback(BattleScript_TricksterActivates);
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     break;
         case ABILITYEFFECT_INTIMIDATE2: // 10
             for (i = 0; i < gBattlersCount; i++)
             {

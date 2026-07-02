@@ -411,6 +411,7 @@ gBattleAnims_General::
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 	.4byte General_Reflect					@ B_ANIM_REFLECT
+	.4byte General_Psychup					@ B_ANIM_PSYCHUP
 
 	.align 2
 gBattleAnims_Special::
@@ -10521,6 +10522,9 @@ General_Sun:
 
 General_Reflect:
 	goto Move_REFLECT
+
+General_Psychup:
+	goto Move_PSYCH_UP
 
 General_Sandstorm:
 	goto Move_SANDSTORM

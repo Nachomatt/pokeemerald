@@ -378,6 +378,7 @@
 #define B_ANIM_INGRAIN_HEAL             21
 #define B_ANIM_WISH_HEAL                22
 #define B_ANIM_REFLECT                  23
+#define B_ANIM_PSYCHUP                  24
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

@@ -88,6 +88,11 @@ static const u8 sCursedBodyDescription[] = _("May disable a move.");
 static const u8 sSkySplitterDescription[] = _("Ups FLYING moves.");
 static const u8 sFurCoatDescription[] = _("Raises DEFENSE.");
 static const u8 sGuardDogDescription[] = _("Unaffected by INTIMIDATE.");
+static const u8 sSuperchargedDescription[] = _("Ups ELECTRIC moves.");
+static const u8 sHotheadedDescription[] = _("Ups FIRE moves.");
+static const u8 sDownpourDescription[] = _("Ups WATER moves.");
+static const u8 sMasterMindDescription[] = _("Copies stat changes.");
+// static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
 
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -182,6 +187,12 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SKY_SPLITTER] = _("SKY SPLITTER"),
     [ABILITY_FUR_COAT] = _("FUR COAT"),
     [ABILITY_GUARD_DOG] = _("GUARD DOG"),
+    [ABILITY_SUPERCHARGED] = _("SUPERCHARGED"),
+    [ABILITY_HOTHEADED] = _("HOTHEADED"),
+    [ABILITY_DOWNPOUR] = _("DOWNPOUR"),
+    [ABILITY_MASTERMIND] = _("MASTERMIND"),
+    // [ABILITY_TRICKSTER] = _("TRICKSTER"),
+
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -276,4 +287,9 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SKY_SPLITTER] = sSkySplitterDescription,
     [ABILITY_FUR_COAT] = sFurCoatDescription,
     [ABILITY_GUARD_DOG] = sGuardDogDescription,
+    [ABILITY_SUPERCHARGED] = sSuperchargedDescription,
+    [ABILITY_HOTHEADED] = sHotheadedDescription,
+    [ABILITY_DOWNPOUR] = sDownpourDescription,
+    [ABILITY_MASTERMIND] = sMasterMindDescription,
+    // [ABILITY_TRICKSTER] = sTricksterDescription,
 };

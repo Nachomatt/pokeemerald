@@ -3232,6 +3232,12 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_FLYING && attacker->ability == ABILITY_SKY_SPLITTER)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (type == TYPE_ELECTRIC && attacker->ability == ABILITY_SUPERCHARGED)
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (type == TYPE_FIRE && attacker->ability == ABILITY_HOTHEADED)
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (type == TYPE_WATER && attacker->ability == ABILITY_DOWNPOUR)
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
     
 
     // Self-destruct / Explosion cut defense in half
