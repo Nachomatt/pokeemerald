@@ -385,8 +385,9 @@
 #define STRINGID_CURSEDBODY                 385
 #define STRINGID_GUARDDOGINTIMIDATE         386
 #define STRINGID_MASTERMINDACTIVATES        387
+#define STRINGID_PKMNCUTSSPATKWITH          388
 
-#define BATTLESTRINGS_COUNT                 388
+#define BATTLESTRINGS_COUNT                 389
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

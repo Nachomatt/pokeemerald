@@ -1156,6 +1156,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro trygetilluminatetarget ptr:req
+	.byte B_SCR_OP_TRYGETILLUMINATETARGET
+	.4byte \ptr
+	.endm
+
 	.macro switchoutabilities battler:req
 	.byte B_SCR_OP_SWITCHOUTABILITIES
 	.byte \battler

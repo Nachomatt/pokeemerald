@@ -148,6 +148,8 @@ extern const u8 BattleScript_WeatherFormChangesLoop[];
 extern const u8 BattleScript_CastformChange[];
 extern const u8 BattleScript_IntimidateActivatesEnd3[];
 extern const u8 BattleScript_IntimidateActivates[];
+extern const u8 BattleScript_IlluminateActivatesEnd3[];
+extern const u8 BattleScript_IlluminateActivates[];
 extern const u8 BattleScript_TangledHairActivatesEnd3[];
 extern const u8 BattleScript_TangledHairActivates[];
 extern const u8 BattleScript_DroughtActivates[];

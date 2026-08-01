@@ -3881,6 +3881,8 @@ static void TryDoEventsBeforeFirstTurn(void)
         return;
     if (AbilityBattleEffects(ABILITYEFFECT_TANGLEDHAIR1, 0, 0, 0, 0) != 0)
         return;
+    if (AbilityBattleEffects(ABILITYEFFECT_ILLUMINATE1, 0, 0, 0, 0) != 0)
+        return;
     if (AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0) != 0)
         return;
     if (AbilityBattleEffects(ABILITYEFFECT_MASTERMIND, 0, 0, 0, 0) != 0)

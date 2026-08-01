@@ -1967,6 +1967,7 @@ bool8 HandleFaintedMonActions(void)
              || AbilityBattleEffects(ABILITYEFFECT_MASTERMIND, 0, 0, 0, 0)
             //  || AbilityBattleEffects(ABILITYEFFECT_TRICKSTER, 0, 0, 0, 0)
              || AbilityBattleEffects(ABILITYEFFECT_TANGLEDHAIR1, 0, 0, 0, 0)
+             || AbilityBattleEffects(ABILITYEFFECT_ILLUMINATE1, 0, 0, 0, 0)
              || ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE)
              || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
                 return TRUE;
@@ -2605,6 +2606,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].intimidatedMon = 1;
                 }
                 break;
+            case ABILITY_ILLUMINATE:
+                if (!(gSpecialStatuses[battler].illuminatedMon))
+                {
+                    gStatuses3[battler] |= STATUS3_ILLUMINATE_POKES;
+                    gSpecialStatuses[battler].illuminatedMon = 1;
+                }
+                break;
             case ABILITY_TANGLED_HAIR:
                 if (!(gSpecialStatuses[battler].tangledHairMon))
                 {
@@ -3122,6 +3130,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+        case ABILITYEFFECT_ILLUMINATE1: // 9
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_ILLUMINATE && gStatuses3[i] & STATUS3_ILLUMINATE_POKES)
+                {
+                    gLastUsedAbility = ABILITY_ILLUMINATE;
+                    gStatuses3[i] &= ~STATUS3_ILLUMINATE_POKES;
+                    BattleScriptPushCursorAndCallback(BattleScript_IlluminateActivatesEnd3);
+                    gBattleStruct->illuminateBattler = i;
+                    effect++;
+                    break;
+                }
+            }
+            break;
         case ABILITYEFFECT_TANGLEDHAIR1: // 9
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -3379,6 +3401,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
                     gBattleStruct->intimidateBattler = i;
+                    effect++;
+                    break;
+                }
+            }
+            break;
+        case ABILITYEFFECT_ILLUMINATE2: // 10
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_ILLUMINATE && (gStatuses3[i] & STATUS3_ILLUMINATE_POKES))
+                {
+                    gLastUsedAbility = ABILITY_ILLUMINATE;
+                    gStatuses3[i] &= ~STATUS3_ILLUMINATE_POKES;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_IlluminateActivates;
+                    gBattleStruct->illuminateBattler = i;
                     effect++;
                     break;
                 }

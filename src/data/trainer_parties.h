@@ -9511,11 +9511,24 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alyssa[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Marcos[] = {
+static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     {
     .iv = 100,
-    .lvl = 15,
+    .lvl = 6,
     .species = SPECIES_VOLTORB,
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_ROLLOUT, MOVE_CHARGE }
+    },
+    {
+    .iv = 100,
+    .lvl = 6,
+    .species = SPECIES_ELECTRIKE,
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_BITE, MOVE_QUICK_ATTACK }
+    },
+    {
+    .iv = 100,
+    .lvl = 6,
+    .species = SPECIES_MAREEP,
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_COTTON_SPORE, MOVE_ATTRACT }
     }
 };
 

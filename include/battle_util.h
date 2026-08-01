@@ -32,6 +32,8 @@
 #define ABILITYEFFECT_TANGLEDHAIR1               20
 #define ABILITYEFFECT_TANGLEDHAIR2               21
 #define ABILITYEFFECT_MASTERMIND                 22
+#define ABILITYEFFECT_ILLUMINATE1                23
+#define ABILITYEFFECT_ILLUMINATE2                24
 // #define ABILITYEFFECT_TRICKSTER                  22
 #define ABILITYEFFECT_MUD_SPORT                  253
 #define ABILITYEFFECT_WATER_SPORT                254

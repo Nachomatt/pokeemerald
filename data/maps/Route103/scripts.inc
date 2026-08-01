@@ -830,6 +830,16 @@ Route103_EventScript_Michael::
 	return
 
 
+Route103_EventScript_Markus::
+# 449 "data/maps/Route103/scripts.pory"
+	trainerbattle_single TRAINER_MARCOS, Route103_MarkusIntro, Route103_MarkusDefeated
+# 450 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_Michael_Text_0
+# 451 "data/maps/Route103/scripts.pory"
+	closemessage
+	return
+
+
 Route103_EventScript_NachoTriggerNorth_Text_0:
 # 376 "data/maps/Route103/scripts.pory"
 	.string "They look busy.... Better not to\n"
@@ -858,18 +868,26 @@ Route103_EventScript_Michael_Text_0:
 	.string "She likes to pretend she's a SKITTY\n"
 	.string "when no one is looking.$"
 
+Route103_MarkusIntro::
+# 454 "data/maps/Route103/scripts.pory"
+	.string "Music is the key to the SOUL!\nShow me what your soul is filled with!$"
+
+Route103_MarkusDefeated::
+# 459 "data/maps/Route103/scripts.pory"
+	.string "Darn, you're good!$"
+
 Route103_AndrewIntro::
-# 449 "data/maps/Route103/scripts.pory"
+# 465 "data/maps/Route103/scripts.pory"
 	.string "My shorts got wet because  I fell off \nthe bridge... \p Maybe a heated battle can dry me off!$"
 
 Route103_AndrewDefeated::
-# 454 "data/maps/Route103/scripts.pory"
+# 470 "data/maps/Route103/scripts.pory"
 	.string "Darn, you're good!$"
 
 Route103_MichaelIntro::
-# 459 "data/maps/Route103/scripts.pory"
+# 475 "data/maps/Route103/scripts.pory"
 	.string "My daughter loves cute and fluffy \nPokémon! \pDo you have any of them to show her?$"
 
 Route103_MichaelDefeated::
-# 464 "data/maps/Route103/scripts.pory"
+# 480 "data/maps/Route103/scripts.pory"
 	.string "Aaaahhhh! Too strong!$"

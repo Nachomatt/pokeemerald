@@ -135,6 +135,7 @@ struct SpecialStatus
     u32 lightningRodRedirected:1;
     u32 restoredBattlerSprite: 1;
     u32 intimidatedMon:1;
+    u32 illuminatedMon:1;
     u32 tangledHairMon:1;
     u32 psychupped:1;
     u32 reflector:1;
@@ -422,6 +423,7 @@ struct BattleStruct
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
     u8 intimidateBattler;
+    u8 illuminateBattler;
     u8 tangledHairBattler;
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;

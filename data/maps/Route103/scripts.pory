@@ -444,6 +444,22 @@ script Route103_EventScript_Michael
 	closemessage
 }
 
+script Route103_EventScript_Markus
+{
+	trainerbattle_single(TRAINER_MARCOS, Route103_MarkusIntro, Route103_MarkusDefeated)
+	msgbox(format("I bought my daughter some cat ears for her birthday.\p She likes to pretend she's a SKITTY when no one is looking."))
+	closemessage
+}
+
+text Route103_MarkusIntro
+{
+	"Music is the key to the SOUL!\nShow me what your soul is filled with!"
+}
+
+text Route103_MarkusDefeated
+{
+	"Darn, you're good!"
+}
 
 
 text Route103_AndrewIntro

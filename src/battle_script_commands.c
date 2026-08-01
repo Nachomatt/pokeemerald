@@ -303,6 +303,7 @@ static void Cmd_trysetmagiccoat(void);
 static void Cmd_trysetsnatch(void);
 static void Cmd_trygetintimidatetarget(void);
 static void Cmd_trygettangledhairtarget(void);
+static void Cmd_trygetilluminatetarget(void);
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
 static void Cmd_getsecretpowereffect(void);
@@ -555,7 +556,8 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     [B_SCR_OP_TRYSETMAGICCOAT]                 = Cmd_trysetmagiccoat,                         //0xDF
     [B_SCR_OP_TRYSETSNATCH]                    = Cmd_trysetsnatch,                            //0xE0
     [B_SCR_OP_TRYGETINTIMIDATETARGET]          = Cmd_trygetintimidatetarget,                  //0xE1
-     [B_SCR_OP_TRYGETTANGLEDHAIRTARGET]        = Cmd_trygettangledhairtarget,                 //0x??
+    [B_SCR_OP_TRYGETTANGLEDHAIRTARGET]        = Cmd_trygettangledhairtarget,                 //0x??
+    [B_SCR_OP_TRYGETILLUMINATETARGET]         = Cmd_trygetilluminatetarget,                 //0x??
     [B_SCR_OP_SWITCHOUTABILITIES]              = Cmd_switchoutabilities,                      //0xE2
     [B_SCR_OP_JUMPIFHASNOHP]                   = Cmd_jumpifhasnohp,                           //0xE3
     [B_SCR_OP_GETSECRETPOWEREFFECT]            = Cmd_getsecretpowereffect,                    //0xE4
@@ -9625,6 +9627,30 @@ static void Cmd_trygettangledhairtarget(void)
     else
         gBattlescriptCurrInstr += 5;
 }
+
+static void Cmd_trygetilluminatetarget(void)
+{
+    u8 side;
+
+    gBattleScripting.battler = gBattleStruct->illuminateBattler;
+    side = GetBattlerSide(gBattleScripting.battler);
+
+    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gBattleMons[gBattleScripting.battler].ability)
+
+    for (;gBattlerTarget < gBattlersCount; gBattlerTarget++)
+    {
+        if (GetBattlerSide(gBattlerTarget) == side)
+            continue;
+        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+            break;
+    }
+
+    if (gBattlerTarget >= gBattlersCount)
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    else
+        gBattlescriptCurrInstr += 5;
+}
+
 
 static void Cmd_switchoutabilities(void)
 {
