@@ -3881,12 +3881,24 @@ static const struct TrainerMonItemDefaultMoves sParty_Victor[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Miguel1[] = {
+static const struct TrainerMonItemCustomMoves sParty_Miguel1[] = {
     {
     .iv = 0,
-    .lvl = 15,
+    .lvl = 5,
+    .species = SPECIES_MEOWTH,
+    .moves = {MOVE_FAKE_OUT, MOVE_BITE, MOVE_SCRATCH}
+    },
+    {
+    .iv = 0,
+    .lvl = 6,
     .species = SPECIES_SKITTY,
-    .heldItem = ITEM_ORAN_BERRY
+    .moves = {MOVE_FAKE_OUT, MOVE_SING, MOVE_SWEET_KISS, MOVE_TACKLE}
+    },
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_SENTRET,
+    .moves = {MOVE_TACKLE, MOVE_QUICK_ATTACK, MOVE_ASTONISH}
     }
 };
 
@@ -4457,22 +4469,19 @@ static const struct TrainerMonItemCustomMoves sParty_Wallace[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Andrew[] = {
+static const struct TrainerMonItemCustomMoves sParty_Andrew[] = {
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_MAGIKARP,
+    .species = SPECIES_RATTATA,
+    .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP}
     },
     {
     .iv = 0,
-    .lvl = 10,
-    .species = SPECIES_TENTACOOL,
+    .lvl = 5,
+    .species = SPECIES_POOCHYENA,
+    .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK}
     },
-    {
-    .iv = 0,
-    .lvl = 15,
-    .species = SPECIES_MAGIKARP,
-    }
 };
 
 static const struct TrainerMonNoItemDefaultMoves sParty_Ivan[] = {

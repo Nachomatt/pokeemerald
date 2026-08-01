@@ -368,6 +368,8 @@ movement Route103Movement3
 {
   walk_up
 }
+
+
 script Route103_EventScript_NachoTriggerNorth
 {
 	lock
@@ -406,3 +408,61 @@ script Route103_EventScriptOnTransition
 	setvar(VAR_TEMP_0, 0)
   }
 }
+
+script Route103_EventScript_Poochyena
+{
+	lock
+	faceplayer
+	playmoncry(SPECIES_POOCHYENA, 0)
+	msgbox(format("POOCHYENA: Grraowr!"))
+	closemessage
+	release
+
+}
+
+script Route103_EventScript_Shoredude
+{
+	lock
+	faceplayer
+	msgbox(format("Did you see that guy earlier at the bridge? \pHe just walked right past everyone without saying a word..\p I wonder if he is a strong trainer."))
+	closemessage
+	release
+
+}
+
+script Route103_EventScript_YoungsterAndrew
+{
+	trainerbattle_single(TRAINER_ANDREW, Route103_AndrewIntro, Route103_AndrewDefeated)
+	msgbox(format("I'm gonna go get a towel..."))
+	closemessage
+}
+
+script Route103_EventScript_Michael
+{
+	trainerbattle_single(TRAINER_MIGUEL_1, Route103_MichaelIntro, Route103_MichaelDefeated)
+	msgbox(format("I bought my daughter some cat ears for her birthday.\p She likes to pretend she's a SKITTY when no one is looking."))
+	closemessage
+}
+
+
+
+text Route103_AndrewIntro
+{
+	"My shorts got wet because  I fell off \nthe bridge... \p Maybe a heated battle can dry me off!"
+}
+
+text Route103_AndrewDefeated
+{
+	"Darn, you're good!"
+}
+
+text Route103_MichaelIntro
+{
+	"My daughter loves cute and fluffy \nPokémon! \pDo you have any of them to show her?"
+}
+
+text Route103_MichaelDefeated
+{
+	"Aaaahhhh! Too strong!"
+}
+

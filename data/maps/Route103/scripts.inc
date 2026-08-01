@@ -726,61 +726,150 @@ Route103Movement3:
 	step_end
 
 Route103_EventScript_NachoTriggerNorth::
-# 373 "data/maps/Route103/scripts.pory"
-	lock
-# 374 "data/maps/Route103/scripts.pory"
-	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
 # 375 "data/maps/Route103/scripts.pory"
-	closemessage
+	lock
 # 376 "data/maps/Route103/scripts.pory"
-	applymovement LOCALID_PLAYER, Route103Movement3
+	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
 # 377 "data/maps/Route103/scripts.pory"
+	closemessage
+# 378 "data/maps/Route103/scripts.pory"
+	applymovement LOCALID_PLAYER, Route103Movement3
+# 379 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScript_NachoTriggerWest::
-# 381 "data/maps/Route103/scripts.pory"
-	lock
-# 382 "data/maps/Route103/scripts.pory"
-	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
 # 383 "data/maps/Route103/scripts.pory"
-	closemessage
+	lock
 # 384 "data/maps/Route103/scripts.pory"
-	applymovement LOCALID_PLAYER, Route103Movement1
+	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
 # 385 "data/maps/Route103/scripts.pory"
+	closemessage
+# 386 "data/maps/Route103/scripts.pory"
+	applymovement LOCALID_PLAYER, Route103Movement1
+# 387 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScript_NachoTriggerSouth::
-# 390 "data/maps/Route103/scripts.pory"
-	lock
-# 391 "data/maps/Route103/scripts.pory"
-	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
 # 392 "data/maps/Route103/scripts.pory"
-	closemessage
+	lock
 # 393 "data/maps/Route103/scripts.pory"
-	applymovement LOCALID_PLAYER, Route103Movement2
+	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
 # 394 "data/maps/Route103/scripts.pory"
+	closemessage
+# 395 "data/maps/Route103/scripts.pory"
+	applymovement LOCALID_PLAYER, Route103Movement2
+# 396 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScriptOnTransition::
-# 400 "data/maps/Route103/scripts.pory"
+# 402 "data/maps/Route103/scripts.pory"
 	goto_if_set FLAG_RECEIVED_POKEDEX_FROM_BIRCH, Route103_EventScriptOnTransition_1
-# 406 "data/maps/Route103/scripts.pory"
+# 408 "data/maps/Route103/scripts.pory"
 	setvar VAR_TEMP_0, 0
 	return
 
 Route103_EventScriptOnTransition_1:
-# 402 "data/maps/Route103/scripts.pory"
+# 404 "data/maps/Route103/scripts.pory"
 	setvar VAR_TEMP_0, 1
 	return
 
 
+Route103_EventScript_Poochyena::
+# 414 "data/maps/Route103/scripts.pory"
+	lock
+# 415 "data/maps/Route103/scripts.pory"
+	faceplayer
+# 416 "data/maps/Route103/scripts.pory"
+	playmoncry SPECIES_POOCHYENA, 0
+# 417 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_Poochyena_Text_0
+# 418 "data/maps/Route103/scripts.pory"
+	closemessage
+# 419 "data/maps/Route103/scripts.pory"
+	release
+	return
+
+
+Route103_EventScript_Shoredude::
+# 425 "data/maps/Route103/scripts.pory"
+	lock
+# 426 "data/maps/Route103/scripts.pory"
+	faceplayer
+# 427 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_Shoredude_Text_0
+# 428 "data/maps/Route103/scripts.pory"
+	closemessage
+# 429 "data/maps/Route103/scripts.pory"
+	release
+	return
+
+
+Route103_EventScript_YoungsterAndrew::
+# 435 "data/maps/Route103/scripts.pory"
+	trainerbattle_single TRAINER_ANDREW, Route103_AndrewIntro, Route103_AndrewDefeated
+# 436 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_YoungsterAndrew_Text_0
+# 437 "data/maps/Route103/scripts.pory"
+	closemessage
+	return
+
+
+Route103_EventScript_Michael::
+# 442 "data/maps/Route103/scripts.pory"
+	trainerbattle_single TRAINER_MIGUEL_1, Route103_MichaelIntro, Route103_MichaelDefeated
+# 443 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_Michael_Text_0
+# 444 "data/maps/Route103/scripts.pory"
+	closemessage
+	return
+
+
 Route103_EventScript_NachoTriggerNorth_Text_0:
-# 374 "data/maps/Route103/scripts.pory"
+# 376 "data/maps/Route103/scripts.pory"
 	.string "They look busy.... Better not to\n"
 	.string "interrupt them.$"
+
+Route103_EventScript_Poochyena_Text_0:
+# 417 "data/maps/Route103/scripts.pory"
+	.string "POOCHYENA: Grraowr!$"
+
+Route103_EventScript_Shoredude_Text_0:
+# 427 "data/maps/Route103/scripts.pory"
+	.string "Did you see that guy earlier at the\n"
+	.string "bridge?\p"
+	.string "He just walked right past everyone\n"
+	.string "without saying a word..\p"
+	.string "I wonder if he is a strong trainer.$"
+
+Route103_EventScript_YoungsterAndrew_Text_0:
+# 436 "data/maps/Route103/scripts.pory"
+	.string "I'm gonna go get a towel...$"
+
+Route103_EventScript_Michael_Text_0:
+# 443 "data/maps/Route103/scripts.pory"
+	.string "I bought my daughter some cat ears for\n"
+	.string "her birthday.\p"
+	.string "She likes to pretend she's a SKITTY\n"
+	.string "when no one is looking.$"
+
+Route103_AndrewIntro::
+# 449 "data/maps/Route103/scripts.pory"
+	.string "My shorts got wet because  I fell off \nthe bridge... \p Maybe a heated battle can dry me off!$"
+
+Route103_AndrewDefeated::
+# 454 "data/maps/Route103/scripts.pory"
+	.string "Darn, you're good!$"
+
+Route103_MichaelIntro::
+# 459 "data/maps/Route103/scripts.pory"
+	.string "My daughter loves cute and fluffy \nPokémon! \pDo you have any of them to show her?$"
+
+Route103_MichaelDefeated::
+# 464 "data/maps/Route103/scripts.pory"
+	.string "Aaaahhhh! Too strong!$"
