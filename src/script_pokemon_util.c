@@ -23,6 +23,7 @@
 #include "tv.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "constants/region_map_sections.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
@@ -63,12 +64,15 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     u16 nationalDexNum;
     int sentToPc;
     u8 heldItem[2];
+    metloc_u8_t metLocation;
     struct Pokemon mon;
 
     CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     heldItem[0] = item;
     heldItem[1] = item >> 8;
+    metLocation = METLOC_SPECIAL_EGG;
     SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
+    SetMonData(&mon, MON_DATA_MET_LOCATION, &metLocation);
     sentToPc = GiveMonToPlayer(&mon);
     nationalDexNum = SpeciesToNationalPokedexNum(species);
 

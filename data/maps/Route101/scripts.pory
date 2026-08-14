@@ -298,3 +298,20 @@ Route101_Text_RouteSign:
 	.string "{UP_ARROW} OLDALE TOWN$"
 
 `
+script Route101_EventScript_PreventExitEast
+{
+	lockall
+	msgbox(format("Wh-Where are you going?!\n Don't leave me like this!"))
+	closemessage
+	applymovement (LOCALID_PLAYER, Route101_Movement_PreventExitEast)
+	waitmovement (0)
+	releaseall
+	end
+}
+
+
+movement Route101_Movement_PreventExitEast
+{
+	walk_left
+	step_end
+}

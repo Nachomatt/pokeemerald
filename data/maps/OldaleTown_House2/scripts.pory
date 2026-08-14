@@ -20,3 +20,55 @@ OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
 	.string "away from here.$"
 
 `
+script OldaleTown_House2_EventScript_Locke
+{
+	lock
+	applymovement(1, LockeMovement1)
+	waitmovement(0)
+	if(flag(FLAG_LOCKE) == false)
+	{
+		msgbox("Yo, what's up!\pThe name's Locke, Nuz Locke.\nWhat? League..?\pOhh, you mean the Pokémon League!\pNah, too much effort for me.\pAnyway, you like challenges?")
+		yesnobox(YES, NO)
+			if(var(VAR_RESULT) == YES)
+			{
+				msgbox(format("Hell yeah! Here, take this!"))
+				playfanfare(MUS_OBTAIN_ITEM)
+				giveitem(ITEM_INFINITY_CANDY)
+				waitfanfare
+				msgbox(format("That right there is some special candy!\p"
+				"It powers up your Pokémon quick, but only up to a certain amount.\p"
+				"The stronger you get as a trainer, the more you can power up!\p"
+				"With great power, comes great responsiblity...\p"
+				"Well, good luck on your journey!"))
+				setflag(FLAG_LOCKE)
+			}
+			if(var(VAR_RESULT) == NO)
+			{
+				msgbox(format("Ah, yeah. Figures.\pYou are not the one."))
+				closemessage
+				applymovement(1,Lockemovement2)
+				waitmovement(0)
+				
+				
+				
+			}
+		release
+	}
+	else
+	{
+	 	lock
+	 	applymovement(1, LockeMovement1)
+	 	msgbox("I hope your challenge is going well!")
+	 	release
+	}
+
+}
+
+movement LockeMovement1
+{
+	face_player
+}
+movement Lockemovement2
+{
+	face_left
+}

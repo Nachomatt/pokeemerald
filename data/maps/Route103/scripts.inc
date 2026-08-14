@@ -707,150 +707,376 @@ Route103_Text_RouteSign:
 # 354 "data/maps/Route103/scripts.pory"
 	.string "{DOWN_ARROW} OLDALE TOWN$"
 
-# 358 "data/maps/Route103/scripts.pory"
-Route103Movement1:
+Route103_Boy::
+# 359 "data/maps/Route103/scripts.pory"
+	lock
 # 360 "data/maps/Route103/scripts.pory"
-	walk_left
-	step_end
-
+	faceplayer
+# 361 "data/maps/Route103/scripts.pory"
+	msgbox Route103_Boy_Text_0
+# 362 "data/maps/Route103/scripts.pory"
+	closemessage
 # 363 "data/maps/Route103/scripts.pory"
-Route103Movement2:
-# 365 "data/maps/Route103/scripts.pory"
-	walk_down
-	step_end
+	release
+	return
 
-# 367 "data/maps/Route103/scripts.pory"
-Route103Movement3:
-# 369 "data/maps/Route103/scripts.pory"
-	walk_up
-	step_end
 
 Route103_EventScript_NachoTriggerNorth::
-# 375 "data/maps/Route103/scripts.pory"
+# 368 "data/maps/Route103/scripts.pory"
 	lock
-# 376 "data/maps/Route103/scripts.pory"
+# 369 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
-# 377 "data/maps/Route103/scripts.pory"
+# 370 "data/maps/Route103/scripts.pory"
 	closemessage
-# 378 "data/maps/Route103/scripts.pory"
+# 371 "data/maps/Route103/scripts.pory"
 	applymovement LOCALID_PLAYER, Route103Movement3
-# 379 "data/maps/Route103/scripts.pory"
+# 372 "data/maps/Route103/scripts.pory"
+	waitmovement 0
+# 373 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScript_NachoTriggerWest::
-# 383 "data/maps/Route103/scripts.pory"
+# 377 "data/maps/Route103/scripts.pory"
 	lock
-# 384 "data/maps/Route103/scripts.pory"
+# 378 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
-# 385 "data/maps/Route103/scripts.pory"
+# 379 "data/maps/Route103/scripts.pory"
 	closemessage
-# 386 "data/maps/Route103/scripts.pory"
+# 380 "data/maps/Route103/scripts.pory"
 	applymovement LOCALID_PLAYER, Route103Movement1
-# 387 "data/maps/Route103/scripts.pory"
+# 381 "data/maps/Route103/scripts.pory"
+	waitmovement 0
+# 382 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScript_NachoTriggerSouth::
-# 392 "data/maps/Route103/scripts.pory"
+# 387 "data/maps/Route103/scripts.pory"
 	lock
-# 393 "data/maps/Route103/scripts.pory"
+# 388 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_NachoTriggerNorth_Text_0
-# 394 "data/maps/Route103/scripts.pory"
+# 389 "data/maps/Route103/scripts.pory"
 	closemessage
-# 395 "data/maps/Route103/scripts.pory"
+# 390 "data/maps/Route103/scripts.pory"
 	applymovement LOCALID_PLAYER, Route103Movement2
-# 396 "data/maps/Route103/scripts.pory"
+# 391 "data/maps/Route103/scripts.pory"
+	waitmovement 0
+# 392 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScriptOnTransition::
-# 402 "data/maps/Route103/scripts.pory"
+# 398 "data/maps/Route103/scripts.pory"
 	goto_if_set FLAG_RECEIVED_POKEDEX_FROM_BIRCH, Route103_EventScriptOnTransition_1
-# 408 "data/maps/Route103/scripts.pory"
+# 404 "data/maps/Route103/scripts.pory"
 	setvar VAR_TEMP_0, 0
 	return
 
 Route103_EventScriptOnTransition_1:
-# 404 "data/maps/Route103/scripts.pory"
+# 400 "data/maps/Route103/scripts.pory"
 	setvar VAR_TEMP_0, 1
 	return
 
 
 Route103_EventScript_Poochyena::
-# 414 "data/maps/Route103/scripts.pory"
+# 410 "data/maps/Route103/scripts.pory"
 	lock
-# 415 "data/maps/Route103/scripts.pory"
+# 411 "data/maps/Route103/scripts.pory"
 	faceplayer
-# 416 "data/maps/Route103/scripts.pory"
+# 412 "data/maps/Route103/scripts.pory"
 	playmoncry SPECIES_POOCHYENA, 0
-# 417 "data/maps/Route103/scripts.pory"
+# 413 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_Poochyena_Text_0
-# 418 "data/maps/Route103/scripts.pory"
+# 414 "data/maps/Route103/scripts.pory"
 	closemessage
-# 419 "data/maps/Route103/scripts.pory"
+# 415 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScript_Shoredude::
-# 425 "data/maps/Route103/scripts.pory"
+# 421 "data/maps/Route103/scripts.pory"
 	lock
-# 426 "data/maps/Route103/scripts.pory"
+# 422 "data/maps/Route103/scripts.pory"
 	faceplayer
-# 427 "data/maps/Route103/scripts.pory"
+# 423 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_Shoredude_Text_0
-# 428 "data/maps/Route103/scripts.pory"
+# 424 "data/maps/Route103/scripts.pory"
 	closemessage
-# 429 "data/maps/Route103/scripts.pory"
+# 425 "data/maps/Route103/scripts.pory"
 	release
 	return
 
 
 Route103_EventScript_YoungsterAndrew::
-# 435 "data/maps/Route103/scripts.pory"
+# 431 "data/maps/Route103/scripts.pory"
 	trainerbattle_single TRAINER_ANDREW, Route103_AndrewIntro, Route103_AndrewDefeated
-# 436 "data/maps/Route103/scripts.pory"
+# 432 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_YoungsterAndrew_Text_0
-# 437 "data/maps/Route103/scripts.pory"
+# 433 "data/maps/Route103/scripts.pory"
 	closemessage
 	return
 
 
 Route103_EventScript_Michael::
-# 442 "data/maps/Route103/scripts.pory"
+# 438 "data/maps/Route103/scripts.pory"
 	trainerbattle_single TRAINER_MIGUEL_1, Route103_MichaelIntro, Route103_MichaelDefeated
-# 443 "data/maps/Route103/scripts.pory"
+# 439 "data/maps/Route103/scripts.pory"
 	msgbox Route103_EventScript_Michael_Text_0
-# 444 "data/maps/Route103/scripts.pory"
+# 440 "data/maps/Route103/scripts.pory"
 	closemessage
 	return
 
 
 Route103_EventScript_Markus::
-# 449 "data/maps/Route103/scripts.pory"
+# 445 "data/maps/Route103/scripts.pory"
 	trainerbattle_single TRAINER_MARCOS, Route103_MarkusIntro, Route103_MarkusDefeated
-# 450 "data/maps/Route103/scripts.pory"
-	msgbox Route103_EventScript_Michael_Text_0
-# 451 "data/maps/Route103/scripts.pory"
+# 446 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_Markus_Text_0
+# 447 "data/maps/Route103/scripts.pory"
 	closemessage
 	return
 
 
+Route103_RivalFight1::
+# 452 "data/maps/Route103/scripts.pory"
+	lock
+# 453 "data/maps/Route103/scripts.pory"
+	checkplayergender
+	checkplayergender
+# 0 "data/maps/Route103/scripts.pory"
+	compare VAR_RESULT, MALE
+	goto_if_eq Route103_RivalFight1_1
+# 460 "data/maps/Route103/scripts.pory"
+	goto Route103_RivalFight1_Brendan
+	return
+
+Route103_RivalFight1_1:
+# 456 "data/maps/Route103/scripts.pory"
+	goto Route103_RivalFight1_May
+	return
+
+
+Route103_RivalFight1_May::
+# 466 "data/maps/Route103/scripts.pory"
+	lock
+# 467 "data/maps/Route103/scripts.pory"
+	msgbox Route103_RivalFight1_May_Text_0
+# 468 "data/maps/Route103/scripts.pory"
+	playse SE_PIN
+# 469 "data/maps/Route103/scripts.pory"
+	applymovement 2, Rival1_Movement1
+# 470 "data/maps/Route103/scripts.pory"
+	waitmovement 0
+# 471 "data/maps/Route103/scripts.pory"
+	playbgm MUS_ENCOUNTER_MAY, TRUE
+# 472 "data/maps/Route103/scripts.pory"
+	msgbox Route103_RivalFight1_May_Text_1
+# 473 "data/maps/Route103/scripts.pory"
+	switch VAR_STARTER_MON
+# 475 "data/maps/Route103/scripts.pory"
+	case 0, Route103_RivalFight1_May_3
+# 477 "data/maps/Route103/scripts.pory"
+	case 1, Route103_RivalFight1_May_4
+# 479 "data/maps/Route103/scripts.pory"
+	case 2, Route103_RivalFight1_May_5
+Route103_RivalFight1_May_1:
+	end
+
+Route103_RivalFight1_May_3:
+# 476 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_StartMayBattleGeodude
+	goto Route103_RivalFight1_May_1
+
+Route103_RivalFight1_May_4:
+# 478 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_StartMayBattleDiglett
+	goto Route103_RivalFight1_May_1
+
+Route103_RivalFight1_May_5:
+# 480 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_StartMayBattleDoduo
+	goto Route103_RivalFight1_May_1
+
+
+Route103_EventScript_StartMayBattleGeodude::
+# 487 "data/maps/Route103/scripts.pory"
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_MayDefeated
+# 488 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_MayBattleEnd
+	end
+
+
+Route103_EventScript_StartMayBattleDoduo::
+# 494 "data/maps/Route103/scripts.pory"
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_MayDefeated
+# 495 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_MayBattleEnd
+	end
+
+
+Route103_EventScript_StartMayBattleDiglett::
+# 501 "data/maps/Route103/scripts.pory"
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_MayDefeated
+# 502 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_MayBattleEnd
+	end
+
+
+Route103_EventScript_MayBattleEnd::
+# 508 "data/maps/Route103/scripts.pory"
+	msgbox Route103_EventScript_MayBattleEnd_Text_0
+# 512 "data/maps/Route103/scripts.pory"
+	closemessage
+# 513 "data/maps/Route103/scripts.pory"
+	goto Route103_Rival1Skedaddle
+	end
+
+
+Route103_Rival1Skedaddle::
+# 519 "data/maps/Route103/scripts.pory"
+	switch VAR_FACING
+# 521 "data/maps/Route103/scripts.pory"
+	case DIR_NORTH, Route103_Rival1Skedaddle_3
+# 523 "data/maps/Route103/scripts.pory"
+	case DIR_WEST, Route103_Rival1Skedaddle_4
+Route103_Rival1Skedaddle_1:
+	end
+
+Route103_Rival1Skedaddle_3:
+# 522 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_RivalExitSouth
+	goto Route103_Rival1Skedaddle_1
+
+Route103_Rival1Skedaddle_4:
+# 524 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_RivalExitEast
+	goto Route103_Rival1Skedaddle_1
+
+
+Route103_EventScript_RivalExitSouth::
+# 532 "data/maps/Route103/scripts.pory"
+	applymovement 2, Rival1_Movement2
+# 533 "data/maps/Route103/scripts.pory"
+	waitmovement 0
+# 534 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_RivalEnd
+	end
+
+
+Route103_EventScript_RivalExitEast::
+# 540 "data/maps/Route103/scripts.pory"
+	applymovement 2, Rival1_Movement3
+# 541 "data/maps/Route103/scripts.pory"
+	waitmovement 0
+# 542 "data/maps/Route103/scripts.pory"
+	goto Route103_EventScript_RivalEnd
+	end
+
+
+Route103_RivalFight1_Brendan::
+	return
+
+
+# 589 "data/maps/Route103/scripts.pory"
+Route103Movement1:
+# 591 "data/maps/Route103/scripts.pory"
+	walk_left
+	step_end
+
+# 594 "data/maps/Route103/scripts.pory"
+Route103Movement2:
+# 596 "data/maps/Route103/scripts.pory"
+	walk_down
+	step_end
+
+# 598 "data/maps/Route103/scripts.pory"
+Route103Movement3:
+# 600 "data/maps/Route103/scripts.pory"
+	walk_up
+	step_end
+
+# 603 "data/maps/Route103/scripts.pory"
+Rival1_Movement1:
+# 605 "data/maps/Route103/scripts.pory"
+	face_player
+# 606 "data/maps/Route103/scripts.pory"
+	emote_exclamation_mark
+# 607 "data/maps/Route103/scripts.pory"
+	delay_16
+	step_end
+
+# 610 "data/maps/Route103/scripts.pory"
+Rival1_Movement2:
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+# 612 "data/maps/Route103/scripts.pory"
+	walk_right
+	step_end
+
+# 614 "data/maps/Route103/scripts.pory"
+Rival1_Movement3:
+# 616 "data/maps/Route103/scripts.pory"
+	walk_down
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+# 617 "data/maps/Route103/scripts.pory"
+	walk_right
+	step_end
+
+Route103_Boy_Text_0:
+# 361 "data/maps/Route103/scripts.pory"
+	.string "Be careful on the bridge up ahead.\p"
+	.string "It's slippery. I saw someone slip on the\n"
+	.string "bridge and fall in the water.$"
+
 Route103_EventScript_NachoTriggerNorth_Text_0:
-# 376 "data/maps/Route103/scripts.pory"
+# 369 "data/maps/Route103/scripts.pory"
 	.string "They look busy.... Better not to\n"
 	.string "interrupt them.$"
 
 Route103_EventScript_Poochyena_Text_0:
-# 417 "data/maps/Route103/scripts.pory"
+# 413 "data/maps/Route103/scripts.pory"
 	.string "POOCHYENA: Grraowr!$"
 
 Route103_EventScript_Shoredude_Text_0:
-# 427 "data/maps/Route103/scripts.pory"
+# 423 "data/maps/Route103/scripts.pory"
 	.string "Did you see that guy earlier at the\n"
 	.string "bridge?\p"
 	.string "He just walked right past everyone\n"
@@ -858,36 +1084,68 @@ Route103_EventScript_Shoredude_Text_0:
 	.string "I wonder if he is a strong trainer.$"
 
 Route103_EventScript_YoungsterAndrew_Text_0:
-# 436 "data/maps/Route103/scripts.pory"
+# 432 "data/maps/Route103/scripts.pory"
 	.string "I'm gonna go get a towel...$"
 
 Route103_EventScript_Michael_Text_0:
-# 443 "data/maps/Route103/scripts.pory"
+# 439 "data/maps/Route103/scripts.pory"
 	.string "I bought my daughter some cat ears for\n"
 	.string "her birthday.\p"
 	.string "She likes to pretend she's a SKITTY\n"
 	.string "when no one is looking.$"
 
+Route103_EventScript_Markus_Text_0:
+# 446 "data/maps/Route103/scripts.pory"
+	.string "Your SOUL is electrifying!$"
+
+Route103_RivalFight1_May_Text_0:
+# 467 "data/maps/Route103/scripts.pory"
+	.string "MAY: Right... So that's where I can find..$"
+
+Route103_RivalFight1_May_Text_1:
+# 472 "data/maps/Route103/scripts.pory"
+	.string "Ah, {PLAYER}! I see my dad gave you a\n"
+	.string "Pokémon too!\p"
+	.string "I got a pretty cute one, hehe.\p"
+	.string "Oh, you want to battle? Well, alright!\p"
+	.string "We both just started, but may the best\n"
+	.string "trainer win!$"
+
+Route103_EventScript_MayBattleEnd_Text_0:
+# 508 "data/maps/Route103/scripts.pory"
+	.string "MAY: I think I get now why my dad\n"
+	.string "trusted you with that Pokémon.\p"
+	.string "Did you know it came from a different\n"
+	.string "region?\p"
+	.string "Aloha I think he said it was called? Eh,\n"
+	.string "who cares.\p"
+	.string "Huh? My dad was worried about me? Okay\n"
+	.string "then, let's head back to the LAB!$"
+
 Route103_MarkusIntro::
-# 454 "data/maps/Route103/scripts.pory"
-	.string "Music is the key to the SOUL!\nShow me what your soul is filled with!$"
+# 553 "data/maps/Route103/scripts.pory"
+	.string "Music is the key to the SOUL!\nShow me what your SOUL is filled with!$"
 
 Route103_MarkusDefeated::
-# 459 "data/maps/Route103/scripts.pory"
-	.string "Darn, you're good!$"
+# 558 "data/maps/Route103/scripts.pory"
+	.string "Ahh. So that's your jam, huh.$"
 
 Route103_AndrewIntro::
-# 465 "data/maps/Route103/scripts.pory"
+# 564 "data/maps/Route103/scripts.pory"
 	.string "My shorts got wet because  I fell off \nthe bridge... \p Maybe a heated battle can dry me off!$"
 
 Route103_AndrewDefeated::
-# 470 "data/maps/Route103/scripts.pory"
+# 569 "data/maps/Route103/scripts.pory"
 	.string "Darn, you're good!$"
 
 Route103_MichaelIntro::
-# 475 "data/maps/Route103/scripts.pory"
+# 574 "data/maps/Route103/scripts.pory"
 	.string "My daughter loves cute and fluffy \nPokémon! \pDo you have any of them to show her?$"
 
 Route103_MichaelDefeated::
-# 480 "data/maps/Route103/scripts.pory"
+# 579 "data/maps/Route103/scripts.pory"
 	.string "Aaaahhhh! Too strong!$"
+
+Route103_MayDefeated::
+# 584 "data/maps/Route103/scripts.pory"
+	.string "Oh wow {PLAYER}, you're pretty good at \nthis!$"

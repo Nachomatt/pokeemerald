@@ -594,3 +594,31 @@ Route101_Text_RouteSign:
 	.string "ROUTE 101\n"
 # 298 "data/maps/Route101/scripts.pory"
 	.string "{UP_ARROW} OLDALE TOWN$"
+
+Route101_EventScript_PreventExitEast::
+# 303 "data/maps/Route101/scripts.pory"
+	lockall
+# 304 "data/maps/Route101/scripts.pory"
+	msgbox Route101_EventScript_PreventExitEast_Text_0
+# 305 "data/maps/Route101/scripts.pory"
+	closemessage
+# 306 "data/maps/Route101/scripts.pory"
+	applymovement LOCALID_PLAYER, Route101_Movement_PreventExitEast
+# 307 "data/maps/Route101/scripts.pory"
+	waitmovement 0
+# 308 "data/maps/Route101/scripts.pory"
+	releaseall
+	end
+
+
+# 313 "data/maps/Route101/scripts.pory"
+Route101_Movement_PreventExitEast:
+# 315 "data/maps/Route101/scripts.pory"
+	walk_left
+# 316 "data/maps/Route101/scripts.pory"
+	step_end
+
+Route101_EventScript_PreventExitEast_Text_0:
+# 304 "data/maps/Route101/scripts.pory"
+	.string "Wh-Where are you going?!\n"
+	.string "Don't leave me like this!$"

@@ -354,21 +354,14 @@ Route103_Text_RouteSign:
 	.string "{DOWN_ARROW} OLDALE TOWN$"
 
 `
-
-movement Route103Movement1
+script Route103_Boy
 {
-  walk_left
+	lock
+	faceplayer
+	msgbox(format("Be careful on the bridge up ahead.\pIt's slippery. I saw someone slip on the bridge and fall in the water."))
+	closemessage
+	release
 }
-
-movement Route103Movement2
-{
-  walk_down
-}
-movement Route103Movement3
-{
-  walk_up
-}
-
 
 script Route103_EventScript_NachoTriggerNorth
 {
@@ -376,6 +369,7 @@ script Route103_EventScript_NachoTriggerNorth
 	msgbox(format("They look busy.... Better not to interrupt them."))
 	closemessage
 	applymovement(LOCALID_PLAYER, Route103Movement3)
+	waitmovement(0)
 	release
 }
 script Route103_EventScript_NachoTriggerWest
@@ -384,6 +378,7 @@ script Route103_EventScript_NachoTriggerWest
 	msgbox(format("They look busy.... Better not to interrupt them."))
 	closemessage
 	applymovement(LOCALID_PLAYER, Route103Movement1)
+	waitmovement(0)
 	release
 }
 
@@ -393,6 +388,7 @@ script Route103_EventScript_NachoTriggerSouth
 	msgbox(format("They look busy.... Better not to interrupt them."))
 	closemessage
 	applymovement(LOCALID_PLAYER, Route103Movement2)
+	waitmovement(0)
 	release
 
 }
@@ -447,18 +443,121 @@ script Route103_EventScript_Michael
 script Route103_EventScript_Markus
 {
 	trainerbattle_single(TRAINER_MARCOS, Route103_MarkusIntro, Route103_MarkusDefeated)
-	msgbox(format("I bought my daughter some cat ears for her birthday.\p She likes to pretend she's a SKITTY when no one is looking."))
+	msgbox(format("Your SOUL is electrifying!"))
 	closemessage
 }
 
+script Route103_RivalFight1
+{
+	lock
+    checkplayergender
+	if(checkplayergender == MALE)
+	{
+		goto(Route103_RivalFight1_May)
+	}
+	else
+	{
+		goto(Route103_RivalFight1_Brendan)
+	}
+}
+
+script Route103_RivalFight1_May
+{
+	lock
+	msgbox(format("MAY: Right... So that's where I can find.."))
+	playse(SE_PIN)
+	applymovement(2,Rival1_Movement1)
+	waitmovement(0)
+	playbgm(MUS_ENCOUNTER_MAY,TRUE)
+	msgbox(format("Ah, {PLAYER}! I see my dad gave you a Pokémon too!\pI got a pretty cute one, hehe.\pOh, you want to battle? Well, alright!\p We both just started, but may the best trainer win!"))
+	switch (var(VAR_STARTER_MON))
+	{
+      case 0:
+	   goto(Route103_EventScript_StartMayBattleGeodude)
+	  case 1:
+	   goto(Route103_EventScript_StartMayBattleDiglett)
+	  case 2:
+	   goto(Route103_EventScript_StartMayBattleDoduo)
+	}
+	end
+}
+
+script Route103_EventScript_StartMayBattleGeodude
+{
+	trainerbattle_no_intro(TRAINER_MAY_ROUTE_103_TREECKO, Route103_MayDefeated)
+	goto(Route103_EventScript_MayBattleEnd)
+	end
+}
+
+script Route103_EventScript_StartMayBattleDoduo
+{
+	trainerbattle_no_intro(TRAINER_MAY_ROUTE_103_MUDKIP, Route103_MayDefeated)
+	goto(Route103_EventScript_MayBattleEnd)
+	end
+}
+
+script Route103_EventScript_StartMayBattleDiglett
+{
+	trainerbattle_no_intro(TRAINER_MAY_ROUTE_103_TORCHIC, Route103_MayDefeated)
+	goto(Route103_EventScript_MayBattleEnd)
+	end
+}
+
+script Route103_EventScript_MayBattleEnd
+{
+  msgbox(format("MAY: I think I get now why my dad trusted you with that Pokémon.\p"
+  "Did you know it came from a different region?\p" 
+  "Aloha I think he said it was called? Eh, who cares. \p"
+  "Huh? My dad was worried about me? Okay then, let's head back to the LAB! "))
+  closemessage
+  goto(Route103_Rival1Skedaddle)
+  end
+}
+
+script Route103_Rival1Skedaddle
+{
+	switch(var(VAR_FACING))
+	{
+	  case DIR_NORTH: 
+	 	goto(Route103_EventScript_RivalExitSouth)
+	  case DIR_WEST:
+	    goto(Route103_EventScript_RivalExitEast)
+	}
+	end
+
+}
+
+script Route103_EventScript_RivalExitSouth
+{
+  applymovement(2,Rival1_Movement2)
+  waitmovement(0)
+  goto(Route103_EventScript_RivalEnd)
+  end
+}
+
+script Route103_EventScript_RivalExitEast
+{
+  applymovement(2, Rival1_Movement3)
+  waitmovement(0)
+  goto(Route103_EventScript_RivalEnd)
+  end
+}
+
+
+script Route103_RivalFight1_Brendan
+{
+
+}
+
+
 text Route103_MarkusIntro
 {
-	"Music is the key to the SOUL!\nShow me what your soul is filled with!"
+	"Music is the key to the SOUL!\nShow me what your SOUL is filled with!"
 }
 
 text Route103_MarkusDefeated
 {
-	"Darn, you're good!"
+	"Ahh. So that's your jam, huh."
 }
 
 
@@ -482,3 +581,38 @@ text Route103_MichaelDefeated
 	"Aaaahhhh! Too strong!"
 }
 
+text Route103_MayDefeated
+{
+	"Oh wow {PLAYER}, you're pretty good at \nthis!"
+}
+
+movement Route103Movement1
+{
+  walk_left
+}
+
+movement Route103Movement2
+{
+  walk_down
+}
+movement Route103Movement3
+{
+  walk_up
+}
+
+movement Rival1_Movement1
+{
+	face_player
+	emote_exclamation_mark
+	delay_16
+
+}
+movement Rival1_Movement2
+{
+	walk_right*10
+}
+movement Rival1_Movement3
+{
+	walk_down
+	walk_right*10
+}

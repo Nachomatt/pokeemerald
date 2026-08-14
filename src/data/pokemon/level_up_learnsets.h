@@ -1137,7 +1137,7 @@ static const u16 sFarfetchdLevelUpLearnset[] = {
 static const u16 sDoduoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_PECK),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
-    LEVEL_UP_MOVE( 9, MOVE_PURSUIT),
+    LEVEL_UP_MOVE( 6, MOVE_DOUBLE_KICK),
     LEVEL_UP_MOVE(13, MOVE_FURY_ATTACK),
     LEVEL_UP_MOVE(21, MOVE_TRI_ATTACK),
     LEVEL_UP_MOVE(25, MOVE_RAGE),

@@ -6795,7 +6795,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BrendanRoute103Mudkip[] 
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_TREECKO,
+    .species = SPECIES_GEODUDE,
     }
 };
 
@@ -6839,7 +6839,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BrendanRoute103Treecko[]
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_TORCHIC,
+    .species = SPECIES_DIGLETT,
     }
 };
 
@@ -6883,7 +6883,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BrendanRoute103Torchic[]
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_MUDKIP,
+    .species = SPECIES_DODUO,
     }
 };
 
@@ -6927,7 +6927,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayRoute103Mudkip[] = {
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_TREECKO,
+    .species = SPECIES_GEODUDE,
     }
 };
 
@@ -6971,7 +6971,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayRoute103Treecko[] = {
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_TORCHIC,
+    .species = SPECIES_DIGLETT,
     }
 };
 
@@ -7015,7 +7015,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayRoute103Torchic[] = {
     {
     .iv = 0,
     .lvl = 5,
-    .species = SPECIES_MUDKIP,
+    .species = SPECIES_DODUO,
     }
 };
 
@@ -9516,7 +9516,8 @@ static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     .iv = 100,
     .lvl = 6,
     .species = SPECIES_VOLTORB,
-    .moves = {MOVE_THUNDER_SHOCK, MOVE_ROLLOUT, MOVE_CHARGE }
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_ROLLOUT, MOVE_CHARGE },
+    .abilitynums = 1
     },
     {
     .iv = 100,
@@ -9527,8 +9528,8 @@ static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     {
     .iv = 100,
     .lvl = 6,
-    .species = SPECIES_MAREEP,
-    .moves = {MOVE_THUNDER_SHOCK, MOVE_COTTON_SPORE, MOVE_ATTRACT }
+    .species = SPECIES_PICHU,
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_FLATTER }
     }
 };
 
