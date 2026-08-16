@@ -9527,7 +9527,7 @@ static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     },
     {
     .iv = 100,
-    .lvl = 6,
+    .lvl = 8,
     .species = SPECIES_PICHU,
     .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_FLATTER }
     }

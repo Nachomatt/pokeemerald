@@ -758,12 +758,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PIKACHU] =
     {
-        .baseHP        = 35,
+        .baseHP        = 65,
         .baseAttack    = 55,
-        .baseDefense   = 30,
+        .baseDefense   = 40,
         .baseSpeed     = 90,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 40,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 50,
         .types = { TYPE_ELECTRIC, TYPE_ELECTRIC },
         .catchRate = 190,
         .expYield = 82,
@@ -788,13 +788,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_RAICHU] =
     {
-        .baseHP        = 60,
+        .baseHP        = 75,
         .baseAttack    = 90,
-        .baseDefense   = 55,
+        .baseDefense   = 65,
         .baseSpeed     = 100,
         .baseSpAttack  = 90,
         .baseSpDefense = 80,
-        .types = { TYPE_ELECTRIC, TYPE_ELECTRIC },
+        .types = { TYPE_ELECTRIC, TYPE_FIGHTING },
         .catchRate = 75,
         .expYield = 122,
         .evYield_HP        = 0,
@@ -5168,7 +5168,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_PICHU] =
     {
-        .baseHP        = 20,
+        .baseHP        = 30,
         .baseAttack    = 40,
         .baseDefense   = 15,
         .baseSpeed     = 60,

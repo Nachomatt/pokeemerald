@@ -91,4 +91,5 @@ void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
 void ItemUseCB_InfinityCandy(u8 taskId, TaskFunc task);
 
+
 #endif // GUARD_PARTY_MENU_H
