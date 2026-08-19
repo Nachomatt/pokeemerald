@@ -632,7 +632,7 @@ static void HandleInputChooseMove(void)
             ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
             CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
             PlaySE(SE_SELECT);
-            MoveSelectionDisplayPpNumber();
+            MoveSelectionDisplayPPNumber();
             MoveSelectionDisplayMoveType();
         }
     }
