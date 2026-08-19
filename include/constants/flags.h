@@ -46,7 +46,7 @@
 #define FLAG_RANCHLADY       0x20 // Ranch Lady Flag
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT        0x21 // don't reset boulders when they go offscreen
 #define FLAG_LOCKE    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_FORCE_LOAD_OFFSCREEN_OBJECT  0x23
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
