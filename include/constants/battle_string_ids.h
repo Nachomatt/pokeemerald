@@ -386,8 +386,9 @@
 #define STRINGID_GUARDDOGINTIMIDATE         386
 #define STRINGID_MASTERMINDACTIVATES        387
 #define STRINGID_PKMNCUTSSPATKWITH          388
+#define STRINGID_VENOMFANGSUCKED            389
 
-#define BATTLESTRINGS_COUNT                 389
+#define BATTLESTRINGS_COUNT                 390
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -423,6 +424,7 @@
 // gAbsorbDrainStringIds
 #define B_MSG_ABSORB      0
 #define B_MSG_ABSORB_OOZE 1
+#define B_MSG_ABSORB_FANG 2
 
 // gLeechSeedStringIds
 #define B_MSG_LEECH_SEED_SET   0

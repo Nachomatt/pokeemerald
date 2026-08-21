@@ -343,6 +343,7 @@ BattleScript_EffectAbsorb::
 	negativedamage
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_AbsorbLiquidOoze
+	jumpifability BS_ATTACKER, ABILITY_VENOM_FANG, BattleScript_AbsorbVenomFang
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB
 	goto BattleScript_AbsorbUpdateHp
 BattleScript_AbsorbLiquidOoze::
@@ -358,6 +359,23 @@ BattleScript_AbsorbTryFainting::
 	tryfaintmon BS_ATTACKER
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
+
+BattleScript_AbsorbVenomFang::
+	manipulatedamage DMG_CHANGE_SIGN
+	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB_FANG
+BattleScript_VenomFangUpdateHp::
+	playanimation BS_TARGET, B_ANIM_VENOMFANG
+	waitanimation
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	jumpifmovehadnoeffect BattleScript_VenomFangFainting
+	printfromtable gAbsorbDrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_VenomFangFainting::
+	tryfaintmon BS_ATTACKER
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
+
 
 BattleScript_EffectBurnHit::
 	setmoveeffect MOVE_EFFECT_BURN

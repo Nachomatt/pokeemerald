@@ -412,6 +412,7 @@ gBattleAnims_General::
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 	.4byte General_Reflect					@ B_ANIM_REFLECT
 	.4byte General_Psychup					@ B_ANIM_PSYCHUP
+	.4byte General_Venom					@ B_ANIM_VENOMFANG
 
 	.align 2
 gBattleAnims_Special::
@@ -10224,6 +10225,12 @@ UnsetSolarBeamBg:
 	return
 
 Status_Poison:
+	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 18, 2
+	blend_color_cycle priority=2, selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=12, color=RGB(30, 0, 31)
+	end
+
+General_Venom:
 	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 18, 2
 	blend_color_cycle priority=2, selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=12, color=RGB(30, 0, 31)

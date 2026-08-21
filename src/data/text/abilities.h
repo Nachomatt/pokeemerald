@@ -95,6 +95,7 @@ static const u8 sMasterMindDescription[] = _("Copies stat changes.");
 static const u8 sSkillLinkDescription[] = _("Ups Multi-Hit Moves.");
 static const u8 sRoyalWrathDescription[] = _("Powers up with ROYAL GUARD.");
 static const u8 sRoyalGuardDescription[] = _("Powers up with ROYAL WRATH.");
+static const u8 sVenomFangDescription[] = _("Draining causes suffering.");
 // static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
 
 
@@ -197,6 +198,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SKILL_LINK] = _("SKILL LINK"),
     [ABILITY_ROYAL_WRATH] = _("ROYAL WRATH"),
     [ABILITY_ROYAL_GUARD] = _("ROYAL GUARD"),
+    [ABILITY_VENOM_FANG] = _("VENOM FANG"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -300,5 +302,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SKILL_LINK] = sSkillLinkDescription,
     [ABILITY_ROYAL_WRATH] = sRoyalWrathDescription,
     [ABILITY_ROYAL_GUARD] = sRoyalGuardDescription,
+    [ABILITY_VENOM_FANG] = sVenomFangDescription,
     // [ABILITY_TRICKSTER] = sTricksterDescription,
 };
