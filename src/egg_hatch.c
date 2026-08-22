@@ -37,6 +37,7 @@
 #include "data.h"
 #include "battle.h" // to get rid of later
 #include "constants/rgb.h"
+#include "constants/region_map_sections.h"
 
 #define GFXTAG_EGG       12345
 #define GFXTAG_EGG_SHARD 23456
@@ -316,6 +317,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u8 i, friendship, language, gameMet, markings, isModernFatefulEncounter;
     u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
+    metloc_u8_t metLocation;
 
     species = GetMonData(egg, MON_DATA_SPECIES);
 
@@ -363,6 +365,7 @@ static void AddHatchedMonToParty(u8 id)
     u16 ball;
     u16 metLevel;
     metloc_u8_t metLocation;
+    u8 ivs;
     struct Pokemon *mon = &gPlayerParty[id];
 
     CreateHatchedMon(mon, &gEnemyParty[0]);
@@ -385,8 +388,11 @@ static void AddHatchedMonToParty(u8 id)
     metLevel = 0;
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
 
-    metLocation = GetCurrentRegionMapSectionId();
+    metLocation = METLOC_SPECIAL_EGG;
+    ivs = 31;
+    SetMonData(mon, MON_DATA_HP_IV, &ivs);
     SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
+    
 
     MonRestorePP(mon);
     CalculateMonStats(mon);

@@ -92,9 +92,13 @@ u8 ScriptGiveEgg(u16 species)
 {
     struct Pokemon mon;
     u8 isEgg;
+    metloc_u8_t metLocation;
 
+
+    metLocation = METLOC_SPECIAL_EGG;
     CreateEgg(&mon, species, TRUE);
     isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_MET_LOCATION, &metLocation);
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 
     return GiveMonToPlayer(&mon);

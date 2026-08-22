@@ -15,3 +15,68 @@ OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
 	.string "It could give you an advantage.$"
 
 `
+script EventScript_Route_103_EggLady
+{
+ lock
+ faceplayer
+ if(flag(FLAG_EGGLADY) == false)
+ {
+   msgbox(format("Ah. Hello there young trainer.\pAre you just starting your adventure?\nI have a request for you.\p"
+ 	"I have this egg my sister gave to me, she lives in OLDALE TOWN.\pWould you please take care of it?"))
+ 	yesnobox(YES, NO)
+ 	if(var(VAR_RESULT) == YES)
+		{
+			getpartysize
+			compare (VAR_RESULT, 6)
+			goto_if_eq(EventScript_PartyIsFull)
+			msgbox(format("I knew right away you'd know what to do.\pPlease take good care of it!"))
+			playfanfare(MUS_OBTAIN_ITEM)
+			msgbox("Obtained the egg from the kind lady!")
+			random(10)
+			switch(var(VAR_RESULT))
+			{
+				case 0:
+				giveegg(SPECIES_ELEKID)
+				case 1:
+				giveegg(SPECIES_SMOOCHUM)
+				case 2:
+				giveegg(SPECIES_MAGBY)
+				case 3:
+				giveegg(SPECIES_PICHU)
+				case 4:
+				giveegg(SPECIES_IGGLYBUFF)
+				case 5:
+				giveegg(SPECIES_CLEFFA)
+				case 6:
+				giveegg(SPECIES_WYNAUT)
+				case 7:
+				giveegg(SPECIES_TYROGUE)
+				case 8:
+				giveegg(SPECIES_TOGEPI)
+				case 9:
+				giveegg(SPECIES_AZURILL)
+			}
+			waitfanfare
+			msgbox(format("I hope you take good care of that little one!"))
+			setflag(FLAG_EGGLADY)
+		}
+		elif(var(VAR_RESULT) == NO)
+			{
+				msgbox(format("I see. I will hold onto it then.\pIf you change your mind, please return."))
+			}
+ }
+ else
+ {
+  msgbox(format("I hope you take good care of that little one!"))
+ }
+
+ closemessage
+ release
+}
+
+script EventScript_PartyIsFull
+{
+ msgbox(format("Oh dear. It seems your party is full.\pPlease come back when you have some room."))
+ closemessage
+ release
+}
