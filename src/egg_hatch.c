@@ -39,10 +39,10 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 
-#define GFXTAG_EGG       12345
+#define GFXTAG_EGG 12345
 #define GFXTAG_EGG_SHARD 23456
 
-#define PALTAG_EGG       54321
+#define PALTAG_EGG 54321
 
 #define EGG_X (DISPLAY_WIDTH / 2)
 #define EGG_Y (DISPLAY_HEIGHT / 2 - 5)
@@ -83,52 +83,49 @@ static void CreateEggShardSprite(u8, u8, s16, s16, s16, u8);
 
 static struct EggHatchData *sEggHatchData;
 
-static const u16 sEggPalette[]  = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");
+static const u16 sEggPalette[] = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");
 static const u8 sEggHatchTiles[] = INCGFX_U8("graphics/pokemon/egg/hatch.png", ".4bpp");
 static const u8 sEggShardTiles[] = INCGFX_U8("graphics/pokemon/egg/shard.png", ".4bpp");
 
 static const struct OamData sOamData_Egg =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x32),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(32x32),
-    .tileNum = 0,
-    .priority = 1,
-    .paletteNum = 0,
-    .affineParam = 0,
+    {
+        .y = 0,
+        .affineMode = ST_OAM_AFFINE_OFF,
+        .objMode = ST_OAM_OBJ_NORMAL,
+        .mosaic = FALSE,
+        .bpp = ST_OAM_4BPP,
+        .shape = SPRITE_SHAPE(32x32),
+        .x = 0,
+        .matrixNum = 0,
+        .size = SPRITE_SIZE(32x32),
+        .tileNum = 0,
+        .priority = 1,
+        .paletteNum = 0,
+        .affineParam = 0,
 };
 
 static const union AnimCmd sSpriteAnim_Egg_Normal[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(0, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd sSpriteAnim_Egg_Cracked1[] =
-{
-    ANIMCMD_FRAME(16, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(16, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd sSpriteAnim_Egg_Cracked2[] =
-{
-    ANIMCMD_FRAME(32, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(32, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd sSpriteAnim_Egg_Cracked3[] =
-{
-    ANIMCMD_FRAME(48, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(48, 5),
+        ANIMCMD_END};
 
-enum {
+enum
+{
     EGG_ANIM_NORMAL,
     EGG_ANIM_CRACKED_1,
     EGG_ANIM_CRACKED_2,
@@ -136,178 +133,163 @@ enum {
 };
 
 static const union AnimCmd *const sSpriteAnimTable_Egg[] =
-{
-    [EGG_ANIM_NORMAL]    = sSpriteAnim_Egg_Normal,
-    [EGG_ANIM_CRACKED_1] = sSpriteAnim_Egg_Cracked1,
-    [EGG_ANIM_CRACKED_2] = sSpriteAnim_Egg_Cracked2,
-    [EGG_ANIM_CRACKED_3] = sSpriteAnim_Egg_Cracked3,
+    {
+        [EGG_ANIM_NORMAL] = sSpriteAnim_Egg_Normal,
+        [EGG_ANIM_CRACKED_1] = sSpriteAnim_Egg_Cracked1,
+        [EGG_ANIM_CRACKED_2] = sSpriteAnim_Egg_Cracked2,
+        [EGG_ANIM_CRACKED_3] = sSpriteAnim_Egg_Cracked3,
 };
 
 static const struct SpriteSheet sEggHatch_Sheet =
-{
-    .data = sEggHatchTiles,
-    .size = sizeof(sEggHatchTiles),
-    .tag = GFXTAG_EGG,
+    {
+        .data = sEggHatchTiles,
+        .size = sizeof(sEggHatchTiles),
+        .tag = GFXTAG_EGG,
 };
 
 static const struct SpriteSheet sEggShards_Sheet =
-{
-    .data = sEggShardTiles,
-    .size = sizeof(sEggShardTiles),
-    .tag = GFXTAG_EGG_SHARD,
+    {
+        .data = sEggShardTiles,
+        .size = sizeof(sEggShardTiles),
+        .tag = GFXTAG_EGG_SHARD,
 };
 
 static const struct SpritePalette sEgg_SpritePalette =
-{
-    .data = sEggPalette,
-    .tag = PALTAG_EGG
-};
+    {
+        .data = sEggPalette,
+        .tag = PALTAG_EGG};
 
 static const struct SpriteTemplate sSpriteTemplate_Egg =
-{
-    .tileTag = GFXTAG_EGG,
-    .paletteTag = PALTAG_EGG,
-    .oam = &sOamData_Egg,
-    .anims = sSpriteAnimTable_Egg,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
+    {
+        .tileTag = GFXTAG_EGG,
+        .paletteTag = PALTAG_EGG,
+        .oam = &sOamData_Egg,
+        .anims = sSpriteAnimTable_Egg,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy};
 
 static const struct OamData sOamData_EggShard =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(8x8),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(8x8),
-    .tileNum = 0,
-    .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
+    {
+        .y = 0,
+        .affineMode = ST_OAM_AFFINE_OFF,
+        .objMode = ST_OAM_OBJ_NORMAL,
+        .mosaic = FALSE,
+        .bpp = ST_OAM_4BPP,
+        .shape = SPRITE_SHAPE(8x8),
+        .x = 0,
+        .matrixNum = 0,
+        .size = SPRITE_SIZE(8x8),
+        .tileNum = 0,
+        .priority = 2,
+        .paletteNum = 0,
+        .affineParam = 0,
 };
 
 static const union AnimCmd sSpriteAnim_EggShard0[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(0, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd sSpriteAnim_EggShard1[] =
-{
-    ANIMCMD_FRAME(1, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(1, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd sSpriteAnim_EggShard2[] =
-{
-    ANIMCMD_FRAME(2, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(2, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd sSpriteAnim_EggShard3[] =
-{
-    ANIMCMD_FRAME(3, 5),
-    ANIMCMD_END
-};
+    {
+        ANIMCMD_FRAME(3, 5),
+        ANIMCMD_END};
 
 static const union AnimCmd *const sSpriteAnimTable_EggShard[] =
-{
-    sSpriteAnim_EggShard0,
-    sSpriteAnim_EggShard1,
-    sSpriteAnim_EggShard2,
-    sSpriteAnim_EggShard3,
+    {
+        sSpriteAnim_EggShard0,
+        sSpriteAnim_EggShard1,
+        sSpriteAnim_EggShard2,
+        sSpriteAnim_EggShard3,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_EggShard =
-{
-    .tileTag = GFXTAG_EGG_SHARD,
-    .paletteTag = PALTAG_EGG,
-    .oam = &sOamData_EggShard,
-    .anims = sSpriteAnimTable_EggShard,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_EggShard
-};
+    {
+        .tileTag = GFXTAG_EGG_SHARD,
+        .paletteTag = PALTAG_EGG,
+        .oam = &sOamData_EggShard,
+        .anims = sSpriteAnimTable_EggShard,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_EggShard};
 
 static const struct BgTemplate sBgTemplates_EggHatch[] =
-{
     {
-        .bg = 0,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 24,
-        .screenSize = 3,
-        .paletteMode = 0,
-        .priority = 0,
-        .baseTile = 0
-    },
+        {.bg = 0,
+         .charBaseIndex = 2,
+         .mapBaseIndex = 24,
+         .screenSize = 3,
+         .paletteMode = 0,
+         .priority = 0,
+         .baseTile = 0},
 
-    {
-        .bg = 1,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 8,
-        .screenSize = 1,
-        .paletteMode = 0,
-        .priority = 2,
-        .baseTile = 0
-    },
+        {.bg = 1,
+         .charBaseIndex = 0,
+         .mapBaseIndex = 8,
+         .screenSize = 1,
+         .paletteMode = 0,
+         .priority = 2,
+         .baseTile = 0},
 };
 
 static const struct WindowTemplate sWinTemplates_EggHatch[] =
-{
     {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 26,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 64
-    },
-    DUMMY_WIN_TEMPLATE
-};
+        {.bg = 0,
+         .tilemapLeft = 2,
+         .tilemapTop = 15,
+         .width = 26,
+         .height = 4,
+         .paletteNum = 0,
+         .baseBlock = 64},
+        DUMMY_WIN_TEMPLATE};
 
 static const struct WindowTemplate sYesNoWinTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 21,
-    .tilemapTop = 9,
-    .width = 5,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = 424
-};
+    {
+        .bg = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 9,
+        .width = 5,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 424};
 
 static const s16 sEggShardVelocities[][2] =
-{
-    // First shake
-    {Q_8_8(-1.5),       Q_8_8(-3.75)},
+    {
+        // First shake
+        {Q_8_8(-1.5), Q_8_8(-3.75)},
 
-    // Third shake
-    {Q_8_8(-5),         Q_8_8(-3)},
-    {Q_8_8(3.5),        Q_8_8(-3)},
+        // Third shake
+        {Q_8_8(-5), Q_8_8(-3)},
+        {Q_8_8(3.5), Q_8_8(-3)},
 
-    // Hatching
-    {Q_8_8(-4),         Q_8_8(-3.75)},
-    {Q_8_8(2),          Q_8_8(-1.5)},
-    {Q_8_8(-0.5),       Q_8_8(-6.75)},
-    {Q_8_8(5),          Q_8_8(-2.25)},
-    {Q_8_8(-1.5),       Q_8_8(-3.75)},
-    {Q_8_8(4.5),        Q_8_8(-1.5)},
-    {Q_8_8(-1),         Q_8_8(-6.75)},
-    {Q_8_8(4),          Q_8_8(-2.25)},
-    {Q_8_8(-3.5),       Q_8_8(-3.75)},
-    {Q_8_8(1),          Q_8_8(-1.5)},
-    {Q_8_8(-3.515625),  Q_8_8(-6.75)},
-    {Q_8_8(4.5),        Q_8_8(-2.25)},
-    {Q_8_8(-0.5),       Q_8_8(-7.5)},
-    {Q_8_8(1),          Q_8_8(-4.5)},
-    {Q_8_8(-2.5),       Q_8_8(-2.25)},
-    {Q_8_8(2.5),        Q_8_8(-7.5)},
+        // Hatching
+        {Q_8_8(-4), Q_8_8(-3.75)},
+        {Q_8_8(2), Q_8_8(-1.5)},
+        {Q_8_8(-0.5), Q_8_8(-6.75)},
+        {Q_8_8(5), Q_8_8(-2.25)},
+        {Q_8_8(-1.5), Q_8_8(-3.75)},
+        {Q_8_8(4.5), Q_8_8(-1.5)},
+        {Q_8_8(-1), Q_8_8(-6.75)},
+        {Q_8_8(4), Q_8_8(-2.25)},
+        {Q_8_8(-3.5), Q_8_8(-3.75)},
+        {Q_8_8(1), Q_8_8(-1.5)},
+        {Q_8_8(-3.515625), Q_8_8(-6.75)},
+        {Q_8_8(4.5), Q_8_8(-2.25)},
+        {Q_8_8(-0.5), Q_8_8(-7.5)},
+        {Q_8_8(1), Q_8_8(-4.5)},
+        {Q_8_8(-2.5), Q_8_8(-2.25)},
+        {Q_8_8(2.5), Q_8_8(-7.5)},
 };
 
 static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
@@ -339,10 +321,10 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
+        SetMonData(temp, MON_DATA_MOVE1 + i, &moves[i]);
 
     for (i = 0; i < NUM_STATS; i++)
-        SetMonData(temp, MON_DATA_HP_IV + i,  &ivs[i]);
+        SetMonData(temp, MON_DATA_HP_IV + i, &ivs[i]);
 
     language = GAME_LANGUAGE;
     SetMonData(temp, MON_DATA_LANGUAGE, &language);
@@ -366,6 +348,9 @@ static void AddHatchedMonToParty(u8 id)
     u16 metLevel;
     metloc_u8_t metLocation;
     u8 ivs;
+    u16 random = Random();
+    u8 i;
+    u8 j;
     struct Pokemon *mon = &gPlayerParty[id];
 
     CreateHatchedMon(mon, &gEnemyParty[0]);
@@ -390,9 +375,21 @@ static void AddHatchedMonToParty(u8 id)
 
     metLocation = METLOC_SPECIAL_EGG;
     ivs = 31;
-    SetMonData(mon, MON_DATA_HP_IV, &ivs);
+    //Thank you Abbie ♥
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 100; j++)
+        {
+            random = Random() % 6;
+                if (GetMonData(mon, MON_DATA_HP_IV + random) != 31)
+                {
+                    SetMonData(mon, MON_DATA_HP_IV + random, &ivs);
+                    break;
+                }
+        };
+    };
+
     SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
-    
 
     MonRestorePP(mon);
     CalculateMonStats(mon);
@@ -409,9 +406,7 @@ static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
     struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
     GetBoxMonNickname(&daycareMon->mon, nickname);
-    if (daycareMon->mail.message.itemId != ITEM_NONE
-        && (StringCompareWithoutExtCtrlCodes(nickname, daycareMon->mail.monName) != 0
-         || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->mail.otName) != 0))
+    if (daycareMon->mail.message.itemId != ITEM_NONE && (StringCompareWithoutExtCtrlCodes(nickname, daycareMon->mail.monName) != 0 || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->mail.otName) != 0))
     {
         StringCopy(gStringVar1, nickname);
         TVShowConvertInternationalString(gStringVar2, daycareMon->mail.otName, daycareMon->mail.gameLanguage);
@@ -730,8 +725,8 @@ static void CB2_EggHatch(void)
     UpdatePaletteFade();
 }
 
-#define sTimer      data[0]
-#define sSinIdx     data[1]
+#define sTimer data[0]
+#define sSinIdx data[1]
 #define sDelayTimer data[2]
 
 static void SpriteCB_Egg_Shake1(struct Sprite *sprite)
@@ -805,11 +800,11 @@ static void SpriteCB_Egg_Shake3(struct Sprite *sprite)
                 // This ineffectually sets the animation to the frame it's already using.
                 // They likely meant to use the 3rd and final cracked frame of the egg, which goes unused as a result.
                 PlaySE(SE_BALL);
-            #ifdef BUGFIX
+#ifdef BUGFIX
                 StartSpriteAnim(sprite, EGG_ANIM_CRACKED_3);
-            #else
+#else
                 StartSpriteAnim(sprite, EGG_ANIM_CRACKED_2);
-            #endif
+#endif
                 CreateRandomEggShardSprite();
                 CreateRandomEggShardSprite();
             }

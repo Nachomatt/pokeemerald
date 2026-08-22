@@ -3216,8 +3216,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_MIGRAINE && attacker->status1)
         spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == ABILITY_MIGRAINE && attacker->status1)
-        spAttack = (150 * spAttack) / 100;
     if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
         defense = (150 * defense) / 100;
     if (defender->ability == ABILITY_FUR_COAT)
@@ -3237,6 +3235,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_FLYING && attacker->ability == ABILITY_SKY_SPLITTER)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_ELECTRIC && attacker->ability == ABILITY_SUPERCHARGED)
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (type == TYPE_PSYCHIC && attacker->ability == ABILITY_ENLIGHTENED)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_FIRE && attacker->ability == ABILITY_HOTHEADED)
         gBattleMovePower = (150 * gBattleMovePower) / 100;

@@ -138,6 +138,7 @@ extern const u8 BattleScript_DrizzleActivates[];
 extern const u8 BattleScript_SpeedBoostActivates[];
 extern const u8 BattleScript_TraceActivates[];
 extern const u8 BattleScript_MasterMindActivates[];
+extern const u8 BattleScript_ArmorUpActivates[];
 // extern const u8 BattleScript_TricksterActivates[];
 extern const u8 BattleScript_RainDishActivates[];
 extern const u8 BattleScript_SandstreamActivates[];

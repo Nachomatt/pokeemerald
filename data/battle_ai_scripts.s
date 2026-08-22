@@ -306,6 +306,7 @@ AI_CBM_AttackDown:
 
 AI_CBM_DefenseDown:
 	if_stat_level_equal AI_TARGET, STAT_DEF, MIN_STAT_STAGE, Score_Minus10
+	if_ability AI_TARGET, ABILITY_ARMOR_UP, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpeedDown:

@@ -2721,6 +2721,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect++;
                     }
                     break;
+                case ABILITY_ARMOR_UP:
+                    if (gBattleMons[battler].statStages[STAT_DEF] < MAX_STAT_STAGE && gDisableStructs[battler].isFirstTurn != 2)
+                    {
+                        gBattleMons[battler].statStages[STAT_DEF]++;
+                        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_DEF;
+                        gBattleScripting.animArg2 = 0;
+                        BattleScriptPushCursorAndCallback(BattleScript_ArmorUpActivates);
+                        gBattleScripting.battler = battler;
+                        effect++;
+                    }
+                    break;
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
