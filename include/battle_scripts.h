@@ -153,6 +153,8 @@ extern const u8 BattleScript_IlluminateActivatesEnd3[];
 extern const u8 BattleScript_IlluminateActivates[];
 extern const u8 BattleScript_TangledHairActivatesEnd3[];
 extern const u8 BattleScript_TangledHairActivates[];
+extern const u8 BattleScript_AcidRainActivatesEnd3[];
+extern const u8 BattleScript_AcidRainActivates[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_ReflectorActivates[];
 extern const u8 BattleScript_TookAttack[];

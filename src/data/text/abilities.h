@@ -98,6 +98,8 @@ static const u8 sRoyalGuardDescription[] = _("Powers up with ROYAL WRATH.");
 static const u8 sVenomFangDescription[] = _("Draining causes suffering.");
 static const u8 sEnlightenedDescription[] = _("Ups PSYCHC moves.");
 static const u8 sArmorUpDescription[] = _("Gradually boosts DEFENSE.");
+static const u8 sAcidRainDescription[] = _("Lowers the foe's DEFENSE.");
+static const u8 sSludgeSkinDescription[] = _("TOXICs foe on contact.");
 // static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
 
 
@@ -203,6 +205,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_VENOM_FANG] = _("VENOM FANG"),
     [ABILITY_ENLIGHTENED] = _("ENLIGHTENED"),
     [ABILITY_ARMOR_UP] = _("ARMOR UP"),
+    [ABILITY_ACID_RAIN] = _("ACID RAIN"),
+    [ABILITY_SLUDGE_SKIN] = _("SLUDGE SKIN"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -309,5 +313,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_VENOM_FANG] = sVenomFangDescription,
     [ABILITY_ENLIGHTENED] = sEnlightenedDescription,
     [ABILITY_ARMOR_UP] = sArmorUpDescription,
+    [ABILITY_ACID_RAIN] = sAcidRainDescription,
+    [ABILITY_SLUDGE_SKIN] = sSludgeSkinDescription,
     // [ABILITY_TRICKSTER] = sTricksterDescription,
 };

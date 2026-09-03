@@ -4172,6 +4172,42 @@ BattleScript_IlluminatePrevented:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_IlluminateActivatesLoopIncrement
 
+BattleScript_AcidRainActivatesEnd3::
+	call BattleScript_PauseAcidRainActivates
+	end3
+
+BattleScript_PauseAcidRainActivates:
+	pause B_WAIT_TIME_SHORT
+BattleScript_AcidRainActivates::
+	setbyte gBattlerTarget, 0
+	setstatchanger STAT_DEF, 1, TRUE
+BattleScript_AcidRainActivatesLoop:
+	trygetacidraintarget BattleScript_AcidRainActivatesReturn
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_AcidRainActivatesLoopIncrement
+	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_AcidRainPrevented
+	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_AcidRainPrevented
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_AcidRainActivatesLoopIncrement
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_AcidRainActivatesLoopIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSDEFWITH
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AcidRainActivatesLoopIncrement:
+	addbyte gBattlerTarget, 1
+	goto BattleScript_AcidRainActivatesLoop
+BattleScript_AcidRainActivatesReturn:
+	return
+BattleScript_AcidRainPrevented:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PREVENTEDFROMWORKING
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_AcidRainActivatesLoopIncrement
+
+
+
+
+
+
 
 BattleScript_DroughtActivates::
 	pause B_WAIT_TIME_SHORT
