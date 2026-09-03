@@ -100,6 +100,7 @@ static const u8 sEnlightenedDescription[] = _("Ups PSYCHC moves.");
 static const u8 sArmorUpDescription[] = _("Gradually boosts DEFENSE.");
 static const u8 sAcidRainDescription[] = _("Lowers the foe's DEFENSE.");
 static const u8 sSludgeSkinDescription[] = _("TOXICs foe on contact.");
+static const u8 sMartialArtsDescription[] = _("Ups Contact Moves.");
 // static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
 
 
@@ -207,6 +208,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_ARMOR_UP] = _("ARMOR UP"),
     [ABILITY_ACID_RAIN] = _("ACID RAIN"),
     [ABILITY_SLUDGE_SKIN] = _("SLUDGE SKIN"),
+    [ABILITY_MARTIAL_ARTS] = _("MARTIAL ARTS"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -315,5 +317,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_ARMOR_UP] = sArmorUpDescription,
     [ABILITY_ACID_RAIN] = sAcidRainDescription,
     [ABILITY_SLUDGE_SKIN] = sSludgeSkinDescription,
+    [ABILITY_MARTIAL_ARTS] = sMartialArtsDescription,
     // [ABILITY_TRICKSTER] = sTricksterDescription,
 };

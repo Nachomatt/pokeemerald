@@ -3242,6 +3242,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_WATER && attacker->ability == ABILITY_DOWNPOUR)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (FLAG_MAKES_CONTACT && attacker->ability == ABILITY_MARTIAL_ARTS)
+        gBattleMovePower = (120 * gBattleMovePower) / 100;
     
 
     // Self-destruct / Explosion cut defense in half
