@@ -383,16 +383,20 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Leah[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Daisy[] = {
+static const struct TrainerMonItemCustomMoves sParty_Tulip[] = {
     {
-    .iv = 0,
-    .lvl = 14,
-    .species = SPECIES_SHROOMISH,
+    .iv = 100,
+    .lvl = 7,
+    .species = SPECIES_HOPPIP,
+    .moves = {MOVE_ABSORB, MOVE_GUST, MOVE_POISON_POWDER, MOVE_NONE},
+    .abilitynums = 1
     },
     {
-    .iv = 0,
-    .lvl = 14,
-    .species = SPECIES_ROSELIA,
+    .iv = 100,
+    .lvl = 7,
+    .species = SPECIES_BULBASAUR,
+    .moves = {MOVE_VINE_WHIP, MOVE_LEECH_SEED, MOVE_TACKLE, MOVE_NONE},
+    .abilitynums = 2
     }
 };
 

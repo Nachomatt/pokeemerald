@@ -3244,8 +3244,12 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (FLAG_MAKES_CONTACT && attacker->ability == ABILITY_MARTIAL_ARTS)
         gBattleMovePower = (120 * gBattleMovePower) / 100;
-    
-
+    if (attacker->ability == ABILITY_PLUS)
+        gBattleMovePower = (110 * gBattleMovePower) / 100;
+    if (defender->ability == ABILITY_MINUS)
+        gBattleMovePower = (90 * gBattleMovePower) / 100;
+    if (defender->ability == ABILITY_EXOSKELETON)
+        gBattleMovePower = (80 * gBattleMovePower) / 100;
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
@@ -3283,7 +3287,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Burn cuts attack in half
         if ((attacker->status1 & STATUS1_BURN) && attacker->ability != ABILITY_GUTS)
             damage /= 2;
-
         // Apply Reflect
         if ((sideStatus & SIDE_STATUS_REFLECT) && gCritMultiplier == 1)
         {
@@ -3334,7 +3337,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         damage = (damage / damageHelper);
         damage /= 50;
-
         // Apply Lightscreen
         if ((sideStatus & SIDE_STATUS_LIGHTSCREEN) && gCritMultiplier == 1)
         {

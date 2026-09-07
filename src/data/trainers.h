@@ -433,16 +433,16 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Leah),
     },
 
-    [TRAINER_DAISY] =
+    [TRAINER_TULIP] =
     {
         .trainerClass = TRAINER_CLASS_AROMA_LADY,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_AROMA_LADY,
-        .trainerName = _("DAISY"),
-        .items = {},
+        .trainerName = _("TULIP"),
+        .items = {ITEM_POTION},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Daisy),
+        .party = ITEM_CUSTOM_MOVES(sParty_Tulip),
     },
 
     [TRAINER_ROSE_1] =

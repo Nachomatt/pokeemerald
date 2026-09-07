@@ -312,6 +312,7 @@ AI_CBM_DefenseDown:
 AI_CBM_SpeedDown:
 	if_stat_level_equal AI_TARGET, STAT_SPEED, MIN_STAT_STAGE, Score_Minus10
 	if_ability AI_TARGET, ABILITY_SPEED_BOOST, Score_Minus10
+	if_ability AI_TARGET, ABILITY_APEX_HUNTER, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpAtkDown:
@@ -416,6 +417,7 @@ AI_CBM_Confuse:
 	if_status2 AI_TARGET, STATUS2_CONFUSION, Score_Minus5
 	get_ability AI_TARGET
 	if_equal ABILITY_OWN_TEMPO, Score_Minus10
+	if_equal ABILITY_OBLIVIOUS, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -488,19 +490,9 @@ AI_CBM_Attract:
 	if_status2 AI_TARGET, STATUS2_INFATUATION, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_OBLIVIOUS, Score_Minus10
-	get_gender AI_USER
-	if_equal MON_MALE, AI_CBM_Attract_CheckIfTargetIsFemale
-	if_equal MON_FEMALE, AI_CBM_Attract_CheckIfTargetIsMale
-	goto Score_Minus10
-
-AI_CBM_Attract_CheckIfTargetIsFemale:
-	get_gender AI_TARGET
-	if_equal MON_FEMALE, AI_CBM_Attract_End
-	goto Score_Minus10
-
-AI_CBM_Attract_CheckIfTargetIsMale:
 	get_gender AI_TARGET
 	if_equal MON_MALE, AI_CBM_Attract_End
+	if_equal MON_FEMALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
 AI_CBM_Attract_End:
