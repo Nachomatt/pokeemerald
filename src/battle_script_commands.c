@@ -1080,7 +1080,7 @@ static bool8 AccuracyCalcHelper(u16 move)
 
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
 
-    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER) || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
+    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER) || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW) || (gBattleMoves[move].type == TYPE_FIRE && gBattleMons[gBattlerAttacker].ability == ABILITY_WILDFIRE))
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -2452,7 +2452,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
             // for synchronize
 
-            if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_POISON || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_TOXIC || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_PARALYSIS || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN)
+            if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_POISON || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_TOXIC || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_PARALYSIS || gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN )
             {
                 u8 *synchronizeEffect = &gBattleStruct->synchronizeMoveEffect;
                 *synchronizeEffect = gBattleCommunication[MOVE_EFFECT_BYTE];
@@ -2563,8 +2563,14 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 3) + 3); // 3-6 turns
-
+                    if(gBattleMons[gBattlerAttacker].ability == ABILITY_GIGA_GRIP)
+                    {
+                     gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN(6); // 6 turns
+                    }
+                    else
+                    {
+                     gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 3) + 3); // 3-6 turns
+                    }
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 0) = gCurrentMove;
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 1) = gCurrentMove >> 8;
                     *(gBattleStruct->wrappedBy + gEffectBattler) = gBattlerAttacker;
@@ -2775,11 +2781,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_AtkDefDown;
                 break;
-            case MOVE_EFFECT_RECOIL_33: // Double Edge
+            case MOVE_EFFECT_RECOIL_33:
                 gBattleMoveDamage = gHpDealt / 3;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
-
+            
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
@@ -2846,6 +2852,10 @@ static void Cmd_seteffectwithchance(void)
 
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
+    else if(gBattleMons[gBattlerAttacker].ability == ABILITY_WILDFIRE && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
+    {
+        percentChance = 100;
+    }
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
@@ -4168,6 +4178,25 @@ static void Cmd_moveend(void)
         case MOVEEND_SYNCHRONIZE_TARGET: // target synchronize
             if (AbilityBattleEffects(ABILITYEFFECT_SYNCHRONIZE, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_ON_ATTACKER: // or make an ABILITYEFFECT_ON_ATTACKER but it doesn't matter you can just put the abilities here
+            if (gBattleMons[gBattlerAttacker].ability == ABILITY_WILDFIRE
+             && moveType == TYPE_FIRE
+             && TARGET_TURN_DAMAGED
+             && gBattleMons[gBattlerAttacker].hp != 0)
+            {
+
+                gBattleMoveDamage = gHpDealt / 3;
+                if (gBattleMoveDamage == 0)
+                {
+                    gBattleMoveDamage = 1;
+                }
+                gLastUsedAbility = gBattleMons[gBattlerAttacker].ability;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
+                effect = TRUE;
+            }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_ON_DAMAGE_ABILITIES: // Such as abilities activating on contact (Effect Spore, Rough Skin, etc.).

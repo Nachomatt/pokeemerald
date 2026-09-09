@@ -103,6 +103,8 @@ static const u8 sSludgeSkinDescription[] = _("TOXICs foe on contact.");
 static const u8 sMartialArtsDescription[] = _("Ups Contact Moves.");
 static const u8 sApexHunterDescription[] = _("Prevents SPEED reduction.");
 static const u8 sExoskeletonDescription[] = _("Lowers damage taken.");
+static const u8 sGigagripDescription[] = _("Holds on tight.");
+static const u8 sWildfireDescription[] = _("FIRE moves at full power.");
 // static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
 
 
@@ -213,6 +215,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MARTIAL_ARTS] = _("MARTIAL ARTS"),
     [ABILITY_APEX_HUNTER] = _("APEX HUNTER"),
     [ABILITY_EXOSKELETON] = _("EXOSKELETON"),
+    [ABILITY_GIGA_GRIP] = _("GIGA GRIP"),
+    [ABILITY_WILDFIRE] = _("WILDFIRE"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -324,5 +328,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MARTIAL_ARTS] = sMartialArtsDescription,
     [ABILITY_APEX_HUNTER] = sApexHunterDescription,
     [ABILITY_EXOSKELETON] = sExoskeletonDescription,
+    [ABILITY_GIGA_GRIP] = sGigagripDescription,
+    [ABILITY_WILDFIRE] = sWildfireDescription,
     // [ABILITY_TRICKSTER] = sTricksterDescription,
 };
