@@ -90,6 +90,7 @@ static const u8 sText_PkmnPoisonedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B
 static const u8 sText_PkmnHurtByPoison[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby poison!");
 static const u8 sText_PkmnAlreadyPoisoned[] = _("{B_DEF_NAME_WITH_PREFIX} is already\npoisoned.");
 static const u8 sText_PkmnBadlyPoisoned[] = _("{B_EFF_NAME_WITH_PREFIX} is badly\npoisoned!");
+static const u8 sText_PkmnBadlyPoisonedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\n badly poisoned {B_EFF_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnEnergyDrained[] = _("{B_DEF_NAME_WITH_PREFIX} had its\nenergy drained!");
 static const u8 sText_PkmnWasBurned[] = _("{B_EFF_NAME_WITH_PREFIX} was burned!");
 static const u8 sText_PkmnBurnedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nburned {B_EFF_NAME_WITH_PREFIX}!");
@@ -561,6 +562,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNHURTBYPOISON - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtByPoison,
     [STRINGID_PKMNALREADYPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnAlreadyPoisoned,
     [STRINGID_PKMNBADLYPOISONED - BATTLESTRINGS_TABLE_START] = sText_PkmnBadlyPoisoned,
+    [STRINGID_PKMNBADLYPOISONEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnBadlyPoisonedBy,
     [STRINGID_PKMNENERGYDRAINED - BATTLESTRINGS_TABLE_START] = sText_PkmnEnergyDrained,
     [STRINGID_PKMNWASBURNED - BATTLESTRINGS_TABLE_START] = sText_PkmnWasBurned,
     [STRINGID_PKMNBURNEDBY - BATTLESTRINGS_TABLE_START] = sText_PkmnBurnedBy,
@@ -1097,6 +1099,12 @@ const u16 gGotPoisonedStringIds[] =
 {
     [B_MSG_STATUSED]            = STRINGID_PKMNWASPOISONED,
     [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNPOISONEDBY
+};
+
+const u16 gGotBadlyPoisonedStringIds[] =
+{
+    [B_MSG_STATUSED]            = STRINGID_PKMNBADLYPOISONED,
+    [B_MSG_STATUSED_BY_ABILITY] = STRINGID_PKMNBADLYPOISONEDBY
 };
 
 const u16 gGotParalyzedStringIds[] =

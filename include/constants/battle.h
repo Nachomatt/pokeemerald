@@ -256,8 +256,8 @@ enum BattlerId
 #define MOVE_EFFECT_FREEZE              4
 #define MOVE_EFFECT_PARALYSIS           5
 #define MOVE_EFFECT_TOXIC               6
-#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC // All above move effects apply primary status
-#define MOVE_EFFECT_CONFUSION           7
+#define MOVE_EFFECT_CONFUSION           7 // All above move effects apply primary status
+#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_CONFUSION
 #define MOVE_EFFECT_FLINCH              8
 #define MOVE_EFFECT_TRI_ATTACK          9
 #define MOVE_EFFECT_UPROAR              10

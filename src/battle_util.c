@@ -2823,7 +2823,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_EFFECT_SPORE:
-                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && gBattleMons[gBattlerAttacker].hp != 0 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg && TARGET_TURN_DAMAGED && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT) && (Random() % 10) == 0)
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && gBattleMons[gBattlerAttacker].hp != 0 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg && TARGET_TURN_DAMAGED && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT) && (Random() % 1) == 0)
                 {
                     do
                     {
@@ -2833,6 +2833,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     // Replace MOVE_EFFECT_BURN with MOVE_EFFECT_PARALYSIS
                     if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN)
                         gBattleCommunication[MOVE_EFFECT_BYTE] += (MOVE_EFFECT_PARALYSIS - MOVE_EFFECT_BURN);
+                    else if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_POISON)
+                        gBattleCommunication[MOVE_EFFECT_BYTE] += (MOVE_EFFECT_TOXIC - MOVE_EFFECT_POISON);
 
                     gBattleCommunication[MOVE_EFFECT_BYTE] += MOVE_EFFECT_AFFECTS_USER;
                     BattleScriptPushCursor();

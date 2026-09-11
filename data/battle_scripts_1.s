@@ -3954,7 +3954,7 @@ BattleScript_MoveEffectUproar::
 
 BattleScript_MoveEffectToxic::
 	statusanimation BS_EFFECT_BATTLER
-	printstring STRINGID_PKMNBADLYPOISONED
+	printfromtable gGotBadlyPoisonedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_UpdateEffectStatusIconRet
 
