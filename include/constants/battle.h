@@ -205,7 +205,7 @@ enum BattlerId
 #define HITMARKER_ALLOW_NO_PP           (1 << 23)
 #define HITMARKER_GRUDGE                (1 << 24)
 #define HITMARKER_OBEYS                 (1 << 25) // Set after obedience check has been performed
-#define HITMARKER_NEVER_SET             (1 << 26) // Cleared as part of a large group. Never set or checked
+#define HITMARKER_PASSED_TRICKSTER      (1 << 26) // Cleared as part of a large group. Never set or checked
 #define HITMARKER_CHARGING              (1 << 27)
 #define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
 #define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
@@ -257,7 +257,7 @@ enum BattlerId
 #define MOVE_EFFECT_PARALYSIS           5
 #define MOVE_EFFECT_TOXIC               6
 #define MOVE_EFFECT_CONFUSION           7 // All above move effects apply primary status
-#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_CONFUSION
+#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC
 #define MOVE_EFFECT_FLINCH              8
 #define MOVE_EFFECT_TRI_ATTACK          9
 #define MOVE_EFFECT_UPROAR              10

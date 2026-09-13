@@ -623,7 +623,7 @@ void HandleAction_NothingIsFainted(void)
 {
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
-    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_IGNORE_ON_AIR | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_PASSIVE_HP_UPDATE | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT | HITMARKER_CHARGING | HITMARKER_NEVER_SET);
+    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_IGNORE_ON_AIR | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_PASSIVE_HP_UPDATE | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT | HITMARKER_CHARGING);
 }
 
 void HandleAction_ActionFinished(void)
@@ -632,7 +632,7 @@ void HandleAction_ActionFinished(void)
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     SpecialStatusesClear();
-    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_IGNORE_ON_AIR | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_PASSIVE_HP_UPDATE | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT | HITMARKER_CHARGING | HITMARKER_NEVER_SET);
+    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_IGNORE_ON_AIR | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_PASSIVE_HP_UPDATE | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT | HITMARKER_CHARGING);
 
     gCurrentMove = 0;
     gBattleMoveDamage = 0;
@@ -1639,7 +1639,17 @@ u8 DoBattlerEndTurnEffects(void)
                     else if (!(gBattleMons[gActiveBattler].status2 & STATUS2_LOCK_CONFUSE) && (gBattleMons[gActiveBattler].status2 & STATUS2_MULTIPLETURNS))
                     {
                         gBattleMons[gActiveBattler].status2 &= ~STATUS2_MULTIPLETURNS;
-                        if (!(gBattleMons[gActiveBattler].status2 & STATUS2_CONFUSION))
+                        if(gBattleMons[gActiveBattler].ability == ABILITY_RAMPAGE)
+                        {
+                            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_RECHARGE | MOVE_EFFECT_AFFECTS_USER;
+                            SetMoveEffect(TRUE, 0);
+                            if (gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE)
+                                gDisableStructs[gEffectBattler].rechargeTimer = 2;
+                                gLockedMoves[gEffectBattler] = gCurrentMove;
+                                gBattlescriptCurrInstr++;
+                            effect++;
+                        }
+                        else if (!(gBattleMons[gActiveBattler].status2 & STATUS2_CONFUSION))
                         {
                             gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER;
                             SetMoveEffect(TRUE, 0);
@@ -2789,16 +2799,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_ON_DAMAGE: // Contact abilities and Color Change
             switch (gLastUsedAbility)
             {
-            case ABILITY_COLOR_CHANGE:
-                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && move != MOVE_STRUGGLE && gBattleMoves[move].power != 0 && TARGET_TURN_DAMAGED && !IS_BATTLER_OF_TYPE(battler, moveType) && gBattleMons[battler].hp != 0)
-                {
-                    SET_BATTLER_TYPE(battler, moveType);
-                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_ColorChangeActivates;
-                    effect++;
-                }
-                break;
             case ABILITY_CURSED_BODY:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && move != MOVE_STRUGGLE && gBattleMoves[move].power != 0 && TARGET_TURN_DAMAGED && gBattleMons[gBattlerAttacker].hp != 0 && (Random() % 3) == 0)
                 {
@@ -2823,7 +2823,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 break;
             case ABILITY_EFFECT_SPORE:
-                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && gBattleMons[gBattlerAttacker].hp != 0 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg && TARGET_TURN_DAMAGED && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT) && (Random() % 1) == 0)
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && gBattleMons[gBattlerAttacker].hp != 0 && !gProtectStructs[gBattlerAttacker].confusionSelfDmg && TARGET_TURN_DAMAGED && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT) && (Random() % 3) == 0)
                 {
                     do
                     {
@@ -3622,7 +3622,14 @@ u8 ItemBattleEffects(u8 caseID, u8 battler, bool8 moveTurn)
             case HOLD_EFFECT_RESTORE_HP:
                 if (gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2 && !moveTurn)
                 {
-                    gBattleMoveDamage = battlerHoldEffectParam;
+                    if(gBattleMons[battler].ability == ABILITY_JUICER)
+                    {
+                      gBattleMoveDamage = battlerHoldEffectParam*2;
+                    }
+                    else
+                    {
+                      gBattleMoveDamage = battlerHoldEffectParam;
+                    }
                     if (gBattleMons[battler].hp + battlerHoldEffectParam > gBattleMons[battler].maxHP)
                         gBattleMoveDamage = gBattleMons[battler].maxHP - gBattleMons[battler].hp;
                     gBattleMoveDamage *= -1;

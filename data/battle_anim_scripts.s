@@ -413,6 +413,7 @@ gBattleAnims_General::
 	.4byte General_Reflect					@ B_ANIM_REFLECT
 	.4byte General_Psychup					@ B_ANIM_PSYCHUP
 	.4byte General_Venom					@ B_ANIM_VENOMFANG
+	.4byte General_Metronome				@ B_ANIM_METRONOME
 
 	.align 2
 gBattleAnims_Special::
@@ -10234,6 +10235,18 @@ General_Venom:
 	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 18, 2
 	blend_color_cycle priority=2, selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=12, color=RGB(30, 0, 31)
+	end
+
+General_Metronome:
+	loadspritegfx ANIM_TAG_FINGER
+	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
+	createsprite gThoughtBubbleSpriteTemplate, ANIM_ATTACKER, 11, 0, 100
+	playsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER
+	delay 6
+	createsprite gMetronomeFingerSpriteTemplate, ANIM_ATTACKER, 12, 0
+	delay 24
+	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER, 22, 3
+	waitforvisualfinish
 	end
 
 Status_Confusion:

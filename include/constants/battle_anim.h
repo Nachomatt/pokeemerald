@@ -380,6 +380,8 @@
 #define B_ANIM_REFLECT                  23
 #define B_ANIM_PSYCHUP                  24
 #define B_ANIM_VENOMFANG                25
+#define B_ANIM_METRONOME                26
+
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

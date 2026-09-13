@@ -65,6 +65,7 @@ AI_CBM_CheckIfNegatesType:
 	if_equal ABILITY_EARTH_EATER, CheckIfEarthEaterCancelsGround
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
+	if_equal ABILITY_COLDHEARTED, CheckIfColdheartedCancelsIceMove
 	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfVoltAbsorbCancelsElectric:
@@ -94,6 +95,11 @@ CheckIfWonderGuardCancelsMove:
 CheckIfLevitateCancelsGroundMove:
 	get_curr_move_type
 	if_equal_ TYPE_GROUND, Score_Minus10
+
+CheckIfColdheartedCancelsIceMove:
+	get_curr_move_type
+	if_equal_ TYPE_ICE, Score_Minus10
+
 AI_CheckBadMove_CheckSoundproof_:
 	get_how_powerful_move_is
 	if_equal MOVE_POWER_OTHER, AI_CheckBadMove_CheckSoundproof  @ Pointless check
@@ -114,12 +120,16 @@ AI_CheckBadMove_CheckSoundproof:
 
 AI_CheckBadMove_CheckToughHide:
 	get_ability AI_TARGET
-	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckEffect
+	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckColdhearted
 	get_considered_move_power
 	if_equal 0, Score_Plus0
 	if_less_than 65, Score_Minus10
 
-
+AI_CheckBadMove_CheckColdhearted:
+	get_ability AI_TARGET
+	if_not_equal ABILITY_COLDHEARTED, AI_CheckBadMove_CheckEffect
+	if_move MOVE_TAUNT, Score_Minus10
+	if_move MOVE_ENCORE, Score_Minus10
 
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep

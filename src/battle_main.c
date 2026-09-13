@@ -4058,6 +4058,7 @@ u8 IsRunningFromBattleImpossible(void)
         if (side != GetBattlerSide(i)
          && gBattleMons[gActiveBattler].ability != ABILITY_OBLIVIOUS
          && gBattleMons[gActiveBattler].ability != ABILITY_SHADOW_TAG
+         && gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY
          && gBattleMons[i].ability == ABILITY_SHADOW_TAG)
         {
             gBattleScripting.battler = i;
@@ -4067,6 +4068,7 @@ u8 IsRunningFromBattleImpossible(void)
         }
         if (side != GetBattlerSide(i)
          && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+         && gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY
          && gBattleMons[gActiveBattler].ability != ABILITY_OBLIVIOUS
          && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
          && gBattleMons[i].ability == ABILITY_ARENA_TRAP)
@@ -4096,8 +4098,11 @@ u8 IsRunningFromBattleImpossible(void)
     if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
         || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
-        return BATTLE_RUN_FORBIDDEN;
+        if((gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY))
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
+            return BATTLE_RUN_FORBIDDEN;
+        }
     }
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
@@ -4263,16 +4268,23 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_SWITCH:
                     *(gBattleStruct->battlerPartyIndexes + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
-                    if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
+                    if ((gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
                         || gBattleTypeFlags & BATTLE_TYPE_ARENA
-                        || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+                        || gStatuses3[gActiveBattler] & STATUS3_ROOTED) && (gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY && gBattleMons[gActiveBattler].ability != ABILITY_OBLIVIOUS))
+
                     {
                         BtlController_EmitChoosePokemon(B_COMM_TO_CONTROLLER, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[gActiveBattler]);
                     }
-                    else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
-                             || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP))
+                    else if ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG)
+                                 && gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY
+                                 && gBattleMons[gActiveBattler].ability != ABILITY_OBLIVIOUS
+                                 && gBattleMons[gActiveBattler].ability != ABILITY_SHADOW_TAG
+                                 && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GHOST))
+                             || ((i = ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP)
                                  && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-                                 && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
+                                 && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+                                 && gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY
+                                 && gBattleMons[gActiveBattler].ability != ABILITY_OBLIVIOUS))
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
                                  && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_FOREST_GRIP, 0, 0))

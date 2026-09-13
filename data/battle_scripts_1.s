@@ -1174,6 +1174,13 @@ BattleScript_EffectMetronome::
 	setbyte sB_ANIM_TARGETS_HIT, 0
 	metronome
 
+BattleScript_TricksterActivates::
+	printstring STRINGID_TRICKSTERACTIVATES
+	playanimation BS_TARGET, B_ANIM_METRONOME
+	setbyte sB_ANIM_TURN, 0
+	setbyte sB_ANIM_TARGETS_HIT, 0
+	metronome
+
 BattleScript_EffectLeechSeed::
 	attackcanceler
 	attackstring
@@ -4323,6 +4330,12 @@ BattleScript_ObliviousPreventsAttraction::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_ColdheartedDoesntCare::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_COLDHEARTEDDOESNTCARE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_FlinchPrevention::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSXPREVENTSFLINCHING
@@ -4543,6 +4556,7 @@ BattleScript_WhiteHerbRet::
 
 BattleScript_ItemHealHP_RemoveItem::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
+	jumpifability BS_ATTACKER, ABILITY_JUICER, BattleScript_JuicerHP_RemoveItem
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
@@ -4550,6 +4564,16 @@ BattleScript_ItemHealHP_RemoveItem::
 	datahpupdate BS_ATTACKER
 	removeitem BS_ATTACKER
 	end2
+
+BattleScript_JuicerHP_RemoveItem::
+	printstring STRINGID_PKMNJUICERRESTOREDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	removeitem BS_ATTACKER
+	end2
+
 
 BattleScript_BerryPPHealEnd2::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT

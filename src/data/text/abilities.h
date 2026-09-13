@@ -105,6 +105,10 @@ static const u8 sApexHunterDescription[] = _("Prevents SPEED reduction.");
 static const u8 sExoskeletonDescription[] = _("Lowers damage taken.");
 static const u8 sGigagripDescription[] = _("Holds on tight.");
 static const u8 sWildfireDescription[] = _("FIRE moves at full power.");
+static const u8 sRampageDescription[] = _("Ups thrashing about.");
+static const u8 sColdheartedDescription[] = _("Immune to ICE and tricks.");
+static const u8 sTricksterDescription[] = _("Messes with enemies.");
+static const u8 sJuicerDescription[] = _("Turns berries into juice.");
 // static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
 
 
@@ -217,6 +221,10 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_EXOSKELETON] = _("EXOSKELETON"),
     [ABILITY_GIGA_GRIP] = _("GIGA GRIP"),
     [ABILITY_WILDFIRE] = _("WILDFIRE"),
+    [ABILITY_RAMPAGE] = _("RAMPAGE"),
+    [ABILITY_COLDHEARTED] = _("COLDHEARTED"),
+    [ABILITY_TRICKSTER] = _("TRICKSTER"),
+    [ABILITY_JUICER] = _("JUICER"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -330,5 +338,9 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_EXOSKELETON] = sExoskeletonDescription,
     [ABILITY_GIGA_GRIP] = sGigagripDescription,
     [ABILITY_WILDFIRE] = sWildfireDescription,
+    [ABILITY_RAMPAGE] = sRampageDescription,
+    [ABILITY_COLDHEARTED] = sColdheartedDescription,
+    [ABILITY_TRICKSTER] = sTricksterDescription,
+    [ABILITY_JUICER] = sJuicerDescription,
     // [ABILITY_TRICKSTER] = sTricksterDescription,
 };
