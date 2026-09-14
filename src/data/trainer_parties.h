@@ -394,6 +394,12 @@ static const struct TrainerMonItemCustomMoves sParty_Tulip[] = {
     {
     .iv = 100,
     .lvl = 7,
+    .species = SPECIES_ODDISH,
+    .moves = {MOVE_ABSORB, MOVE_POISON_POWDER, MOVE_ACID, MOVE_NONE},
+    },
+    {
+    .iv = 100,
+    .lvl = 7,
     .species = SPECIES_BULBASAUR,
     .moves = {MOVE_VINE_WHIP, MOVE_LEECH_SEED, MOVE_TACKLE, MOVE_NONE},
     .abilitynums = 2
@@ -3887,19 +3893,19 @@ static const struct TrainerMonItemDefaultMoves sParty_Victor[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_Miguel1[] = {
     {
-    .iv = 0,
+    .iv = 50,
     .lvl = 5,
     .species = SPECIES_MEOWTH,
     .moves = {MOVE_FAKE_OUT, MOVE_BITE, MOVE_SCRATCH}
     },
     {
-    .iv = 0,
+    .iv = 50,
     .lvl = 6,
     .species = SPECIES_SKITTY,
     .moves = {MOVE_FAKE_OUT, MOVE_SING, MOVE_SWEET_KISS, MOVE_TACKLE}
     },
     {
-    .iv = 0,
+    .iv = 50,
     .lvl = 5,
     .species = SPECIES_SENTRET,
     .moves = {MOVE_TACKLE, MOVE_QUICK_ATTACK, MOVE_ASTONISH}

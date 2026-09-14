@@ -441,7 +441,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("TULIP"),
         .items = {ITEM_POTION},
         .doubleBattle = FALSE,
-        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_HP_AWARE,
         .party = ITEM_CUSTOM_MOVES(sParty_Tulip),
     },
 
@@ -4041,7 +4041,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("ANDREW"),
         .items = {ITEM_POTION},
         .doubleBattle = FALSE,
-        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_HP_AWARE,
         .party = ITEM_CUSTOM_MOVES(sParty_Andrew),
     },
 
@@ -8433,7 +8433,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("MARCOS"),
         .items = {ITEM_POTION},
         .doubleBattle = FALSE,
-        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_HP_AWARE,
         .party = ITEM_CUSTOM_MOVES(sParty_Marcos),
     },
 
