@@ -138,6 +138,8 @@ struct SpecialStatus
     u32 illuminatedMon:1;
     u32 tangledHairMon:1;
     u32 acidRainMon:1;
+    u32 mightyRoarMon:1;
+    u32 webSpinnerMon:1;
     u32 psychupped:1;
     u32 reflector:1;
     u32 traced:1;
@@ -426,6 +428,7 @@ struct BattleStruct
     u8 intimidateBattler;
     u8 illuminateBattler;
     u8 tangledHairBattler;
+    u8 mightyRoarBattler;
     u8 acidRainBattler;
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;

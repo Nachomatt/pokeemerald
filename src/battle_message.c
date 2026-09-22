@@ -70,6 +70,7 @@ static const u8 sText_PkmnProtectedItself[] = _("{B_DEF_NAME_WITH_PREFIX}\nprote
 static const u8 sText_AvoidedDamage[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!");
 static const u8 sText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!");
 static const u8 sText_PkmnMakesIceMiss[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ndoesn't care about your ICE moves!");
+static const u8 sText_PkmnMakesWaterMiss[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nevaporates the WATER move!");
 static const u8 sText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
 static const u8 sText_ItDoesntAffect[] = _("It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…");
 static const u8 sText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
@@ -345,6 +346,7 @@ static const u8 sText_WildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} f
 static const u8 sText_TwoWildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} and\n{B_LINK_OPPONENT2_NAME} fled!");
 static const u8 sText_NoRunningFromTrainers[] = _("No! There's no running\nfrom a TRAINER battle!\p");
 static const u8 sText_CantEscape[] = _("Can't escape!\p");
+static const u8 sText_PkmnTrapsWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ntraps {B_BUFF1}!");
 static const u8 sText_DontLeaveBirch[] = _("PROF. BIRCH: Don't leave me like this!\p");
 static const u8 sText_ButNothingHappened[] = _("But nothing happened!");
 static const u8 sText_ButItFailed[] = _("But it failed!");
@@ -736,6 +738,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNCUTSSPEEDWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsSpeedWith,
     [STRINGID_PKMNCUTSDEFWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsDefWith,
     [STRINGID_PKMNCUTSSPATKWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnCutsSpatkWith,
+    [STRINGID_PKMNTRAPSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnTrapsWith,
     [STRINGID_PKMNPREVENTSSTATLOSSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnPreventsStatLossWith,
     [STRINGID_PKMNHURTSWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnHurtsWith,
     [STRINGID_PKMNTRACED - BATTLESTRINGS_TABLE_START] = sText_PkmnTraced,
@@ -868,6 +871,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSREFLECTORACTIVATES - BATTLESTRINGS_TABLE_START] = sText_PkmnsXReflector,
     [STRINGID_PKMNMAKESGROUNDMISS - BATTLESTRINGS_TABLE_START] = sText_PkmnMakesGroundMiss,
     [STRINGID_PKMNMAKESICEMISS - BATTLESTRINGS_TABLE_START] = sText_PkmnMakesIceMiss,
+    [STRINGID_PKMNMAKESWATERMISS - BATTLESTRINGS_TABLE_START] = sText_PkmnMakesWaterMiss,
     [STRINGID_YOUTHROWABALLNOWRIGHT - BATTLESTRINGS_TABLE_START] = sText_YouThrowABallNowRight,
     [STRINGID_PKMNSXTOOKATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnsXTookAttack,
     [STRINGID_PKMNCHOSEXASDESTINY - BATTLESTRINGS_TABLE_START] = sText_PkmnChoseXAsDestiny,
@@ -928,7 +932,8 @@ const u16 gMissStringIds[] =
     [B_MSG_AVOIDED_ATK] = STRINGID_PKMNAVOIDEDATTACK,
     [B_MSG_AVOIDED_DMG] = STRINGID_AVOIDEDDAMAGE,
     [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS,
-    [B_MSG_ICE_MISS]    = STRINGID_PKMNMAKESICEMISS
+    [B_MSG_ICE_MISS]    = STRINGID_PKMNMAKESICEMISS,
+    [B_MSG_WATER_MISS]  = STRINGID_PKMNMAKESWATERMISS
 };
 
 const u16 gNoEscapeStringIds[] =

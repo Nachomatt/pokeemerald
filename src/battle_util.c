@@ -1915,7 +1915,7 @@ bool8 HandleFaintedMonActions(void)
         case 6:
             if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_MASTERMIND, 0, 0, 0, 0)
                 //  || AbilityBattleEffects(ABILITYEFFECT_TRICKSTER, 0, 0, 0, 0)
-                || AbilityBattleEffects(ABILITYEFFECT_TANGLEDHAIR1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_ILLUMINATE1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_ACIDRAIN1, 0, 0, 0, 0) || ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE) || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
+                || AbilityBattleEffects(ABILITYEFFECT_TANGLEDHAIR1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_ILLUMINATE1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_ACIDRAIN1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_MIGHTYROAR1, 0, 0, 0, 0)|| AbilityBattleEffects(ABILITYEFFECT_WEBSPINNER    , 0, 0, 0, 0) || ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE) || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
                 return TRUE;
             gBattleStruct->faintedActionsState++;
             break;
@@ -2562,6 +2562,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].acidRainMon = 1;
                 }
                 break;
+            case ABILITY_MIGHTY_ROAR:
+                if (!(gSpecialStatuses[battler].mightyRoarMon))
+                {
+                    gStatuses3[battler] |= STATUS3_MIGHTYROAR_POKES;
+                    gSpecialStatuses[battler].mightyRoarMon = 1;
+                }
+                break;
+            case ABILITY_WEBSPINNER:
+                if (!(gSpecialStatuses[battler].webSpinnerMon))
+                {
+                    gStatuses3[battler] |= STATUS3_WEBSPINNER_POKES;
+                    gSpecialStatuses[battler].webSpinnerMon = 1;
+                }
+                break;
             case ABILITY_FORECAST:
                 effect = CastformDataTypeChange(battler);
                 if (effect != 0)
@@ -3039,6 +3053,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+        case ABILITYEFFECT_MIGHTYROAR1: // 9
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_MIGHTY_ROAR && gStatuses3[i] & STATUS3_MIGHTYROAR_POKES)
+                {
+                    gLastUsedAbility = ABILITY_MIGHTY_ROAR;
+                    gStatuses3[i] &= ~STATUS3_MIGHTYROAR_POKES;
+                    BattleScriptPushCursorAndCallback(BattleScript_MightyRoarActivatesEnd3);
+                    gBattleStruct->mightyRoarBattler = i;
+                    effect++;
+                    break;
+                }
+            }
+            break;
         case ABILITYEFFECT_ILLUMINATE1: // 9
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -3078,6 +3106,51 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattleStruct->acidRainBattler = i;
                     effect++;
                     break;
+                }
+            }
+            break;
+        case ABILITYEFFECT_WEBSPINNER: // 10
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_WEBSPINNER && gStatuses3[i] & STATUS3_WEBSPINNER_POKES)
+                {
+                    u8 target2;
+                    gStatuses3[i] &= ~STATUS3_WEBSPINNER_POKES;
+                    side = BATTLE_OPPOSITE(GetBattlerPosition(i)) & BIT_SIDE; // side of the opposing Pokémon
+                    target1 = GetBattlerAtPosition(side);
+                    target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                    {
+                        if (!(gBattleMons[target1].status2 & STATUS2_ESCAPE_PREVENTION) && !(gBattleMons[target2].status2 & STATUS2_ESCAPE_PREVENTION))
+                        {
+                            gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
+                            effect++;
+                        }
+                        else if (!(gBattleMons[target1].status2 & STATUS2_ESCAPE_PREVENTION))
+                        {
+                            gActiveBattler = target1;
+                            effect++;
+                        }
+                        else if (!(gBattleMons[target2].status2 & STATUS2_ESCAPE_PREVENTION))
+                        {
+                            gActiveBattler = target2;
+                            effect++;
+                        }
+                    }
+                    else
+                    {
+                        gActiveBattler = target1;
+                        effect++;
+                    }
+                    if (effect != 0)
+                    {
+                        BattleScriptPushCursorAndCallback(BattleScript_WebSpinnerActivates);
+                        gBattleScripting.battler = i;
+                        gBattlerAttacker = gActiveBattler;
+                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
+                        gBattleMons[gActiveBattler].status2 |= STATUS2_ESCAPE_PREVENTION;
+                        break;
+                    }
                 }
             }
             break;
@@ -3368,6 +3441,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_AcidRainActivates;
                     gBattleStruct->acidRainBattler = i;
+                    effect++;
+                    break;
+                }
+            }
+            break;
+        case ABILITYEFFECT_MIGHTYROAR2: // 10
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].ability == ABILITY_MIGHTY_ROAR && (gStatuses3[i] & STATUS3_MIGHTYROAR_POKES))
+                {
+                    gLastUsedAbility = ABILITY_MIGHTY_ROAR;
+                    gStatuses3[i] &= ~STATUS3_MIGHTYROAR_POKES;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_MightyRoarActivates;
+                    gBattleStruct->mightyRoarBattler = i;
                     effect++;
                     break;
                 }

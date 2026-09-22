@@ -414,6 +414,7 @@ gBattleAnims_General::
 	.4byte General_Psychup					@ B_ANIM_PSYCHUP
 	.4byte General_Venom					@ B_ANIM_VENOMFANG
 	.4byte General_Metronome				@ B_ANIM_METRONOME
+	.4byte General_SpiderWeb				@ B_ANIM_SPIDERWEB
 
 	.align 2
 gBattleAnims_Special::
@@ -10248,6 +10249,39 @@ General_Metronome:
 	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER, 22, 3
 	waitforvisualfinish
 	end
+
+General_SpiderWeb:
+	loadspritegfx ANIM_TAG_SPIDER_WEB
+	loadspritegfx ANIM_TAG_WEB_THREAD
+	monbg ANIM_DEF_PARTNER
+	delay 0
+	simple_palette_blend unused_subpriority_offset=5, selector=F_PAL_BG, delay=2, initial_blend_y=0, target_blend_y=9, color=RGB_BLACK
+	waitforvisualfinish
+	splitbgprio ANIM_TARGET
+	loopsewithpan SE_M_STRING_SHOT, SOUND_PAN_ATTACKER, 9, 6
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	call SpiderWebThread
+	waitforvisualfinish
+	playsewithpan SE_M_STRING_SHOT2, SOUND_PAN_TARGET
+	createsprite gSpiderWebSpriteTemplate, ANIM_ATTACKER, 2
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	delay 1
+	simple_palette_blend unused_subpriority_offset=5, selector=F_PAL_BG, delay=2, initial_blend_y=9, target_blend_y=0, color=RGB_BLACK
+	end
+
 
 Status_Confusion:
 	loadspritegfx ANIM_TAG_DUCK

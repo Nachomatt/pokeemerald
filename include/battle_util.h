@@ -36,7 +36,9 @@
 #define ABILITYEFFECT_ILLUMINATE2                24
 #define ABILITYEFFECT_ACIDRAIN1                  25
 #define ABILITYEFFECT_ACIDRAIN2                  26
-// #define ABILITYEFFECT_TRICKSTER                  22
+#define ABILITYEFFECT_WEBSPINNER                 27
+#define ABILITYEFFECT_MIGHTYROAR1                28
+#define ABILITYEFFECT_MIGHTYROAR2                29
 #define ABILITYEFFECT_MUD_SPORT                  253
 #define ABILITYEFFECT_WATER_SPORT                254
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          255

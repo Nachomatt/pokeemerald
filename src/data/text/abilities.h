@@ -109,7 +109,13 @@ static const u8 sRampageDescription[] = _("Ups thrashing about.");
 static const u8 sColdheartedDescription[] = _("Immune to ICE and tricks.");
 static const u8 sTricksterDescription[] = _("Messes with enemies.");
 static const u8 sJuicerDescription[] = _("Turns berries into juice.");
-// static const u8 sTricksterDescription[] = _("TRICKS an opponent.");
+static const u8 sSharpshooterDescription[] = _("Ups BEAM moves.");
+static const u8 sWebSpinnerDescription[] = _("Traps enemies in web.");
+static const u8 sMagmaHeartDescription[] = _("Evaporates WATER.");
+static const u8 sMightyRoarDescription[] = _("Lowers the foes offense.");
+static const u8 sIndomitableDescription[] = _("Weaknes 'super effective'.");
+
+
 
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -225,6 +231,11 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_COLDHEARTED] = _("COLDHEARTED"),
     [ABILITY_TRICKSTER] = _("TRICKSTER"),
     [ABILITY_JUICER] = _("JUICER"),
+    [ABILITY_SHARPSHOOTER] = _("SHARPSHOOTER"),
+    [ABILITY_WEBSPINNER] = _("WEBSPINNER"),
+    [ABILITY_MAGMA_HEART] = _("MAGMA HEART"),
+    [ABILITY_MIGHTY_ROAR] = _("MIGHTY ROAR"),
+    [ABILITY_INDOMITABLE] = _("INDOMITABLE"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -342,5 +353,9 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_COLDHEARTED] = sColdheartedDescription,
     [ABILITY_TRICKSTER] = sTricksterDescription,
     [ABILITY_JUICER] = sJuicerDescription,
-    // [ABILITY_TRICKSTER] = sTricksterDescription,
+    [ABILITY_SHARPSHOOTER] = sSharpshooterDescription,
+    [ABILITY_WEBSPINNER] = sWebSpinnerDescription,
+    [ABILITY_MAGMA_HEART] = sMagmaHeartDescription,
+    [ABILITY_MIGHTY_ROAR] = sMightyRoarDescription,
+    [ABILITY_INDOMITABLE] = sIndomitableDescription,
 };

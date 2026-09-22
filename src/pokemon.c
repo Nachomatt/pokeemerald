@@ -3202,6 +3202,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
         spAttack /= 2;
+    if (attacker-> ability == ABILITY_MAGMA_HEART && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) && type == TYPE_FIRE)
+         gBattleMovePower *= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -3248,11 +3250,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (110 * gBattleMovePower) / 100;
     if (type == TYPE_FIRE && attacker->ability == ABILITY_WILDFIRE)
         gBattleMovePower = (130 * gBattleMovePower) / 100;
-
+    if(attacker->ability == ABILITY_SHARPSHOOTER && FLAG_SHARPSHOOTER_AFFECTED)
+        gBattleMovePower = (130* gBattleMovePower) / 100;
     if (defender->ability == ABILITY_MINUS)
         gBattleMovePower = (90 * gBattleMovePower) / 100;
     if (defender->ability == ABILITY_EXOSKELETON)
         gBattleMovePower = (80 * gBattleMovePower) / 100;
+    if (defender->ability == ABILITY_INDOMITABLE && TYPE_MUL_SUPER_EFFECTIVE)
+        gBattleMovePower = (50*gBattleMovePower) / 100;
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;

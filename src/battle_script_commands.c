@@ -305,6 +305,7 @@ static void Cmd_trygetintimidatetarget(void);
 static void Cmd_trygettangledhairtarget(void);
 static void Cmd_trygetacidraintarget(void);
 static void Cmd_trygetilluminatetarget(void);
+static void Cmd_trygetmightyroartarget(void);
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
 static void Cmd_getsecretpowereffect(void);
@@ -560,6 +561,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
         [B_SCR_OP_TRYGETTANGLEDHAIRTARGET] = Cmd_trygettangledhairtarget,                 // 0x??
         [B_SCR_OP_TRYGETACIDRAINTARGET] = Cmd_trygetacidraintarget,                       // 0x??
         [B_SCR_OP_TRYGETILLUMINATETARGET] = Cmd_trygetilluminatetarget,                   // 0x??
+        [B_SCR_OP_TRYGETMIGHTYROARTARGET] = Cmd_trygetmightyroartarget,                   // 0x??
         [B_SCR_OP_SWITCHOUTABILITIES] = Cmd_switchoutabilities,                           // 0xE2
         [B_SCR_OP_JUMPIFHASNOHP] = Cmd_jumpifhasnohp,                                     // 0xE3
         [B_SCR_OP_GETSECRETPOWEREFFECT] = Cmd_getsecretpowereffect,                       // 0xE4
@@ -1272,7 +1274,7 @@ static void Cmd_critcalc(void)
 
     gPotentialItemEffectBattler = gBattlerAttacker;
 
-    critChance = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0) + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL) + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK) + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK) + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL) + (holdEffect == HOLD_EFFECT_SCOPE_LENS) + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY) + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD);
+    critChance = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0) + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL) + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK) + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK) + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL) + (holdEffect == HOLD_EFFECT_SCOPE_LENS) + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY) + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD) + (gBattleMons[gBattlerAttacker].ability == ABILITY_SHARPSHOOTER && gBattleMoves[gCurrentMove].flags & FLAG_SHARPSHOOTER_AFFECTED);
 
     if (critChance >= ARRAY_COUNT(sCriticalHitChance))
         critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
@@ -1379,6 +1381,15 @@ static void Cmd_typecalc(void)
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGMA_HEART && moveType == TYPE_WATER)
+    {
+        gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+        gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
+        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastHitByType[gBattlerTarget] = 0;
+        gBattleCommunication[MISS_TYPE] = B_MSG_WATER_MISS;
+        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
+    }
     if (gBattleMons[gBattlerTarget].ability == ABILITY_COLDHEARTED && moveType == TYPE_ICE)
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
@@ -1451,6 +1462,13 @@ static void CheckWonderGuardAndLevitate(void)
         gLastUsedAbility = ABILITY_COLDHEARTED;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_COLDHEARTED);
+        return;
+    }
+    else if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGMA_HEART && moveType == TYPE_WATER)
+    {
+        gLastUsedAbility = ABILITY_MAGMA_HEART;
+        gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_MAGMA_HEART);
         return;
     }
 
@@ -1566,6 +1584,10 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     {
         flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
+    else if (gBattleMons[defender].ability == ABILITY_MAGMA_HEART && moveType == TYPE_WATER)
+    {
+        flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
+    }
     else
     {
         while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
@@ -1616,6 +1638,10 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
         flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
     }
     else if (targetAbility == ABILITY_COLDHEARTED && moveType == TYPE_ICE)
+    {
+        flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
+    }
+    else if (targetAbility == ABILITY_MAGMA_HEART && moveType == TYPE_WATER)
     {
         flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
     }
@@ -9461,11 +9487,35 @@ static void Cmd_trygetacidraintarget(void)
         gBattlescriptCurrInstr += 5;
 }
 
+
 static void Cmd_trygetilluminatetarget(void)
 {
     u8 side;
 
     gBattleScripting.battler = gBattleStruct->illuminateBattler;
+    side = GetBattlerSide(gBattleScripting.battler);
+
+    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gBattleMons[gBattleScripting.battler].ability)
+
+    for (; gBattlerTarget < gBattlersCount; gBattlerTarget++)
+    {
+        if (GetBattlerSide(gBattlerTarget) == side)
+            continue;
+        if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+            break;
+    }
+
+    if (gBattlerTarget >= gBattlersCount)
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    else
+        gBattlescriptCurrInstr += 5;
+}
+
+static void Cmd_trygetmightyroartarget(void)
+{
+    u8 side;
+
+    gBattleScripting.battler = gBattleStruct->mightyRoarBattler;
     side = GetBattlerSide(gBattleScripting.battler);
 
     PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gBattleMons[gBattleScripting.battler].ability)

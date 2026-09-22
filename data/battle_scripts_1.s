@@ -1482,6 +1482,7 @@ BattleScript_EffectMeanLook::
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC
 	jumpifstatus2 BS_TARGET, STATUS2_ESCAPE_PREVENTION, BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE
@@ -1838,6 +1839,13 @@ BattleScript_MasterMindActivates::
 	pause B_WAIT_TIME_SHORT
     playanimation BS_ATTACKER, B_ANIM_PSYCHUP
     printstring STRINGID_MASTERMINDACTIVATES
+	pause B_WAIT_TIME_LONG
+    end3
+
+BattleScript_WebSpinnerActivates::
+	pause B_WAIT_TIME_SHORT
+    playanimation BS_ATTACKER, B_ANIM_SPIDERWEB
+    printstring STRINGID_PKMNTRAPSWITH
 	pause B_WAIT_TIME_LONG
     end3
 
@@ -4219,6 +4227,42 @@ BattleScript_AcidRainPrevented:
 	goto BattleScript_AcidRainActivatesLoopIncrement
 
 
+BattleScript_MightyRoarActivatesEnd3::
+	call BattleScript_PauseMightyRoarActivates
+	end3
+	
+BattleScript_PauseMightyRoarActivates:
+	pause B_WAIT_TIME_SHORT
+BattleScript_MightyRoarActivates::
+	setbyte gBattlerTarget, 0
+	setstatchanger STAT_ATK, 1, TRUE
+BattleScript_MightyRoarActivatesLoop:
+	trygetmightyroartarget BattleScript_MightyRoarActivatesReturn
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MightyRoarActivatesLoopIncrement
+	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_MightyRoarPrevented
+	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_MightyRoarPrevented
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_MightyRoarActivatesLoopIncrement
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_MightyRoarActivatesLoopIncrement
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSATTACKWITH
+	waitmessage B_WAIT_TIME_LONG
+	setstatchanger STAT_SPATK, 1, TRUE
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNCUTSSPATKWITH
+	waitmessage B_WAIT_TIME_LONG
+	setstatchanger STAT_ATK, 1, TRUE
+BattleScript_MightyRoarActivatesLoopIncrement:
+	addbyte gBattlerTarget, 1
+	goto BattleScript_MightyRoarActivatesLoop
+BattleScript_MightyRoarActivatesReturn:
+	return
+BattleScript_MightyRoarPrevented:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PREVENTEDFROMWORKING
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MightyRoarActivatesLoopIncrement
 
 
 

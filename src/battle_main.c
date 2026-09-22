@@ -3892,6 +3892,10 @@ static void TryDoEventsBeforeFirstTurn(void)
         return;
     if (AbilityBattleEffects(ABILITYEFFECT_MASTERMIND, 0, 0, 0, 0) != 0)
         return;
+    if (AbilityBattleEffects(ABILITYEFFECT_WEBSPINNER, 0, 0, 0, 0) != 0)
+        return;
+    if (AbilityBattleEffects(ABILITYEFFECT_MIGHTYROAR1, 0, 0, 0, 0) != 0)
+        return;
     // if (AbilityBattleEffects(ABILITYEFFECT_TRICKSTER, 0, 0, 0, 0) != 0)
     //     return;
     // Check all switch in items having effect from the fastest mon to slowest.

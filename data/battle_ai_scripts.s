@@ -66,6 +66,7 @@ AI_CBM_CheckIfNegatesType:
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
 	if_equal ABILITY_COLDHEARTED, CheckIfColdheartedCancelsIceMove
+	if_equal ABILITY_MAGMA_HEART, CheckIfMagmaHeartCancelsWaterMove
 	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfVoltAbsorbCancelsElectric:
@@ -86,6 +87,11 @@ CheckIfFlashFireCancelsFire:
 CheckIfEarthEaterCancelsGround:
 	get_curr_move_type
 	if_equal_ TYPE_GROUND, Score_Minus12
+	goto AI_CheckBadMove_CheckSoundproof_
+
+CheckIfMagmaHeartCancelsWaterMove:
+	get_curr_move_type
+	if_equal_ TYPE_WATER, Score_Minus12
 	goto AI_CheckBadMove_CheckSoundproof_
 
 CheckIfWonderGuardCancelsMove:
