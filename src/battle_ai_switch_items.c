@@ -448,7 +448,7 @@ static bool8 ShouldSwitch(void)
         return FALSE;
     if (ABILITY_ON_FIELD2(ABILITY_MAGNET_PULL))
     {
-        if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
+        if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL) || gBattleMons[gActiveBattler].ability == ABILITY_MAGNET_PULL)
             return FALSE;
     }
     if (ABILITY_ON_FIELD2(ABILITY_FOREST_GRIP))

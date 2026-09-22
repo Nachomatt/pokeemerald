@@ -4084,7 +4084,7 @@ u8 IsRunningFromBattleImpossible(void)
         }
     }
     i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0);
-    if (i != 0 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
+    if (i != 0 && (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL) || (gBattleMons[gActiveBattler].ability == ABILITY_MAGNET_PULL)))
     {
         gBattleScripting.battler = i - 1;
         gLastUsedAbility = gBattleMons[i - 1].ability;
@@ -4290,7 +4290,7 @@ static void HandleTurnActionSelectionState(void)
                                  && gBattleMons[gActiveBattler].ability != ABILITY_RUN_AWAY
                                  && gBattleMons[gActiveBattler].ability != ABILITY_OBLIVIOUS))
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0))
-                                 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
+                                 && (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL) || (gBattleMons[gActiveBattler].ability == ABILITY_MAGNET_PULL)))
                              || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_FOREST_GRIP, 0, 0))
                                  && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GRASS)))
                     {
