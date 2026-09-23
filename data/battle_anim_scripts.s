@@ -415,6 +415,10 @@ gBattleAnims_General::
 	.4byte General_Venom					@ B_ANIM_VENOMFANG
 	.4byte General_Metronome				@ B_ANIM_METRONOME
 	.4byte General_SpiderWeb				@ B_ANIM_SPIDERWEB
+	.4byte General_Smokescreen				@ B_ANIM_SMOKESCREEN
+	.4byte General_MightyRoar				@ B_ANIM_MIGHTYROAR
+	.4byte General_Flash					@ B_ANIM_FLASH
+	.4byte General_Acid						@ B_ANIM_ACID
 
 	.align 2
 gBattleAnims_Special::
@@ -2987,6 +2991,12 @@ SkyAttackUnleash:
 	goto SkyAttackEnd
 
 Move_FLASH:
+	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_Flash, 2
+	waitforvisualfinish
+	end
+
+General_Flash:
 	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_Flash, 2
 	waitforvisualfinish
@@ -10281,6 +10291,60 @@ General_SpiderWeb:
 	delay 1
 	simple_palette_blend unused_subpriority_offset=5, selector=F_PAL_BG, delay=2, initial_blend_y=9, target_blend_y=0, color=RGB_BLACK
 	end
+
+General_Smokescreen:
+	loadspritegfx ANIM_TAG_BLACK_SMOKE
+	loadspritegfx ANIM_TAG_BLACK_BALL
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
+	createsprite gBlackBallSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 0, 35, -25
+	waitforvisualfinish
+	createvisualtask AnimTask_SmokescreenImpact, 2
+	delay 2
+	playsewithpan SE_M_ABSORB, SOUND_PAN_TARGET
+	waitforvisualfinish
+	end
+
+General_MightyRoar:
+	loadspritegfx ANIM_TAG_NOISE_LINE
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_ROAR
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, ANIM_ATTACKER, 1
+	delay 12
+	call RoarEffect
+	createvisualtask SoundTask_PlayCryHighPitch, 2, ANIM_ATTACKER, 3
+	waitforvisualfinish
+	delay 15
+	end
+
+General_Acid:
+	loadspritegfx ANIM_TAG_RAIN_DROPS
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 2, 0, 4, RGB_BLACK
+	waitforvisualfinish
+	createvisualtask AnimTask_CreateRaindrops, 2, 0, 3, 120
+	createvisualtask AnimTask_CreateRaindrops, 2, 0, 3, 120
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 30
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 2, 4, 0, RGB_BLACK
+	waitforvisualfinish
+	end
+
+
 
 
 Status_Confusion:

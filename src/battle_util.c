@@ -2569,6 +2569,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].mightyRoarMon = 1;
                 }
                 break;
+            case ABILITY_COAL_ENGINE:
+                if (!(gSpecialStatuses[battler].coalEngineMon))
+                {
+                    gStatuses3[battler] |= STATUS3_COALENGINE;
+                    gSpecialStatuses[battler].coalEngineMon = 1;
+                    BattleScriptPushCursorAndCallback(BattleScript_CoalEngineActivates);
+                    gStatuses3[battler] &= ~STATUS3_COALENGINE;
+                    gBattleScripting.battler = battler;
+                    gBattlerAttacker = battler;
+                    effect++;
+                }
+                break;
             case ABILITY_WEBSPINNER:
                 if (!(gSpecialStatuses[battler].webSpinnerMon))
                 {
@@ -3073,6 +3085,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gStatuses3[i] &= ~STATUS3_MIGHTYROAR_POKES;
                     BattleScriptPushCursorAndCallback(BattleScript_MightyRoarActivatesEnd3);
                     gBattleStruct->mightyRoarBattler = i;
+                    gBattleScripting.battler = i;
+                    gBattlerAttacker = i;
                     effect++;
                     break;
                 }
@@ -3087,6 +3101,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gStatuses3[i] &= ~STATUS3_ILLUMINATE_POKES;
                     BattleScriptPushCursorAndCallback(BattleScript_IlluminateActivatesEnd3);
                     gBattleStruct->illuminateBattler = i;
+                    gBattleScripting.battler = i;
+                    gBattlerAttacker = i;
                     effect++;
                     break;
                 }
@@ -3115,6 +3131,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gStatuses3[i] &= ~STATUS3_ACIDRAIN_POKES;
                     BattleScriptPushCursorAndCallback(BattleScript_AcidRainActivatesEnd3);
                     gBattleStruct->acidRainBattler = i;
+                    gBattleScripting.battler = i;
+                    gBattlerAttacker = i;
                     effect++;
                     break;
                 }
@@ -3422,6 +3440,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_IlluminateActivates;
                     gBattleStruct->illuminateBattler = i;
+                    gBattleScripting.battler = i;
+                    gBattlerAttacker = i;
                     effect++;
                     break;
                 }
@@ -3452,6 +3472,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_AcidRainActivates;
                     gBattleStruct->acidRainBattler = i;
+                    gBattleScripting.battler = i;
+                    gBattlerAttacker = i;
                     effect++;
                     break;
                 }
@@ -3467,6 +3489,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MightyRoarActivates;
                     gBattleStruct->mightyRoarBattler = i;
+                    gBattleScripting.battler = i;
+                    gBattlerAttacker = i;
                     effect++;
                     break;
                 }

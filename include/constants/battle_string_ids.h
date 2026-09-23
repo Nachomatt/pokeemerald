@@ -396,8 +396,16 @@
 #define STRINGID_PKMNJUICERRESTOREDHEALTH   396
 #define STRINGID_PKMNTRAPSWITH              397
 #define STRINGID_PKMNMAKESWATERMISS         398
+#define STRINGID_COALENGINEACTIVATES        399
+#define STRINGID_PKMNBOOSTSDEFWITH          400
+#define STRINGID_PKMNBOOSTSSPATTACKWITH     401
+#define STRINGID_PKMNLETSOUTROAR            402
+#define STRINGID_PKMNILLUMINATES            403
+#define STRINGID_PKMNPOURSACID              404
 
-#define BATTLESTRINGS_COUNT                 399
+
+
+#define BATTLESTRINGS_COUNT                 405
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

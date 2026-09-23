@@ -382,6 +382,10 @@
 #define B_ANIM_VENOMFANG                25
 #define B_ANIM_METRONOME                26
 #define B_ANIM_SPIDERWEB                27
+#define B_ANIM_SMOKESCREEN              28
+#define B_ANIM_MIGHTYROAR               29
+#define B_ANIM_FLASH                    30
+#define B_ANIM_ACID                     31
 
 
 // special animations table (gBattleAnims_Special)

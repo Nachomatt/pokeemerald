@@ -160,6 +160,7 @@ extern const u8 BattleScript_MightyRoarActivatesEnd3[];
 extern const u8 BattleScript_WebSpinnerActivates[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_ReflectorActivates[];
+extern const u8 BattleScript_CoalEngineActivates[];
 extern const u8 BattleScript_TookAttack[];
 extern const u8 BattleScript_SturdyPreventsOHKO[];
 extern const u8 BattleScript_DampStopsExplosion[];

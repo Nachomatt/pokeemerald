@@ -139,6 +139,7 @@ struct SpecialStatus
     u32 tangledHairMon:1;
     u32 acidRainMon:1;
     u32 mightyRoarMon:1;
+    u32 coalEngineMon:1;
     u32 webSpinnerMon:1;
     u32 psychupped:1;
     u32 reflector:1;

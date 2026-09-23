@@ -4164,6 +4164,11 @@ BattleScript_TangledHairPrevented:
 	goto BattleScript_TangledHairActivatesLoopIncrement
 
 BattleScript_IlluminateActivatesEnd3::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNILLUMINATES
+	waitstate
+	playanimation BS_ATTACKER, B_ANIM_FLASH
+	waitanimation
 	call BattleScript_PauseIlluminateActivates
 	end3
 
@@ -4196,6 +4201,11 @@ BattleScript_IlluminatePrevented:
 	goto BattleScript_IlluminateActivatesLoopIncrement
 
 BattleScript_AcidRainActivatesEnd3::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNPOURSACID
+	waitstate
+	playanimation BS_ATTACKER, B_ANIM_ACID
+	waitanimation
 	call BattleScript_PauseAcidRainActivates
 	end3
 
@@ -4228,6 +4238,11 @@ BattleScript_AcidRainPrevented:
 
 
 BattleScript_MightyRoarActivatesEnd3::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNLETSOUTROAR
+	waitstate
+	playanimation BS_ATTACKER, B_ANIM_MIGHTYROAR
+	waitanimation
 	call BattleScript_PauseMightyRoarActivates
 	end3
 	
@@ -4285,6 +4300,22 @@ BattleScript_ReflectorActivates::
 	setlightscreen
 	end3
 
+BattleScript_CoalEngineActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_COALENGINEACTIVATES
+	waitstate
+	playanimation BS_ATTACKER B_ANIM_SMOKESCREEN
+	setstatchanger STAT_DEF, 1, FALSE
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNBOOSTSDEFWITH
+	waitmessage B_WAIT_TIME_LONG
+	setstatchanger STAT_SPATK, 1, FALSE
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNBOOSTSSPATTACKWITH 
+	waitmessage B_WAIT_TIME_LONG
+	end3
 
 BattleScript_TookAttack::
 	attackstring

@@ -1167,7 +1167,7 @@
 	.endm
 
 	.macro trygetmightyroartarget ptr:req
-	.byte B_SCR_OP_TRYGETILLUMINATETARGET
+	.byte B_SCR_OP_TRYGETMIGHTYROARTARGET
 	.4byte \ptr
 	.endm
 
