@@ -6787,8 +6787,14 @@ static void Cmd_stockpile(void)
     }
     else
     {
-        gDisableStructs[gBattlerAttacker].stockpileCounter++;
-
+        if(gBattleMons[gBattlerAttacker].ability == ABILITY_BIG_APPETITE)
+        {
+         gDisableStructs[gBattlerAttacker].stockpileCounter = 3;
+        }
+        else
+        {
+          gDisableStructs[gBattlerAttacker].stockpileCounter++;
+        }
         PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gBattlerAttacker].stockpileCounter)
 
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STOCKPILED;

@@ -115,6 +115,7 @@ static const u8 sMagmaHeartDescription[] = _("Evaporates WATER.");
 static const u8 sMightyRoarDescription[] = _("Lowers the foes offense.");
 static const u8 sIndomitableDescription[] = _("Weaknes 'super effective'.");
 static const u8 sGemGobblerDescription[] = _("Changes Rocks into HP.");
+static const u8 sBigAppetiteDescription[] = _("Ups STOCKPILE.");
 
 
 
@@ -238,6 +239,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MIGHTY_ROAR] = _("MIGHTY ROAR"),
     [ABILITY_INDOMITABLE] = _("INDOMITABLE"),
     [ABILITY_GEM_GOBBLER] = _("GEM GOBBLER"),
+    [ABILITY_BIG_APPETITE] = _("BIG APPETITE"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -361,4 +363,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MIGHTY_ROAR] = sMightyRoarDescription,
     [ABILITY_INDOMITABLE] = sIndomitableDescription,
     [ABILITY_GEM_GOBBLER] = sGemGobblerDescription,
+    [ABILITY_BIG_APPETITE] = sBigAppetiteDescription,
 };
