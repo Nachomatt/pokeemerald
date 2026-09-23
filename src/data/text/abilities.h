@@ -114,6 +114,7 @@ static const u8 sWebSpinnerDescription[] = _("Traps enemies in web.");
 static const u8 sMagmaHeartDescription[] = _("Evaporates WATER.");
 static const u8 sMightyRoarDescription[] = _("Lowers the foes offense.");
 static const u8 sIndomitableDescription[] = _("Weaknes 'super effective'.");
+static const u8 sGemGobblerDescription[] = _("Changes Rocks into HP.");
 
 
 
@@ -236,6 +237,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_MAGMA_HEART] = _("MAGMA HEART"),
     [ABILITY_MIGHTY_ROAR] = _("MIGHTY ROAR"),
     [ABILITY_INDOMITABLE] = _("INDOMITABLE"),
+    [ABILITY_GEM_GOBBLER] = _("GEM GOBBLER"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -358,4 +360,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_MAGMA_HEART] = sMagmaHeartDescription,
     [ABILITY_MIGHTY_ROAR] = sMightyRoarDescription,
     [ABILITY_INDOMITABLE] = sIndomitableDescription,
+    [ABILITY_GEM_GOBBLER] = sGemGobblerDescription,
 };
