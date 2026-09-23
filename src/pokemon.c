@@ -3202,6 +3202,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
         spAttack /= 2;
+    if (defender->ability == ABILITY_MAGMA_ARMOR && (type == TYPE_ICE))
+        spAttack /= 2;
     if (attacker-> ability == ABILITY_MAGMA_HEART && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) && type == TYPE_FIRE)
          gBattleMovePower *= 2;
     if (attacker->ability == ABILITY_HUSTLE)
@@ -3253,6 +3255,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if(attacker->ability == ABILITY_SHARPSHOOTER && FLAG_SHARPSHOOTER_AFFECTED)
         gBattleMovePower = (130* gBattleMovePower) / 100;
     if (defender->ability == ABILITY_MINUS)
+        gBattleMovePower = (90 * gBattleMovePower) / 100;
+    if (defender->ability == ABILITY_MAGMA_ARMOR)
         gBattleMovePower = (90 * gBattleMovePower) / 100;
     if (defender->ability == ABILITY_EXOSKELETON)
         gBattleMovePower = (80 * gBattleMovePower) / 100;
