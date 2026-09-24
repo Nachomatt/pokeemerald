@@ -108,6 +108,7 @@ struct ProtectStruct
     u32 noValidMoves:1;
     u32 helpingHand:1;
     u32 bounceMove:1;
+    u32 alreadyBounced:1;
     u32 stealMove:1;
     u32 flag0Unknown:1; // Only set to 0 once.
     u32 prlzImmobility:1;

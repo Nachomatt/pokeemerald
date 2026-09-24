@@ -386,6 +386,8 @@
 #define B_ANIM_MIGHTYROAR               29
 #define B_ANIM_FLASH                    30
 #define B_ANIM_ACID                     31
+#define B_ANIM_PRESENT                  32
+#define B_ANIM_PRESENT2                 33
 
 
 // special animations table (gBattleAnims_Special)

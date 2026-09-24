@@ -299,6 +299,7 @@ static const u8 sText_PkmnsXRoars[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} lets ou
 static const u8 sText_PkmnsXPoursAcid[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} makes it rain ACID!");
 static const u8 sText_PkmnsXIlluminates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} ILLUMINATES the enemies!");
 static const u8 sText_PkmnsXCoalEngine[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nis at full power!");
+static const u8 sText_PkmnsXHasaSurprise[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} has a SURPRISE\nfor {B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnsXBoostsDefWith[] = _("{B_SCR_ACTIVE_ABILITY} raises DEFENSE!");
 static const u8 sText_PkmnsXBoostsSpAttackWith[] = _("{B_SCR_ACTIVE_ABILITY} raises SP. ATK!");
 static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
@@ -879,6 +880,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNPOURSACID - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPoursAcid,
     [STRINGID_PKMNILLUMINATES - BATTLESTRINGS_TABLE_START] = sText_PkmnsXIlluminates,
     [STRINGID_COALENGINEACTIVATES - BATTLESTRINGS_TABLE_START] = sText_PkmnsXCoalEngine,
+    [STRINGID_PKMNHASASURPRISE - BATTLESTRINGS_TABLE_START] = sText_PkmnsXHasaSurprise,
     [STRINGID_PKMNBOOSTSDEFWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnsXBoostsDefWith,
     [STRINGID_PKMNBOOSTSSPATTACKWITH - BATTLESTRINGS_TABLE_START] = sText_PkmnsXBoostsSpAttackWith,
     [STRINGID_PKMNMAKESGROUNDMISS - BATTLESTRINGS_TABLE_START] = sText_PkmnMakesGroundMiss,

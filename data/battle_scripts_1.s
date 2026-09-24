@@ -4029,6 +4029,41 @@ BattleScript_ArmorUpActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
+BattleScript_PresentHealTargetEnd3::
+	printstring STRINGID_PKMNHASASURPRISE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_PRESENT2
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_SurpriseActivates::
+	printstring STRINGID_PKMNHASASURPRISE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_PresentAttackAnimate
+BattleScript_PresentAttackAnimate::
+	playanimation BS_TARGET, B_ANIM_PRESENT
+BattleScript_DoPresentAttackHit::
+	damagecalc
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_TARGET
+	checkteamslost BattleScript_PresentAttackEnd
+BattleScript_PresentAttackEnd::
+	moveendcase MOVEEND_RAGE
+	moveendfromto MOVEEND_ITEM_EFFECTS_ALL, MOVEEND_UPDATE_LAST_MOVES
+	setbyte gMoveResultFlags, 0
+	end3
+
 BattleScript_TraceActivates::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNTRACED
@@ -4299,6 +4334,8 @@ BattleScript_ReflectorActivates::
 	setreflect
 	setlightscreen
 	end3
+
+
 
 BattleScript_CoalEngineActivates::
 	pause B_WAIT_TIME_SHORT

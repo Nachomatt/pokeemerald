@@ -2699,9 +2699,74 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect++;
                     }
                     break;
+
+                case ABILITY_SURPRISE: // 11
+                {
+                            u8 target2;
+                            side = BATTLE_OPPOSITE(GetBattlerPosition(battler)); // side of the opposing Pokémon
+                            target1 = GetBattlerAtPosition(side);
+                            target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                            {
+                                gBattlerTarget = GetBattlerAtPosition(((Random() & 1) * 2) | side);
+                                effect++;
+                            }
+                            else
+                            {
+                                gBattlerTarget = target1;
+                                effect++;
+                            }
+                            if (effect != 0)
+                            {
+                                s32 rand = Random() & 0xFF;
+                                gSpecialStatuses[gBattlerTarget].shellBellDmg = IGNORE_SHELL_BELL;
+                                gBattleScripting.battler = battler;
+                                gBattlerAttacker = battler;
+                                PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
+
+                                if (rand < 102)
+                                {
+                                    gDynamicBasePower = 40;
+                                }
+                                else if (rand < 178)
+                                {
+                                    gDynamicBasePower = 80;
+                                }
+                                else if (rand < 204)
+                                {
+                                    gDynamicBasePower = 120;
+                                }
+                                else
+                                {
+                                    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 4;
+                                    if (gBattleMoveDamage == 0)
+                                        gBattleMoveDamage = 1;
+                                    gBattleMoveDamage *= -1;
+                                }
+
+
+                                if (rand < 204)
+                                {
+                                    BattleScriptExecute(BattleScript_SurpriseActivates);
+                                }
+                                else if (gBattleMons[gBattlerTarget].maxHP == gBattleMons[gBattlerTarget].hp)
+                                {
+                                    BattleScriptExecute(BattleScript_AlreadyAtFullHp);
+                                }
+                                else
+                                {
+                                    BattleScriptExecute(BattleScript_PresentHealTargetEnd3); // needs a new (same) script but with end3
+                                }
+
+                                effect++;
+                                break;
+                            }
+                }
+                break;
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
+
                 }
             }
             break;

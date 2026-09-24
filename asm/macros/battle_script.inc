@@ -842,6 +842,10 @@
 	.byte B_SCR_OP_METRONOME
 	.endm
 
+	.macro surprise
+	.byte B_SCR_OP_SURPRISE
+	.endm
+
 	.macro dmgtolevel
 	.byte B_SCR_OP_DMGTOLEVEL
 	.endm

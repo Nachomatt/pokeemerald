@@ -117,6 +117,8 @@ static const u8 sIndomitableDescription[] = _("Weaknes 'super effective'.");
 static const u8 sGemGobblerDescription[] = _("Changes Rocks into HP.");
 static const u8 sBigAppetiteDescription[] = _("Ups STOCKPILE.");
 static const u8 sCoalEngineDescription[] = _("Powers up on switchin.");
+static const u8 sSurpriseDescription[] = _("Gives PRESENTS to enemies.");
+static const u8 sMagicBounceDescription[] = _("Bounces back status moves.");
 
 
 
@@ -242,6 +244,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_GEM_GOBBLER] = _("GEM GOBBLER"),
     [ABILITY_BIG_APPETITE] = _("BIG APPETITE"),
     [ABILITY_COAL_ENGINE] = _("COAL ENGINE"),
+    [ABILITY_SURPRISE] = _("SURPRISE"),
+    [ABILITY_MAGIC_BOUNCE] = _("MAGIC BOUNCE"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -367,4 +371,6 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_GEM_GOBBLER] = sGemGobblerDescription,
     [ABILITY_BIG_APPETITE] = sBigAppetiteDescription,
     [ABILITY_COAL_ENGINE] = sCoalEngineDescription,
+    [ABILITY_SURPRISE] = sSurpriseDescription,
+    [ABILITY_MAGIC_BOUNCE] = sMagicBounceDescription,
 };

@@ -139,9 +139,58 @@ AI_CheckBadMove_CheckToughHide:
 
 AI_CheckBadMove_CheckColdhearted:
 	get_ability AI_TARGET
-	if_not_equal ABILITY_COLDHEARTED, AI_CheckBadMove_CheckEffect
+	if_not_equal ABILITY_COLDHEARTED, AI_CheckBadMove_CheckMagicBounce
 	if_move MOVE_TAUNT, Score_Minus10
 	if_move MOVE_ENCORE, Score_Minus10
+
+AI_CheckBadMove_CheckMagicBounce:
+	get_ability AI_TARGET
+	if_not_equal ABILITY_MAGIC_BOUNCE, AI_CheckBadMove_CheckEffect
+	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
+	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
+	if_effect EFFECT_ATTACK_UP, AI_CBM_AttackUp
+	if_effect EFFECT_DEFENSE_UP, AI_CBM_DefenseUp
+	if_effect EFFECT_SPEED_UP, AI_CBM_SpeedUp
+	if_effect EFFECT_SPECIAL_ATTACK_UP, AI_CBM_SpAtkUp
+	if_effect EFFECT_SPECIAL_DEFENSE_UP, AI_CBM_SpDefUp
+	if_effect EFFECT_ACCURACY_UP, AI_CBM_AccUp
+	if_effect EFFECT_EVASION_UP, AI_CBM_EvasionUp
+	if_effect EFFECT_LIGHT_SCREEN, AI_CBM_LightScreen
+	if_effect EFFECT_MIST, AI_CBM_Mist
+	if_effect EFFECT_FOCUS_ENERGY, AI_CBM_FocusEnergy
+	if_effect EFFECT_ATTACK_UP_2, AI_CBM_AttackUp
+	if_effect EFFECT_DEFENSE_UP_2, AI_CBM_DefenseUp
+	if_effect EFFECT_SPEED_UP_2, AI_CBM_SpeedUp
+	if_effect EFFECT_SPECIAL_ATTACK_UP_2, AI_CBM_SpAtkUp
+	if_effect EFFECT_SPECIAL_DEFENSE_UP_2, AI_CBM_SpDefUp
+	if_effect EFFECT_ACCURACY_UP_2, AI_CBM_AccUp
+	if_effect EFFECT_EVASION_UP_2, AI_CBM_EvasionUp
+	if_effect EFFECT_SUBSTITUTE, AI_CBM_Substitute
+	if_effect EFFECT_RAIN_DANCE, AI_CBM_RainDance
+	if_effect EFFECT_SUNNY_DAY, AI_CBM_SunnyDay
+	if_effect EFFECT_BELLY_DRUM, AI_CBM_BellyDrum
+	if_effect EFFECT_PSYCH_UP, AI_CBM_Haze
+	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_REFLECT, AI_CBM_Reflect
+	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
+	if_effect EFFECT_SPIT_UP, AI_CBM_SpitUpAndSwallow
+	if_effect EFFECT_SWALLOW, AI_CBM_SpitUpAndSwallow
+	if_effect EFFECT_HAIL, AI_CBM_Hail
+	if_effect EFFECT_SLEEP_TALK, AI_CBM_DamageDuringSleep
+	if_effect EFFECT_DEFENSE_CURL, AI_CBM_DefenseUp
+	if_effect EFFECT_COSMIC_POWER, AI_CBM_CosmicPower
+	if_effect EFFECT_BULK_UP, AI_CBM_BulkUp
+	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
+	if_effect EFFECT_INGRAIN, AI_CBM_Ingrain
+	if_effect EFFECT_RECYCLE, AI_CBM_Recycle
+	if_effect EFFECT_IMPRISON, AI_CBM_Imprison
+	if_effect EFFECT_SANDSTORM, AI_CBM_Sandstorm
+	if_effect EFFECT_CURSE, AI_CBM_Curse
+	if_effect EFFECT_SAFEGUARD, AI_CBM_Safeguard
+	if_effect EFFECT_PERISH_SONG, AI_CBM_PerishSong
+	if_effect EFFECT_HAZE, AI_CBM_Haze
+	get_considered_move_power
+	if_equal 0, Score_Minus30
 
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep

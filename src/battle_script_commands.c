@@ -953,6 +953,15 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TricksterActivates;
         return;
     }
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_MAGIC_BOUNCE && gBattleMoves[gCurrentMove].flags & FLAG_MAGIC_COAT_AFFECTED && !(gProtectStructs[gBattlerTarget].alreadyBounced))
+    {
+        gProtectStructs[gBattlerTarget].alreadyBounced = TRUE;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+        return;
+    }
+
+
     gHitMarker &= ~HITMARKER_ALLOW_NO_PP;
 
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
@@ -7858,6 +7867,7 @@ static void Cmd_metronome(void)
         }
     }
 }
+
 
 static void Cmd_dmgtolevel(void)
 {
