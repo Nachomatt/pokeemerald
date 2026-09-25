@@ -403,10 +403,12 @@
 #define STRINGID_PKMNILLUMINATES            403
 #define STRINGID_PKMNPOURSACID              404
 #define STRINGID_PKMNHASASURPRISE           405
+#define STRINGID_PKMNTRAPPEDBYVICEGRIP      406
+#define STRINGID_RAZORWINDRAISEDATTACK      407
 
 
 
-#define BATTLESTRINGS_COUNT                 406
+#define BATTLESTRINGS_COUNT                 408
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -629,6 +631,6 @@
 #define B_MSG_REF_DRAW               7
 #define B_MSG_REF_COMMENCE_BATTLE    8
 
-#define NUM_TRAPPING_MOVES 6
+#define NUM_TRAPPING_MOVES 7
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

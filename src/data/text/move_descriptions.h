@@ -46,8 +46,8 @@ static const u8 sViceGripDescription[] = _(
     "powerful pincers.");
 
 static const u8 sGuillotineDescription[] = _(
-    "A powerful pincer attack\n"
-    "that may cause fainting.");
+    "A powerful pincer attack.\n"
+    "May lower all foe's stats.");
 
 static const u8 sRazorWindDescription[] = _(
     "A 2-turn move that strikes\n"
@@ -126,7 +126,7 @@ static const u8 sFuryAttackDescription[] = _(
     "with sharp horns, etc.");
 
 static const u8 sHornDrillDescription[] = _(
-    "A one-hit KO attack that\n"
+    "A life-risking attack that\n"
     "uses a horn like a drill.");
 
 static const u8 sTackleDescription[] = _(
