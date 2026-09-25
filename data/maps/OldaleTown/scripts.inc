@@ -843,38 +843,56 @@ OldaleTown_FootprintsMan::
 	return
 
 
-OldaleTown_Girl::
+OldaleTown_Kirlia::
 # 452 "data/maps/OldaleTown/scripts.pory"
 	lock
 # 453 "data/maps/OldaleTown/scripts.pory"
 	faceplayer
 # 454 "data/maps/OldaleTown/scripts.pory"
-	msgbox OldaleTown_Girl_Text_0
+	playmoncry SPECIES_KIRLIA, 0
 # 455 "data/maps/OldaleTown/scripts.pory"
-	closemessage
+	msgbox OldaleTown_Kirlia_Text_0
 # 456 "data/maps/OldaleTown/scripts.pory"
+	waitmoncry
+# 457 "data/maps/OldaleTown/scripts.pory"
+	closemessage
+# 458 "data/maps/OldaleTown/scripts.pory"
+	release
+	return
+
+
+OldaleTown_Girl::
+# 463 "data/maps/OldaleTown/scripts.pory"
+	lock
+# 464 "data/maps/OldaleTown/scripts.pory"
+	faceplayer
+# 465 "data/maps/OldaleTown/scripts.pory"
+	msgbox OldaleTown_Girl_Text_0
+# 466 "data/maps/OldaleTown/scripts.pory"
+	closemessage
+# 467 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_MartEmployee::
-# 460 "data/maps/OldaleTown/scripts.pory"
+# 471 "data/maps/OldaleTown/scripts.pory"
 	lock
-# 461 "data/maps/OldaleTown/scripts.pory"
+# 472 "data/maps/OldaleTown/scripts.pory"
 	faceplayer
-# 462 "data/maps/OldaleTown/scripts.pory"
+# 473 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_MartEmployee_Text_0
-# 463 "data/maps/OldaleTown/scripts.pory"
+# 474 "data/maps/OldaleTown/scripts.pory"
 	closemessage
-# 464 "data/maps/OldaleTown/scripts.pory"
+# 475 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_EventScript_HCNuzlocke::
-# 479 "data/maps/OldaleTown/scripts.pory"
+# 490 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_EventScript_HCNuzlocke_Text_0
-# 480 "data/maps/OldaleTown/scripts.pory"
+# 491 "data/maps/OldaleTown/scripts.pory"
 	closemessage
 	return
 
@@ -908,15 +926,19 @@ OldaleTown_FootprintsMan_Text_0:
 	.string "one can even get through.\p"
 	.string "Guess I gotta look for feet elsewhere..$"
 
+OldaleTown_Kirlia_Text_0:
+# 455 "data/maps/OldaleTown/scripts.pory"
+	.string "Liaa!$"
+
 OldaleTown_Girl_Text_0:
-# 454 "data/maps/OldaleTown/scripts.pory"
+# 465 "data/maps/OldaleTown/scripts.pory"
 	.string "My family lives in PETALBURG CITY.\p"
 	.string "It's gonna be harder for them to come\n"
 	.string "visit now.\p"
 	.string "Good riddance.$"
 
 OldaleTown_MartEmployee_Text_0:
-# 462 "data/maps/OldaleTown/scripts.pory"
+# 473 "data/maps/OldaleTown/scripts.pory"
 	.string "Hello there!\n"
 	.string "Huh? Free potions?\p"
 	.string "Oh that promotion ended many years\n"
@@ -924,14 +946,14 @@ OldaleTown_MartEmployee_Text_0:
 	.string "We do sell high quality goods though!$"
 
 OldaleTown_EventScript_HCNuzlocke_Text_0:
-# 479 "data/maps/OldaleTown/scripts.pory"
+# 490 "data/maps/OldaleTown/scripts.pory"
 	.string "Locke's House\n"
 	.string "Only real challengers allowed.$"
 
 OldaleTown_Text_MayMessage::
-# 468 "data/maps/OldaleTown/scripts.pory"
+# 479 "data/maps/OldaleTown/scripts.pory"
 	.string "MAY: C'mon, {PLAYER}!\pDid you get your Pokémon healed?\pLet's head back to the LAB!$"
 
 OldaleTown_Text_BrendanMessage::
-# 472 "data/maps/OldaleTown/scripts.pory"
+# 483 "data/maps/OldaleTown/scripts.pory"
 	.string "MAY: C'mon, {PLAYER}!\pDid you get your Pokémon healed?\pLet's head back to the LAB!$"

@@ -447,6 +447,17 @@ script OldaleTown_FootprintsMan
  release
 }
 
+script OldaleTown_Kirlia
+{
+ lock
+ faceplayer
+ playmoncry(SPECIES_KIRLIA,0)
+ msgbox(format("Liaa!"))
+ waitmoncry
+ closemessage
+ release
+}
+
 script OldaleTown_Girl
 {
  lock
