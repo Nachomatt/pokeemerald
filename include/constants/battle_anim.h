@@ -424,6 +424,8 @@
 #define TRAP_ANIM_WHIRLPOOL 2
 #define TRAP_ANIM_CLAMP 3
 #define TRAP_ANIM_SAND_TOMB 4
+#define TRAP_ANIM_VICE_GRIP 5
+#define TRAP_ANIM_FISSURE 6
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0

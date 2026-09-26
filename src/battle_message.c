@@ -147,6 +147,7 @@ static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
 static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
 static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
 static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
+static const u8 sText_PkmnFellinFissure[] = _("{B_DEF_NAME_WITH_PREFIX} fell in\na FISSURE!");
 static const u8 sText_PkmnsXTrappedByViceGrip[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby VICEGRIP!");
 static const u8 sText_PkmnWrappedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnClamped[] = _("{B_ATK_NAME_WITH_PREFIX} CLAMPED\n{B_DEF_NAME_WITH_PREFIX}!");
@@ -875,6 +876,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNUSEDXTOGETPUMPED - BATTLESTRINGS_TABLE_START] = sText_PkmnUsedXToGetPumped,
     [STRINGID_PKMNSXMADEYUSELESS - BATTLESTRINGS_TABLE_START] = sText_PkmnsXMadeYUseless,
     [STRINGID_PKMNTRAPPEDBYSANDTOMB - BATTLESTRINGS_TABLE_START] = sText_PkmnTrappedBySandTomb,
+    [STRINGID_PKMNSTUCKINFISSURE - BATTLESTRINGS_TABLE_START] = sText_PkmnFellinFissure,
     [STRINGID_EMPTYSTRING4 - BATTLESTRINGS_TABLE_START] = sText_EmptyString4,
     [STRINGID_ABOOSTED - BATTLESTRINGS_TABLE_START] = sText_ABoosted,
     [STRINGID_PKMNSXINTENSIFIEDSUN - BATTLESTRINGS_TABLE_START] = sText_PkmnsXIntensifiedSun,
@@ -1101,7 +1103,8 @@ const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
     STRINGID_PKMNCLAMPED,          // MOVE_CLAMP
     STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_WHIRLPOOL
     STRINGID_PKMNTRAPPEDBYSANDTOMB,
-    STRINGID_PKMNTRAPPEDBYVICEGRIP // MOVE_SAND_TOMB
+    STRINGID_PKMNTRAPPEDBYVICEGRIP, // MOVE_SAND_TOMB
+    STRINGID_PKMNSTUCKINFISSURE, // MOVE_FISSURE
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1328,6 +1331,7 @@ const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
     MOVE_WHIRLPOOL,
     MOVE_SAND_TOMB,
     MOVE_VICE_GRIP,
+    MOVE_FISSURE,
     0xFFFF // Never read
 };
 

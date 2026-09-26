@@ -2188,7 +2188,7 @@ u8 AtkCanceler_UnableToUseMove(void)
                     if (gBideDmg[gBattlerAttacker])
                     {
                         gCurrentMove = MOVE_BIDE;
-                        *bideDmg = gBideDmg[gBattlerAttacker] * 2;
+                        *bideDmg = gBideDmg[gBattlerAttacker] * 3;
                         gBattlerTarget = gBideTarget[gBattlerAttacker];
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetMoveTarget(MOVE_BIDE, MOVE_TARGET_SELECTED + 1);

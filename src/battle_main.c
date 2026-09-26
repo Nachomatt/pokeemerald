@@ -4643,8 +4643,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     u8 holdEffect = 0;
     u8 holdEffectParam = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
-    u8 prioritybattler1 = 0;
-    u8 prioritybattler2 = 0;
+    s8 prioritybattler1 = 0;
+    s8 prioritybattler2 = 0;
 
     if (WEATHER_HAS_EFFECT)
     {
@@ -4765,7 +4765,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     prioritybattler2 = gBattleMoves[moveBattler2].priority;
     if(gBattleMons[battler1].ability == ABILITY_APEX_HUNTER && gRandomTurnNumber < (0xFFFF * 20) / 100)
         prioritybattler1 = 2;
-    if(gBattleMons[battler2].ability == ABILITY_APEX_HUNTER && gRandomTurnNumber < (0xFFFF * 30) / 100)
+    if(gBattleMons[battler2].ability == ABILITY_APEX_HUNTER && gRandomTurnNumber < (0xFFFF * 20) / 100)
         prioritybattler2 = 2;
     // both move priorities are different than 0
     if (prioritybattler1 != 0 || prioritybattler2 != 0)
