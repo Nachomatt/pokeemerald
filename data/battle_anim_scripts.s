@@ -6709,6 +6709,7 @@ Move_ROCK_SMASH:
 Move_SUBMISSION:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET, 10
@@ -6722,6 +6723,7 @@ Move_SUBMISSION:
 	waitplaysewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET, 90
 	createvisualtask AnimTask_TranslateMonElliptical, 2, 0, -18, 6, 6, 4
 	createvisualtask AnimTask_TranslateMonElliptical, 2, 1, 18, 6, 6, 4
+	createvisualtask AnimTask_TranslateMonElliptical, 2, 3, 18, 6, 6, 4
 	call SubmissionHit
 	call SubmissionHit
 	call SubmissionHit
@@ -6731,12 +6733,18 @@ Move_SUBMISSION:
 	end
 
 SubmissionHit:
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=-12, relative_to=ANIM_TARGET, animation=1
-	delay 8
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=-12, y=8, relative_to=ANIM_TARGET, animation=1
-	delay 8
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=12, y=0, relative_to=ANIM_TARGET, animation=1
-	delay 8
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-32, y=-16, relative_to=ANIM_TARGET, animation=1
+	delay 4
+	create_random_pos_hitsplat_sprite ANIM_TARGET, 3, relative_to=ANIM_TARGET, animation=1
+	delay 4
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-16, y=-32, relative_to=ANIM_TARGET, animation=1
+	delay 4
+	create_random_pos_hitsplat_sprite ANIM_TARGET, 3, relative_to=ANIM_TARGET, animation=1
+	delay 4
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-32, y=-16, relative_to=ANIM_TARGET, animation=1
+	delay 4
+	create_random_pos_hitsplat_sprite ANIM_TARGET, 3, relative_to=ANIM_TARGET, animation=1
+	delay 4
 	return
 
 @ Also used by Sunny weather
@@ -9698,7 +9706,6 @@ Move_TWISTER:
 	create_twister_leaf_sprite ANIM_TARGET, 2, duration=20, distance_y=255, wave_period=15, wave_amplitude=32, speed_up_on_frame=0
 	create_twister_leaf_sprite ANIM_TARGET, 2, duration=110, distance_y=10, wave_period=8, wave_amplitude=32, speed_up_on_frame=20
 	waitforvisualfinish
-	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-32, y=-16, relative_to=ANIM_TARGET, animation=3
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 3, 0, 12, 1
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_DEF_PARTNER, 3, 0, 12, 1
