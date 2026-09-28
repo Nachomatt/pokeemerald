@@ -3455,6 +3455,7 @@ Move_TORMENT:
 	end
 
 Move_MEMENTO:
+	loadspritegfx ANIM_TAG_GHOSTLY_SPIRIT
 	setalpha 0, 16
 	delay 1
 	createvisualtask AnimTask_InitMementoShadow, 2
@@ -3473,6 +3474,11 @@ Move_MEMENTO:
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
 	waitforvisualfinish
 	clearmonbg_static ANIM_TARGET
+	delay 20
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
+	createsprite gCurseGhostSpriteTemplate, ANIM_TARGET, 2
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 14, 1
+	waitforvisualfinish
 	delay 1
 	blendoff
 	delay 1

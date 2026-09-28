@@ -234,6 +234,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
 	.4byte BattleScript_EffectAllStatsDownHit		 @ EFFECT_ALL_STATS_DOWN_HIT
 	.4byte BattleScript_EffectBigRecoil		 		 @ EFFECT_BIG_RECOIL
+	.4byte BattleScript_EffectLusterPurge			 @ EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2
+	.4byte BattleScript_EffectMistBall			 	 @ EFFECT_SPECIAL_ATTACK_DOWN_HIT_2
+	.4byte BattleScript_EffectSheerCold			 	 @ EFFECT_SPEED_DOWN_HIT_2
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -549,6 +552,19 @@ BattleScript_EffectSpeedDown::
 BattleScript_EffectAccuracyDown::
 	setstatchanger STAT_ACC, 1, TRUE
 	goto BattleScript_EffectStatDown
+
+BattleScript_EffectSheerCold::
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_2
+	goto BattleScript_EffectHit
+
+BattleScript_EffectLusterPurge::
+	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
+	goto BattleScript_EffectHit
+
+BattleScript_EffectMistBall::
+	setmoveeffect MOVE_EFFECT_SP_ATK_MINUS_2
+	goto BattleScript_EffectHit
+
 
 BattleScript_EffectEvasionDown::
 	setstatchanger STAT_EVASION, 1, TRUE
@@ -1084,6 +1100,14 @@ BattleScript_EffectSpecialAttackDownHit::
 
 BattleScript_EffectSpecialDefenseDownHit::
 	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_1
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSpecialDefenseDownHit2::
+	setmoveeffect MOVE_EFFECT_SP_DEF_MINUS_2
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSpecialAttackDownHit2::
+	setmoveeffect MOVE_EFFECT_SP_ATK_MINUS_2
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAccuracyDownHit::
@@ -2419,6 +2443,11 @@ BattleScript_EffectCharge::
 	waitanimation
 	printstring STRINGID_PKMNCHARGINGPOWER
 	waitmessage B_WAIT_TIME_LONG
+	setstatchanger STAT_SPATK, 1, FALSE
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNBOOSTSSPATTACK
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTaunt::
@@ -3495,6 +3524,11 @@ BattleScript_SelectingUnusableMoveInPalace::
 
 BattleScript_EncoredNoMore::
 	printstring STRINGID_PKMNENCOREENDED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_TauntedNoMore::
+	printstring STRINGID_PKMNTAUNTENDED
 	waitmessage B_WAIT_TIME_LONG
 	end2
 

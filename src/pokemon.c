@@ -3267,9 +3267,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (defender->ability == ABILITY_INDOMITABLE && TYPE_MUL_SUPER_EFFECTIVE)
         gBattleMovePower = (50*gBattleMovePower) / 100;
     // Self-destruct / Explosion cut defense in half
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
-        defense /= 2;
 
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION && IS_TYPE_PHYSICAL(type))
+        defense /= 2;
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION && IS_TYPE_SPECIAL(type))
+        spDefense /= 2;
+
+    
     if (IS_TYPE_PHYSICAL(type))
     {
         if (gCritMultiplier == 2)

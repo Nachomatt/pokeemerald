@@ -661,6 +661,7 @@ static const u8 *const sMoveEffectBS_Ptrs[] =
         [MOVE_EFFECT_ATK_MINUS_1] = BattleScript_MoveEffectSleep,
         [MOVE_EFFECT_DEF_MINUS_1] = BattleScript_MoveEffectSleep,
         [MOVE_EFFECT_SPD_MINUS_1] = BattleScript_MoveEffectSleep,
+        [MOVE_EFFECT_SPD_MINUS_2] = BattleScript_MoveEffectSleep,
         [MOVE_EFFECT_SP_ATK_MINUS_1] = BattleScript_MoveEffectSleep,
         [MOVE_EFFECT_SP_DEF_MINUS_1] = BattleScript_MoveEffectSleep,
         [MOVE_EFFECT_ACC_MINUS_1] = BattleScript_MoveEffectSleep,
@@ -9119,8 +9120,8 @@ static void Cmd_settaunt(void)
     }
     else if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
     {
-        gDisableStructs[gBattlerTarget].tauntTimer = 2;
-        gDisableStructs[gBattlerTarget].tauntTimer2 = 2;
+        gDisableStructs[gBattlerTarget].tauntTimer = 3;
+        gDisableStructs[gBattlerTarget].tauntTimer2 = 3;
         gBattlescriptCurrInstr += 5;
     }
     else

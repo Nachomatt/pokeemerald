@@ -1260,7 +1260,7 @@ const struct Item gItems[] =
 
     [ITEM_INFINITY_CANDY] =
     {
-        .name = _("INFINITYCANDY"),
+        .name = _("CANDY POUCH"),
 		.itemId = ITEM_INFINITY_CANDY,
         .price = 0,
         .description = sInfinityCandyDesc,

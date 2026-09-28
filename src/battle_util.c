@@ -1713,8 +1713,15 @@ u8 DoBattlerEndTurnEffects(void)
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_TAUNT: // taunt
-                if (gDisableStructs[gActiveBattler].tauntTimer)
-                    gDisableStructs[gActiveBattler].tauntTimer--;
+                if (gDisableStructs[gActiveBattler].tauntTimer != 0)
+                {
+                    if(--gDisableStructs[gActiveBattler].tauntTimer == 0)
+                    {
+                        gDisableStructs[gActiveBattler].tauntTimer = 0;
+                        BattleScriptExecute(BattleScript_TauntedNoMore);
+                        effect++;
+                    }
+                }
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_YAWN: // yawn
