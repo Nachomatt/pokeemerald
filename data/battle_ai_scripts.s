@@ -273,7 +273,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SKULL_BASH, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_FUTURE_SIGHT, AI_CBM_FutureSight
-	if_effect EFFECT_TELEPORT, AI_CBM_BatonPass
+	if_effect EFFECT_TELEPORT, AI_CV_SwitchOut
 	if_effect EFFECT_DEFENSE_CURL, AI_CBM_DefenseUp
 	if_effect EFFECT_FAKE_OUT, AI_CBM_FakeOut
 	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
