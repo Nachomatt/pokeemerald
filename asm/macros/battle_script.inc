@@ -1000,6 +1000,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro recoverbasedonhail ptr:req
+	.byte B_SCR_OP_RECOVERBASEDONHAIL
+	.4byte \ptr
+	.endm
+
 	.macro hiddenpowercalc
 	.byte B_SCR_OP_HIDDENPOWERCALC
 	.endm

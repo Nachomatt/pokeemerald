@@ -670,8 +670,8 @@ static const u8 sTripleKickDescription[] = _(
     "row with rising intensity.");
 
 static const u8 sThiefDescription[] = _(
-    "While attacking, it may\n"
-    "steal the foe's held item.");
+    "Makes a run for it\n"
+    "after hitting the opponent.");
 
 static const u8 sSpiderWebDescription[] = _(
     "Ensnares the foe to stop it\n"
@@ -1587,7 +1587,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_STRUGGLE - 1] = sStruggleDescription,
     [MOVE_SKETCH - 1] = sSketchDescription,
     [MOVE_TRIPLE_KICK - 1] = sTripleKickDescription,
-    [MOVE_THIEF - 1] = sThiefDescription,
+    [MOVE_HIT_AND_RUN - 1] = sThiefDescription,
     [MOVE_SPIDER_WEB - 1] = sSpiderWebDescription,
     [MOVE_MIND_READER - 1] = sMindReaderDescription,
     [MOVE_NIGHTMARE - 1] = sNightmareDescription,

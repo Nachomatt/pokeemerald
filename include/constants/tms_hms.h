@@ -47,7 +47,7 @@
     F(SECRET_POWER) \
     F(REST) \
     F(ATTRACT) \
-    F(THIEF) \
+    F(HIT_AND_RUN) \
     F(STEEL_WING) \
     F(SKILL_SWAP) \
     F(SNATCH) \

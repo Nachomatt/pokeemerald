@@ -4484,7 +4484,7 @@ static const struct TrainerMonItemCustomMoves sParty_Andrew[] = {
     .iv = 0,
     .lvl = 5,
     .species = SPECIES_RATTATA,
-    .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP}
+    .moves = {MOVE_TACKLE, MOVE_HIT_AND_RUN}
     },
     {
     .iv = 0,
@@ -7732,7 +7732,7 @@ static const struct TrainerMonItemCustomMoves sParty_Athena[] = {
     .lvl = 32,
     .species = SPECIES_LINOONE,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_SURF, MOVE_THIEF, MOVE_NONE, MOVE_NONE}
+    .moves = {MOVE_SURF, MOVE_HIT_AND_RUN, MOVE_NONE, MOVE_NONE}
     }
 };
 

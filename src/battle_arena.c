@@ -166,7 +166,6 @@ static const s8 sMindRatings[MOVES_COUNT] =
     [MOVE_SLASH] = 1,
     [MOVE_STRUGGLE] = 1,
     [MOVE_TRIPLE_KICK] = 1,
-    [MOVE_THIEF] = 1,
     [MOVE_FLAME_WHEEL] = 1,
     [MOVE_SNORE] = 1,
     [MOVE_FLAIL] = 1,

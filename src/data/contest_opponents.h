@@ -1185,7 +1185,7 @@ const struct ContestPokemon gContestOpponents[] =
         .aiPool_Tough = TRUE,
         .moves =
         {
-            MOVE_THIEF,
+            MOVE_HIT_AND_RUN,
             MOVE_SCREECH,
             MOVE_ANCIENT_POWER,
             MOVE_BIND
@@ -1690,7 +1690,7 @@ const struct ContestPokemon gContestOpponents[] =
         .moves =
         {
             MOVE_TAUNT,
-            MOVE_THIEF,
+            MOVE_HIT_AND_RUN,
             MOVE_ODOR_SLEUTH,
             MOVE_TAKE_DOWN
         },

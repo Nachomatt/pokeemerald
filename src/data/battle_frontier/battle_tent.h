@@ -1056,7 +1056,7 @@ const struct FacilityMon gSlateportBattleTentMons[NUM_SLATEPORT_TENT_MONS] =
     },
     [SLATEPORT_TENT_MON_KECLEON_1] = {
         .species = SPECIES_KECLEON,
-        .moves = {MOVE_PSYBEAM, MOVE_SUBSTITUTE, MOVE_THIEF, MOVE_TAIL_WHIP},
+        .moves = {MOVE_PSYBEAM, MOVE_SUBSTITUTE, MOVE_HIT_AND_RUN, MOVE_TAIL_WHIP},
         .itemTableId = BATTLE_FRONTIER_ITEM_NONE,
         .evSpread = F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_HP,
         .nature = NATURE_MODEST
@@ -1808,7 +1808,7 @@ const struct FacilityMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
 {
     [VERDANTURF_TENT_MON_POOCHYENA] = {
         .species = SPECIES_POOCHYENA,
-        .moves = {MOVE_ROAR, MOVE_THIEF, MOVE_BITE, MOVE_HOWL},
+        .moves = {MOVE_ROAR, MOVE_HIT_AND_RUN, MOVE_BITE, MOVE_HOWL},
         .itemTableId = BATTLE_FRONTIER_ITEM_BLACK_GLASSES,
         .evSpread = F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP,
         .nature = NATURE_NAUGHTY
@@ -1990,7 +1990,7 @@ const struct FacilityMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
     },
     [VERDANTURF_TENT_MON_NUZLEAF] = {
         .species = SPECIES_NUZLEAF,
-        .moves = {MOVE_SUNNY_DAY, MOVE_TORMENT, MOVE_FAKE_OUT, MOVE_THIEF},
+        .moves = {MOVE_SUNNY_DAY, MOVE_TORMENT, MOVE_FAKE_OUT, MOVE_HIT_AND_RUN},
         .itemTableId = BATTLE_FRONTIER_ITEM_BLACK_GLASSES,
         .evSpread = F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP,
         .nature = NATURE_BOLD

@@ -119,6 +119,7 @@ static const u8 sBigAppetiteDescription[] = _("Ups STOCKPILE.");
 static const u8 sCoalEngineDescription[] = _("Powers up on switchin.");
 static const u8 sSurpriseDescription[] = _("Gives PRESENTS to enemies.");
 static const u8 sMagicBounceDescription[] = _("Bounces back status moves.");
+static const u8 sSolarMightDescription[] = _("Ups sunlight-related moves.");
 
 
 
@@ -246,6 +247,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_COAL_ENGINE] = _("COAL ENGINE"),
     [ABILITY_SURPRISE] = _("SURPRISE"),
     [ABILITY_MAGIC_BOUNCE] = _("MAGIC BOUNCE"),
+    [ABILITY_SOLAR_MIGHT] = _("SOLAR MIGHT"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -373,4 +375,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_COAL_ENGINE] = sCoalEngineDescription,
     [ABILITY_SURPRISE] = sSurpriseDescription,
     [ABILITY_MAGIC_BOUNCE] = sMagicBounceDescription,
+    [ABILITY_SOLAR_MIGHT] = sSolarMightDescription,
 };

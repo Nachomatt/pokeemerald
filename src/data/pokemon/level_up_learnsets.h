@@ -3766,7 +3766,7 @@ static const u16 sMightyenaLevelUpLearnset[] = {
 static const u16 sZigzagoonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE(5, MOVE_RAZOR_WIND),
+    LEVEL_UP_MOVE(5, MOVE_HIT_AND_RUN),
     LEVEL_UP_MOVE(10, MOVE_MEAN_LOOK),
     LEVEL_UP_MOVE(14, MOVE_PIN_MISSILE),
     LEVEL_UP_MOVE(19, MOVE_DIG),
@@ -3864,7 +3864,7 @@ static const u16 sLombreLevelUpLearnset[] = {
     LEVEL_UP_MOVE(19, MOVE_FAKE_OUT),
     LEVEL_UP_MOVE(25, MOVE_FURY_SWIPES),
     LEVEL_UP_MOVE(31, MOVE_WATER_SPORT),
-    LEVEL_UP_MOVE(37, MOVE_THIEF),
+    LEVEL_UP_MOVE(37, MOVE_HIT_AND_RUN),
     LEVEL_UP_MOVE(43, MOVE_UPROAR),
     LEVEL_UP_MOVE(49, MOVE_HYDRO_PUMP),
     LEVEL_UP_END
@@ -4150,7 +4150,7 @@ static const u16 sDelcattyLevelUpLearnset[] = {
 };
 
 static const u16 sKecleonLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_THIEF),
+    LEVEL_UP_MOVE( 1, MOVE_HIT_AND_RUN),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
     LEVEL_UP_MOVE( 1, MOVE_LICK),

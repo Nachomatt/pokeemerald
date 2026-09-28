@@ -581,6 +581,7 @@ AI_CBM_BatonPass:
 	if_equal 0, Score_Minus10
 	end
 
+
 AI_CBM_RainDance:
 	get_weather
 	if_equal AI_WEATHER_RAIN, Score_Minus8
@@ -817,7 +818,7 @@ AI_CheckViability:
 	if_effect EFFECT_DESTINY_BOND, AI_CV_DestinyBond
 	if_effect EFFECT_FLAIL, AI_CV_Flail
 	if_effect EFFECT_HEAL_BELL, AI_CV_HealBell
-	if_effect EFFECT_THIEF, AI_CV_Thief
+	if_effect EFFECT_THIEF, AI_CV_SwitchOut
 	if_effect EFFECT_MEAN_LOOK, AI_CV_Trap
 	if_effect EFFECT_MINIMIZE, AI_CV_EvasionUp
 	if_effect EFFECT_CURSE, AI_CV_Curse
@@ -882,6 +883,14 @@ AI_CV_SleepEncourageSlpDamage:
 	if_random_less_than 128, AI_CV_Sleep_End
 	score +1
 AI_CV_Sleep_End:
+	end
+
+AI_CV_SwitchOut:
+	count_usable_party_mons AI_USER
+	if_equal 0, Score_Plus0
+	if_random_less_than 128, AI_Switchout_End
+	score +2
+AI_Switchout_End:
 	end
 
 AI_CV_Absorb:
@@ -980,7 +989,6 @@ AI_CV_MirrorMove_EncouragedMovesToMirror:
 	.2byte MOVE_DYNAMIC_PUNCH
 	.2byte MOVE_HYPER_BEAM
 	.2byte MOVE_EXTREME_SPEED
-	.2byte MOVE_THIEF
 	.2byte MOVE_COVET
 	.2byte MOVE_ATTRACT
 	.2byte MOVE_SWAGGER

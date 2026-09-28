@@ -184,7 +184,7 @@ gBattleAnims_Moves::
 	.4byte Move_STRUGGLE
 	.4byte Move_SKETCH
 	.4byte Move_TRIPLE_KICK
-	.4byte Move_THIEF
+	.4byte Move_HIT_AND_RUN
 	.4byte Move_SPIDER_WEB
 	.4byte Move_MIND_READER
 	.4byte Move_NIGHTMARE
@@ -1708,10 +1708,7 @@ Move_FRUSTRATION:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
 	createvisualtask AnimTask_GetFrustrationPowerLevel, 1
-	jumpreteq 0, Frustration_Strongest
-	jumpreteq 1, Frustration_Strong
-	jumpreteq 2, Frustration_Medium
-	goto Frustration_Weak
+	goto Frustration_Strongest
 Frustration_Continue:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -1752,59 +1749,6 @@ Frustration_Strongest:
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 9, 0, RGB_RED
-	goto Frustration_Continue
-Frustration_Strong:
-	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 5, ANIM_ATTACKER, 1, 0, 15, 1
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 9, RGB_RED
-	waitforvisualfinish
-	delay 20
-	playsewithpan SE_M_SWAGGER2, SOUND_PAN_ATTACKER
-	createsprite gAngerMarkSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, -28
-	waitforvisualfinish
-	delay 5
-	createvisualtask AnimTask_StrongFrustrationGrowAndShrink, 5
-	delay 7
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=8, relative_to=ANIM_TARGET, animation=1
-	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 4, 0, 6, 1
-	delay 14
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=12, y=-6, relative_to=ANIM_TARGET, animation=1
-	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 4, 0, 6, 1
-	delay 14
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=-12, y=-6, relative_to=ANIM_TARGET, animation=1
-	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 4, 0, 6, 1
-	waitforvisualfinish
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 9, 0, RGB_RED
-	goto Frustration_Continue
-Frustration_Medium:
-	playsewithpan SE_M_SWAGGER2, SOUND_PAN_ATTACKER
-	createsprite gAngerMarkSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, -28
-	waitforvisualfinish
-	delay 5
-	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
-	delay 6
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=10, y=4, relative_to=ANIM_TARGET, animation=1
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 6, 1
-	waitforvisualfinish
-	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
-	delay 6
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=-10, y=-4, relative_to=ANIM_TARGET, animation=2
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 6, 1
-	goto Frustration_Continue
-Frustration_Weak:
-	createsprite gWeakFrustrationAngerMarkSpriteTemplate, ANIM_ATTACKER, 2, 20, -28
-	waitforvisualfinish
-	delay 10
-	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 10, 2
-	delay 12
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=0, y=0, relative_to=ANIM_TARGET, animation=2
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 6, 1
 	goto Frustration_Continue
 
 Move_SAFEGUARD:
@@ -2178,7 +2122,7 @@ RockSlideRocks:
 	delay 2
 	return
 
-Move_THIEF:
+Move_HIT_AND_RUN:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
 	delay 1
@@ -2928,15 +2872,11 @@ Move_BARRAGE:
 	end
 
 Move_SKY_ATTACK:
-	choosetwoturnanim SkyAttackSetUp, SkyAttackUnleash
-SkyAttackEnd:
-	end
 SkyAttackSetUp:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 11
 	createvisualtask AnimTask_GetTargetIsAttackerPartner, 5, ARG_RET_ID
 	jumpretfalse SkyAttackSetUpAgainstOpponent
-	goto SkyAttackSetUpAgainstPartner
 SkyAttackSetUpAgainstOpponent:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE | F_PAL_DEF_PARTNER, 1, 0, 12, RGB_BLACK
 	waitforvisualfinish
@@ -2952,29 +2892,14 @@ SkyAttackSetUpAgainstOpponent:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
-	goto SkyAttackEnd
-SkyAttackSetUpAgainstPartner:
-	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, ANIM_TARGET, 1, 0, 12, RGB_BLACK
-	waitforvisualfinish
-	delay 12
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB_BLACK
-	createvisualtask AnimTask_HorizontalShake, 5, ANIM_ATTACKER, 2, 16
-	playsewithpan SE_M_STAT_INCREASE, SOUND_PAN_ATTACKER
-	delay 8
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 15, RGB_WHITE
-	delay 20
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 15, 0, RGB_WHITE
-	waitforvisualfinish
-	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 4, 1, 8, 0, RGB_BLACK
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	goto SkyAttackEnd
 SkyAttackUnleash:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_BIRD
 	call SetSkyBg
 	monbg ANIM_ATTACKER
+	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
+	delay 20
+	shake_mon_or_platform velocity=4, shake_timer=1, shake_duration=120, type=SHAKE_BG_Y
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 16, RGB_WHITE
 	delay 4
 	attacker_fade_to_invisible priority=5, step_delay=0
@@ -2991,7 +2916,7 @@ SkyAttackUnleash:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	call UnsetSkyBg
-	goto SkyAttackEnd
+	end
 
 Move_FLASH:
 	playsewithpan SE_M_LEER, SOUND_PAN_ATTACKER
@@ -8953,67 +8878,12 @@ Move_RETURN:
 	setalpha 12, 8
 	createvisualtask AnimTask_GetReturnPowerLevel, 2
 	delay 2
-	jumpreteq 0, ReturnWeak
-	jumpreteq 1, ReturnMedium
-	jumpreteq 2, ReturnStrong
-	jumpreteq 3, ReturnStrongest
+	goto ReturnStrongest
 ReturnContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-ReturnWeak:
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 16, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 16, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	delay 5
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=-10, y=-8, relative_to=ANIM_TARGET, animation=2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	goto ReturnContinue
-ReturnMedium:
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	delay 11
-	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 5, 4
-	delay 6
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=0, relative_to=ANIM_TARGET, animation=2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_MEGA_KICK2, SOUND_PAN_TARGET
-	goto ReturnContinue
-ReturnStrong:
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 6, 1, ANIM_ATTACKER
-	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=-10, y=-8, relative_to=ANIM_TARGET, animation=2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 8, 1
-	delay 8
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=10, y=10, relative_to=ANIM_TARGET, animation=2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 8, 1
-	delay 8
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=3, y=-5, relative_to=ANIM_TARGET, animation=2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 8, 1
-	delay 8
-	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=-5, y=3, relative_to=ANIM_TARGET, animation=2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 8, 1
-	goto ReturnContinue
 ReturnStrongest:
 	simple_palette_blend selector=F_PAL_BG, delay=0, initial_blend_y=0, target_blend_y=6, color=RGB_BLACK
 	waitforvisualfinish

@@ -472,6 +472,7 @@ BattleScript_DreamEaterWorked:
 	waitmessage B_WAIT_TIME_LONG
 	negativedamage
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	jumpifability BS_ATTACKER, ABILITY_VENOM_FANG, BattleScript_AbsorbVenomFang
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	jumpifmovehadnoeffect BattleScript_DreamEaterTryFaintEnd
@@ -814,7 +815,6 @@ BattleScript_TwoTurnMovesSecondTurn::
 	setbyte sB_ANIM_TURN, 1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	jumpifnotmove MOVE_SKY_ATTACK, BattleScript_HitFromAccCheck
 	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_HitFromAccCheck
 
@@ -1481,8 +1481,45 @@ BattleScript_TripleKickEnd::
 	end
 
 BattleScript_EffectThief::
-	setmoveeffect MOVE_EFFECT_STEAL_ITEM
-	goto BattleScript_EffectHit
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	critcalc
+	damagecalc
+	typecalc
+	adjustnormaldamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_MoveEnd
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_MoveEnd
+	printstring STRINGID_PKMNSWITCHEDOUT
+	waitmessage B_WAIT_TIME_SHORT
+	openpartyscreen BS_ATTACKER, BattleScript_MoveEnd
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	returntoball BS_ATTACKER
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+	moveendall
+	end
 
 BattleScript_EffectMeanLook::
 	attackcanceler
@@ -1775,11 +1812,16 @@ BattleScript_EffectSonicboom::
 
 BattleScript_EffectMorningSun::
 BattleScript_EffectSynthesis::
-BattleScript_EffectMoonlight::
 	attackcanceler
 	attackstring
 	ppreduce
 	recoverbasedonsunlight BattleScript_AlreadyAtFullHp
+	goto BattleScript_PresentHealTarget
+BattleScript_EffectMoonlight::
+	attackcanceler
+	attackstring
+	ppreduce
+	recoverbasedonhail BattleScript_AlreadyAtFullHp
 	goto BattleScript_PresentHealTarget
 
 BattleScript_EffectHiddenPower::
@@ -1966,6 +2008,7 @@ BattleScript_EffectStomp::
 	goto BattleScript_FlinchEffect
 
 BattleScript_EffectSolarBeam::
+	jumpifability BS_ATTACKER, ABILITY_SOLAR_MIGHT, BattleScript_SolarBeamOnFirstTurn
 	jumpifabilitypresent ABILITY_CLOUD_NINE, BattleScript_SolarBeamDecideTurn
 	jumpifabilitypresent ABILITY_AIR_LOCK, BattleScript_SolarBeamDecideTurn
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_SolarBeamOnFirstTurn

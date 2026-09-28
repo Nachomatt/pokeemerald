@@ -269,6 +269,7 @@ static void Cmd_copyfoestats(void);
 static void Cmd_rapidspinfree(void);
 static void Cmd_setdefensecurlbit(void);
 static void Cmd_recoverbasedonsunlight(void);
+static void Cmd_recoverbasedonhail(void);
 static void Cmd_hiddenpowercalc(void);
 static void Cmd_selectfirstvalidtarget(void);
 static void Cmd_trysetfutureattack(void);
@@ -525,6 +526,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
         [B_SCR_OP_RAPIDSPINFREE] = Cmd_rapidspinfree,                                     // 0xBE
         [B_SCR_OP_SETDEFENSECURLBIT] = Cmd_setdefensecurlbit,                             // 0xBF
         [B_SCR_OP_RECOVERBASEDONSUNLIGHT] = Cmd_recoverbasedonsunlight,                   // 0xC0
+        [B_SCR_OP_RECOVERBASEDONHAIL] = Cmd_recoverbasedonhail,
         [B_SCR_OP_HIDDENPOWERCALC] = Cmd_hiddenpowercalc,                                 // 0xC1
         [B_SCR_OP_SELECTFIRSTVALIDTARGET] = Cmd_selectfirstvalidtarget,                   // 0xC2
         [B_SCR_OP_TRYSETFUTUREATTACK] = Cmd_trysetfutureattack,                           // 0xC3
@@ -743,7 +745,6 @@ static const u16 sMovesForbiddenToCopy[] =
         MOVE_ENDURE,
         MOVE_DESTINY_BOND,
         MOVE_SLEEP_TALK,
-        MOVE_THIEF,
         MOVE_FOLLOW_ME,
         MOVE_SNATCH,
         MOVE_HELPING_HAND,
@@ -7896,7 +7897,7 @@ static void Cmd_psywavedamageeffect(void)
         ;
 
     randDamage *= 10;
-    gBattleMoveDamage = gBattleMons[gBattlerAttacker].level * (randDamage + 50) / 100;
+    gBattleMoveDamage = gBattleMons[gBattlerAttacker].level * (randDamage + 85) / 100;
     gBattlescriptCurrInstr++;
 }
 
@@ -8263,7 +8264,7 @@ static void Cmd_tryspiteppreduce(void)
 
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
         {
-            s32 ppToDeduct = (Random() & 3) + 2;
+            s32 ppToDeduct = 5;
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
 
@@ -8513,7 +8514,7 @@ static void Cmd_furycuttercalc(void)
     {
         s32 i;
 
-        if (gDisableStructs[gBattlerAttacker].furyCutterCounter != 5)
+        if (gDisableStructs[gBattlerAttacker].furyCutterCounter != 4)
             gDisableStructs[gBattlerAttacker].furyCutterCounter++;
 
         gDynamicBasePower = gBattleMoves[gCurrentMove].power;
@@ -8787,10 +8788,55 @@ static void Cmd_recoverbasedonsunlight(void)
     if (gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP)
     {
         if (gBattleWeather == 0 || !WEATHER_HAS_EFFECT)
-            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+            if(gBattleMons[gBattlerAttacker].ability == ABILITY_SOLAR_MIGHT)
+            {
+                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+            }
+            else
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
         else if (gBattleWeather & B_WEATHER_SUN)
-            gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
-        else // not sunny weather
+            if(gBattleMons[gBattlerAttacker].ability == ABILITY_SOLAR_MIGHT)
+            {
+                gBattleMoveDamage = 30 * gBattleMons[gBattlerAttacker].maxHP / 40;
+            }
+            else
+                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+        else // not hail weather
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        gBattleMoveDamage *= -1;
+
+        gBattlescriptCurrInstr += 5;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
+}
+
+static void Cmd_recoverbasedonhail(void)
+{
+    gBattlerTarget = gBattlerAttacker;
+
+    if (gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP)
+    {
+        if (gBattleWeather == 0 || !WEATHER_HAS_EFFECT)
+            if(gBattleMons[gBattlerAttacker].ability == ABILITY_LUNAR_MIGHT)
+            {
+                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+            }
+            else
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        else if (gBattleWeather & B_WEATHER_HAIL)
+            if(gBattleMons[gBattlerAttacker].ability == ABILITY_LUNAR_MIGHT)
+            {
+                gBattleMoveDamage = 30 * gBattleMons[gBattlerAttacker].maxHP / 40;
+            }
+            else
+                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+        else // not hail weather
             gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
 
         if (gBattleMoveDamage == 0)
@@ -8807,11 +8853,8 @@ static void Cmd_recoverbasedonsunlight(void)
 
 static void Cmd_hiddenpowercalc(void)
 {
-    u8 powerBits = ((gBattleMons[gBattlerAttacker].hpIV & 2) >> 1) | ((gBattleMons[gBattlerAttacker].attackIV & 2) << 0) | ((gBattleMons[gBattlerAttacker].defenseIV & 2) << 1) | ((gBattleMons[gBattlerAttacker].speedIV & 2) << 2) | ((gBattleMons[gBattlerAttacker].spAttackIV & 2) << 3) | ((gBattleMons[gBattlerAttacker].spDefenseIV & 2) << 4);
 
     u8 typeBits = ((gBattleMons[gBattlerAttacker].hpIV & 1) << 0) | ((gBattleMons[gBattlerAttacker].attackIV & 1) << 1) | ((gBattleMons[gBattlerAttacker].defenseIV & 1) << 2) | ((gBattleMons[gBattlerAttacker].speedIV & 1) << 3) | ((gBattleMons[gBattlerAttacker].spAttackIV & 1) << 4) | ((gBattleMons[gBattlerAttacker].spDefenseIV & 1) << 5);
-
-    gDynamicBasePower = (40 * powerBits) / 63 + 30;
 
     // Subtract 3 instead of 1 below because 2 types are excluded (TYPE_NORMAL and TYPE_MYSTERY)
     // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
