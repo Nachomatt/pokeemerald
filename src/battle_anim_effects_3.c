@@ -27,6 +27,7 @@ extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
 
 static void AnimBlackSmoke(struct Sprite *);
 static void AnimBlackSmoke_Step(struct Sprite *);
+static void AnimBlackSmokeDouble(struct Sprite *);
 static void AnimWhiteHalo(struct Sprite *);
 static void AnimWhiteHalo_Step1(struct Sprite *);
 static void AnimWhiteHalo_Step2(struct Sprite *);
@@ -156,6 +157,27 @@ const struct SpriteTemplate gBlackSmokeSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimBlackSmoke,
+};
+
+const struct SpriteTemplate gBlackSmokeSpriteTemplateDouble =
+{
+    .tileTag = ANIM_TAG_BLACK_SMOKE,
+    .paletteTag = ANIM_TAG_BLACK_SMOKE,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimBlackSmokeDouble,
+};
+const struct SpriteTemplate gBlackBallSpriteTemplateDouble =
+{
+    .tileTag = ANIM_TAG_BLACK_BALL,
+    .paletteTag = ANIM_TAG_BLACK_BALL,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimThrowProjectileDouble,
 };
 
 const struct SpriteTemplate gBlackBallSpriteTemplate =
@@ -1193,6 +1215,22 @@ static void AnimBlackSmoke(struct Sprite *sprite)
     sprite->callback = AnimBlackSmoke_Step;
 }
 
+static void AnimBlackSmokeDouble(struct Sprite *sprite)
+{
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
+
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
+
+    if (!gBattleAnimArgs[3])
+        sprite->data[0] = gBattleAnimArgs[2];
+    else
+        sprite->data[0] = -gBattleAnimArgs[2];
+
+    sprite->data[1] = gBattleAnimArgs[4];
+    sprite->callback = AnimBlackSmoke_Step;
+}
+
 static void AnimBlackSmoke_Step(struct Sprite *sprite)
 {
     if (sprite->data[1] > 0)
@@ -1213,6 +1251,14 @@ void AnimTask_SmokescreenImpact(u8 taskId)
     SmokescreenImpact(
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + 8,
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + 8,
+        FALSE);
+    DestroyAnimVisualTask(taskId);
+}
+void AnimTask_SmokescreenImpactDouble(u8 taskId)
+{
+    SmokescreenImpact(
+        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
+        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
         FALSE);
     DestroyAnimVisualTask(taskId);
 }

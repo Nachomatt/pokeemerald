@@ -1033,6 +1033,17 @@ const struct SpriteTemplate gSilverWindMediumSparkSpriteTemplate =
     .callback = AnimFlyingParticle,
 };
 
+const struct SpriteTemplate gCurseGhostFlyingTemplate =
+{
+    .tileTag = ANIM_TAG_GHOSTLY_SPIRIT,
+    .paletteTag = ANIM_TAG_GHOSTLY_SPIRIT,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFlyingParticle,
+};
+
 const struct SpriteTemplate gSilverWindSmallSparkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARKLE_6,

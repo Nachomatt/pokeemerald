@@ -231,6 +231,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_ATTACK_DOWN_2, AI_CBM_AttackDown
 	if_effect EFFECT_DEFENSE_DOWN_2, AI_CBM_DefenseDown
 	if_effect EFFECT_SPEED_DOWN_2, AI_CBM_SpeedDown
+	if_effect EFFECT_SPEED_DOWN_HIT_2, AI_CBM_SpeedDown
 	if_effect EFFECT_SPECIAL_ATTACK_DOWN_2, AI_CBM_SpAtkDown
 	if_effect EFFECT_SPECIAL_DEFENSE_DOWN_2, AI_CBM_SpDefDown
 	if_effect EFFECT_ACCURACY_DOWN_2, AI_CBM_AccDown
@@ -803,6 +804,7 @@ AI_CheckViability:
 	if_effect EFFECT_PARALYZE, AI_CV_Paralyze
 	if_effect EFFECT_SWAGGER, AI_CV_Swagger
 	if_effect EFFECT_SPEED_DOWN_HIT, AI_CV_SpeedDownFromChance
+	if_effect EFFECT_SPEED_DOWN_HIT_2, AI_CV_SpeedDownFromChance
 	if_effect EFFECT_SKY_ATTACK, AI_CV_ChargeUpMove
 	if_effect EFFECT_VITAL_THROW, AI_CV_VitalThrow
 	if_effect EFFECT_SUBSTITUTE, AI_CV_Substitute
@@ -1243,6 +1245,7 @@ AI_CV_SpeedDownFromChance:
 	if_move MOVE_ICY_WIND, AI_CV_SpeedDown
 	if_move MOVE_ROCK_TOMB, AI_CV_SpeedDown
 	if_move MOVE_MUD_SHOT, AI_CV_SpeedDown
+	if_move MOVE_SHEER_COLD, AI_CV_SpeedDown
 	end
 
 AI_CV_SpeedDown:

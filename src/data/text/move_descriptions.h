@@ -15,11 +15,11 @@ static const u8 sDoubleSlapDescription[] = _(
 
 static const u8 sCometPunchDescription[] = _(
     "Repeatedly punches the foe\n"
-    "2 to 5 times.");
+    "2 to 5 times.Goes First.");
 
 static const u8 sMegaPunchDescription[] = _(
-    "A strong punch thrown with\n"
-    "incredible power.");
+    "An incredibly strong punch.\n"
+    "High critical-hit ratio.");
 
 static const u8 sPayDayDescription[] = _(
     "Throws coins at the foe.\n"
@@ -67,7 +67,7 @@ static const u8 sGustDescription[] = _(
 
 static const u8 sWingAttackDescription[] = _(
     "Strikes the foe with wings\n"
-    "spread wide.");
+    "spread wide twice.");
 
 static const u8 sWhirlwindDescription[] = _(
     "Blows away the foe with\n"
@@ -82,8 +82,8 @@ static const u8 sBindDescription[] = _(
     "for 2 to 5 turns.");
 
 static const u8 sSlamDescription[] = _(
-    "Slams the foe with a long\n"
-    "tail, vine, etc.");
+    "Slams the foe so hard\n"
+    "that it may cause confusion.");
 
 static const u8 sVineWhipDescription[] = _(
     "Strikes the foe with\n"
@@ -98,8 +98,8 @@ static const u8 sDoubleKickDescription[] = _(
     "that strikes the foe twice.");
 
 static const u8 sMegaKickDescription[] = _(
-    "An extremely powerful kick\n"
-    "with intense force.");
+    "An extremely powerful kick.\n"
+    "Also hurts the user.");
 
 static const u8 sJumpKickDescription[] = _(
     "A strong jumping kick. May\n"
@@ -122,7 +122,7 @@ static const u8 sHornAttackDescription[] = _(
     "horns.");
 
 static const u8 sFuryAttackDescription[] = _(
-    "Jabs the foe 2 to 5 times\n"
+    "Jabs the foe 1 to 3 times\n"
     "with sharp horns, etc.");
 
 static const u8 sHornDrillDescription[] = _(
@@ -278,8 +278,8 @@ static const u8 sSeismicTossDescription[] = _(
     "to the user's level.");
 
 static const u8 sStrengthDescription[] = _(
-    "Builds enormous power,\n"
-    "then slams the foe.");
+    "Hits the foe with enormous\n"
+    "power. May raise ATTACK.");
 
 static const u8 sAbsorbDescription[] = _(
     "An attack that absorbs\n"
@@ -358,8 +358,8 @@ static const u8 sEarthquakeDescription[] = _(
     "no effect on flying foes.");
 
 static const u8 sFissureDescription[] = _(
-    "A one-hit KO move that\n"
-    "drops the foe in a fissure.");
+    "An earth-shattering move.\n"
+    "Drops the foes in a fissure.");
 
 static const u8 sDigDescription[] = _(
     "Digs underground the first\n"
@@ -483,7 +483,7 @@ static const u8 sSelfDestructDescription[] = _(
 
 static const u8 sEggBombDescription[] = _(
     "An egg is forcibly hurled at\n"
-    "the foe.");
+    "the foe. Also hurts user.");
 
 static const u8 sLickDescription[] = _(
     "Licks with a long tongue to\n"
@@ -559,7 +559,7 @@ static const u8 sPoisonGasDescription[] = _(
 
 static const u8 sBarrageDescription[] = _(
     "Hurls round objects at the\n"
-    "foe 2 to 5 times.");
+    "foe 1 to 3 times.");
 
 static const u8 sLeechLifeDescription[] = _(
     "An attack that steals half\n"
@@ -1046,8 +1046,8 @@ static const u8 sWillOWispDescription[] = _(
     "with intense fire.");
 
 static const u8 sMementoDescription[] = _(
-    "The user faints and lowers\n"
-    "the foe's abilities.");
+    "Hurts the target's soul\n"
+    "but also faints the user.");
 
 static const u8 sFacadeDescription[] = _(
     "Boosts ATTACK when burned,\n"
@@ -1070,8 +1070,8 @@ static const u8 sNaturePowerDescription[] = _(
     "depending on the location.");
 
 static const u8 sChargeDescription[] = _(
-    "Charges power to boost the\n"
-    "electric move used next.");
+    "Boosts ELECTRIC power next\n"
+    "turn. Raises SP.ATK.");
 
 static const u8 sTauntDescription[] = _(
     "Taunts the foe into only\n"
@@ -1122,7 +1122,7 @@ static const u8 sBrickBreakDescription[] = _(
     "REFLECT and causes damage.");
 
 static const u8 sYawnDescription[] = _(
-    "Lulls the foe into yawning,\n"
+    "Lulls everyone into yawning,\n"
     "then sleeping next turn.");
 
 static const u8 sKnockOffDescription[] = _(
@@ -1178,12 +1178,12 @@ static const u8 sTailGlowDescription[] = _(
     "raises SP. ATK.");
 
 static const u8 sLusterPurgeDescription[] = _(
-    "Attacks with a burst of\n"
-    "light. May lower SP. DEF.");
+    "Attacks with a burst of light.\n"
+    "May sharply lower SP.DEF.");
 
 static const u8 sMistBallDescription[] = _(
-    "Attacks with a flurry of\n"
-    "down. May lower SP. ATK.");
+    "Attacks with a flurry of down.\n"
+    "May sharply lower SP.ATK.");
 
 static const u8 sFeatherDanceDescription[] = _(
     "Envelops the foe with down\n"
@@ -1315,7 +1315,7 @@ static const u8 sSandTombDescription[] = _(
 
 static const u8 sSheerColdDescription[] = _(
     "A chilling attack that\n"
-    "causes fainting if it hits.");
+    "may harshly lower SPEED.");
 
 static const u8 sMuddyWaterDescription[] = _(
     "Attacks with muddy water.\n"
@@ -1416,6 +1416,21 @@ static const u8 sDoomDesireDescription[] = _(
 static const u8 sPsychoBoostDescription[] = _(
     "Allows a full-power attack,\n"
     "but sharply lowers SP. ATK.");
+
+static const u8 sAquaJetDescription[] = _(
+    "Lunges at the target, unseen\n"
+    "it is sure to strike first");
+
+static const u8 sBulletPunchDescription[] = _(
+    "Strikes as fast as a bullet.\n"
+    "it is sure to strike first");
+
+static const u8 sOminousWindDescription[] = _(
+    "A soul-chilling wind that\n"
+    "may raise abilities.");
+static const u8 sThunderStormDescription[] = _(
+    "A vicious thunderstorm that\n"
+    "may paralyze opponents.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1774,4 +1789,8 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_WATER_PULSE - 1] = sWaterPulseDescription,
     [MOVE_DOOM_DESIRE - 1] = sDoomDesireDescription,
     [MOVE_PSYCHO_BOOST - 1] = sPsychoBoostDescription,
+    [MOVE_AQUA_JET - 1] = sAquaJetDescription,
+    [MOVE_BULLET_PUNCH - 1] = sBulletPunchDescription,
+    [MOVE_OMINOUS_WIND - 1] = sOminousWindDescription,
+    [MOVE_THUNDERSTORM - 1] = sThunderStormDescription,
 };

@@ -583,6 +583,10 @@
 	@ NOTE: These generate 0x000 or 0x101 to match, but the code checks for '& 0x100'.
 	createvisualtask AnimTask_InvertScreenColor, \priority, (\scenery << 8) | \scenery, (\attacker << 8) | \attacker, (\target << 8) | \target
 	.endm
+	.macro invert_screen_color_big priority=2, scenery:req, attacker:req, target:req
+	@ NOTE: These generate 0x000 or 0x101 to match, but the code checks for '& 0x100'.
+	createvisualtask AnimTask_InvertScreenColorBig, \priority, (\scenery << 8) | \scenery, (\attacker << 8) | \attacker, (\target << 8) | \target
+	.endm
 
 	.macro tint_palettes priority=2, scenery:req, attacker:req, target:req, duration:req, color:req
 	createvisualtask AnimTask_TintPalettes, \priority, \scenery << 8, \attacker << 8, \target << 8, \duration, \color & 0x1F, (\color >> 5) & 0x1F, (\color >> 10) & 0x1F

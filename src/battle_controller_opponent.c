@@ -1586,6 +1586,12 @@ static void OpponentHandleChooseMove(void)
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
+                if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_USER_AND_PARTNER)
+                {
+                    gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+                    if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                }
                 BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, (chosenMoveId) | (gBattlerTarget << 8));
                 break;
             }

@@ -318,6 +318,7 @@ enum BattlerId
 #define NUM_MOVE_EFFECTS                62
 
 
+
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
 

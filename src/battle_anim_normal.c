@@ -776,6 +776,26 @@ void AnimTask_InvertScreenColor(u8 taskId)
     InvertPlttBuffer(selectedPalettes);
     DestroyAnimVisualTask(taskId);
 }
+void AnimTask_InvertScreenColorBig(u8 taskId)
+{
+    CMD_ARGS(flagsScenery, flagsAttacker, flagsTarget);
+
+    u32 selectedPalettes = 0;
+    u8 attackerBattler = gBattleAnimAttacker;
+    u8 targetBattler = gBattleAnimTarget;
+
+    if (cmd->flagsScenery & (1 << 8))
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE);
+
+    if (cmd->flagsAttacker & (1 << 8))
+        selectedPalettes |= (0x10000 << attackerBattler);
+
+    if (cmd->flagsTarget & (1 << 8))
+        selectedPalettes |= (0x10000 << targetBattler);
+
+    InvertPlttBuffer(selectedPalettes);
+    DestroyAnimVisualTask(taskId);
+}
 
 // Unused
 #define tTimer         data[0]

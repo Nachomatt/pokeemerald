@@ -7,6 +7,7 @@
 
 static void AnimLightning(struct Sprite *);
 static void AnimLightning_Step(struct Sprite *);
+static void AnimLightningDouble(struct Sprite *);
 static void AnimUnusedSpinningFist(struct Sprite *);
 static void AnimUnusedSpinningFist_Step(struct Sprite *);
 static void AnimUnusedCirclingShock(struct Sprite *);
@@ -61,6 +62,17 @@ const struct SpriteTemplate gLightningSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimLightning,
+};
+
+const struct SpriteTemplate gLightningSpriteTemplateDouble =
+{
+    .tileTag = ANIM_TAG_LIGHTNING,
+    .paletteTag = ANIM_TAG_LIGHTNING,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_Lightning,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimLightningDouble,
 };
 
 static const union AffineAnimCmd sAffineAnim_UnusedSpinningFist[] =
@@ -455,6 +467,21 @@ const struct SpriteTemplate gShockWaveProgressingBoltSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimShockWaveProgressingBolt,
 };
+
+
+static void AnimLightningDouble(struct Sprite *sprite)
+{
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
+    
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        sprite->x -= gBattleAnimArgs[0];
+    else
+        sprite->x += gBattleAnimArgs[0];
+
+    sprite->y += gBattleAnimArgs[1];
+    sprite->callback = AnimLightning_Step;
+}
+
 
 static void AnimLightning(struct Sprite *sprite)
 {

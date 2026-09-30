@@ -4480,6 +4480,24 @@ static void Cmd_moveend(void)
                     gHitMarker |= HITMARKER_NO_ATTACKSTRING;
                 }
             }
+            else if (!(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE) && gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !gProtectStructs[gBattlerAttacker].chargingTurn && gBattleMoves[gCurrentMove].target == MOVE_TARGET_USER_AND_PARTNER && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
+            {
+                u8 battler = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
+                if (gBattleMons[battler].hp != 0)
+                {
+                    gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = battler;
+                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
+                    gBattleScripting.moveendState = 0;
+                    MoveValuesCleanUp();
+                    BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
+                    gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
+                    return;
+                }
+                else
+                {
+                    gHitMarker |= HITMARKER_NO_ATTACKSTRING;
+                }
+            }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_COUNT:

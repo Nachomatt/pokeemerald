@@ -4378,6 +4378,11 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
     case MOVE_TARGET_USER:
         targetBattler = gBattlerAttacker;
         break;
+    case MOVE_TARGET_USER_AND_PARTNER:
+        targetBattler = GetBattlerAtPosition(BATTLE_PARTNER(GET_BATTLER_SIDE(gBattlerAttacker)));
+        if (gAbsentBattlerFlags & gBitTable[targetBattler])
+            targetBattler ^= BIT_FLANK;
+        break;
     }
 
     *(gBattleStruct->moveTarget + gBattlerAttacker) = targetBattler;
