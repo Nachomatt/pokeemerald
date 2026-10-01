@@ -62,6 +62,16 @@ const struct SpriteTemplate gFallingRockSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFallingRock,
 };
+const struct SpriteTemplate gFallingIceRockSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ICE_CUBE,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_FlyingRock,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFallingRock,
+};
 
 const struct SpriteTemplate gRockFragmentSpriteTemplate =
 {

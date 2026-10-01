@@ -199,6 +199,7 @@ const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
     .callback = AnimHitSplatBasic,
 };
 
+
 const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,

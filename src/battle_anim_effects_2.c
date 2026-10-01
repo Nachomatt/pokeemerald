@@ -340,7 +340,7 @@ const struct SpriteTemplate gMetalSoundSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gGrowingRingAffineAnimTable,
-    .callback = TranslateAnimSpriteToTargetMonLocation,
+    .callback = TranslateAnimSpriteToTargetMonLocationDouble,
 };
 
 const struct SpriteTemplate gWaterPulseRingSpriteTemplate =

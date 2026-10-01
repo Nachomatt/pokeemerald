@@ -1424,6 +1424,9 @@ static const u8 sAquaJetDescription[] = _(
 static const u8 sBulletPunchDescription[] = _(
     "Strikes as fast as a bullet.\n"
     "it is sure to strike first");
+static const u8 sDracoMeteorDescription[] = _(
+    "Bursts open the heavens,\n"
+    "but sharply lowers SP. ATK.");
 
 static const u8 sOminousWindDescription[] = _(
     "A soul-chilling wind that\n"
@@ -1431,7 +1434,21 @@ static const u8 sOminousWindDescription[] = _(
 static const u8 sThunderStormDescription[] = _(
     "A vicious thunderstorm that\n"
     "may paralyze opponents.");
-
+static const u8 sAvalancheDescription[] = _(
+    "Makes it rain icy rocks,\n"
+    "the user moves last.");
+static const u8 sGrimReaperDescription[] = _(
+    "Drains the targets life force.\n"
+    "Restores half of the damage.");
+static const u8 sFlashCannonDescription[] = _(
+    "Releases its gathered light.\n"
+    "This may lower Defense.");
+static const u8 sMudBlastDescription[] = _(
+    "Blasts mud with high power\n"
+    "at a foe. May lower SP.ATK.");
+static const u8 sMaulDescription[] = _(
+    "Ferociously mauls the foe\n"
+    "1-3 times, increasing in power.");
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 {
@@ -1793,4 +1810,10 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_BULLET_PUNCH - 1] = sBulletPunchDescription,
     [MOVE_OMINOUS_WIND - 1] = sOminousWindDescription,
     [MOVE_THUNDERSTORM - 1] = sThunderStormDescription,
+    [MOVE_AVALANCHE - 1] = sAvalancheDescription,
+    [MOVE_GRIM_REAPER - 1] = sGrimReaperDescription,
+    [MOVE_FLASH_CANNON - 1] = sFlashCannonDescription,
+    [MOVE_MUD_BLAST - 1] = sMudBlastDescription,
+    [MOVE_MAUL - 1] = sMaulDescription,
+    [MOVE_DRACO_METEOR - 1] = sDracoMeteorDescription,
 };

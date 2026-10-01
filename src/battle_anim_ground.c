@@ -11,6 +11,7 @@ static void AnimBoneHitProjectile(struct Sprite *);
 static void AnimDirtScatter(struct Sprite *);
 static void AnimMudSportDirt(struct Sprite *);
 static void AnimDirtPlumeParticle(struct Sprite *);
+static void AnimDirtPlumeParticleDouble(struct Sprite *);
 static void AnimDirtPlumeParticle_Step(struct Sprite *);
 static void AnimDigDirtMound(struct Sprite *);
 static void AnimBonemerangProjectile_Step(struct Sprite *);
@@ -124,6 +125,17 @@ const struct SpriteTemplate gDirtPlumeSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDirtPlumeParticle,
+};
+
+const struct SpriteTemplate gDirtPlumeSpriteTemplateDouble =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDirtPlumeParticleDouble,
 };
 
 const struct SpriteTemplate gDirtMoundSpriteTemplate =
@@ -527,6 +539,32 @@ void AnimDirtPlumeParticle(struct Sprite *sprite)
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimDirtPlumeParticle_Step;
 }
+void AnimDirtPlumeParticleDouble(struct Sprite *sprite)
+{
+    u16 battler; // Should be u8.
+    s16 xOffset;
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
+    if (gBattleAnimArgs[0] == 0)
+        battler = gBattleAnimAttacker;
+    else
+        battler = gBattleAnimTarget;
+
+    xOffset = 24;
+    if (gBattleAnimArgs[1] == 1)
+    {
+        xOffset *= -1;
+        gBattleAnimArgs[2] *= -1;
+    }
+
+    sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2) + xOffset;
+    sprite->y = GetBattlerYCoordWithElevation(battler) + 30;
+    sprite->data[0] = gBattleAnimArgs[5];
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[4] = sprite->y + gBattleAnimArgs[3];
+    sprite->data[5] = gBattleAnimArgs[4];
+    InitAnimArcTranslation(sprite);
+    sprite->callback = AnimDirtPlumeParticle_Step;
+}
 
 static void AnimDirtPlumeParticle_Step(struct Sprite *sprite)
 {
@@ -745,7 +783,6 @@ void AnimTask_PositionFissureBgOnBattler(u8 taskId)
 {
     struct Task *newTask;
     u8 battler = (gBattleAnimArgs[0] & ANIM_TARGET) ? gBattleAnimTarget : gBattleAnimAttacker;
-
     if (gBattleAnimArgs[0] > ANIM_TARGET)
         battler = BATTLE_PARTNER(battler);
     newTask = &gTasks[CreateTask(WaitForFissureCompletion, gBattleAnimArgs[1])];

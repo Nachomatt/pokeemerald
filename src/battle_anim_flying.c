@@ -575,7 +575,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
     s16 spriteCoord;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
-
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
     if (gBattleAnimArgs[7] & 0x100)
         battler = gBattleAnimAttacker;
     else

@@ -1030,7 +1030,6 @@ const struct SpriteTemplate gBarrageBallSpriteTemplate =
     .affineAnims = gBarrageBallAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
-
 const struct SpriteTemplate gSmellingSaltsHandSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TAG_HAND,

@@ -1709,6 +1709,16 @@ const struct SpriteTemplate gOctazookaBallSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = TranslateAnimSpriteToTargetMonLocation,
 };
+const struct SpriteTemplate gFlashCannonBallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_BLACK_BALL,
+    .paletteTag = ANIM_TAG_BLACK_BALL,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = TranslateAnimSpriteToTargetMonLocation,
+};
 
 const union AnimCmd gOctazookaAnimCmds[] =
 {
@@ -5329,7 +5339,6 @@ static void AnimWavyMusicNotes(struct Sprite *sprite)
         x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
         y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     }
-
     sprite->sX = sprite->x << 4;
     sprite->sY = sprite->y << 4;
     AnimWavyMusicNotes_CalcVelocity(x - sprite->x, y - sprite->y, &sprite->sVelocX, &sprite->sVelocY, 40);

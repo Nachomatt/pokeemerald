@@ -1194,7 +1194,7 @@ static void AnimTask_MistBallFog_Step(u8 taskId)
 static void InitPoisonGasCloudAnim(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
-
+    SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
     if (GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2))
         sprite->data[7] = 0x8000;
 
@@ -1241,7 +1241,6 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
 static void MovePoisonGasCloud(struct Sprite *sprite)
 {
     int value;
-
     switch (sprite->data[7] & 0xFF)
     {
     case 0:

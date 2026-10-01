@@ -360,8 +360,19 @@
 #define MOVE_BULLET_PUNCH 356
 #define MOVE_OMINOUS_WIND 357
 #define MOVE_THUNDERSTORM 358
+#define MOVE_AVALANCHE 359
+#define MOVE_GRIM_REAPER 360
+#define MOVE_FLASH_CANNON 361
+#define MOVE_MUD_BLAST 362
+#define MOVE_MAUL 363
+#define MOVE_DRACO_METEOR 364
 
-#define MOVES_COUNT 359
+
+
+
+
+
+#define MOVES_COUNT 365
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
