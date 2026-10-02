@@ -124,10 +124,10 @@ static const u8 sLunarMightDescription[] = _("Ups moonlight-related moves.");
 static const u8 sDragonBloodDescription[] = _("Unharmed by DRAGON+Status.");
 static const u8 sIceBodyDescription[] = _("Slight HP recovery in hail.");
 static const u8 sAbyssDiverDescription[] = _("Ups DIVE and DARK moves.");
-static const u8 sCruelDiverDescription[] = _("Ups Dive and PSYCHC moves.");
-static const u8 sDatedDiverDescription[] = _("Ups Dive and ANCIENTPOWER.");
+static const u8 sCruelDiverDescription[] = _("Ups DIVE and PSYCHC moves.");
+static const u8 sDatedDiverDescription[] = _("Ups DIVE and ANCIENTPOWER.");
 static const u8 sWishCallerDescription[] = _("Ups WISH and added effects.");
-static const u8 sBellRingerDescription[] = _("Clears the party's status.");
+static const u8 sBellRingerDescription[] = _("Clears the party of status.");
 
 
 
