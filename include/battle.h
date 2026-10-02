@@ -145,6 +145,7 @@ struct SpecialStatus
     u32 webSpinnerMon:1;
     u32 psychupped:1;
     u32 reflector:1;
+    u32 bellRinger:1;
     u32 traced:1;
     u32 ppNotAffectedByPressure:1;
     u32 faintedHasReplacement:1;

@@ -127,6 +127,8 @@ static const u8 sAbyssDiverDescription[] = _("Ups DIVE and DARK moves.");
 static const u8 sCruelDiverDescription[] = _("Ups Dive and PSYCHC moves.");
 static const u8 sDatedDiverDescription[] = _("Ups Dive and ANCIENTPOWER.");
 static const u8 sWishCallerDescription[] = _("Ups WISH and added effects.");
+static const u8 sBellRingerDescription[] = _("Clears the party's status.");
+
 
 
 
@@ -262,6 +264,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_CRUEL_DIVER] = _("CRUEL DIVER"),
     [ABILITY_DATED_DIVER] = _("DATED DIVER"),
     [ABILITY_WISHCALLER] = _("WISHCALLER"),
+    [ABILITY_BELLRINGER] = _("BELLRINGER"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -397,4 +400,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_CRUEL_DIVER] = sCruelDiverDescription,
     [ABILITY_DATED_DIVER] = sDatedDiverDescription,
     [ABILITY_WISHCALLER] = sWishCallerDescription,
+    [ABILITY_BELLRINGER] = sBellRingerDescription,
 };

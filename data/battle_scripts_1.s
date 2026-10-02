@@ -4483,7 +4483,15 @@ BattleScript_ReflectorActivates::
 	setlightscreen
 	end3
 
-
+BattleScript_BellRingerActivates::
+	healpartystatus
+	waitstate
+	playanimation BS_ATTACKER B_ANIM_HEALBELL
+	printfromtable gPartyStatusHealStringIds
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_ATTACKER_WITH_PARTNER
+	waitstate
+	end3
 
 BattleScript_CoalEngineActivates::
 	pause B_WAIT_TIME_SHORT

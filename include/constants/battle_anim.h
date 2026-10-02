@@ -388,6 +388,7 @@
 #define B_ANIM_ACID                     31
 #define B_ANIM_PRESENT                  32
 #define B_ANIM_PRESENT2                 33
+#define B_ANIM_HEALBELL                 34
 
 
 // special animations table (gBattleAnims_Special)

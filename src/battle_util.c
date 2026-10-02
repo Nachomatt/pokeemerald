@@ -2543,6 +2543,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_BELLRINGER:
+                if (!(gSpecialStatuses[battler].bellRinger))
+                {
+                    gStatuses3[battler] |= STATUS3_BELLRINGER;
+                    gSpecialStatuses[battler].bellRinger = 1;
+                    BattleScriptPushCursorAndCallback(BattleScript_BellRingerActivates);
+                    gStatuses3[battler] &= ~STATUS3_BELLRINGER;
+                    gBattleScripting.battler = battler;
+                    gBattlerAttacker = battler;
+                    effect++;
+                }
+                break;
 
             case ABILITY_INTIMIDATE:
                 if (!(gSpecialStatuses[battler].intimidatedMon))
