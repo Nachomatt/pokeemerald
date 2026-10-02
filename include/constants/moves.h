@@ -366,13 +366,15 @@
 #define MOVE_MUD_BLAST 362
 #define MOVE_MAUL 363
 #define MOVE_DRACO_METEOR 364
+#define MOVE_HURRICANE 365
 
 
 
 
 
 
-#define MOVES_COUNT 365
+
+#define MOVES_COUNT 366
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

@@ -3766,7 +3766,7 @@ static const u16 sMightyenaLevelUpLearnset[] = {
 static const u16 sZigzagoonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE(9, MOVE_DRACO_METEOR),
+    LEVEL_UP_MOVE(9, MOVE_HURRICANE),
     LEVEL_UP_MOVE(10, MOVE_FEATHER_DANCE),
     LEVEL_UP_MOVE(14, MOVE_PIN_MISSILE),
     LEVEL_UP_MOVE(19, MOVE_DIG),

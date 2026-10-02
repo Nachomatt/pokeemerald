@@ -3202,6 +3202,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
         spAttack /= 2;
+    if (defender->ability == ABILITY_SUBZERO_BODY && (type == TYPE_FIRE))
+        spAttack /= 2;
+    if (defender->ability == ABILITY_AIR_LOCK && (type == TYPE_FIRE || type == TYPE_WATER))
+        spAttack /= 2;
     if (defender->ability == ABILITY_BLACK_HOLE && (type == TYPE_DARK))
         spAttack /= 2;
     if (defender->ability == ABILITY_BLACK_HOLE && (type == TYPE_GHOST))
@@ -3244,6 +3248,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_ELECTRIC && attacker->ability == ABILITY_SUPERCHARGED)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (type == TYPE_ELECTRIC && attacker->ability == ABILITY_STORMCALLER)
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
+    if (type == TYPE_GRASS && attacker->ability == ABILITY_TERRA_KING)
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
     if (type == TYPE_PSYCHIC && attacker->ability == ABILITY_ENLIGHTENED)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_FIRE && attacker->ability == ABILITY_HOTHEADED)
@@ -3254,10 +3262,28 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (120 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_PLUS)
         gBattleMovePower = (110 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_ARCHENEMY && defender->ability == ABILITY_ARCHENEMY)
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
     if (type == TYPE_FIRE && attacker->ability == ABILITY_WILDFIRE)
         gBattleMovePower = (130 * gBattleMovePower) / 100;
     if(attacker->ability == ABILITY_SHARPSHOOTER && FLAG_SHARPSHOOTER_AFFECTED)
+        gBattleMovePower = (50 * gBattleMovePower) / 100;
+    if(defender->ability == ABILITY_AIR_LOCK && FLAG_WEATHER_AFFECTED)
         gBattleMovePower = (130* gBattleMovePower) / 100;
+    if((attacker->ability == ABILITY_ABYSS_DIVER || attacker->ability == ABILITY_CRUEL_DIVER || attacker->ability == ABILITY_DATED_DIVER ) && (FLAG_DIVER_AFFECTED))
+    {
+        gBattleMovePower = (130* gBattleMovePower) / 100;
+    }
+    if(attacker->ability == ABILITY_CRUEL_DIVER && defender->status1)
+    {
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    }
+    if (attacker->ability == ABILITY_DATED_DIVER && FLAG_DATED_AFFECTED)
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
+    if (type == TYPE_DARK && attacker->ability == ABILITY_ABYSS_DIVER)
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
+    if (type == TYPE_PSYCHIC && attacker->ability == ABILITY_CRUEL_DIVER)
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
     if (defender->ability == ABILITY_MINUS)
         gBattleMovePower = (90 * gBattleMovePower) / 100;
     if (defender->ability == ABILITY_MAGMA_ARMOR)
@@ -3388,7 +3414,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             }
 
             // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM && gBattleMons[gBattlerAttacker].ability != ABILITY_SOLAR_MIGHT)
                 damage /= 2;
 
             // Sun boosts Fire, weakens Water

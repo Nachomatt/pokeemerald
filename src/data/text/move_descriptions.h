@@ -1449,6 +1449,10 @@ static const u8 sMudBlastDescription[] = _(
 static const u8 sMaulDescription[] = _(
     "Ferociously mauls the foe\n"
     "1-3 times, increasing in power.");
+static const u8 sHurricaneDescription[] = _(
+    "Strikes the foe with a\n"
+    "massive storm of wind.");
+
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 {
@@ -1816,4 +1820,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MUD_BLAST - 1] = sMudBlastDescription,
     [MOVE_MAUL - 1] = sMaulDescription,
     [MOVE_DRACO_METEOR - 1] = sDracoMeteorDescription,
+    [MOVE_HURRICANE - 1] = sHurricaneDescription,
 };

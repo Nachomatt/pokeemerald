@@ -409,11 +409,18 @@
 #define STRINGID_PKMNSWITCHEDOUT            409
 #define STRINGID_PKMNBOOSTSSPATTACK         410
 #define STRINGID_PKMNTAUNTENDED             411
+#define STRINGID_DRAGONBLOODRENDERSUSELESS  412
+#define STRINGID_DRAGONBLOODBOOSTS          413
+#define STRINGID_PKMNMAKESDRAGONMISS        414
+#define STRINGID_PKMNMAKESFLYINGMISS        415
 
 
 
 
-#define BATTLESTRINGS_COUNT                 412
+
+
+
+#define BATTLESTRINGS_COUNT                 416
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -447,6 +454,8 @@
 #define B_MSG_GROUND_MISS  4
 #define B_MSG_ICE_MISS     5
 #define B_MSG_WATER_MISS   6
+#define B_MSG_DRAGON_MISS  7
+#define B_MSG_FLYING_MISS  8
 
 // gAbsorbDrainStringIds
 #define B_MSG_ABSORB      0

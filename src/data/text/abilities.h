@@ -120,6 +120,13 @@ static const u8 sCoalEngineDescription[] = _("Powers up on switchin.");
 static const u8 sSurpriseDescription[] = _("Gives PRESENTS to enemies.");
 static const u8 sMagicBounceDescription[] = _("Bounces back status moves.");
 static const u8 sSolarMightDescription[] = _("Ups sunlight-related moves.");
+static const u8 sLunarMightDescription[] = _("Ups moonlight-related moves.");
+static const u8 sDragonBloodDescription[] = _("Unharmed by DRAGON+Status.");
+static const u8 sIceBodyDescription[] = _("Slight HP recovery in hail.");
+static const u8 sAbyssDiverDescription[] = _("Ups DIVE and DARK moves.");
+static const u8 sCruelDiverDescription[] = _("Ups Dive and PSYCHC moves.");
+static const u8 sDatedDiverDescription[] = _("Ups Dive and ANCIENTPOWER.");
+static const u8 sWishCallerDescription[] = _("Ups WISH and added effects.");
 
 
 
@@ -248,6 +255,13 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SURPRISE] = _("SURPRISE"),
     [ABILITY_MAGIC_BOUNCE] = _("MAGIC BOUNCE"),
     [ABILITY_SOLAR_MIGHT] = _("SOLAR MIGHT"),
+    [ABILITY_LUNAR_MIGHT] = _("LUNAR MIGHT"),
+    [ABILITY_DRAGONBLOOD] = _("DRAGONBLOOD"),
+    [ABILITY_ICE_BODY] = _("ICE BODY"),
+    [ABILITY_ABYSS_DIVER] = _("ABYSS DIVER"),
+    [ABILITY_CRUEL_DIVER] = _("CRUEL DIVER"),
+    [ABILITY_DATED_DIVER] = _("DATED DIVER"),
+    [ABILITY_WISHCALLER] = _("WISHCALLER"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -376,4 +390,11 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SURPRISE] = sSurpriseDescription,
     [ABILITY_MAGIC_BOUNCE] = sMagicBounceDescription,
     [ABILITY_SOLAR_MIGHT] = sSolarMightDescription,
+    [ABILITY_LUNAR_MIGHT] = sLunarMightDescription,
+    [ABILITY_DRAGONBLOOD] = sDragonBloodDescription,
+    [ABILITY_ICE_BODY] = sIceBodyDescription,
+    [ABILITY_ABYSS_DIVER] = sAbyssDiverDescription,
+    [ABILITY_CRUEL_DIVER] = sCruelDiverDescription,
+    [ABILITY_DATED_DIVER] = sDatedDiverDescription,
+    [ABILITY_WISHCALLER] = sWishCallerDescription,
 };

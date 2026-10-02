@@ -365,4 +365,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_MUD_BLAST] = _("MUD BLAST"),
     [MOVE_MAUL] = _("MAUL"),
     [MOVE_DRACO_METEOR] = _("DRACO METEOR"),
+    [MOVE_HURRICANE] = _("HURRICANE"),
 };

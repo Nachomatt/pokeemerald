@@ -4651,6 +4651,10 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         if ((gBattleMons[battler1].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
             || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
             speedMultiplierBattler1 = 2;
+        else if (gBattleMons[battler1].ability == ABILITY_ABYSS_DIVER && gBattleWeather & B_WEATHER_RAIN)
+        {
+            speedMultiplierBattler1 = 1.5;
+        }
         else
             speedMultiplierBattler1 = 1;
 
@@ -4687,13 +4691,15 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         speedBattler1 = (speedBattler1 * 110) / 100;
     }
-
+    if (gBattleMons[battler1].ability == ABILITY_EON_GLIDER && ABILITY_ON_FIELD2(ABILITY_EON_GLIDER))
+        speedBattler1 = (150 * speedBattler1) / 100;
+    if (gBattleMons[battler2].ability == ABILITY_EON_GLIDER && ABILITY_ON_FIELD2(ABILITY_EON_GLIDER))
+        speedBattler2 = (150 * speedBattler2) / 100;
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBattler1 /= 2;
 
     if (gBattleMons[battler1].status1 & STATUS1_PARALYSIS)
         speedBattler1 /= 4;
-
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         speedBattler1 = UINT_MAX;
     // check second battler's speed

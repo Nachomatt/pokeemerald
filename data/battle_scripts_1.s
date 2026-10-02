@@ -4161,6 +4161,12 @@ BattleScript_SpeedBoostActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
+BattleScript_DragonBloodBoosts::
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_DRAGONBLOODBOOSTS
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_ArmorUpActivates::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNRAISEDDEFENSE
@@ -4270,6 +4276,7 @@ BattleScript_IntimidateActivatesLoop:
 	trygetintimidatetarget BattleScript_IntimidateActivatesReturn
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateActivatesLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_IRON_BODY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
@@ -4317,6 +4324,7 @@ BattleScript_TangledHairActivatesLoop:
 	trygettangledhairtarget BattleScript_TangledHairActivatesReturn
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_TangledHairActivatesLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_TangledHairPrevented
+	jumpifability BS_TARGET, ABILITY_IRON_BODY, BattleScript_TangledHairPrevented
 	jumpifability BS_TARGET, ABILITY_APEX_HUNTER, BattleScript_TangledHairPrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_TangledHairPrevented
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_TangledHairActivatesLoopIncrement
@@ -4391,6 +4399,7 @@ BattleScript_AcidRainActivatesLoop:
 	trygetacidraintarget BattleScript_AcidRainActivatesReturn
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_AcidRainActivatesLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_AcidRainPrevented
+	jumpifability BS_TARGET, ABILITY_IRON_BODY, BattleScript_AcidRainPrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_AcidRainPrevented
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_AcidRainActivatesLoopIncrement
 	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_AcidRainActivatesLoopIncrement
@@ -4428,6 +4437,7 @@ BattleScript_MightyRoarActivatesLoop:
 	trygetmightyroartarget BattleScript_MightyRoarActivatesReturn
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MightyRoarActivatesLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_MightyRoarPrevented
+	jumpifability BS_TARGET, ABILITY_IRON_BODY, BattleScript_MightyRoarPrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_MightyRoarPrevented
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_MightyRoarActivatesLoopIncrement
 	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 1, BattleScript_MightyRoarActivatesLoopIncrement
@@ -4585,6 +4595,13 @@ BattleScript_ColdheartedDoesntCare::
 	printstring STRINGID_COLDHEARTEDDOESNTCARE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_DragonBloodRendersUseless::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_DRAGONBLOODRENDERSUSELESS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 
 BattleScript_FlinchPrevention::
 	pause B_WAIT_TIME_SHORT

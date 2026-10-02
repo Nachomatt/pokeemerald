@@ -67,6 +67,8 @@ AI_CBM_CheckIfNegatesType:
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
 	if_equal ABILITY_COLDHEARTED, CheckIfColdheartedCancelsIceMove
+	if_equal ABILITY_AIR_LOCK, CheckIfAirLockCancelsFlyingMove
+	if_equal ABILITY_DRAGONBLOOD, CheckIfDragonBloodCancelsDragonMove
 	if_equal ABILITY_MAGMA_HEART, CheckIfMagmaHeartCancelsWaterMove
 	goto AI_CheckBadMove_CheckSoundproof_
 
@@ -112,6 +114,14 @@ CheckIfColdheartedCancelsIceMove:
 	get_curr_move_type
 	if_equal_ TYPE_ICE, Score_Minus10
 
+CheckIfAirLockCancelsFlyingMove:
+	get_curr_move_type
+	if_equal_ TYPE_FLYING, Score_Minus10
+	
+CheckIfDragonBloodCancelsDragonMove:
+	get_curr_move_type
+	if_equal_ TYPE_DRAGON, Score_Minus10
+
 AI_CheckBadMove_CheckSoundproof_:
 	get_how_powerful_move_is
 	if_equal MOVE_POWER_OTHER, AI_CheckBadMove_CheckSoundproof  @ Pointless check
@@ -139,8 +149,16 @@ AI_CheckBadMove_CheckToughHide:
 
 AI_CheckBadMove_CheckColdhearted:
 	get_ability AI_TARGET
+	if_not_equal ABILITY_COLDHEARTED, AI_CheckBadMove_CheckDragonBlood
+	if_move MOVE_TAUNT, Score_Minus10
+	if_move MOVE_TORMENT, Score_Minus10
+	if_move MOVE_ENCORE, Score_Minus10
+
+AI_CheckBadMove_CheckDragonBlood:
+	get_ability AI_TARGET
 	if_not_equal ABILITY_COLDHEARTED, AI_CheckBadMove_CheckMagicBounce
 	if_move MOVE_TAUNT, Score_Minus10
+	if_move MOVE_TORMENT, Score_Minus10
 	if_move MOVE_ENCORE, Score_Minus10
 
 AI_CheckBadMove_CheckMagicBounce:
@@ -309,6 +327,8 @@ AI_CBM_Sleep:
 	get_ability AI_TARGET
 	if_equal ABILITY_INSOMNIA, Score_Minus10
 	if_equal ABILITY_VITAL_SPIRIT, Score_Minus10
+	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
+	if_equal ABILITY_IRON_BODY, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
@@ -445,6 +465,8 @@ AI_CBM_Toxic:
 	if_equal TYPE_POISON, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_IMMUNITY, Score_Minus10
+	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
+	if_equal ABILITY_IRON_BODY, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
@@ -490,6 +512,8 @@ AI_CBM_Confuse:
 	get_ability AI_TARGET
 	if_equal ABILITY_OWN_TEMPO, Score_Minus10
 	if_equal ABILITY_OBLIVIOUS, Score_Minus10
+	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
+	if_equal ABILITY_IRON_BODY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -503,6 +527,8 @@ AI_CBM_Paralyze:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_equal ABILITY_LIMBER, Score_Minus10
+	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
+	if_equal ABILITY_IRON_BODY, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
@@ -518,6 +544,9 @@ AI_CBM_LeechSeed:
 	if_equal TYPE_GRASS, Score_Minus10
 	get_target_type2
 	if_equal TYPE_GRASS, Score_Minus10
+	get_ability AI_TARGET
+	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
+	if_equal ABILITY_IRON_BODY, Score_Minus10
 	end
 
 AI_CBM_Disable:
@@ -629,6 +658,8 @@ AI_CBM_Torment:
 AI_CBM_WillOWisp:
 	get_ability AI_TARGET
 	if_equal ABILITY_WATER_VEIL, Score_Minus10
+	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
+	if_equal ABILITY_IRON_BODY, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_type AI_TARGET, TYPE_FIRE, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
