@@ -389,6 +389,9 @@
 #define B_ANIM_PRESENT                  32
 #define B_ANIM_PRESENT2                 33
 #define B_ANIM_HEALBELL                 34
+#define B_ANIM_TRANSFORM                35
+#define B_ANIM_RAINBOW_CONTINUES        36
+
 
 
 // special animations table (gBattleAnims_Special)
@@ -434,6 +437,7 @@
 #define ANIM_WEATHER_RAIN 2
 #define ANIM_WEATHER_SANDSTORM 3
 #define ANIM_WEATHER_HAIL 4
+#define ANIM_WEATHER_RAINBOW 5
 
 // Surf wave palettes
 #define ANIM_SURF_PAL_SURF           0

@@ -3412,7 +3412,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                     break;
                 }
             }
-
+            if(gBattleWeather & B_WEATHER_RAINBOW_TEMPORARY)
+            {
+                switch (type)
+                {
+                case TYPE_DARK:
+                    damage /= 2;
+                    break;
+                }
+            }
             // Any weather except sun weakens solar beam
             if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM && gBattleMons[gBattlerAttacker].ability != ABILITY_SOLAR_MIGHT)
                 damage /= 2;

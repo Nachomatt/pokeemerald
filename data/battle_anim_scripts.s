@@ -433,6 +433,8 @@ gBattleAnims_General::
 	.4byte General_Present					@ B_ANIM_PRESENT
 	.4byte General_Present2					@ B_ANIM_PRESENT2
 	.4byte General_HealBell					@ B_ANIM_HEALBELL
+	.4byte General_Transform				@ B_ANIM_TRANSFORM
+	.4byte General_Rainbow					@ B_ANIM_RAINBOW_CONTINUES
 
 	.align 2
 gBattleAnims_Special::
@@ -7176,6 +7178,42 @@ SunnyDayLightRay:
 	delay 6
 	return
 
+General_Rainbow:
+	loadspritegfx ANIM_TAG_SUNLIGHT
+	loadspritegfx ANIM_TAG_RAIN_DROPS
+	loadspritegfx ANIM_TAG_YELLOW_BALL
+	loadspritegfx ANIM_TAG_GLOWY_GREEN_ORB
+	loadspritegfx ANIM_TAG_BLUE_ORB
+	loadspritegfx ANIM_TAG_PURPLE_RING
+	loadspritegfx ANIM_TAG_PINK_ORB
+	loadspritegfx ANIM_TAG_RED_HEART
+	monbg ANIM_ATK_PARTNER
+	setalpha 13, 3
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 1, 0, 6, RGB_YELLOW
+	waitforvisualfinish
+	panse_adjustnone SE_M_MOONLIGHT, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0
+	createsprite gSunlightRaySpriteTemplate1, ANIM_ATTACKER, 40
+	delay 6
+	createsprite gSunlightRaySpriteTemplate, ANIM_ATTACKER, 40
+	delay 6
+	createsprite gSunlightRaySpriteTemplate2, ANIM_ATTACKER, 40
+	createvisualtask AnimTask_CreateRaindrops, 2, 0, 3, 120
+	delay 6
+	createsprite gSunlightRaySpriteTemplate3, ANIM_ATTACKER, 40
+	delay 6
+	createsprite gSunlightRaySpriteTemplate4, ANIM_ATTACKER, 40
+	delay 6
+	createsprite gSunlightRaySpriteTemplate5, ANIM_ATTACKER, 40
+	delay 6
+	createsprite gSunlightRaySpriteTemplate6, ANIM_ATTACKER, 40
+	delay 6
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 1, 6, 0, RGB_YELLOW
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
+	end
+
 Move_COTTON_SPORE:
 	loadspritegfx ANIM_TAG_SPORE
 	monbg ANIM_DEF_PARTNER
@@ -8751,6 +8789,15 @@ SwallowBest:
 	goto SwallowContinue
 
 Move_TRANSFORM:
+	monbg ANIM_ATTACKER
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
+	createvisualtask AnimTask_TransformMon, 2, 0
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	end
+
+General_Transform:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48

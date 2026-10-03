@@ -941,6 +941,21 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power > 1 && gBattleMons[gBattlerAttacker].species == SPECIES_ZIGZAGOON)
+    {
+        u8 *battleMonAttacker, *battleMonTarget;
+        u16 species = SPECIES_DEOXYS_SPEED;
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, species)
+        gActiveBattler = gBattlerAttacker;
+        BtlController_EmitResetActionMoveSelection(B_COMM_TO_CONTROLLER, RESET_MOVE_SELECTION);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
+        gBattlescriptCurrInstr++;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+        return;
+    }
+
     if (gBattleMons[gBattlerTarget].ability == ABILITY_COLOR_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power != 0 && gBattleMons[gBattlerTarget].types[1] != gBattleMoves[gCurrentMove].type)
     {
         SET_BATTLER_TYPE(gBattlerTarget, gBattleMoves[gCurrentMove].type);
@@ -1287,7 +1302,7 @@ static void Cmd_critcalc(void)
 
     gPotentialItemEffectBattler = gBattlerAttacker;
 
-    critChance = 2 * (2 *(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0) + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL) + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK) + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK) + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL) + (holdEffect == HOLD_EFFECT_SCOPE_LENS) + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY) + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD) + (gBattleMons[gBattlerAttacker].ability == ABILITY_SHARPSHOOTER && gBattleMoves[gCurrentMove].flags & FLAG_SHARPSHOOTER_AFFECTED);
+    critChance = 2 * (2 *(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0) + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL) + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK) + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK) + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL) + (holdEffect == HOLD_EFFECT_SCOPE_LENS) + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY) + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD) + (gBattleMons[gBattlerAttacker].ability == ABILITY_SHARPSHOOTER && gBattleMoves[gCurrentMove].flags & FLAG_SHARPSHOOTER_AFFECTED) + (gBattleWeather & B_WEATHER_RAINBOW);
 
     if (critChance >= ARRAY_COUNT(sCriticalHitChance))
         critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
@@ -2993,11 +3008,15 @@ static void Cmd_seteffectwithchance(void)
 {
     u32 percentChance;
 
-    if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE || gBattleMons[gBattlerAttacker].ability == ABILITY_WISHCALLER  )
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE || gBattleMons[gBattlerAttacker].ability == ABILITY_WISHCALLER)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else if (gBattleMons[gBattlerAttacker].ability == ABILITY_WILDFIRE && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
     {
         percentChance = 100;
+    }
+    else if(gBattleWeather & B_WEATHER_RAINBOW )
+    {
+       percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 1.5; 
     }
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
@@ -4091,7 +4110,7 @@ static void Cmd_playanimation(void)
         BattleScriptPush(gBattlescriptCurrInstr + 7);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
     }
-    else if (gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
+    else if (gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES || gBattlescriptCurrInstr[2] == B_ANIM_RAINBOW_CONTINUES)
     {
         BtlController_EmitBattleAnimation(B_COMM_TO_CONTROLLER, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4129,7 +4148,7 @@ static void Cmd_playanimation_var(void)
     {
         gBattlescriptCurrInstr += 10;
     }
-    else if (*animationIdPtr == B_ANIM_RAIN_CONTINUES || *animationIdPtr == B_ANIM_SUN_CONTINUES || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
+    else if (*animationIdPtr == B_ANIM_RAIN_CONTINUES || *animationIdPtr == B_ANIM_SUN_CONTINUES || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES || *animationIdPtr == B_ANIM_HAIL_CONTINUES|| *animationIdPtr == B_ANIM_RAINBOW_CONTINUES)
     {
         BtlController_EmitBattleAnimation(B_COMM_TO_CONTROLLER, *animationIdPtr, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);

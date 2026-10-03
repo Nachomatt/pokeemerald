@@ -413,6 +413,9 @@
 #define STRINGID_DRAGONBLOODBOOSTS          413
 #define STRINGID_PKMNMAKESDRAGONMISS        414
 #define STRINGID_PKMNMAKESFLYINGMISS        415
+#define STRINGID_PKMNSXRAINBOWROAD          416
+#define STRINGID_RAINBOWRAYS                417
+#define STRINGID_RAINBOWOVER                418
 
 
 
@@ -420,7 +423,9 @@
 
 
 
-#define BATTLESTRINGS_COUNT                 416
+
+
+#define BATTLESTRINGS_COUNT                 419
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

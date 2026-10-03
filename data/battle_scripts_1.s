@@ -1000,6 +1000,14 @@ BattleScript_EffectTransform::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_DnaChangeActivates::
+	pause B_WAIT_TIME_SHORT
+	playanimation BS_ATTACKER B_ANIM_TRANSFORM
+	waitanimation
+	printfromtable gTransformUsedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_EffectAttackDown2::
 	setstatchanger STAT_ATK, 2, TRUE
 	goto BattleScript_EffectStatDown
@@ -3390,6 +3398,18 @@ BattleScript_SunlightFaded::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_RainbowOver::
+	printstring STRINGID_RAINBOWOVER
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_RainbowRays::
+	printstring STRINGID_RAINBOWRAYS
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RAINBOW_CONTINUES
+	end2
+
+
 BattleScript_OverworldWeatherStarts::
 	printfromtable gWeatherStartsStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -4473,6 +4493,15 @@ BattleScript_DroughtActivates::
 	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
 	call BattleScript_WeatherFormChanges
 	end3
+
+BattleScript_RainbowRoadActivates::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNSXRAINBOWROAD
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_RAINBOW_CONTINUES
+	call BattleScript_WeatherFormChanges
+	end3
+
 
 BattleScript_ReflectorActivates::
 	pause B_WAIT_TIME_SHORT

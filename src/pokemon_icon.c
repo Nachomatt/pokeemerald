@@ -463,6 +463,9 @@ const u8 *const gMonIconTable[] =
     [SPECIES_UNOWN_Z] = gMonIcon_UnownZ,
     [SPECIES_UNOWN_EMARK] = gMonIcon_UnownExclamationMark,
     [SPECIES_UNOWN_QMARK] = gMonIcon_UnownQuestionMark,
+    [SPECIES_DEOXYS_ATTACK] = gMonIcon_Deoxys,
+    [SPECIES_DEOXYS_DEFENSE] = gMonIcon_Deoxys,
+    [SPECIES_DEOXYS_SPEED] = gMonIcon_DeoxysSpeed,
 };
 
 const u8 gMonIconPaletteIndices[] =

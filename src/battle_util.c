@@ -1134,6 +1134,7 @@ enum
     ENDTURN_SANDSTORM,
     ENDTURN_SUN,
     ENDTURN_HAIL,
+    ENDTURN_RAINBOW,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -1381,6 +1382,24 @@ u8 DoFieldEndTurnEffects(void)
 
                 gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_HAIL;
+                BattleScriptExecute(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            break;
+        case ENDTURN_RAINBOW:
+            if (gBattleWeather & B_WEATHER_RAINBOW)
+            {
+                if (!(gBattleWeather & B_WEATHER_RAINBOW_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
+                {
+                    gBattleWeather &= ~B_WEATHER_RAINBOW_TEMPORARY;
+                    gBattlescriptCurrInstr = BattleScript_RainbowOver;
+                }
+                else
+                {
+                    gBattlescriptCurrInstr = BattleScript_RainbowRays;
+                }
+
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
@@ -2046,7 +2065,7 @@ u8 AtkCanceler_UnableToUseMove(void)
             gBattleStruct->atkCancelerTracker++;
             break;
         case CANCELER_TRUANT: // truant
-            if (gBattleMons[gBattlerAttacker].ability == ABILITY_TRUANT && gDisableStructs[gBattlerAttacker].truantCounter)
+            if ((gBattleMons[gBattlerAttacker].ability == ABILITY_TRUANT && gDisableStructs[gBattlerAttacker].truantCounter) || (gBattleMons[gBattlerAttacker].ability == ABILITY_ROYAL_REST && gDisableStructs[gBattlerAttacker].truantCounter))
             {
                 CancelMultiTurnMoves(gBattlerAttacker);
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -2484,6 +2503,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             effect++;
                         }
                         break;
+                    case WEATHER_RAINBOWROAD:
+                        if (!(gBattleWeather & B_WEATHER_RAINBOW))
+                        {
+                            gBattleWeather = B_WEATHER_RAINBOW;
+                            gBattleScripting.animArg1 = B_ANIM_RAINBOW_CONTINUES;
+                            gBattleScripting.battler = battler;
+                            effect++;
+                        }
+                        break;
                     }
                 }
                 if (effect != 0)
@@ -2527,6 +2555,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     gBattleWeather = B_WEATHER_SUN;
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
+            case ABILITY_RAINBOW_ROAD:
+                if (!(gBattleWeather & B_WEATHER_RAINBOW_PERMANENT))
+                {
+                    gBattleWeather = B_WEATHER_RAINBOW;
+                    BattleScriptPushCursorAndCallback(BattleScript_RainbowRoadActivates);
                     gBattleScripting.battler = battler;
                     effect++;
                 }
@@ -2858,7 +2895,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 case ABILITY_TRUANT:
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
-
+                case ABILITY_ROYAL_REST:
+                    if(gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power == 0 && (ABILITY_ON_FIELD2(ABILITY_ROYAL_GUARD) || ABILITY_ON_FIELD2(ABILITY_ROYAL_WRATH)))
+                    {
+                        break;
+                    }
+                    else if(gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power != 0 && (ABILITY_ON_FIELD2(ABILITY_ROYAL_GUARD) || ABILITY_ON_FIELD2(ABILITY_ROYAL_WRATH)))
+                    {
+                        gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
+                        break;
+                    }
+                    else
+                    {
+                        gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
+                        break;
+                    }
                 }
             }
             break;

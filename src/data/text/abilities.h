@@ -128,6 +128,9 @@ static const u8 sCruelDiverDescription[] = _("Ups DIVE and PSYCHC moves.");
 static const u8 sDatedDiverDescription[] = _("Ups DIVE and ANCIENTPOWER.");
 static const u8 sWishCallerDescription[] = _("Ups WISH and added effects.");
 static const u8 sBellRingerDescription[] = _("Clears the party of status.");
+static const u8 sDnaChangeDescription[] = _("Changes DNA during battle.");
+static const u8 sRainbowRoadDescription[] = _("Summons Rainbows in battle.");
+static const u8 sRoyalRestDescription[] = _("Awakens around ROYALS.");
 
 
 
@@ -265,6 +268,9 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_DATED_DIVER] = _("DATED DIVER"),
     [ABILITY_WISHCALLER] = _("WISHCALLER"),
     [ABILITY_BELLRINGER] = _("BELLRINGER"),
+    [ABILITY_DNA_CHANGE] = _("DNA CHANGE"),
+    [ABILITY_RAINBOW_ROAD] = _("RAINBOW ROAD"),
+    [ABILITY_ROYAL_REST] = _("ROYAL REST"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -401,4 +407,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_DATED_DIVER] = sDatedDiverDescription,
     [ABILITY_WISHCALLER] = sWishCallerDescription,
     [ABILITY_BELLRINGER] = sBellRingerDescription,
+    [ABILITY_DNA_CHANGE] = sDnaChangeDescription,
+    [ABILITY_RAINBOW_ROAD] = sRainbowRoadDescription,
+    [ABILITY_ROYAL_REST] = sRoyalRestDescription,
 };

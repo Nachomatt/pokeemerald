@@ -221,7 +221,66 @@ const struct SpriteTemplate gSunlightRaySpriteTemplate =
     .affineAnims = sAffineAnims_SunlightRay,
     .callback = AnimSunlight,
 };
-
+const struct SpriteTemplate gSunlightRaySpriteTemplate1 =
+{
+    .tileTag = ANIM_TAG_SUNLIGHT,
+    .paletteTag = ANIM_TAG_RED_HEART,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SunlightRay,
+    .callback = AnimSunlight,
+};
+const struct SpriteTemplate gSunlightRaySpriteTemplate2 =
+{
+    .tileTag = ANIM_TAG_SUNLIGHT,
+    .paletteTag = ANIM_TAG_YELLOW_BALL,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SunlightRay,
+    .callback = AnimSunlight,
+};
+const struct SpriteTemplate gSunlightRaySpriteTemplate3 =
+{
+    .tileTag = ANIM_TAG_SUNLIGHT,
+    .paletteTag = ANIM_TAG_GLOWY_GREEN_ORB,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SunlightRay,
+    .callback = AnimSunlight,
+};
+const struct SpriteTemplate gSunlightRaySpriteTemplate4 =
+{
+    .tileTag = ANIM_TAG_SUNLIGHT,
+    .paletteTag = ANIM_TAG_BLUE_ORB,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SunlightRay,
+    .callback = AnimSunlight,
+};
+const struct SpriteTemplate gSunlightRaySpriteTemplate5 =
+{
+    .tileTag = ANIM_TAG_SUNLIGHT,
+    .paletteTag = ANIM_TAG_PURPLE_RING,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SunlightRay,
+    .callback = AnimSunlight,
+};
+const struct SpriteTemplate gSunlightRaySpriteTemplate6 =
+{
+    .tileTag = ANIM_TAG_SUNLIGHT,
+    .paletteTag = ANIM_TAG_PINK_ORB,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SunlightRay,
+    .callback = AnimSunlight,
+};
 static const union AnimCmd sAnim_BasicFire[] =
 {
     ANIMCMD_FRAME(0, 4),
