@@ -907,7 +907,9 @@ OldaleTown_EventScript_RanchLady_Text_1:
 # 389 "data/maps/OldaleTown/scripts.pory"
 	.string "They seem to have calmed down. You\n"
 	.string "should be fine, probably. Maybe.\l"
-	.string "Hopefully. Possibly.$"
+	.string "Hopefully. Possibly.\p"
+	.string "Oh right, I gave my sister a Pokémon\n"
+	.string "egg. I hope she takes good care of it.$"
 
 OldaleTown_EventScript_RanchLadyTrigger_Text_0:
 # 426 "data/maps/OldaleTown/scripts.pory"

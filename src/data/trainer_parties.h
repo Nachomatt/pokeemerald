@@ -4484,7 +4484,7 @@ static const struct TrainerMonItemCustomMoves sParty_Andrew[] = {
     .iv = 0,
     .lvl = 5,
     .species = SPECIES_RATTATA,
-    .moves = {MOVE_TACKLE, MOVE_HIT_AND_RUN}
+    .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP}
     },
     {
     .iv = 0,
@@ -9524,10 +9524,9 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Alyssa[] = {
 static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     {
     .iv = 100,
-    .lvl = 6,
-    .species = SPECIES_VOLTORB,
-    .moves = {MOVE_THUNDER_SHOCK, MOVE_ROLLOUT, MOVE_CHARGE },
-    .abilitynums = 1
+    .lvl = 8,
+    .species = SPECIES_PICHU,
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_FLATTER }
     },
     {
     .iv = 100,
@@ -9537,9 +9536,10 @@ static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     },
     {
     .iv = 100,
-    .lvl = 8,
-    .species = SPECIES_PICHU,
-    .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_FLATTER }
+    .lvl = 6,
+    .species = SPECIES_VOLTORB,
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_ROLLOUT, MOVE_CHARGE },
+    .abilitynums = 1
     }
 };
 

@@ -130,7 +130,13 @@ static const u8 sWishCallerDescription[] = _("Ups WISH and added effects.");
 static const u8 sBellRingerDescription[] = _("Clears the party of status.");
 static const u8 sDnaChangeDescription[] = _("Changes DNA during battle.");
 static const u8 sRainbowRoadDescription[] = _("Summons Rainbows in battle.");
-static const u8 sRoyalRestDescription[] = _("Awakens around ROYALS.");
+static const u8 sBoulderBodyDescription[] = _("Summons Sand. Heals in sand.");
+static const u8 sSubZeroBodyDescription[] = _("Freezes on contact.");
+static const u8 sIronBodyDescription[] = _("Prevents ability reduction.");
+static const u8 sEonGliderDescription[] = _("Ups with EON GLIDER.");
+static const u8 sStormCallerDescription[] = _("Summons rain. Ups ELECTR.");
+static const u8 sTerraKingDescription[] = _("Summons sun. ups GRASS.");
+static const u8 sRoyalRestDescription[] = _("Snoozes around ROYALS.");
 
 
 
@@ -271,6 +277,12 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_DNA_CHANGE] = _("DNA CHANGE"),
     [ABILITY_RAINBOW_ROAD] = _("RAINBOW ROAD"),
     [ABILITY_ROYAL_REST] = _("ROYAL REST"),
+    [ABILITY_BOULDER_BODY] = _("BOULDER BODY"),
+    [ABILITY_SUBZERO_BODY] = _("SUBZERO BODY"),
+    [ABILITY_IRON_BODY] = _("IRON BODY"),
+    [ABILITY_EON_GLIDER] = _("EON GLIDER"),
+    [ABILITY_TERRA_KING] = _("TERRA KING"),
+    [ABILITY_STORMCALLER] = _("STORMCALLER"),
     // [ABILITY_TRICKSTER] = _("TRICKSTER"),
 
 };
@@ -408,6 +420,12 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_WISHCALLER] = sWishCallerDescription,
     [ABILITY_BELLRINGER] = sBellRingerDescription,
     [ABILITY_DNA_CHANGE] = sDnaChangeDescription,
-    [ABILITY_RAINBOW_ROAD] = sRainbowRoadDescription,
     [ABILITY_ROYAL_REST] = sRoyalRestDescription,
+    [ABILITY_RAINBOW_ROAD] = sRainbowRoadDescription,
+    [ABILITY_BOULDER_BODY] = sBoulderBodyDescription,
+    [ABILITY_SUBZERO_BODY] = sSubZeroBodyDescription,
+    [ABILITY_IRON_BODY] = sIronBodyDescription,
+    [ABILITY_EON_GLIDER] = sEonGliderDescription,
+    [ABILITY_STORMCALLER] = sStormCallerDescription,
+    [ABILITY_TERRA_KING] = sTerraKingDescription,
 };

@@ -1452,6 +1452,18 @@ static const u8 sMaulDescription[] = _(
 static const u8 sHurricaneDescription[] = _(
     "Strikes the foe with a\n"
     "massive storm of wind.");
+static const u8 sShadowSneakDescription[] = _(
+    "Shadows haunt the target.\n"
+    "It is sure to strike first.");
+static const u8 sRagingStormDescription[] = _(
+    "A raging storm of 2-3 turns\n"
+    "that confuses the user.");
+static const u8 sBugBuzzDescription[] = _(
+    "Generates sound by\n"
+    "vibration. May lower DEFENSE.");
+static const u8 sDragonHoardDescription[] = _(
+    "Throws treasure at the foe.\n"
+    "Money is recovered after.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1821,4 +1833,10 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MAUL - 1] = sMaulDescription,
     [MOVE_DRACO_METEOR - 1] = sDracoMeteorDescription,
     [MOVE_HURRICANE - 1] = sHurricaneDescription,
+    [MOVE_SHADOW_SNEAK - 1] = sShadowSneakDescription,
+    [MOVE_RAGING_STORM - 1] = sRagingStormDescription,
+    [MOVE_BUG_BUZZ - 1] = sBugBuzzDescription,
+    [MOVE_DRAGON_HOARD - 1] = sDragonHoardDescription,
+    
+    
 };

@@ -487,7 +487,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .power = 100,
         .type = TYPE_NORMAL,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_RANDOM,
         .priority = 0,
@@ -2252,7 +2252,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_SNORE] =
     {
         .effect = EFFECT_SNORE,
-        .power = 60,
+        .power = 70,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 15,
@@ -2606,7 +2606,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .power = 100,
         .type = TYPE_DRAGON,
         .accuracy = 100,
-        .pp = 15,
+        .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_RANDOM,
         .priority = 0,
@@ -4370,8 +4370,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DRAGON_CLAW] =
     {
-        .effect = EFFECT_HIT,
-        .power = 80,
+        .effect = EFFECT_MULTI_HIT,
+        .power = 25,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .pp = 15,
@@ -4729,6 +4729,54 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .accuracy = 70,
         .pp = 10,
         .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_SHADOW_SNEAK] =
+    {
+        .effect = EFFECT_QUICK_ATTACK,
+        .power = 40,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_RAGING_STORM] =
+    {
+        .effect = EFFECT_RAMPAGE,
+        .power = 100,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_RANDOM,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_BUG_BUZZ] =
+    {
+        .effect = EFFECT_DEFENSE_DOWN_HIT,
+        .power = 85,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_DRAGON_HOARD] =
+    {
+        .effect = EFFECT_PAY_DAY,
+        .power = 75,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,

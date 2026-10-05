@@ -27,6 +27,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId);
 static void AnimTask_SpiteTargetShadow_Step2(u8 taskId);
 static void AnimTask_SpiteTargetShadow_Step3(u8 taskId);
 static void AnimDestinyBondWhiteShadow(struct Sprite *);
+static void AnimDestinyBondWhiteShadowSingle(struct Sprite *);
 static void AnimDestinyBondWhiteShadow_Step(struct Sprite *);
 static void AnimTask_DestinyBondWhiteShadow_Step(u8 taskId);
 static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId);
@@ -145,6 +146,17 @@ const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDestinyBondWhiteShadow,
+};
+
+const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplateSingle =
+{
+    .tileTag = ANIM_TAG_WHITE_SHADOW,
+    .paletteTag = ANIM_TAG_WHITE_SHADOW,
+    .oam = &gOamData_AffineOff_ObjBlend_64x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDestinyBondWhiteShadowSingle,
 };
 
 const struct SpriteTemplate gCurseNailSpriteTemplate =
@@ -742,7 +754,35 @@ static void AnimTask_SpiteTargetShadow_Step3(u8 taskId)
 
     task->data[15]++;
 }
+static void AnimDestinyBondWhiteShadowSingle(struct Sprite *sprite)
+{
+    s16 battler1X, battler1Y;
+    s16 yDiff;
 
+    if (gBattleAnimArgs[0] == 0)
+    {
+        battler1X = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        battler1Y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 28;
+    }
+    else
+    {
+        battler1X = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        battler1Y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 28;
+    }
+
+    yDiff = battler1Y;
+    sprite->data[0] = battler1X * 16;
+    sprite->data[1] = battler1Y * 16;
+    sprite->data[2] = ((battler1X) * 16) / gBattleAnimArgs[1];
+    sprite->data[3] = (yDiff * 16) / gBattleAnimArgs[1];
+    sprite->data[4] = gBattleAnimArgs[1];
+    sprite->data[7] = sprite->data[4] / 2;
+    sprite->oam.priority = 2;
+    sprite->x = battler1X;
+    sprite->y = battler1Y;
+    sprite->callback = AnimDestinyBondWhiteShadow_Step;
+    sprite->invisible = TRUE;
+}
 static void AnimDestinyBondWhiteShadow(struct Sprite *sprite)
 {
     s16 battler1X, battler1Y;
@@ -792,7 +832,79 @@ static void AnimDestinyBondWhiteShadow_Step(struct Sprite *sprite)
             sprite->data[0] = 0;
     }
 }
+void AnimTask_DestinyBondWhiteShadowSingle(u8 taskId)
+{
+    struct Task *task;
+    s16 battler;
+    u8 spriteId;
+    s16 baseX, baseY;
+    s16 x, y;
 
+    task = &gTasks[taskId];
+    SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
+    task->data[5] = 0;
+    task->data[6] = 0;
+    task->data[7] = 0;
+    task->data[8] = 0;
+    task->data[9] = 16;
+    task->data[10] = gBattleAnimArgs[0];
+
+    baseX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM);
+    if (!IsContest())
+    {
+        for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+        {
+            if (battler != gBattleAnimAttacker
+             && battler != BATTLE_PARTNER(gBattleAnimAttacker)
+             && IsBattlerSpriteVisible(battler)
+             && battler == gBattleAnimTarget)
+             
+            {
+                spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplateSingle, baseX, baseY, 55);
+                if (spriteId != MAX_SPRITES)
+                {
+                    x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2);
+                    y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_BOTTOM);
+                    gSprites[spriteId].data[0] = baseX << 4;
+                    gSprites[spriteId].data[1] = baseY << 4;
+                    gSprites[spriteId].data[2] = ((x - baseX) << 4) / gBattleAnimArgs[1];
+                    gSprites[spriteId].data[3] = ((y - baseY) << 4) / gBattleAnimArgs[1];
+                    gSprites[spriteId].data[4] = gBattleAnimArgs[1];
+                    gSprites[spriteId].data[5] = x;
+                    gSprites[spriteId].data[6] = y;
+                    gSprites[spriteId].callback = AnimDestinyBondWhiteShadow_Step;
+
+                    task->data[task->data[12] + 13] = spriteId;
+                    task->data[12]++;
+                }
+            }
+        }
+    }
+    else
+    {
+        spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplateSingle, baseX, baseY, 55);
+        if (spriteId != MAX_SPRITES)
+        {
+            x = 48;
+            y = 40;
+            gSprites[spriteId].data[0] = baseX << 4;
+            gSprites[spriteId].data[1] = baseY << 4;
+            gSprites[spriteId].data[2] = ((x - baseX) << 4) / gBattleAnimArgs[1];
+            gSprites[spriteId].data[3] = ((y - baseY) << 4) / gBattleAnimArgs[1];
+            gSprites[spriteId].data[4] = gBattleAnimArgs[1];
+            gSprites[spriteId].data[5] = x;
+            gSprites[spriteId].data[6] = y;
+            gSprites[spriteId].callback = AnimDestinyBondWhiteShadow_Step;
+
+            task->data[13] = spriteId;
+            task->data[12] = 1;
+        }
+    }
+
+    task->func = AnimTask_DestinyBondWhiteShadow_Step;
+}
 void AnimTask_DestinyBondWhiteShadow(u8 taskId)
 {
     struct Task *task;

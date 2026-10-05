@@ -386,7 +386,7 @@ script OldaleTown_EventScript_RanchLady{
 	}
 	else
 	{
-	  msgbox(format("They seem to have calmed down. You should be fine, probably. Maybe. Hopefully. Possibly."))
+	  msgbox(format("They seem to have calmed down. You should be fine, probably. Maybe. Hopefully. Possibly.\pOh right, I gave my sister a Pokémon egg. I hope she takes good care of it."))
 	}
 	release
 }

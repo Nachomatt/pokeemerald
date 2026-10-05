@@ -1327,7 +1327,6 @@ static void Cmd_damagecalc(void)
         gBattleMoveDamage *= 2;
     if (gProtectStructs[gBattlerAttacker].helpingHand)
         gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
-
     gBattlescriptCurrInstr++;
 }
 
@@ -2674,7 +2673,14 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 if (GET_BATTLER_SIDE(gBattlerAttacker) == B_SIDE_PLAYER)
                 {
                     u16 payday = gPaydayMoney;
-                    gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
+                    if(gBattleMoves[gCurrentMove].type == TYPE_DRAGON)
+                    {
+                        gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 20);
+                    }
+                    else
+                    {
+                        gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
+                    }
                     if (payday > gPaydayMoney)
                         gPaydayMoney = 0xFFFF;
                 }

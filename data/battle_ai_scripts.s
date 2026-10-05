@@ -139,13 +139,14 @@ AI_CheckBadMove_CheckSoundproof:
 	if_move MOVE_METAL_SOUND, Score_Minus10
 	if_move MOVE_GRASS_WHISTLE, Score_Minus10
 	if_move MOVE_HYPER_VOICE, Score_Minus10
+	if_move MOVE_BUG_BUZZ, Score_Minus10
 
 AI_CheckBadMove_CheckToughHide:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_TOUGH_HIDE, AI_CheckBadMove_CheckColdhearted
 	get_considered_move_power
 	if_equal 0, Score_Plus0
-	if_less_than 65, Score_Minus10
+	if_less_than 65, Score_Minus30
 
 AI_CheckBadMove_CheckColdhearted:
 	get_ability AI_TARGET
@@ -321,6 +322,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
 	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
+	if_effect EFFECT_CHARGE, AI_CBM_Charge
 	end
 
 AI_CBM_Sleep:
@@ -523,8 +525,6 @@ AI_CBM_Reflect:
 
 AI_CBM_Paralyze:
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_equal ABILITY_LIMBER, Score_Minus10
 	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
@@ -661,7 +661,10 @@ AI_CBM_WillOWisp:
 	if_equal ABILITY_DRAGONBLOOD, Score_Minus10
 	if_equal ABILITY_IRON_BODY, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
-	if_type AI_TARGET, TYPE_FIRE, Score_Minus10
+	get_target_type1
+	if_equal TYPE_FIRE, Score_Minus10
+	get_target_type2
+	if_equal TYPE_FIRE, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -722,6 +725,10 @@ AI_CBM_CalmMind:
 AI_CBM_DragonDance:
 	if_stat_level_equal AI_USER, STAT_ATK, MAX_STAT_STAGE, Score_Minus10
 	if_stat_level_equal AI_USER, STAT_SPEED, MAX_STAT_STAGE, Score_Minus8
+	end
+
+AI_CBM_Charge:
+	if_status3 AI_USER, STATUS3_CHARGED_UP, Score_Minus10
 	end
 
 Score_Minus1:
@@ -2346,13 +2353,8 @@ AI_CV_SemiInvulnerable2:
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
 	get_weather
-#ifdef BUGFIX
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckIceType
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckSandstormTypes
-#else
-	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckSandstormTypes
-	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
-#endif
 	goto AI_CV_SemiInvulnerable5
 
 AI_CV_SemiInvulnerable_CheckSandstormTypes:
@@ -2371,7 +2373,7 @@ AI_CV_SemiInvulnerable5:
 	if_target_faster AI_CV_SemiInvulnerable_End
 	get_last_used_bank_move AI_TARGET
 	get_move_effect_from_result
-	if_not_equal EFFECT_LOCK_ON, AI_CV_SemiInvulnerable_TryEncourage
+	if_equal EFFECT_LOCK_ON, AI_CV_SemiInvulnerable_TryEncourage
 	goto AI_CV_SemiInvulnerable_End
 
 AI_CV_SemiInvulnerable_TryEncourage:
@@ -2417,11 +2419,7 @@ AI_CV_Hail_End:
 
 @ BUG: Facade score is increased if the target is statused, but should be if the user is
 AI_CV_Facade:
-#ifdef BUGFIX
 	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-#else
-	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-#endif
 	score +1
 AI_CV_Facade_End:
 	end

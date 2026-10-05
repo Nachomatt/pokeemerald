@@ -656,7 +656,7 @@ void HandleAction_ActionFinished(void)
 static const u16 sSoundMovesTable[] =
     {
         MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
-        MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, SOUND_MOVES_END};
+        MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, MOVE_BUG_BUZZ, SOUND_MOVES_END};
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -2896,20 +2896,24 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                     break;
                 case ABILITY_ROYAL_REST:
-                    if(gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power == 0 && (ABILITY_ON_FIELD2(ABILITY_ROYAL_GUARD) || ABILITY_ON_FIELD2(ABILITY_ROYAL_WRATH)))
+                    if(gBattleMons[gBattlerAttacker].ability == ABILITY_ROYAL_REST && (ABILITY_ON_FIELD2(ABILITY_ROYAL_GUARD) || ABILITY_ON_FIELD2(ABILITY_ROYAL_WRATH)))
                     {
-                        break;
-                    }
-                    else if(gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power != 0 && (ABILITY_ON_FIELD2(ABILITY_ROYAL_GUARD) || ABILITY_ON_FIELD2(ABILITY_ROYAL_WRATH)))
-                    {
-                        gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
-                        break;
+                        if(gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
+                            break;
+                        }
                     }
                     else
                     {
                         gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
-                        break;
                     }
+                    break;
+
                 }
             }
             break;

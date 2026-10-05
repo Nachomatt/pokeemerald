@@ -2062,8 +2062,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 SetMonData(&party[i], MON_DATA_ABILITY_NUM, &partyData[i].abilitynums);
 
-                SetMonData(&party[i], MON_DATA_PERSONALITY, &partyData[i].nature);
-
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
                     SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
