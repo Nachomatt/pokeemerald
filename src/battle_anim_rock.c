@@ -129,6 +129,16 @@ const struct SpriteTemplate gFireSpinSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimParticleInVortex,
 };
+const struct SpriteTemplate gDamnationFireSpinSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_PURPLE_FLAME,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_BasicFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex,
+};
 
 const struct SpriteTemplate gFlyingSandCrescentSpriteTemplate =
 {
@@ -275,6 +285,17 @@ const struct SpriteTemplate gRockScatterSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = sAnims_BasicRock,
+    .images = NULL,
+    .affineAnims = sAffineAnims_BasicRock,
+    .callback = AnimRockScatter,
+};
+
+const struct SpriteTemplate gDamnationRockScatterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_PURPLE_SWIPE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,

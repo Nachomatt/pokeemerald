@@ -501,6 +501,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_ROUTE_110_BIRCH"
+    },
+    {
+      "local_id": "LOCALID_ROUTE110_NACHO",
+      "graphics_id": "OBJ_EVENT_GFX_NACHO",
+      "x": -1,
+      "y": 69,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_ROUTE_110_NACHO"
     }
   ],
   "warp_events": [
@@ -628,6 +642,51 @@
       "var": "VAR_REGISTER_BIRCH_STATE",
       "var_value": "1",
       "script": "Route110_EventScript_BirchScene4"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 68,
+      "elevation": 0,
+      "var": "VAR_NACHOSTATE110",
+      "var_value": "0",
+      "script": "Route110_EventScript_Nacho1"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 69,
+      "elevation": 0,
+      "var": "VAR_NACHOSTATE110",
+      "var_value": "0",
+      "script": "Route110_EventScript_Nacho2"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 70,
+      "elevation": 0,
+      "var": "VAR_NACHOSTATE110",
+      "var_value": "0",
+      "script": "Route110_EventScript_Nacho3"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 71,
+      "elevation": 0,
+      "var": "VAR_NACHOSTATE110",
+      "var_value": "0",
+      "script": "Route110_EventScript_Nacho4"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 72,
+      "elevation": 0,
+      "var": "VAR_NACHOSTATE110",
+      "var_value": "0",
+      "script": "Route110_EventScript_Nacho5"
     }
   ],
   "bg_events": [

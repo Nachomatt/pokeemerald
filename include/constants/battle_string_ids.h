@@ -416,6 +416,7 @@
 #define STRINGID_PKMNSXRAINBOWROAD          416
 #define STRINGID_RAINBOWRAYS                417
 #define STRINGID_RAINBOWOVER                418
+#define STRINGID_PKMNTOOKMOONLIGHT          419
 
 
 
@@ -425,7 +426,8 @@
 
 
 
-#define BATTLESTRINGS_COUNT                 419
+
+#define BATTLESTRINGS_COUNT                 420
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -483,6 +485,8 @@
 #define B_MSG_TURN1_DIG         5
 #define B_MSG_TURN1_DIVE        6
 #define B_MSG_TURN1_BOUNCE      7
+#define B_MSG_TURN1_LUNAR_BEAM  8
+
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0

@@ -140,6 +140,7 @@ static const u8 sText_PkmnWentToSleep[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto s
 static const u8 sText_PkmnSleptHealthy[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!");
 static const u8 sText_PkmnWhippedWhirlwind[] = _("{B_ATK_NAME_WITH_PREFIX} whipped\nup a whirlwind!");
 static const u8 sText_PkmnTookSunlight[] = _("{B_ATK_NAME_WITH_PREFIX} took\nin sunlight!");
+static const u8 sText_PkmnTookMoonlight[] = _("{B_ATK_NAME_WITH_PREFIX} took\nin moonlight!");
 static const u8 sText_PkmnLoweredHead[] = _("{B_ATK_NAME_WITH_PREFIX} lowered\nits head!");
 static const u8 sText_PkmnIsGlowing[] = _("{B_ATK_NAME_WITH_PREFIX} is glowing!");
 static const u8 sText_PkmnFlewHigh[] = _("{B_ATK_NAME_WITH_PREFIX} flew\nup high!");
@@ -630,6 +631,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSLEPTHEALTHY - BATTLESTRINGS_TABLE_START] = sText_PkmnSleptHealthy,
     [STRINGID_PKMNWHIPPEDWHIRLWIND - BATTLESTRINGS_TABLE_START] = sText_PkmnWhippedWhirlwind,
     [STRINGID_PKMNTOOKSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnTookSunlight,
+    [STRINGID_PKMNTOOKMOONLIGHT - BATTLESTRINGS_TABLE_START] = sText_PkmnTookMoonlight,
     [STRINGID_PKMNLOWEREDHEAD - BATTLESTRINGS_TABLE_START] = sText_PkmnLoweredHead,
     [STRINGID_PKMNISGLOWING - BATTLESTRINGS_TABLE_START] = sText_PkmnIsGlowing,
     [STRINGID_PKMNFLEWHIGH - BATTLESTRINGS_TABLE_START] = sText_PkmnFlewHigh,
@@ -648,6 +650,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNPROTECTEDITSELF2 - BATTLESTRINGS_TABLE_START] = sText_PkmnProtectedItself2,
     [STRINGID_PKMNBUFFETEDBYSANDSTORM - BATTLESTRINGS_TABLE_START] = sText_PkmnBuffetedBySandstorm,
     [STRINGID_PKMNPELTEDBYHAIL - BATTLESTRINGS_TABLE_START] = sText_PkmnPeltedByHail,
+    [STRINGID_PKMNDOUSEDBYRAIN - BATTLESTRINGS_TABLE_START] = sText_PkmnDousedByRain,
+    [STRINGID_PKMNHARMEDBYSUN - BATTLESTRINGS_TABLE_START] = sText_PkmnHarmedBySun,
     [STRINGID_PKMNSEEDED - BATTLESTRINGS_TABLE_START] = sText_PkmnSeeded,
     [STRINGID_PKMNEVADEDATTACK - BATTLESTRINGS_TABLE_START] = sText_PkmnEvadedAttack,
     [STRINGID_PKMNSAPPEDBYLEECHSEED - BATTLESTRINGS_TABLE_START] = sText_PkmnSappedByLeechSeed,
@@ -1006,7 +1010,7 @@ const u16 gSandStormHailContinuesStringIds[] =
 const u16 gSandStormHailDmgStringIds[] =
 {
     [B_MSG_SANDSTORM] = STRINGID_PKMNBUFFETEDBYSANDSTORM,
-    [B_MSG_HAIL]      = STRINGID_PKMNPELTEDBYHAIL
+    [B_MSG_HAIL]      = STRINGID_PKMNPELTEDBYHAIL,
 };
 
 const u16 gSandStormHailEndStringIds[] =
@@ -1108,6 +1112,7 @@ const u16 gFirstTurnOfTwoStringIds[] =
 {
     [B_MSG_TURN1_RAZOR_WIND] = STRINGID_PKMNWHIPPEDWHIRLWIND,
     [B_MSG_TURN1_SOLAR_BEAM] = STRINGID_PKMNTOOKSUNLIGHT,
+    [B_MSG_TURN1_LUNAR_BEAM] = STRINGID_PKMNTOOKMOONLIGHT,
     [B_MSG_TURN1_SKULL_BASH] = STRINGID_PKMNLOWEREDHEAD,
     [B_MSG_TURN1_SKY_ATTACK] = STRINGID_PKMNISGLOWING,
     [B_MSG_TURN1_FLY]        = STRINGID_PKMNFLEWHIGH,

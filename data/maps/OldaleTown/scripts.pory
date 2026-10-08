@@ -384,9 +384,15 @@ script OldaleTown_EventScript_RanchLady{
 	{
 	  	msgbox(format("Hello! Uhm, the Pokémon are pretty restless here. Please come back later, okay?"))
 	}
-	else
+	elif(flag(FLAG_EGGLADY) == false)
 	{
 	  msgbox(format("They seem to have calmed down. You should be fine, probably. Maybe. Hopefully. Possibly.\pOh right, I gave my sister a Pokémon egg. I hope she takes good care of it."))
+	}
+	else
+	{
+	  msgbox(format("They seem to have calmed down. You should be fine, probably. Maybe. Hopefully. Possibly.\pOh my sister gave you the egg! How sweet of her.\p"
+	  "I believe she got it from some kind of ranch.\p"
+	  "You'll find the ranch on ROUTE 117, just west of MAUVILLE CITY."))
 	}
 	release
 }

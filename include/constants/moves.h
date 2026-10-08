@@ -371,6 +371,13 @@
 #define MOVE_RAGING_STORM 367
 #define MOVE_BUG_BUZZ 368
 #define MOVE_DRAGON_HOARD 369
+#define MOVE_DAMNATION 370
+#define MOVE_INTOXICATE 371
+#define MOVE_COSMIC_CRASH 372
+#define MOVE_LUNAR_BEAM 373
+#define MOVE_METEOR_BLAST 374
+#define MOVE_HARVEST_MOON 375
+#define MOVE_ECLIPSE 376
 
 
 
@@ -381,7 +388,9 @@
 
 
 
-#define MOVES_COUNT 370
+
+
+#define MOVES_COUNT 377
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

@@ -315,7 +315,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DOUBLE_KICK] =
     {
         .effect = EFFECT_DOUBLE_HIT,
-        .power = 40,
+        .power = 30,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 30,
@@ -4780,5 +4780,89 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_DAMNATION] =
+    {
+        .effect = EFFECT_BURN_HIT,
+        .power = 90,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_INTOXICATE] =
+    {
+        .effect = EFFECT_POISON_FANG,
+        .power = 120,
+        .type = TYPE_POISON,
+        .accuracy = 85,
+        .pp = 5,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    [MOVE_COSMIC_CRASH] =
+    {
+        .effect = EFFECT_DOUBLE_EDGE,
+        .power = 120,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_MAKES_CONTACT | FLAG_LUNAR_AFFECTED,
+    },
+    [MOVE_LUNAR_BEAM] =
+    {
+        .effect = EFFECT_LUNAR_BEAM,
+        .power = 130,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_LUNAR_AFFECTED,
+    },
+    [MOVE_METEOR_BLAST] =
+    {
+        .effect = EFFECT_METEOR_BLAST,
+        .power = 100,
+        .type = TYPE_ROCK,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_LUNAR_AFFECTED,
+    },
+    [MOVE_HARVEST_MOON] =
+    {
+        .effect = EFFECT_ABSORB,
+        .power = 75,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_LUNAR_AFFECTED,
+    },
+    [MOVE_ECLIPSE] =
+    {
+        .effect = EFFECT_ACCURACY_DOWN_HIT,
+        .power = 85,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_LUNAR_AFFECTED,
     },
 };

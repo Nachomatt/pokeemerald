@@ -1464,6 +1464,29 @@ static const u8 sBugBuzzDescription[] = _(
 static const u8 sDragonHoardDescription[] = _(
     "Throws treasure at the foe.\n"
     "Money is recovered after.");
+static const u8 sDamnationDescription[] = _(
+    "Damns the target to the.\n"
+    "underworld. May burn the foe.");
+static const u8 sIntoxicateDescription[] = _(
+    "Addicting toxics are hurled at\n"
+    "the foe. May badly poison.");
+static const u8 sCosmicCrashDescription[] = _(
+    "A life risking tackle, hitting\n"
+    "the foe with cosmic strength.");
+static const u8 sLunarBeamDescription[] = _(
+    "Absorbs moonlight in one turn,\n"
+    "then attacks next turn.");
+static const u8 sMeteorBlastDescription[] = _(
+    "Hurls a meteor at the foe,\n"
+    "may leave a burn. Cannot miss.");
+static const u8 sHarvestMoonDescription[] = _(
+    "Lunar power drains the foe.\n"
+    "Restores half of the damage. ");
+static const u8 sEclipseDescription[] = _(
+    "The user covers the world\n"
+    "in dark. May lower ACCURACY.");
+    
+    
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1837,6 +1860,15 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_RAGING_STORM - 1] = sRagingStormDescription,
     [MOVE_BUG_BUZZ - 1] = sBugBuzzDescription,
     [MOVE_DRAGON_HOARD - 1] = sDragonHoardDescription,
+    [MOVE_DAMNATION - 1] = sDamnationDescription,
+    [MOVE_INTOXICATE - 1] = sIntoxicateDescription,
+    [MOVE_COSMIC_CRASH - 1] = sCosmicCrashDescription,
+    [MOVE_LUNAR_BEAM - 1] = sLunarBeamDescription,
+    [MOVE_METEOR_BLAST - 1] = sMeteorBlastDescription,
+    [MOVE_HARVEST_MOON - 1] = sHarvestMoonDescription,
+    [MOVE_ECLIPSE - 1] = sEclipseDescription,
+    
+    
     
     
 };

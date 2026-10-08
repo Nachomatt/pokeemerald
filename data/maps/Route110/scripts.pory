@@ -989,3 +989,280 @@ Route110_Text_KeepAnEyeOutForRival:
 	.string "See you again, {PLAYER}{KUN}!$"
 
 `
+
+script Route110_EventScript_Nacho1
+{
+	lock
+	fadeoutbgm(0)
+	setvar(VAR_TEMP_0, 1)
+	goto(Route110_EventScript_NachoEncounter)
+}
+script Route110_EventScript_Nacho2
+{
+	lock
+	fadeoutbgm(0)
+	setvar(VAR_TEMP_0, 2)
+	goto(Route110_EventScript_NachoEncounter)
+}
+script Route110_EventScript_Nacho3
+{
+	lock
+	fadeoutbgm(0)
+	setvar(VAR_TEMP_0, 3)
+	goto(Route110_EventScript_NachoEncounter)
+}
+script Route110_EventScript_Nacho4
+{
+	lock
+	fadeoutbgm(0)
+	setvar(VAR_TEMP_0, 4)
+	goto(Route110_EventScript_NachoEncounter)
+}
+script Route110_EventScript_Nacho5
+{
+	lock
+	fadeoutbgm(0)
+	setvar(VAR_TEMP_0, 5)
+	goto(Route110_EventScript_NachoEncounter)
+}
+
+script Route110_EventScript_NachoEncounter
+{
+	addobject(LOCALID_ROUTE110_NACHO)
+	call_if_eq(VAR_TEMP_0, 1, Route110_EventScript_NachoApproachPlayer1)
+	call_if_eq(VAR_TEMP_0, 2, Route110_EventScript_NachoApproachPlayer2)
+	call_if_eq(VAR_TEMP_0, 3, Route110_EventScript_NachoApproachPlayer3)
+	call_if_eq(VAR_TEMP_0, 4, Route110_EventScript_NachoApproachPlayer4)
+	call_if_eq(VAR_TEMP_0, 5, Route110_EventScript_NachoApproachPlayer5)
+	waitmovement(LOCALID_ROUTE110_NACHO)
+	msgbox("???: Heya.")
+	playbgm(MUS_CAVE_OF_ORIGIN, FALSE)
+	applymovement(LOCALID_PLAYER, Route110_EventScript_PlayerTurnsAround)
+	msgbox("???: Have I seen you around before?
+			You look familiar. Strange, huh? Heh.
+			I'm NACHO. Pleasure to meet ya, kid.
+			What's your name?
+			")
+	msgbox("...........................")
+	msgbox("NACHO: {PLAYER}, huh? Sounds familiar.
+			Welp, nice to meet you, {PLAYER}.")
+	msgbox("I'm actually in a bit of trouble.
+			You see, I got here from a wayy 
+			different region. Good friend of mine
+			sent me to investigate some stuff here.")
+	msgbox("But ehh, I can't contact her and most
+			of my Pokémon are missing.
+			Speaking of contact, got a POKéNAV?")
+	msgbox("No? What, kids don't have cellphones
+			these days? Man. Your mom is stingy huh.
+			Welp. I got a spare one, you can have it.")
+	playfanfare(MUS_OBTAIN_ITEM)
+	msgbox("Obtained the POKéNAV from NACHO!")
+	waitfanfare
+	setflag(FLAG_SYS_POKENAV_GET)
+	setflag(FLAG_RECEIVED_POKENAV)
+	setflag(FLAG_ADDED_MATCH_CALL_TO_POKENAV)
+	msgbox("NACHO: Thing's pretty neat. You can 
+			register people on it. Useful for 
+			staying in touch with people. 
+			Can't order pizza with it though. Lame.
+			Aaaanyways, I heard there was some
+			stuff happening in SLATEPORT CITY.
+			Dunno if you're busy, but probably
+			worth it to check out.
+			Anyways, see you later, FERALIGATR.")
+	closemessage
+	call_if_eq(VAR_TEMP_0, 1, Route110_EventScript_NachoExitsPlayer1)
+	call_if_eq(VAR_TEMP_0, 2, Route110_EventScript_NachoExitsPlayer2)
+	call_if_eq(VAR_TEMP_0, 3, Route110_EventScript_NachoExitsPlayer3)
+	call_if_eq(VAR_TEMP_0, 4, Route110_EventScript_NachoExitsPlayer4)
+	call_if_eq(VAR_TEMP_0, 5, Route110_EventScript_NachoExitsPlayer5)
+	removeobject(LOCALID_ROUTE110_NACHO)
+	setvar(VAR_NACHOSTATE110, 1)
+	playbgm(MUS_ROUTE110, TRUE)
+	release
+
+}
+
+script Route110_EventScript_NachoApproachPlayer1
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer1)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoApproachPlayer2
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer2)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoApproachPlayer3
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer3)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoApproachPlayer4
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer4)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoApproachPlayer5
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer5)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoExitsPlayer1
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer1)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoExitsPlayer2
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer2)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoExitsPlayer3
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer3)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoExitsPlayer4
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer4)
+	waitmovement(0)
+}
+script Route110_EventScript_NachoExitsPlayer5
+{
+	applymovement(LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer5)
+	waitmovement(0)
+}
+
+movement Route110_EventScript_PlayerTurnsAround
+{
+	face_left
+}
+
+
+
+movement Route110_EventScript_NachoMovesAwayFromPlayer1
+{
+	walk_down
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+}
+movement Route110_EventScript_NachoMovesAwayFromPlayer2
+{
+	walk_down
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+}
+movement Route110_EventScript_NachoMovesAwayFromPlayer3
+{
+	walk_down
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+}
+movement Route110_EventScript_NachoMovesAwayFromPlayer4
+{
+	walk_up
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+}
+movement Route110_EventScript_NachoMovesAwayFromPlayer5
+{
+	walk_up
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+}
+
+movement Route110_EventScript_NachoMovestoPlayer1
+{
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_right
+}
+movement Route110_EventScript_NachoMovestoPlayer2
+{
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+}
+movement Route110_EventScript_NachoMovestoPlayer3
+{
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+}
+movement Route110_EventScript_NachoMovestoPlayer4
+{
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_right
+}
+movement Route110_EventScript_NachoMovestoPlayer5
+{
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+}

@@ -3114,6 +3114,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 defenderHoldEffect;
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
+    u8 types[2];
     u8 attackerHoldEffectParam;
 
     if (!powerOverride)
@@ -3232,6 +3233,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defense = (150 * defense) / 100;
     if (defender->ability == ABILITY_FUR_COAT)
         defense *= 2;
+    if ((defender->types[0] == TYPE_ICE || defender->types[1] == TYPE_ICE) && (gBattleWeather & B_WEATHER_HAIL))
+        defense *= 1.5;
+    if ((defender->types[0] == TYPE_ROCK || defender->types[1] == TYPE_ROCK) && (gBattleWeather & B_WEATHER_SANDSTORM))
+        spDefense *= 1.5;
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
         gBattleMovePower /= 2;
     if (type == TYPE_FIRE && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_WATER_SPORT, 0))

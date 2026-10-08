@@ -339,6 +339,36 @@ const struct SpriteTemplate gFireBlastRingSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireRing,
 };
+static const union AnimCmd sAnim_PoisonProjectile[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const sAnims_PoisonProjectile[] =
+{
+    sAnim_PoisonProjectile,
+};
+static const union AffineAnimCmd sAffineAnim_PoisonProjectile[] =
+{
+    AFFINEANIMCMD_FRAME(0x160, 0x160, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 10),
+    AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
+    AFFINEANIMCMD_JUMP(0),
+};
+static const union AffineAnimCmd *const sAffineAnims_PoisonProjectile[] =
+{
+    sAffineAnim_PoisonProjectile,
+};
+const struct SpriteTemplate gToxicRingSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_PoisonProjectile,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireRing,
+};
 
 static const union AnimCmd sAnim_FireBlastCross[] =
 {
@@ -377,6 +407,16 @@ const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FireBlastCross,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireCross,
+};
+const struct SpriteTemplate gToxicCrossSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_PoisonProjectile,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireCross,

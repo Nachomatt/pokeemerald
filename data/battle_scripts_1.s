@@ -237,6 +237,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectLusterPurge			 @ EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2
 	.4byte BattleScript_EffectMistBall			 	 @ EFFECT_SPECIAL_ATTACK_DOWN_HIT_2
 	.4byte BattleScript_EffectSheerCold			 	 @ EFFECT_SPEED_DOWN_HIT_2
+	.4byte BattleScript_EffectLunarBeam				 @ EFFECT_LUNAR_BEAM
+	.4byte BattleScript_EffectBurnHit			 	 @ EFFECT_METEOR_BLAST
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2057,6 +2059,25 @@ BattleScript_SolarBeamOnFirstTurn::
 	ppreduce
 	goto BattleScript_TwoTurnMovesSecondTurn
 
+
+BattleScript_EffectLunarBeam::
+	jumpifabilitypresent ABILITY_CLOUD_NINE, BattleScript_LunarBeamDecideTurn
+	jumpifabilitypresent ABILITY_AIR_LOCK, BattleScript_LunarBeamDecideTurn
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_HAIL, BattleScript_LunarBeamOnFirstTurn
+BattleScript_LunarBeamDecideTurn::
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_LUNAR_BEAM
+	call BattleScriptFirstChargingTurn
+	goto BattleScript_MoveEnd
+BattleScript_LunarBeamOnFirstTurn::
+	orword gHitMarker, HITMARKER_CHARGING
+	setmoveeffect MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+	ppreduce
+	goto BattleScript_TwoTurnMovesSecondTurn
+
+
 BattleScript_EffectThunder::
 	setmoveeffect MOVE_EFFECT_PARALYSIS
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
@@ -2795,6 +2816,14 @@ BattleScript_EffectWaterSport::
 	printfromtable gSportsUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_WaterSportHit::
+	attackcanceler
+	attackstring
+	settypebasedhalvers BattleScript_ButItFailed
+	printfromtable gSportsUsedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_EffectHit
 
 BattleScript_EffectPoisonFang::
 	setmoveeffect MOVE_EFFECT_TOXIC

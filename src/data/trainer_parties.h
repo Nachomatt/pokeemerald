@@ -4481,16 +4481,20 @@ static const struct TrainerMonItemCustomMoves sParty_Wallace[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_Andrew[] = {
     {
-    .iv = 0,
+    .iv = 50,
     .lvl = 5,
     .species = SPECIES_RATTATA,
-    .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP}
+    .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP},
+    .abilitynums = 0,
+    .nature = NATURE_RELAXED,
     },
     {
-    .iv = 0,
+    .iv = 50,
     .lvl = 5,
     .species = SPECIES_POOCHYENA,
-    .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK}
+    .moves = {MOVE_TACKLE, MOVE_SAND_ATTACK},
+    .abilitynums = 0,
+    .nature = NATURE_BRAVE,
     },
 };
 
@@ -9526,13 +9530,15 @@ static const struct TrainerMonItemCustomMoves sParty_Marcos[] = {
     .iv = 100,
     .lvl = 8,
     .species = SPECIES_PICHU,
-    .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_FLATTER }
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_FLATTER },
+    .abilitynums = 0 // First Ability
     },
     {
     .iv = 100,
     .lvl = 6,
     .species = SPECIES_ELECTRIKE,
-    .moves = {MOVE_THUNDER_SHOCK, MOVE_BITE, MOVE_QUICK_ATTACK }
+    .moves = {MOVE_THUNDER_SHOCK, MOVE_BITE, MOVE_QUICK_ATTACK },
+    .abilitynums = 1
     },
     {
     .iv = 100,

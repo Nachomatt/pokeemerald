@@ -1,7 +1,6 @@
 raw `
 Route103_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route103_OnTransition
-	map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad
 	.byte 0
 
 Route103_OnTransition:
@@ -9,15 +8,6 @@ Route103_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
 	call Route103_EventScriptOnTransition
 	end
-
-Route103_OnLoad:
-	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
-	end
-
-Route103_EventScript_OpenAlteringCave::
-	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
-	setmetatile 45, 6, METATILE_General_CaveEntrance_Bottom, FALSE
-	return
 
 Route103_EventScript_Rival::
 	lockall
@@ -399,16 +389,12 @@ script Route103_EventScriptOnTransition
 	setvar(VAR_TEMP_0, 0)
   }
 }
-
-script Route103_EventScript_Poochyena
+script Route103_EventScript_EggLadyHouse
 {
 	lock
-	faceplayer
-	playmoncry(SPECIES_POOCHYENA, 0)
-	msgbox(format("POOCHYENA: Grraowr!"))
+	msgbox(format("Come and rest for a bit!\nEveryone is welcome <3."))
 	closemessage
 	release
-
 }
 
 script Route103_EventScript_Shoredude
@@ -448,6 +434,20 @@ script Route103_EventScript_Tulip
 	msgbox(format("Haa... The smell of flowers.\pSoothing, isn't it? Hehe."))
 	closemessage
 }
+
+script Route103_EventScript_NachoCave
+{
+	lock
+	msgbox(format("???: .... Where even am I?\nThis isn't the Rogue region..\p"
+	"If I'm here, that means that she is here too.\p"
+	"Gotta be careful.\pIt seems all my Pokémon are gone as well.\p"
+	"Heh. All but you, old friend."))
+	 closemessage
+	 playmoncry(SPECIES_SWAMPERT,0)
+	 waitmoncry
+	 release
+}
+
 
 script Route103_RivalFight1
 {
@@ -575,7 +575,7 @@ text Route103_MarkusDefeated
 
 text Route103_AndrewIntro
 {
-	"My shorts got wet because  I fell off \nthe bridge... \p Maybe a heated battle can dry me off!"
+	"My shorts got wet because  I fell off \nthe bridge... \pMaybe a heated battle can dry me off!"
 }
 
 text Route103_AndrewDefeated

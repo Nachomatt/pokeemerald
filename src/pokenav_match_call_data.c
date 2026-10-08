@@ -176,29 +176,29 @@ static void MatchCall_GetNameAndDescByRematchIdx(u32, const u8 **, const u8 **);
 
 // .rodata
 
-static const match_call_text_data_t sMrStoneTextScripts[] = {
-    { MatchCall_Text_MrStone1,  ALWAYS_AVAILABLE,                    FLAG_ENABLE_MR_STONE_POKENAV },
-    { MatchCall_Text_MrStone2,  FLAG_ENABLE_MR_STONE_POKENAV,        NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone3,  FLAG_DELIVERED_STEVEN_LETTER,        NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone4,  FLAG_RECEIVED_EXP_SHARE,             NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone5,  FLAG_RECEIVED_HM_STRENGTH,           NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone6,  FLAG_DEFEATED_PETALBURG_GYM,         NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone7,  FLAG_RECEIVED_CASTFORM,              NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone8,  FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone9,  FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone10, FLAG_DEFEATED_SOOTOPOLIS_GYM,        NO_FLAG_TO_SET },
-    { MatchCall_Text_MrStone11, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
+static const match_call_text_data_t sNachoTextScripts[] = {
+    { MatchCall_Text_Nacho1,  ALWAYS_AVAILABLE,                    FLAG_ENABLE_MR_STONE_POKENAV },
+    { MatchCall_Text_Nacho2,  FLAG_ENABLE_MR_STONE_POKENAV,        NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho3,  FLAG_DELIVERED_STEVEN_LETTER,        NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho4,  FLAG_RECEIVED_EXP_SHARE,             NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho5,  FLAG_RECEIVED_HM_STRENGTH,           NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho6,  FLAG_DEFEATED_PETALBURG_GYM,         NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho7,  FLAG_RECEIVED_CASTFORM,              NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho8,  FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho9,  FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho10, FLAG_DEFEATED_SOOTOPOLIS_GYM,        NO_FLAG_TO_SET },
+    { MatchCall_Text_Nacho11, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
     MATCH_CALL_TEXT_END
 };
 
-static const struct MatchCallStructNPC sMrStoneMatchCallHeader =
+static const struct MatchCallStructNPC sNachoMatchCallHeader =
 {
     .type = MC_TYPE_NPC,
-    .mapSec = MAPSEC_RUSTBORO_CITY,
+    .mapSec = MAPSEC_NONE,
     .flag = 0xFFFF,
-    .desc = gText_MrStoneMatchCallDesc,
-    .name = gText_MrStoneMatchCallName,
-    .textData = sMrStoneTextScripts
+    .desc = gText_NachoMatchCallDesc,
+    .name = gText_NachoMatchCallName,
+    .textData = sNachoTextScripts
 };
 
 static const match_call_text_data_t sNormanTextScripts[] = {
@@ -595,7 +595,7 @@ static const struct MatchCallStructTrainer sWallaceMatchCallHeader =
 };
 
 static const match_call_t sMatchCallHeaders[] = {
-    [MC_HEADER_MR_STONE]   = {.npc    = &sMrStoneMatchCallHeader},
+    [MC_HEADER_NACHO]   = {.npc    = &sNachoMatchCallHeader},
     [MC_HEADER_PROF_BIRCH] = {.birch  = &sProfBirchMatchCallHeader},
     [MC_HEADER_BRENDAN]    = {.rival  = &sBrendanMatchCallHeader},
     [MC_HEADER_MAY]        = {.rival  = &sMayMatchCallHeader},

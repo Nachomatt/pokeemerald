@@ -1976,3 +1976,500 @@ Route110_Text_KeepAnEyeOutForRival:
 	.string "Well, I had better get going.\n"
 # 989 "data/maps/Route110/scripts.pory"
 	.string "See you again, {PLAYER}{KUN}!$"
+
+Route110_EventScript_Nacho1::
+# 995 "data/maps/Route110/scripts.pory"
+	lock
+# 996 "data/maps/Route110/scripts.pory"
+	fadeoutbgm 0
+# 997 "data/maps/Route110/scripts.pory"
+	setvar VAR_TEMP_0, 1
+# 998 "data/maps/Route110/scripts.pory"
+	goto Route110_EventScript_NachoEncounter
+	return
+
+
+Route110_EventScript_Nacho2::
+# 1002 "data/maps/Route110/scripts.pory"
+	lock
+# 1003 "data/maps/Route110/scripts.pory"
+	fadeoutbgm 0
+# 1004 "data/maps/Route110/scripts.pory"
+	setvar VAR_TEMP_0, 2
+# 1005 "data/maps/Route110/scripts.pory"
+	goto Route110_EventScript_NachoEncounter
+	return
+
+
+Route110_EventScript_Nacho3::
+# 1009 "data/maps/Route110/scripts.pory"
+	lock
+# 1010 "data/maps/Route110/scripts.pory"
+	fadeoutbgm 0
+# 1011 "data/maps/Route110/scripts.pory"
+	setvar VAR_TEMP_0, 3
+# 1012 "data/maps/Route110/scripts.pory"
+	goto Route110_EventScript_NachoEncounter
+	return
+
+
+Route110_EventScript_Nacho4::
+# 1016 "data/maps/Route110/scripts.pory"
+	lock
+# 1017 "data/maps/Route110/scripts.pory"
+	fadeoutbgm 0
+# 1018 "data/maps/Route110/scripts.pory"
+	setvar VAR_TEMP_0, 4
+# 1019 "data/maps/Route110/scripts.pory"
+	goto Route110_EventScript_NachoEncounter
+	return
+
+
+Route110_EventScript_Nacho5::
+# 1023 "data/maps/Route110/scripts.pory"
+	lock
+# 1024 "data/maps/Route110/scripts.pory"
+	fadeoutbgm 0
+# 1025 "data/maps/Route110/scripts.pory"
+	setvar VAR_TEMP_0, 5
+# 1026 "data/maps/Route110/scripts.pory"
+	goto Route110_EventScript_NachoEncounter
+	return
+
+
+Route110_EventScript_NachoEncounter::
+# 1031 "data/maps/Route110/scripts.pory"
+	addobject LOCALID_ROUTE110_NACHO
+# 1032 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 1, Route110_EventScript_NachoApproachPlayer1
+# 1033 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 2, Route110_EventScript_NachoApproachPlayer2
+# 1034 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 3, Route110_EventScript_NachoApproachPlayer3
+# 1035 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 4, Route110_EventScript_NachoApproachPlayer4
+# 1036 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 5, Route110_EventScript_NachoApproachPlayer5
+# 1037 "data/maps/Route110/scripts.pory"
+	waitmovement LOCALID_ROUTE110_NACHO
+# 1038 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_0
+# 1039 "data/maps/Route110/scripts.pory"
+	playbgm MUS_CAVE_OF_ORIGIN, FALSE
+# 1040 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_PLAYER, Route110_EventScript_PlayerTurnsAround
+# 1041 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_1
+# 1046 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_2
+# 1047 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_3
+# 1049 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_4
+# 1053 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_5
+# 1056 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_6
+# 1059 "data/maps/Route110/scripts.pory"
+	playfanfare MUS_OBTAIN_ITEM
+# 1060 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_7
+# 1061 "data/maps/Route110/scripts.pory"
+	waitfanfare
+# 1062 "data/maps/Route110/scripts.pory"
+	setflag FLAG_SYS_POKENAV_GET
+# 1063 "data/maps/Route110/scripts.pory"
+	setflag FLAG_RECEIVED_POKENAV
+# 1064 "data/maps/Route110/scripts.pory"
+	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
+# 1065 "data/maps/Route110/scripts.pory"
+	msgbox Route110_EventScript_NachoEncounter_Text_8
+# 1074 "data/maps/Route110/scripts.pory"
+	closemessage
+# 1075 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 1, Route110_EventScript_NachoExitsPlayer1
+# 1076 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 2, Route110_EventScript_NachoExitsPlayer2
+# 1077 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 3, Route110_EventScript_NachoExitsPlayer3
+# 1078 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 4, Route110_EventScript_NachoExitsPlayer4
+# 1079 "data/maps/Route110/scripts.pory"
+	call_if_eq VAR_TEMP_0, 5, Route110_EventScript_NachoExitsPlayer5
+# 1080 "data/maps/Route110/scripts.pory"
+	removeobject LOCALID_ROUTE110_NACHO
+# 1081 "data/maps/Route110/scripts.pory"
+	setvar VAR_NACHOSTATE110, 1
+# 1082 "data/maps/Route110/scripts.pory"
+	playbgm MUS_ROUTE110, TRUE
+# 1083 "data/maps/Route110/scripts.pory"
+	release
+	return
+
+
+Route110_EventScript_NachoApproachPlayer1::
+# 1089 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer1
+# 1090 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoApproachPlayer2::
+# 1094 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer2
+# 1095 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoApproachPlayer3::
+# 1099 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer3
+# 1100 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoApproachPlayer4::
+# 1104 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer4
+# 1105 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoApproachPlayer5::
+# 1109 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovestoPlayer5
+# 1110 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoExitsPlayer1::
+# 1114 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer1
+# 1115 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoExitsPlayer2::
+# 1119 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer2
+# 1120 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoExitsPlayer3::
+# 1124 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer3
+# 1125 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoExitsPlayer4::
+# 1129 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer4
+# 1130 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_EventScript_NachoExitsPlayer5::
+# 1134 "data/maps/Route110/scripts.pory"
+	applymovement LOCALID_ROUTE110_NACHO, Route110_EventScript_NachoMovesAwayFromPlayer5
+# 1135 "data/maps/Route110/scripts.pory"
+	waitmovement 0
+	return
+
+
+# 1138 "data/maps/Route110/scripts.pory"
+Route110_EventScript_PlayerTurnsAround:
+# 1140 "data/maps/Route110/scripts.pory"
+	face_left
+	step_end
+
+# 1145 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovesAwayFromPlayer1:
+# 1147 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1148 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1149 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1150 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1151 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1152 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1153 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1154 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1155 "data/maps/Route110/scripts.pory"
+	walk_down
+	step_end
+
+# 1157 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovesAwayFromPlayer2:
+# 1159 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1160 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1161 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1162 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1163 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1164 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1165 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1166 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1167 "data/maps/Route110/scripts.pory"
+	walk_down
+	step_end
+
+# 1169 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovesAwayFromPlayer3:
+# 1171 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1172 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1173 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1174 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1175 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1176 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1177 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1178 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1179 "data/maps/Route110/scripts.pory"
+	walk_down
+	step_end
+
+# 1181 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovesAwayFromPlayer4:
+# 1183 "data/maps/Route110/scripts.pory"
+	walk_up
+# 1184 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1185 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1186 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1187 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1188 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1189 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1190 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1191 "data/maps/Route110/scripts.pory"
+	walk_down
+	step_end
+
+# 1193 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovesAwayFromPlayer5:
+# 1195 "data/maps/Route110/scripts.pory"
+	walk_up
+# 1196 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1197 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1198 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1199 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1200 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1201 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1202 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1203 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1204 "data/maps/Route110/scripts.pory"
+	walk_down
+	step_end
+
+# 1207 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovestoPlayer1:
+# 1209 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1210 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1211 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1212 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1213 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1214 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1215 "data/maps/Route110/scripts.pory"
+	walk_up
+# 1216 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1217 "data/maps/Route110/scripts.pory"
+	walk_right
+	step_end
+
+# 1219 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovestoPlayer2:
+# 1221 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1222 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1223 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1224 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1225 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1226 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1227 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1228 "data/maps/Route110/scripts.pory"
+	walk_right
+	step_end
+
+# 1230 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovestoPlayer3:
+# 1232 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1233 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1234 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1235 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1236 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1237 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1238 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1239 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1240 "data/maps/Route110/scripts.pory"
+	walk_right
+	step_end
+
+# 1242 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovestoPlayer4:
+# 1244 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1245 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1246 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1247 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1248 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1249 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1250 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1251 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1252 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1253 "data/maps/Route110/scripts.pory"
+	walk_right
+	step_end
+
+# 1255 "data/maps/Route110/scripts.pory"
+Route110_EventScript_NachoMovestoPlayer5:
+# 1257 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1258 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1259 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1260 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1261 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1262 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1263 "data/maps/Route110/scripts.pory"
+	walk_right
+# 1264 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1265 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1266 "data/maps/Route110/scripts.pory"
+	walk_down
+# 1267 "data/maps/Route110/scripts.pory"
+	walk_right
+	step_end
+
+Route110_EventScript_NachoEncounter_Text_0:
+# 1038 "data/maps/Route110/scripts.pory"
+	.string "???: Heya.$"
+
+Route110_EventScript_NachoEncounter_Text_1:
+# 1041 "data/maps/Route110/scripts.pory"
+	.string "???: Have I seen you around before?\n"
+	.string "You look familiar. Strange, huh? Heh.\l"
+	.string "I'm NACHO. Pleasure to meet ya, kid.\l"
+	.string "What's your name?$"
+
+Route110_EventScript_NachoEncounter_Text_2:
+# 1046 "data/maps/Route110/scripts.pory"
+	.string "...........................$"
+
+Route110_EventScript_NachoEncounter_Text_3:
+# 1047 "data/maps/Route110/scripts.pory"
+	.string "NACHO: {PLAYER}, huh? Sounds familiar.\n"
+	.string "Welp, nice to meet you, {PLAYER}.$"
+
+Route110_EventScript_NachoEncounter_Text_4:
+# 1049 "data/maps/Route110/scripts.pory"
+	.string "I'm actually in a bit of trouble.\n"
+	.string "You see, I got here from a wayy \l"
+	.string "different region. Good friend of mine\l"
+	.string "sent me to investigate some stuff here.$"
+
+Route110_EventScript_NachoEncounter_Text_5:
+# 1053 "data/maps/Route110/scripts.pory"
+	.string "But ehh, I can't contact her and most\n"
+	.string "of my Pokémon are missing.\l"
+	.string "Speaking of contact, got a POKéNAV?$"
+
+Route110_EventScript_NachoEncounter_Text_6:
+# 1056 "data/maps/Route110/scripts.pory"
+	.string "No? What, kids don't have cellphones\n"
+	.string "these days? Man. Your mom is stingy huh.\l"
+	.string "Welp. I got a spare one, you can have it.$"
+
+Route110_EventScript_NachoEncounter_Text_7:
+# 1060 "data/maps/Route110/scripts.pory"
+	.string "Obtained the POKéNAV from NACHO!$"
+
+Route110_EventScript_NachoEncounter_Text_8:
+# 1065 "data/maps/Route110/scripts.pory"
+	.string "NACHO: Thing's pretty neat. You can \n"
+	.string "register people on it. Useful for \l"
+	.string "staying in touch with people. \l"
+	.string "Can't order pizza with it though. Lame.\l"
+	.string "Aaaanyways, I heard there was some\l"
+	.string "stuff happening in SLATEPORT CITY.\l"
+	.string "Dunno if you're busy, but probably\l"
+	.string "worth it to check out.\l"
+	.string "Anyways, see you later, FERALIGATR.$"

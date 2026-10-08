@@ -215,6 +215,8 @@
 #define FLAG_DIVER_AFFECTED         (1 << 7)
 #define FLAG_DATED_AFFECTED         (1 << 8)
 #define FLAG_WEATHER_AFFECTED       (1 << 9)
+#define FLAG_LUNAR_AFFECTED         (1 << 10)
+
 
 
 

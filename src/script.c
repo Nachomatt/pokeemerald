@@ -179,6 +179,11 @@ u32 ScriptReadWord(struct ScriptContext *ctx)
     return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
 }
 
+void GetObjectEventTrainerRangeFromTemplate(void)
+{
+    gSpecialVar_Result = gMapHeader.events->objectEvents[gSpecialVar_LastTalked - 1].trainerRange_berryTreeId;
+}
+
 void LockPlayerFieldControls(void)
 {
     sLockFieldControls = TRUE;

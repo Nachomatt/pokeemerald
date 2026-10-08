@@ -5,7 +5,7 @@
   "music": "MUS_RG_SEVII_CAVE",
   "region_map_section": "MAPSEC_ALTERING_CAVE",
   "requires_flash": false,
-  "weather": "WEATHER_NONE",
+  "weather": "WEATHER_FOG_DIAGONAL",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": true,
   "allow_escaping": true,
@@ -13,7 +13,22 @@
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
+  "object_events": [
+    {
+      "local_id": "AlteringCaveItem",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 7,
+      "y": 14,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HARD_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ALTERINGCAVE_HARDSTONE"
+    }
+  ],
   "warp_events": [
     {
       "x": 18,
@@ -24,5 +39,14 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 30,
+      "y": 4,
+      "elevation": 0,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_ALTERINGCAVE_HEARTSCALE"
+    }
+  ]
 }

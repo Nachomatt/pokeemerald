@@ -745,10 +745,12 @@ OldaleTown_EventScript_RanchLady::
 	faceplayer
 # 383 "data/maps/OldaleTown/scripts.pory"
 	goto_if_unset FLAG_RECEIVED_POKEDEX_FROM_BIRCH, OldaleTown_EventScript_RanchLady_2
-# 389 "data/maps/OldaleTown/scripts.pory"
-	msgbox OldaleTown_EventScript_RanchLady_Text_1
+# 387 "data/maps/OldaleTown/scripts.pory"
+	goto_if_unset FLAG_EGGLADY, OldaleTown_EventScript_RanchLady_3
+# 393 "data/maps/OldaleTown/scripts.pory"
+	msgbox OldaleTown_EventScript_RanchLady_Text_2
 OldaleTown_EventScript_RanchLady_1:
-# 391 "data/maps/OldaleTown/scripts.pory"
+# 397 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
@@ -757,142 +759,147 @@ OldaleTown_EventScript_RanchLady_2:
 	msgbox OldaleTown_EventScript_RanchLady_Text_0
 	goto OldaleTown_EventScript_RanchLady_1
 
+OldaleTown_EventScript_RanchLady_3:
+# 389 "data/maps/OldaleTown/scripts.pory"
+	msgbox OldaleTown_EventScript_RanchLady_Text_1
+	goto OldaleTown_EventScript_RanchLady_1
 
-# 394 "data/maps/OldaleTown/scripts.pory"
+
+# 400 "data/maps/OldaleTown/scripts.pory"
 PlayerMovementRanch:
-# 396 "data/maps/OldaleTown/scripts.pory"
+# 402 "data/maps/OldaleTown/scripts.pory"
 	walk_down
-# 397 "data/maps/OldaleTown/scripts.pory"
+# 403 "data/maps/OldaleTown/scripts.pory"
 	face_up
 	step_end
 
-# 401 "data/maps/OldaleTown/scripts.pory"
+# 407 "data/maps/OldaleTown/scripts.pory"
 RanchLadyMovement:
-# 403 "data/maps/OldaleTown/scripts.pory"
-	walk_left
-# 404 "data/maps/OldaleTown/scripts.pory"
-	face_down
-	step_end
-
-# 406 "data/maps/OldaleTown/scripts.pory"
-RanchLadyMovement2:
-# 408 "data/maps/OldaleTown/scripts.pory"
-	walk_right
 # 409 "data/maps/OldaleTown/scripts.pory"
+	walk_left
+# 410 "data/maps/OldaleTown/scripts.pory"
 	face_down
 	step_end
 
-# 411 "data/maps/OldaleTown/scripts.pory"
-RanchLadyMovement3:
-# 413 "data/maps/OldaleTown/scripts.pory"
-	face_left
+# 412 "data/maps/OldaleTown/scripts.pory"
+RanchLadyMovement2:
 # 414 "data/maps/OldaleTown/scripts.pory"
+	walk_right
+# 415 "data/maps/OldaleTown/scripts.pory"
+	face_down
+	step_end
+
+# 417 "data/maps/OldaleTown/scripts.pory"
+RanchLadyMovement3:
+# 419 "data/maps/OldaleTown/scripts.pory"
+	face_left
+# 420 "data/maps/OldaleTown/scripts.pory"
 	emote_exclamation_mark
 	step_end
 
 OldaleTown_EventScript_RanchLadyTrigger::
-# 420 "data/maps/OldaleTown/scripts.pory"
+# 426 "data/maps/OldaleTown/scripts.pory"
 	goto_if_unset FLAG_RECEIVED_POKEDEX_FROM_BIRCH, OldaleTown_EventScript_RanchLadyTrigger_1
 	return
 
 OldaleTown_EventScript_RanchLadyTrigger_1:
-# 422 "data/maps/OldaleTown/scripts.pory"
-	lock
-# 423 "data/maps/OldaleTown/scripts.pory"
-	playse SE_PIN
-# 424 "data/maps/OldaleTown/scripts.pory"
-	applymovement 4, RanchLadyMovement3
-# 425 "data/maps/OldaleTown/scripts.pory"
-	waitmovement 0
-# 426 "data/maps/OldaleTown/scripts.pory"
-	msgbox OldaleTown_EventScript_RanchLadyTrigger_Text_0
-# 427 "data/maps/OldaleTown/scripts.pory"
-	closemessage
 # 428 "data/maps/OldaleTown/scripts.pory"
-	applymovement LOCALID_PLAYER, PlayerMovementRanch
+	lock
 # 429 "data/maps/OldaleTown/scripts.pory"
-	waitmovement 0
+	playse SE_PIN
 # 430 "data/maps/OldaleTown/scripts.pory"
-	applymovement 4, RanchLadyMovement
+	applymovement 4, RanchLadyMovement3
 # 431 "data/maps/OldaleTown/scripts.pory"
 	waitmovement 0
 # 432 "data/maps/OldaleTown/scripts.pory"
-	msgbox OldaleTown_EventScript_RanchLadyTrigger_Text_1
+	msgbox OldaleTown_EventScript_RanchLadyTrigger_Text_0
 # 433 "data/maps/OldaleTown/scripts.pory"
 	closemessage
 # 434 "data/maps/OldaleTown/scripts.pory"
-	applymovement 4, RanchLadyMovement2
+	applymovement LOCALID_PLAYER, PlayerMovementRanch
 # 435 "data/maps/OldaleTown/scripts.pory"
 	waitmovement 0
 # 436 "data/maps/OldaleTown/scripts.pory"
+	applymovement 4, RanchLadyMovement
+# 437 "data/maps/OldaleTown/scripts.pory"
+	waitmovement 0
+# 438 "data/maps/OldaleTown/scripts.pory"
+	msgbox OldaleTown_EventScript_RanchLadyTrigger_Text_1
+# 439 "data/maps/OldaleTown/scripts.pory"
+	closemessage
+# 440 "data/maps/OldaleTown/scripts.pory"
+	applymovement 4, RanchLadyMovement2
+# 441 "data/maps/OldaleTown/scripts.pory"
+	waitmovement 0
+# 442 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_FootprintsMan::
-# 443 "data/maps/OldaleTown/scripts.pory"
+# 449 "data/maps/OldaleTown/scripts.pory"
 	lock
-# 444 "data/maps/OldaleTown/scripts.pory"
+# 450 "data/maps/OldaleTown/scripts.pory"
 	faceplayer
-# 445 "data/maps/OldaleTown/scripts.pory"
+# 451 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_FootprintsMan_Text_0
-# 446 "data/maps/OldaleTown/scripts.pory"
+# 452 "data/maps/OldaleTown/scripts.pory"
 	closemessage
-# 447 "data/maps/OldaleTown/scripts.pory"
+# 453 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_Kirlia::
-# 452 "data/maps/OldaleTown/scripts.pory"
-	lock
-# 453 "data/maps/OldaleTown/scripts.pory"
-	faceplayer
-# 454 "data/maps/OldaleTown/scripts.pory"
-	playmoncry SPECIES_KIRLIA, 0
-# 455 "data/maps/OldaleTown/scripts.pory"
-	msgbox OldaleTown_Kirlia_Text_0
-# 456 "data/maps/OldaleTown/scripts.pory"
-	waitmoncry
-# 457 "data/maps/OldaleTown/scripts.pory"
-	closemessage
 # 458 "data/maps/OldaleTown/scripts.pory"
+	lock
+# 459 "data/maps/OldaleTown/scripts.pory"
+	faceplayer
+# 460 "data/maps/OldaleTown/scripts.pory"
+	playmoncry SPECIES_KIRLIA, 0
+# 461 "data/maps/OldaleTown/scripts.pory"
+	msgbox OldaleTown_Kirlia_Text_0
+# 462 "data/maps/OldaleTown/scripts.pory"
+	waitmoncry
+# 463 "data/maps/OldaleTown/scripts.pory"
+	closemessage
+# 464 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_Girl::
-# 463 "data/maps/OldaleTown/scripts.pory"
+# 469 "data/maps/OldaleTown/scripts.pory"
 	lock
-# 464 "data/maps/OldaleTown/scripts.pory"
+# 470 "data/maps/OldaleTown/scripts.pory"
 	faceplayer
-# 465 "data/maps/OldaleTown/scripts.pory"
+# 471 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_Girl_Text_0
-# 466 "data/maps/OldaleTown/scripts.pory"
+# 472 "data/maps/OldaleTown/scripts.pory"
 	closemessage
-# 467 "data/maps/OldaleTown/scripts.pory"
+# 473 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_MartEmployee::
-# 471 "data/maps/OldaleTown/scripts.pory"
+# 477 "data/maps/OldaleTown/scripts.pory"
 	lock
-# 472 "data/maps/OldaleTown/scripts.pory"
+# 478 "data/maps/OldaleTown/scripts.pory"
 	faceplayer
-# 473 "data/maps/OldaleTown/scripts.pory"
+# 479 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_MartEmployee_Text_0
-# 474 "data/maps/OldaleTown/scripts.pory"
+# 480 "data/maps/OldaleTown/scripts.pory"
 	closemessage
-# 475 "data/maps/OldaleTown/scripts.pory"
+# 481 "data/maps/OldaleTown/scripts.pory"
 	release
 	return
 
 
 OldaleTown_EventScript_HCNuzlocke::
-# 490 "data/maps/OldaleTown/scripts.pory"
+# 496 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_EventScript_HCNuzlocke_Text_0
-# 491 "data/maps/OldaleTown/scripts.pory"
+# 497 "data/maps/OldaleTown/scripts.pory"
 	closemessage
 	return
 
@@ -911,17 +918,29 @@ OldaleTown_EventScript_RanchLady_Text_1:
 	.string "Oh right, I gave my sister a Pokémon\n"
 	.string "egg. I hope she takes good care of it.$"
 
+OldaleTown_EventScript_RanchLady_Text_2:
+# 393 "data/maps/OldaleTown/scripts.pory"
+	.string "They seem to have calmed down. You\n"
+	.string "should be fine, probably. Maybe.\l"
+	.string "Hopefully. Possibly.\p"
+	.string "Oh my sister gave you the egg! How\n"
+	.string "sweet of her.\p"
+	.string "I believe she got it from some kind of\n"
+	.string "ranch.\p"
+	.string "You'll find the ranch on ROUTE 117, just\n"
+	.string "west of MAUVILLE CITY.$"
+
 OldaleTown_EventScript_RanchLadyTrigger_Text_0:
-# 426 "data/maps/OldaleTown/scripts.pory"
+# 432 "data/maps/OldaleTown/scripts.pory"
 	.string "Hold on there!$"
 
 OldaleTown_EventScript_RanchLadyTrigger_Text_1:
-# 432 "data/maps/OldaleTown/scripts.pory"
+# 438 "data/maps/OldaleTown/scripts.pory"
 	.string "The Pokémon are restless, I can't let\n"
 	.string "you go in there!$"
 
 OldaleTown_FootprintsMan_Text_0:
-# 445 "data/maps/OldaleTown/scripts.pory"
+# 451 "data/maps/OldaleTown/scripts.pory"
 	.string "I used to look for footprints\n"
 	.string "on ROUTE 102.\p"
 	.string "But the forest has grown so dense no\n"
@@ -929,18 +948,18 @@ OldaleTown_FootprintsMan_Text_0:
 	.string "Guess I gotta look for feet elsewhere..$"
 
 OldaleTown_Kirlia_Text_0:
-# 455 "data/maps/OldaleTown/scripts.pory"
+# 461 "data/maps/OldaleTown/scripts.pory"
 	.string "Liaa!$"
 
 OldaleTown_Girl_Text_0:
-# 465 "data/maps/OldaleTown/scripts.pory"
+# 471 "data/maps/OldaleTown/scripts.pory"
 	.string "My family lives in PETALBURG CITY.\p"
 	.string "It's gonna be harder for them to come\n"
 	.string "visit now.\p"
 	.string "Good riddance.$"
 
 OldaleTown_MartEmployee_Text_0:
-# 473 "data/maps/OldaleTown/scripts.pory"
+# 479 "data/maps/OldaleTown/scripts.pory"
 	.string "Hello there!\n"
 	.string "Huh? Free potions?\p"
 	.string "Oh that promotion ended many years\n"
@@ -948,14 +967,14 @@ OldaleTown_MartEmployee_Text_0:
 	.string "We do sell high quality goods though!$"
 
 OldaleTown_EventScript_HCNuzlocke_Text_0:
-# 490 "data/maps/OldaleTown/scripts.pory"
+# 496 "data/maps/OldaleTown/scripts.pory"
 	.string "Locke's House\n"
 	.string "Only real challengers allowed.$"
 
 OldaleTown_Text_MayMessage::
-# 479 "data/maps/OldaleTown/scripts.pory"
+# 485 "data/maps/OldaleTown/scripts.pory"
 	.string "MAY: C'mon, {PLAYER}!\pDid you get your Pokémon healed?\pLet's head back to the LAB!$"
 
 OldaleTown_Text_BrendanMessage::
-# 483 "data/maps/OldaleTown/scripts.pory"
+# 489 "data/maps/OldaleTown/scripts.pory"
 	.string "MAY: C'mon, {PLAYER}!\pDid you get your Pokémon healed?\pLet's head back to the LAB!$"

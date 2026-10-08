@@ -30,6 +30,8 @@ static void AnimPowerAbsorptionOrb(struct Sprite *);
 static void AnimSolarBeamBigOrb(struct Sprite *);
 static void AnimSolarBeamSmallOrb(struct Sprite *);
 static void AnimSolarBeamSmallOrb_Step(struct Sprite *);
+static void AnimLunarBeamSmallOrb(struct Sprite *);
+static void AnimLunarBeamSmallOrb_Step(struct Sprite *);
 static void AnimAbsorptionOrb(struct Sprite *);
 static void AnimAbsorptionOrb_Step(struct Sprite *);
 static void AnimHyperBeamOrb(struct Sprite *);
@@ -303,6 +305,16 @@ const struct SpriteTemplate gPowerAbsorptionOrbSpriteTemplate =
     .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
     .callback = AnimPowerAbsorptionOrb,
 };
+const struct SpriteTemplate gLunarAbsorptionOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
+    .anims = gPowerAbsorptionOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
+    .callback = AnimPowerAbsorptionOrb,
+};
 
 const struct SpriteTemplate gSolarBeamBigOrbSpriteTemplate =
 {
@@ -314,6 +326,29 @@ const struct SpriteTemplate gSolarBeamBigOrbSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSolarBeamBigOrb,
 };
+
+const struct SpriteTemplate gLunarBeamBigOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gSolarBeamBigOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSolarBeamBigOrb,
+};
+
+const struct SpriteTemplate gLunarBeamSmallOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ICICLE_SPEAR,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gSolarBeamBigOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimLunarBeamSmallOrb,
+};
+
 
 const struct SpriteTemplate gSolarBeamSmallOrbSpriteTemplate =
 {
@@ -2274,6 +2309,59 @@ static void AnimSolarBeamBigOrb(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
+
+
+static void AnimLunarBeamSmallOrb(struct Sprite *sprite)
+{
+    CMD_ARGS(x, y, duration, waveOffset);
+
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+    sprite->data[0] = cmd->duration;
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    InitAnimLinearTranslation(sprite);
+    sprite->data[5] = cmd->waveOffset;
+    sprite->callback = AnimLunarBeamSmallOrb_Step;
+    sprite->callback(sprite);
+}
+
+static void AnimLunarBeamSmallOrb_Step(struct Sprite *sprite)
+{
+    if (AnimTranslateLinear(sprite))
+    {
+        DestroySprite(sprite);
+    }
+    else
+    {
+        if (sprite->data[5] > 0x7F)
+            sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + 1;
+        else
+            sprite->subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + 6;
+
+        sprite->x2 += Sin(sprite->data[5], 5);
+        sprite->y2 += Cos(sprite->data[5], 14);
+        sprite->data[5] = (sprite->data[5] + 15) & 0xFF;
+    }
+}
+void AnimTask_CreateSmallLunarBeamOrbs(u8 taskId)
+{
+    if (--gTasks[taskId].data[0] == -1)
+    {
+        gTasks[taskId].data[1]++;
+        gTasks[taskId].data[0] = 6;
+        // See AnimSolarBeamSmallOrb for how to interpret these.
+        gBattleAnimArgs[0] = 15;
+        gBattleAnimArgs[1] = 0;
+        gBattleAnimArgs[2] = 80;
+        gBattleAnimArgs[3] = 0;
+        CreateSpriteAndAnimate(&gLunarBeamSmallOrbSpriteTemplate, 0, 0, GetBattlerSpriteSubpriority(gBattleAnimTarget) + 1);
+    }
+
+    if (gTasks[taskId].data[1] == 15)
+        DestroyAnimVisualTask(taskId);
+}
 // Moves a small orb in a wavy pattern towards the target mon.
 // The small orb "circles" the big orbs in AnimSolarBeamBigOrb.
 static void AnimSolarBeamSmallOrb(struct Sprite *sprite)
@@ -2331,6 +2419,7 @@ void AnimTask_CreateSmallSolarBeamOrbs(u8 taskId)
     if (gTasks[taskId].data[1] == 15)
         DestroyAnimVisualTask(taskId);
 }
+
 
 // Moves an orb from the target mon to the attacking mon in an arc-like fashion.
 static void AnimAbsorptionOrb(struct Sprite *sprite)

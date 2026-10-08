@@ -1126,7 +1126,7 @@ static bool8 AccuracyCalcHelper(u16 move)
 
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
 
-    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)||(WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_GUST) || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW) || (gBattleMoves[move].type == TYPE_FIRE && gBattleMons[gBattlerAttacker].ability == ABILITY_WILDFIRE))
+    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)||(WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_GUST) || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW) || (gBattleMoves[move].type == TYPE_FIRE && gBattleMons[gBattlerAttacker].ability == ABILITY_WILDFIRE) || gBattleMoves[move].effect ==  EFFECT_METEOR_BLAST)
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
