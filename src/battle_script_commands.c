@@ -7678,7 +7678,7 @@ static void Cmd_weatherdamage(void)
     {
         if (gBattleWeather & B_WEATHER_SANDSTORM)
         {
-            if (gBattleMons[gBattlerAttacker].types[0] != TYPE_ROCK && gBattleMons[gBattlerAttacker].types[0] != TYPE_STEEL && gBattleMons[gBattlerAttacker].types[0] != TYPE_GROUND && gBattleMons[gBattlerAttacker].types[1] != TYPE_ROCK && gBattleMons[gBattlerAttacker].types[1] != TYPE_STEEL && gBattleMons[gBattlerAttacker].types[1] != TYPE_GROUND && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL && gBattleMons[gBattlerAttacker].ability != ABILITY_BOULDER_BODY && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_STREAM &&  !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND) && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
+            if (gBattleMons[gBattlerAttacker].types[0] != TYPE_ROCK && gBattleMons[gBattlerAttacker].types[0] != TYPE_STEEL && gBattleMons[gBattlerAttacker].types[0] != TYPE_GROUND && gBattleMons[gBattlerAttacker].types[1] != TYPE_ROCK && gBattleMons[gBattlerAttacker].types[1] != TYPE_STEEL && gBattleMons[gBattlerAttacker].types[1] != TYPE_GROUND && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL && gBattleMons[gBattlerAttacker].ability != ABILITY_BOULDER_BODY && gBattleMons[gBattlerAttacker].ability != ABILITY_FORECAST && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_STREAM &&  !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND) && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
             {
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
                 if (gBattleMoveDamage == 0)
@@ -9961,6 +9961,8 @@ static void Cmd_setweatherballtype(void)
             *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | F_DYNAMIC_TYPE_SET;
         else if (gBattleWeather & B_WEATHER_HAIL)
             *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | F_DYNAMIC_TYPE_SET;
+        else if (gBattleWeather & B_WEATHER_RAINBOW)
+            *(&gBattleStruct->dynamicMoveType) = TYPE_DRAGON | F_DYNAMIC_TYPE_SET;
         else
             *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
     }

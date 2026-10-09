@@ -3235,7 +3235,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defense *= 2;
     if ((defender->types[0] == TYPE_ICE || defender->types[1] == TYPE_ICE) && (gBattleWeather & B_WEATHER_HAIL))
         defense *= 1.5;
-    if ((defender->types[0] == TYPE_ROCK || defender->types[1] == TYPE_ROCK) && (gBattleWeather & B_WEATHER_SANDSTORM))
+    if ((defender->types[0] == TYPE_ROCK || defender->types[1] == TYPE_ROCK || defender->ability == ABILITY_FORECAST) && (gBattleWeather & B_WEATHER_SANDSTORM))
         spDefense *= 1.5;
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
         gBattleMovePower /= 2;

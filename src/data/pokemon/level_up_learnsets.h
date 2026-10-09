@@ -3728,8 +3728,8 @@ static const u16 sSwampertLevelUpLearnset[] = {
 };
 
 static const u16 sPoochyenaLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_TACKLE),
-    LEVEL_UP_MOVE(1, MOVE_GROWL),
+    LEVEL_UP_MOVE(1, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(1, MOVE_BULLET_PUNCH),
     LEVEL_UP_MOVE(5, MOVE_BITE),
     LEVEL_UP_MOVE(11, MOVE_TAUNT),
     LEVEL_UP_MOVE(15, MOVE_POISON_FANG),

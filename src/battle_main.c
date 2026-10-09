@@ -4775,6 +4775,10 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     //Get priority, set higher if Apex Hunter procs
     prioritybattler1 = gBattleMoves[moveBattler1].priority;
     prioritybattler2 = gBattleMoves[moveBattler2].priority;
+    if(gBattleMons[battler1].ability == ABILITY_FORECAST  && gBattleWeather & B_WEATHER_RAIN && gBattleMons[battler1].hp == gBattleMons[battler1].maxHP && gBattleMoves[moveBattler1].flags & FLAG_WEATHER_AFFECTED)
+        prioritybattler1 = 1;
+    if(gBattleMons[battler2].ability == ABILITY_FORECAST  && gBattleWeather & B_WEATHER_RAIN && gBattleMons[battler2].hp == gBattleMons[battler2].maxHP && gBattleMoves[moveBattler1].flags & FLAG_WEATHER_AFFECTED)
+        prioritybattler1 = 1;
     if(gBattleMons[battler1].ability == ABILITY_APEX_HUNTER && gRandomTurnNumber < (0xFFFF * 20) / 100)
         prioritybattler1 = 2;
     if(gBattleMons[battler2].ability == ABILITY_APEX_HUNTER && gRandomTurnNumber < (0xFFFF * 20) / 100)

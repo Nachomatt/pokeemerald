@@ -446,6 +446,7 @@ const struct SpriteTemplate gWeatherBallIceDownSpriteTemplate =
     .callback = AnimWeatherBallDown,
 };
 
+
 static const union AnimCmd sAnim_IceBallChunk_0[] =
 {
     ANIMCMD_FRAME(0, 1),

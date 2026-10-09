@@ -444,6 +444,17 @@ const struct SpriteTemplate gWeatherBallFireDownSpriteTemplate =
     .callback = AnimWeatherBallDown,
 };
 
+const struct SpriteTemplate gWeatherBallDragonDownSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimWeatherBallDown,
+};
+
 const struct SpriteTemplate gEruptionLaunchRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WARM_ROCK,
