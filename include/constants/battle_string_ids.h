@@ -419,6 +419,7 @@
 #define STRINGID_PKMNTOOKMOONLIGHT          419
 #define STRINGID_PKMNSXHURTBYSUN            420
 #define STRINGID_PKMNSCHANGEDITSDNA         421
+#define STRINGID_PKMNSISCHANGINGITSDNA      422
 
 
 
@@ -430,7 +431,8 @@
 
 
 
-#define BATTLESTRINGS_COUNT                 422
+
+#define BATTLESTRINGS_COUNT                 423
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

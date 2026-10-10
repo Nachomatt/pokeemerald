@@ -2259,10 +2259,8 @@ u8 AtkCanceler_UnableToUseMove(void)
         case CANCELER_DEOXYS:
                 if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power > 1 && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_DEFENSE || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_SPEED))
                     {
-                        FormChange(gBattlerAttacker, SPECIES_DEOXYS);
+                        FormChange(gBattlerAttacker, SPECIES_DEOXYS_ATTACK);
                         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
-                        gActiveBattler = gBattlerAttacker;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
                         effect++;
@@ -2271,8 +2269,6 @@ u8 AtkCanceler_UnableToUseMove(void)
                     {
                         FormChange(gBattlerAttacker, SPECIES_DEOXYS_DEFENSE);
                         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
-                        gActiveBattler = gBattlerAttacker;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
                         effect++;
@@ -2281,13 +2277,11 @@ u8 AtkCanceler_UnableToUseMove(void)
                     {
                         FormChange(gBattlerAttacker, SPECIES_DEOXYS_SPEED);
                         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
-                        gActiveBattler = gBattlerAttacker;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
                         effect++;
                     }
-                gBattleStruct->atkCancelerTracker++;
+            gBattleStruct->atkCancelerTracker++;
             break;
         case CANCELER_END:
             break;

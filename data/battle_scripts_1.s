@@ -1003,10 +1003,11 @@ BattleScript_EffectTransform::
 	goto BattleScript_MoveEnd
 
 BattleScript_DnaChangeActivates::
+	printstring STRINGID_PKMNSISCHANGINGITSDNA
 	pause B_WAIT_TIME_SHORT
 	playanimation BS_ATTACKER B_ANIM_TRANSFORM
-	waitanimation
 	printstring STRINGID_PKMNSCHANGEDITSDNA
+	waitanimation
 	waitmessage B_WAIT_TIME_LONG
 	return
 
