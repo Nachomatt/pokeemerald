@@ -1006,7 +1006,7 @@ BattleScript_DnaChangeActivates::
 	pause B_WAIT_TIME_SHORT
 	playanimation BS_ATTACKER B_ANIM_TRANSFORM
 	waitanimation
-	printfromtable gTransformUsedStringIds
+	printstring STRINGID_PKMNSCHANGEDITSDNA
 	waitmessage B_WAIT_TIME_LONG
 	return
 
@@ -4257,6 +4257,14 @@ BattleScript_TraceActivates::
 
 BattleScript_RainDishActivates::
 	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	end3
+
+BattleScript_HurtbySun::
+	printstring STRINGID_PKMNSXHURTBYSUN
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER

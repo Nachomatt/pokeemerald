@@ -1821,6 +1821,9 @@ static const union AnimCmd *const *const sUnusedAnimsTable[] =
     [SPECIES_UNOWN_Z] = sUnusedAnims_UnownZ,
     [SPECIES_UNOWN_EMARK] = sUnusedAnims_UnownEMark,
     [SPECIES_UNOWN_QMARK] = sUnusedAnims_UnownQMark,
+    [SPECIES_DEOXYS_ATTACK] = sUnusedAnims_Deoxys,
+    [SPECIES_DEOXYS_DEFENSE] = sUnusedAnims_Deoxys,
+    [SPECIES_DEOXYS_SPEED] = sUnusedAnims_Deoxys,
 };
 
 #undef ANIM_CMD

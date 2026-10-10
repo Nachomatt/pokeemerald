@@ -463,8 +463,8 @@ const u8 *const gMonIconTable[] =
     [SPECIES_UNOWN_Z] = gMonIcon_UnownZ,
     [SPECIES_UNOWN_EMARK] = gMonIcon_UnownExclamationMark,
     [SPECIES_UNOWN_QMARK] = gMonIcon_UnownQuestionMark,
-    [SPECIES_DEOXYS_ATTACK] = gMonIcon_Deoxys,
-    [SPECIES_DEOXYS_DEFENSE] = gMonIcon_Deoxys,
+    [SPECIES_DEOXYS_ATTACK] = gMonIcon_DeoxysAttack,
+    [SPECIES_DEOXYS_DEFENSE] = gMonIcon_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED] = gMonIcon_DeoxysSpeed,
 };
 
@@ -910,6 +910,9 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_UNOWN_Z] = 0,
     [SPECIES_UNOWN_EMARK] = 0,
     [SPECIES_UNOWN_QMARK] = 0,
+    [SPECIES_DEOXYS_ATTACK] = 0,
+    [SPECIES_DEOXYS_DEFENSE] = 0,
+    [SPECIES_DEOXYS_SPEED] = 0,
 };
 
 const struct SpritePalette gMonIconPaletteTable[] =

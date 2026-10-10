@@ -148,6 +148,7 @@ extern const u8 BattleScript_ArmorUpActivates[];
 extern const u8 BattleScript_SurpriseActivates[];
 // extern const u8 BattleScript_TricksterActivates[];
 extern const u8 BattleScript_RainDishActivates[];
+extern const u8 BattleScript_HurtbySun[];
 extern const u8 BattleScript_SandstreamActivates[];
 extern const u8 BattleScript_SnowWarningActivates[];
 extern const u8 BattleScript_ShedSkinActivates[];

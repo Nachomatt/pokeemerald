@@ -1961,6 +1961,19 @@ void TryClearRageStatuses(void)
     }
 }
 
+void FormChange(u32 battler, u32 species)
+{
+    struct Pokemon *mon;
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+    else
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+        
+    gBattleMons[battler].species = species;
+    SetMonData(mon, MON_DATA_SPECIES, &species);
+    CalculateMonStats(mon);
+}
+
 enum
 {
     CANCELER_FLAGS,
@@ -1977,6 +1990,7 @@ enum
     CANCELER_IN_LOVE,
     CANCELER_BIDE,
     CANCELER_THAW,
+    CANCELER_DEOXYS,
     CANCELER_END,
 };
 
@@ -2241,6 +2255,39 @@ u8 AtkCanceler_UnableToUseMove(void)
                 effect = 2;
             }
             gBattleStruct->atkCancelerTracker++;
+            break;
+        case CANCELER_DEOXYS:
+                if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power > 1 && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_DEFENSE || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_SPEED))
+                    {
+                        FormChange(gBattlerAttacker, SPECIES_DEOXYS);
+                        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
+                        gActiveBattler = gBattlerAttacker;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+                        effect++;
+                    }
+                    else if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].effect == EFFECT_PROTECT && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_ATTACK || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_SPEED))
+                    {
+                        FormChange(gBattlerAttacker, SPECIES_DEOXYS_DEFENSE);
+                        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
+                        gActiveBattler = gBattlerAttacker;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+                        effect++;
+                    }
+                    else if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power == 0 && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_ATTACK || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_DEFENSE))
+                    {
+                        FormChange(gBattlerAttacker, SPECIES_DEOXYS_SPEED);
+                        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
+                        gActiveBattler = gBattlerAttacker;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+                        effect++;
+                    }
+                gBattleStruct->atkCancelerTracker++;
             break;
         case CANCELER_END:
             break;
@@ -2759,6 +2806,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         if (gBattleMoveDamage == 0)
                             gBattleMoveDamage = 1;
                         gBattleMoveDamage *= -1;
+                        effect++;
+                    }
+                    break;
+                case ABILITY_FORECAST:
+                    if (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_SUN) && gBattleMons[battler].hp != 0)
+                    {
+                        gLastUsedAbility = ABILITY_FORECAST; // why
+                        BattleScriptPushCursorAndCallback(BattleScript_HurtbySun);
+                        gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
                         effect++;
                     }
                     break;
@@ -4547,6 +4605,10 @@ static bool32 IsBattlerModernFatefulEncounter(u8 battler)
         return TRUE;
     if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
         return TRUE;
+    if (!GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL)){
+       bool32 isEventLegal = TRUE;
+       SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, &isEventLegal);
+   }
     return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
 }
 

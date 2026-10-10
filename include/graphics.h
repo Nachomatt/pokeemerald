@@ -2732,7 +2732,6 @@ extern const u32 gMonBackPic_Deoxys[];
 extern const u32 gMonShinyPalette_Deoxys[];
 extern const u32 gMonStillFrontPic_Deoxys[];
 extern const u8 gMonIcon_Deoxys[];
-extern const u8 gMonIcon_DeoxysSpeed[];
 extern const u8 gMonFootprint_Deoxys[];
 extern const u32 gMonFrontPic_Chimecho[];
 extern const u32 gMonPalette_Chimecho[];
@@ -2741,6 +2740,22 @@ extern const u32 gMonShinyPalette_Chimecho[];
 extern const u32 gMonStillFrontPic_Chimecho[];
 extern const u8 gMonIcon_Chimecho[];
 extern const u8 gMonFootprint_Chimecho[];
+
+extern const u32 gMonFrontPic_DeoxysAttack[];
+extern const u32 gMonBackPic_DeoxysAttack[];
+extern const u32 gMonStillFrontPic_DeoxysAttack[];
+extern const u8 gMonIcon_DeoxysAttack[];
+
+extern const u32 gMonFrontPic_DeoxysDefense[];
+extern const u32 gMonBackPic_DeoxysDefense[];
+extern const u32 gMonStillFrontPic_DeoxysDefense[];
+extern const u8 gMonIcon_DeoxysDefense[];
+
+extern const u32 gMonFrontPic_DeoxysSpeed[];
+extern const u32 gMonBackPic_DeoxysSpeed[];
+extern const u32 gMonStillFrontPic_DeoxysSpeed[];
+extern const u8 gMonIcon_DeoxysSpeed[];
+
 extern const u32 gMonPic_Egg[];
 extern const u32 gMonPalette_Egg[];
 extern const u32 gMonFrontPic_Egg[];

@@ -2405,6 +2405,7 @@ void AnimTask_TransformMon(u8 taskId)
     }
 }
 
+
 void AnimTask_IsMonInvisible(u8 taskId)
 {
     gBattleAnimArgs[ARG_RET_ID] = gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible;

@@ -393,6 +393,9 @@ const u32 gMonFrontPic_Jirachi[] = INCGFX_U32("graphics/pokemon/jirachi/anim_fro
 const u32 gMonFrontPic_Deoxys[] = INCGFX_U32("graphics/pokemon/deoxys/anim_front.png", ".4bpp.lz");
 const u32 gMonFrontPic_Chimecho[] = INCGFX_U32("graphics/pokemon/chimecho/anim_front.png", ".4bpp.lz");
 
+const u32 gMonFrontPic_DeoxysSpeed[] = INCGFX_U32("graphics/pokemon/deoxys/speed/anim_front.png", ".4bpp.lz");
+const u32 gMonFrontPic_DeoxysAttack[] = INCGFX_U32("graphics/pokemon/deoxys/attack/anim_front.png", ".4bpp.lz");
+const u32 gMonFrontPic_DeoxysDefense[] = INCGFX_U32("graphics/pokemon/deoxys/defense/anim_front.png", ".4bpp.lz");
 const u32 gMonFrontPic_Egg[] = INCGFX_U32("graphics/pokemon/egg/anim_front.png", ".4bpp.lz");
 
 const u32 gMonFrontPic_UnownB[] = INCGFX_U32("graphics/pokemon/unown/b/anim_front.png", ".4bpp.lz");

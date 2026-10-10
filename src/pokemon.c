@@ -1790,6 +1790,9 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_JIRACHI - 1]     = ANIM_SWING_CONVEX,
     [SPECIES_DEOXYS - 1]      = ANIM_H_PIVOT,
     [SPECIES_CHIMECHO - 1]    = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_DEOXYS_ATTACK - 1]      = ANIM_H_PIVOT,
+    [SPECIES_DEOXYS_DEFENSE - 1]      = ANIM_H_PIVOT,
+    [SPECIES_DEOXYS_SPEED - 1]      = ANIM_H_PIVOT,
 };
 
 static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
@@ -3269,13 +3272,19 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (110 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_ARCHENEMY && defender->ability == ABILITY_ARCHENEMY)
         gBattleMovePower = (130 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_FORECAST && (gBattleWeather & B_WEATHER_SANDSTORM) && type == TYPE_ROCK)
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_FORECAST && (gBattleWeather & B_WEATHER_RAINBOW) && type == TYPE_DRAGON)
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_FORECAST && (gBattleWeather & B_WEATHER_SUN))
+        spAttack = (150 * spAttack) / 100;
     if (type == TYPE_FIRE && attacker->ability == ABILITY_WILDFIRE)
         gBattleMovePower = (130 * gBattleMovePower) / 100;
     if(attacker->ability == ABILITY_SHARPSHOOTER && FLAG_SHARPSHOOTER_AFFECTED)
-        gBattleMovePower = (50 * gBattleMovePower) / 100;
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
     if(defender->ability == ABILITY_AIR_LOCK && FLAG_WEATHER_AFFECTED)
-        gBattleMovePower = (130* gBattleMovePower) / 100;
-    if((attacker->ability == ABILITY_ABYSS_DIVER || attacker->ability == ABILITY_CRUEL_DIVER || attacker->ability == ABILITY_DATED_DIVER ) && (FLAG_DIVER_AFFECTED))
+        gBattleMovePower = (70 * gBattleMovePower) / 100;
+    if((attacker->ability == ABILITY_ABYSS_DIVER || attacker->ability == ABILITY_CRUEL_DIVER || attacker->ability == ABILITY_DATED_DIVER ) && (FLAG_DIVER_AFFECTED)) //Dive
     {
         gBattleMovePower = (130* gBattleMovePower) / 100;
     }
@@ -3283,7 +3292,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     {
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     }
-    if (attacker->ability == ABILITY_DATED_DIVER && FLAG_DATED_AFFECTED)
+    if (attacker->ability == ABILITY_DATED_DIVER && FLAG_DATED_AFFECTED) // Ancient Power
         gBattleMovePower = (130 * gBattleMovePower) / 100;
     if (type == TYPE_DARK && attacker->ability == ABILITY_ABYSS_DIVER)
         gBattleMovePower = (130 * gBattleMovePower) / 100;

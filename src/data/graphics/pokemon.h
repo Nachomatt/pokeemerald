@@ -2682,7 +2682,6 @@ const u32 gMonBackPic_Latios[] = INCGFX_U32("graphics/pokemon/latios/back.png", 
 const u32 gMonShinyPalette_Latios[] = INCGFX_U32("graphics/pokemon/latios/shiny.pal", ".gbapal.lz");
 const u8 gMonIcon_Latios[] = INCGFX_U8("graphics/pokemon/latios/icon.png", ".4bpp");
 const u8 gMonFootprint_Latios[] = INCGFX_U8("graphics/pokemon/latios/footprint.png", ".1bpp");
-
 const u32 gMonStillFrontPic_Jirachi[] = INCGFX_U32("graphics/pokemon/jirachi/front.png", ".4bpp.lz");
 const u32 gMonPalette_Jirachi[] = INCGFX_U32("graphics/pokemon/jirachi/normal.pal", ".gbapal.lz");
 const u32 gMonBackPic_Jirachi[] = INCGFX_U32("graphics/pokemon/jirachi/back.png", ".4bpp.lz");
@@ -2695,7 +2694,21 @@ const u32 gMonPalette_Deoxys[] = INCGFX_U32("graphics/pokemon/deoxys/normal.pal"
 const u32 gMonBackPic_Deoxys[] = INCGFX_U32("graphics/pokemon/deoxys/back.png", ".4bpp.lz");
 const u32 gMonShinyPalette_Deoxys[] = INCGFX_U32("graphics/pokemon/deoxys/shiny.pal", ".gbapal.lz");
 const u8 gMonIcon_Deoxys[] = INCGFX_U8("graphics/pokemon/deoxys/icon.png", ".4bpp");
-const u8 gMonIcon_DeoxysSpeed[] = INCGFX_U8("graphics/pokemon/deoxys/icon_speed.png", ".4bpp");
+
+const u32 gMonStillFrontPic_DeoxysAttack[] = INCGFX_U32("graphics/pokemon/deoxys/attack/front.png", ".4bpp.lz");
+const u32 gMonBackPic_DeoxysAttack[] = INCGFX_U32("graphics/pokemon/deoxys/attack/back.png", ".4bpp.lz");
+const u8 gMonIcon_DeoxysAttack[] = INCGFX_U8("graphics/pokemon/deoxys/attack/icon.png", ".4bpp");
+
+const u32 gMonStillFrontPic_DeoxysDefense[] = INCGFX_U32("graphics/pokemon/deoxys/defense/front.png", ".4bpp.lz");
+const u32 gMonBackPic_DeoxysDefense[] = INCGFX_U32("graphics/pokemon/deoxys/defense/back.png", ".4bpp.lz");
+const u8 gMonIcon_DeoxysDefense[] = INCGFX_U8("graphics/pokemon/deoxys/defense/icon.png", ".4bpp");
+
+
+
+
+const u32 gMonStillFrontPic_DeoxysSpeed[] = INCGFX_U32("graphics/pokemon/deoxys/speed/front.png", ".4bpp.lz");
+const u32 gMonBackPic_DeoxysSpeed[] = INCGFX_U32("graphics/pokemon/deoxys/speed/back.png", ".4bpp.lz");
+const u8 gMonIcon_DeoxysSpeed[] = INCGFX_U8("graphics/pokemon/deoxys/speed/icon.png", ".4bpp");
 const u8 gMonIcon_DeoxysSpeedWide[] = INCGFX_U8("graphics/pokemon/deoxys/icon_speed_wide.png", ".4bpp"); // Unused
 
 // Probably the leftover space from the other Deoxys forms

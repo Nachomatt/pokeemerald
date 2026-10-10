@@ -941,20 +941,7 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power > 1 && gBattleMons[gBattlerAttacker].species == SPECIES_ZIGZAGOON)
-    {
-        u8 *battleMonAttacker, *battleMonTarget;
-        u16 species = SPECIES_DEOXYS_SPEED;
-        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, species)
-        gActiveBattler = gBattlerAttacker;
-        BtlController_EmitResetActionMoveSelection(B_COMM_TO_CONTROLLER, RESET_MOVE_SELECTION);
-        MarkBattlerForControllerExec(gActiveBattler);
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORMED;
-        gBattlescriptCurrInstr++;
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
-        return;
-    }
+
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_COLOR_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power != 0 && gBattleMons[gBattlerTarget].types[1] != gBattleMoves[gCurrentMove].type)
     {
@@ -1192,6 +1179,8 @@ static void Cmd_accuracycheck(void)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
+        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_FORECAST && gBattleWeather & B_WEATHER_HAIL)
+            calc = (calc * 80) / 100; // 1.2 snow cloak loss
         if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
@@ -2356,7 +2345,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
     if (gBattleMons[gEffectBattler].ability == ABILITY_SHIELD_DUST && !(gHitMarker & HITMARKER_STATUS_ABILITY_EFFECT) && !primary && gBattleCommunication[MOVE_EFFECT_BYTE] <= 9)
         INCREMENT_RESET_RETURN
-
+    if (gBattleMons[gEffectBattler].ability == ABILITY_FORECAST && (gBattleWeather & B_WEATHER_RAINBOW) && !(gHitMarker & HITMARKER_STATUS_ABILITY_EFFECT) && !primary && gBattleCommunication[MOVE_EFFECT_BYTE] <= 9)
+        INCREMENT_RESET_RETURN
     if (gSideStatuses[GET_BATTLER_SIDE(gEffectBattler)] & SIDE_STATUS_SAFEGUARD && !(gHitMarker & HITMARKER_STATUS_ABILITY_EFFECT) && !primary && gBattleCommunication[MOVE_EFFECT_BYTE] <= 7)
         INCREMENT_RESET_RETURN
 
@@ -7102,7 +7092,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             }
             return STAT_CHANGE_DIDNT_WORK;
         }
-        else if (gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST && flags == 0)
+        else if ((gBattleMons[gActiveBattler].ability == ABILITY_SHIELD_DUST || (gBattleMons[gEffectBattler].ability == ABILITY_FORECAST && (gBattleWeather & B_WEATHER_RAINBOW))) && flags == 0)
         {
             return STAT_CHANGE_DIDNT_WORK;
         }
