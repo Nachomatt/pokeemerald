@@ -220,6 +220,7 @@
 
 
 
+
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
 #define GROWTH_ERRATIC      1

@@ -1961,7 +1961,7 @@ void TryClearRageStatuses(void)
     }
 }
 
-void FormChange(u32 battler, u32 species)
+void FormChange(u32 battler, u32 species) // Shoutout to Alex(Rainonline)
 {
     struct Pokemon *mon;
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
@@ -1993,6 +1993,7 @@ enum
     CANCELER_DEOXYS,
     CANCELER_END,
 };
+
 
 u8 AtkCanceler_UnableToUseMove(void)
 {
@@ -2256,21 +2257,21 @@ u8 AtkCanceler_UnableToUseMove(void)
             }
             gBattleStruct->atkCancelerTracker++;
             break;
-        case CANCELER_DEOXYS:
-                if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power > 1 && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_DEFENSE || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_SPEED))
+        case CANCELER_DEOXYS: // Shoutout to Alex(Rainonline)
+                if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power != 0 && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_DEFENSE || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_SPEED))
                     {
                         FormChange(gBattlerAttacker, SPECIES_DEOXYS_ATTACK);
                         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
                         BattleScriptPushCursor();
-                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates1;
                         effect++;
                     }
-                    else if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].effect == EFFECT_PROTECT && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_ATTACK || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_SPEED))
+                    else if (gBattleMons[gBattlerTarget].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power != 0 && (gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS_ATTACK || gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS || gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS_SPEED))
                     {
-                        FormChange(gBattlerAttacker, SPECIES_DEOXYS_DEFENSE);
-                        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
+                        FormChange(gBattlerTarget, SPECIES_DEOXYS_DEFENSE);//Shoutout to John Project Bugn't for this idea
+                        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
                         BattleScriptPushCursor();
-                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates2;
                         effect++;
                     }
                     else if (gBattleMons[gBattlerAttacker].ability == ABILITY_DNA_CHANGE && gCurrentMove != MOVE_STRUGGLE && gBattleMoves[gCurrentMove].power == 0 && (gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_ATTACK || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS || gBattleMons[gBattlerAttacker].species == SPECIES_DEOXYS_DEFENSE))
@@ -2278,7 +2279,7 @@ u8 AtkCanceler_UnableToUseMove(void)
                         FormChange(gBattlerAttacker, SPECIES_DEOXYS_SPEED);
                         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
                         BattleScriptPushCursor();
-                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates;
+                        gBattlescriptCurrInstr = BattleScript_DnaChangeActivates3;
                         effect++;
                     }
             gBattleStruct->atkCancelerTracker++;

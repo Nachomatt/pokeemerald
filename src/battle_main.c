@@ -5158,11 +5158,51 @@ static void HandleEndTurn_MonFled(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
+void RevertFormAfterBattle(void)
+{
+    u32 side;
+    u32 species;
+    u32 partySlot;
+
+    for (side = 0; side < NUM_BATTLE_SIDES; side++)
+    {
+        for (partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
+        {
+            struct Pokemon *mon;
+            if (side == B_SIDE_PLAYER)
+                mon = &gPlayerParty[partySlot];
+            else
+                mon = &gEnemyParty[partySlot];
+
+            switch (GetMonData(mon, MON_DATA_SPECIES))
+            {
+            case SPECIES_DEOXYS_SPEED:
+                species = SPECIES_DEOXYS;
+                SetMonData(mon, MON_DATA_SPECIES, &species);
+                CalculateMonStats(mon);
+                break;
+            case SPECIES_DEOXYS_ATTACK:
+                species = SPECIES_DEOXYS;
+                SetMonData(mon, MON_DATA_SPECIES, &species);
+                CalculateMonStats(mon);
+                break;
+            case SPECIES_DEOXYS_DEFENSE:
+                species = SPECIES_DEOXYS;
+                SetMonData(mon, MON_DATA_SPECIES, &species);
+                CalculateMonStats(mon);
+                break;
+            }
+        }
+    }
+}
+
+
 static void HandleEndTurn_FinishBattle(void)
 {
 
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
+        RevertFormAfterBattle();
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_RECORDED_LINK
                                   | BATTLE_TYPE_FIRST_BATTLE
