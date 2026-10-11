@@ -448,7 +448,7 @@ script OldaleTown_FootprintsMan
 {
  lock
  faceplayer
- msgbox(format("I used to look for footprints\non ROUTE 102.\p But the forest has grown so dense no one can even get through.\p Guess I gotta look for feet elsewhere.."))
+ msgbox(format("I used to look for footprints\non ROUTE 102.\pBut the forest has grown so dense no one can even get through.\pGuess I gotta look for feet elsewhere.."))
  closemessage
  release
 }
@@ -468,7 +468,7 @@ script OldaleTown_Girl
 {
  lock
  faceplayer
- msgbox(format("My family lives in PETALBURG CITY.\p It's gonna be harder for them to come visit now.\p Good riddance."))
+ msgbox(format("My family lives in PETALBURG CITY.\pIt's gonna be harder for them to come visit now with all these trees blocking the way.\p Good riddance."))
  closemessage
  release
 }

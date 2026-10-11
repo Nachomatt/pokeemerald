@@ -7833,7 +7833,7 @@ static void Cmd_transformdataexecution(void)
 {
     gChosenMove = MOVE_UNAVAILABLE;
     gBattlescriptCurrInstr++;
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_TRANSFORMED || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE || gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS)
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_TRANSFORMED || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE || gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS|| gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS_ATTACK|| gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS_DEFENSE|| gBattleMons[gBattlerTarget].species == SPECIES_DEOXYS_SPEED)
     {
         gMoveResultFlags |= MOVE_RESULT_FAILED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORM_FAILED;
