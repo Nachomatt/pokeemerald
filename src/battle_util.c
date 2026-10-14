@@ -3928,7 +3928,7 @@ enum
     }
 
 #define TRY_EAT_STAT_UP_BERRY(stat)                                                                                                                            \
-    if (gBattleMons[battler].hp <= gBattleMons[battler].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE) \
+    if (gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE) \
     {                                                                                                                                                          \
         PREPARE_STAT_BUFFER(gBattleTextBuff1, stat);                                                                                                           \
         gEffectBattler = battler;                                                                                                                              \
@@ -4119,7 +4119,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battler, bool8 moveTurn)
                 TRY_EAT_CONFUSE_BERRY(FLAVOR_SOUR);
                 break;
             case HOLD_EFFECT_ATTACK_UP:
-                if (gBattleMons[battler].hp <= gBattleMons[battler].maxHP / battlerHoldEffectParam && !moveTurn && gBattleMons[battler].statStages[STAT_ATK] < MAX_STAT_STAGE)
+                if (gBattleMons[battler].statStages[STAT_ATK] < MAX_STAT_STAGE)
                 {
                     PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE); // Only the Attack stat-up berry has this
