@@ -955,7 +955,8 @@ OldaleTown_Girl_Text_0:
 # 471 "data/maps/OldaleTown/scripts.pory"
 	.string "My family lives in PETALBURG CITY.\p"
 	.string "It's gonna be harder for them to come\n"
-	.string "visit now.\p"
+	.string "visit now with all these trees blocking\l"
+	.string "the way.\p"
 	.string "Good riddance.$"
 
 OldaleTown_MartEmployee_Text_0:

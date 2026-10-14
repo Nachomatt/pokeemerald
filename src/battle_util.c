@@ -4019,7 +4019,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battler, bool8 moveTurn)
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_RESTORE_HP:
-                if (gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2 && !moveTurn)
+                if (gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
                 {
                     if(gBattleMons[battler].ability == ABILITY_JUICER)
                     {

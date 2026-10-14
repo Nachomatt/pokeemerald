@@ -1055,11 +1055,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STRING_SHOT] =
     {
-        .effect = EFFECT_SPEED_DOWN,
-        .power = 0,
+        .effect = EFFECT_SPEED_DOWN_HIT,
+        .power = 55,
         .type = TYPE_BUG,
-        .accuracy = 95,
-        .pp = 40,
+        .accuracy = 100,
+        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
@@ -1290,10 +1290,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_RAGE] =
     {
         .effect = EFFECT_RAGE,
-        .power = 20,
+        .power = 60,
         .type = TYPE_NORMAL,
         .accuracy = 100,
-        .pp = 20,
+        .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
