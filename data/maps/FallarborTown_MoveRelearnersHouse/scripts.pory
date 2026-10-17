@@ -95,3 +95,188 @@ FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
 	.string "I can teach an EGG.$"
 
 `
+script EventScript_FallarborTown_MoveRelearner
+{
+	lock
+	faceplayer
+	msgbox("Zzzz... Huh? Oh, I'm the MOVE RELEARNER.
+			I know every move your POKÉMON learn!")
+	msgbox("Pretty neat huh? I can make them 
+			remember these moves, but not for free!")
+	msgbox("You know HEART SCALES? I loove those.
+			If you have any, I'll help you out.")
+	checkitem(ITEM_HEART_SCALE)
+	goto_if_eq(VAR_RESULT, FALSE, EventScript_FallarborTown_MoveRelearner_ComeBackLater)
+	goto_if_eq(VAR_RESULT, TRUE, EventScript_FallarborTown_MoveRelearner_AskForMoves)
+}
+
+script EventScript_FallarborTown_MoveRelearner_ComeBackLater
+{
+	msgbox("Aww, don't have any? That's cool.
+			If you have some, you know where to
+			find me!")
+	closemessage
+	release
+}
+
+script EventScript_FallarborTown_MoveRelearner_ComebackAnothertime
+{
+	msgbox("That's cool. If you need any moves, you 
+			know where to find me!")
+	clearflag(FLAG_EGG_MOVES_TUTOR)
+	closemessage
+	release
+}
+
+script EventScript_FallarborTown_MoveRelearner_AskForMoves
+{
+	applymovement(LOCALID_MOVE_RELEARNER_GUY, MoveRelearnerWoah)
+	playse(SE_PIN)
+	waitmovement(0)
+	msgbox("Yo! You have some HEART SCALES! sweet!
+			Alright. would you like to re-learn some 
+			egg moves?")
+	yesnobox(YES, NO)
+	if(var(VAR_RESULT) == YES)
+	{
+		goto(EventScript_FallarborTown_MoveRelearner_TeachEggMoves)
+	}
+	elif(var(VAR_RESULT) == NO)
+	{
+		goto(EventScript_FallarborTown_MoveRelearner_AskForMoves2)
+	}
+	closemessage
+	release
+}
+
+script EventScript_FallarborTown_MoveRelearner_AskForMoves2
+{
+	msgbox("Would you like to re-learn some 
+			level-up moves?")
+	yesnobox(YES, NO)
+	if(var(VAR_RESULT) == YES)
+	{
+		goto(EventScript_FallarborTown_MoveRelearner_TeachLevelUpMoves)
+	}
+	elif(var(VAR_RESULT) == NO)
+	{
+		goto(EventScript_FallarborTown_MoveRelearner_ComebackAnothertime)
+	}
+	closemessage
+	release
+}
+
+
+script EventScript_FallarborTown_MoveRelearner_AskForMoves3
+{
+	msgbox("Would you like to re-learn some 
+			egg moves?")
+	yesnobox(YES, NO)
+	if(var(VAR_RESULT) == YES)
+	{
+		goto(EventScript_FallarborTown_MoveRelearner_TeachEggMoves)
+	}
+	elif(var(VAR_RESULT) == NO)
+	{
+		goto(EventScript_FallarborTown_MoveRelearner_AskForMoves2)
+	}
+	closemessage
+	release
+}
+
+
+script EventScript_FallarborTown_MoveRelearner_TeachEggMoves
+{
+	setflag((FLAG_EGG_MOVES_TUTOR))
+	msgbox("Alright! What POKéMON would you like
+	to make remember an egg move?")
+	goto(EventScript_FallarborTown_MoveRelearner_MoveTeaching)
+	goto_if_eq(VAR_0x8004, 0, EventScript_FallarborTown_MoveRelearner_TeachEggMoves)
+	msgbox("{PLAYER} handed the MOVE RELEARNER a
+			HEART SCALE.")
+	removeitem(ITEM_HEART_SCALE)
+	goto(EventScript_FallarborTown_MoveRelearner_WelcomeAnytime)
+}
+
+script EventScript_FallarborTown_MoveRelearner_MoveTeaching
+{
+	special(ChooseMonForMoveRelearner)
+	goto_if_eq(VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+	special(IsSelectedMonEgg)
+	goto_if_eq(VAR_RESULT, TRUE, EventScript_FallarborTown_MoveRelearnersHouse_CantTeachEgg)
+	if(flag(FLAG_EGG_MOVES_TUTOR) == TRUE) 
+	{
+		goto_if_eq(VAR_0x8005, 0, EventScript_FallarborTown_MoveRelearnersHouse_NoEggMoveToTeachMon)
+	}
+	else
+	{
+		goto_if_eq(VAR_0x8005, 0, EventScript_FallarborTown_MoveRelearnersHouse_NoMoveToTeachMon)
+	}
+	msgbox("Which move would you like to make 
+			your POKéMON remember?")
+	special(TeachMoveRelearnerMove)
+	clearflag(FLAG_EGG_MOVES_TUTOR)
+	goto(EventScript_FallarborTown_MoveRelearner_AskForMoves3)
+	return
+}
+
+script EventScript_FallarborTown_MoveRelearner_TeachLevelUpMoves
+{
+	msgbox("Alright! What POKéMON would you like
+	to make remember a move?")
+	goto(EventScript_FallarborTown_MoveRelearner_MoveTeaching)
+	goto_if_eq(VAR_0x8004, 0, EventScript_FallarborTown_MoveRelearner_TeachLevelUpMoves)
+	msgbox("{PLAYER} handed the MOVE RELEARNER a
+			HEART SCALE.")
+	removeitem(ITEM_HEART_SCALE)
+	goto(EventScript_FallarborTown_MoveRelearner_WelcomeAnytime)
+}
+
+script EventScript_FallarborTown_MoveRelearner_WelcomeAnytime
+{
+	msgbox("Hope you're happy with that move! Come
+			back with a HEART SCALE if you need any
+			other moves!")
+	clearflag(FLAG_EGG_MOVES_TUTOR)
+	closemessage
+	release
+}
+
+script EventScript_FallarborTown_MoveRelearnersHouse_CantTeachEgg
+{
+	msgbox("Woahhh dude, is that an EGG?
+			Radd. I can't teach those anything
+			though. Come back when it's hatched,
+			okay? Then I'll be able to help you.")
+	clearflag(FLAG_EGG_MOVES_TUTOR)
+	closemessage
+	release
+}
+script EventScript_FallarborTown_MoveRelearnersHouse_NoMoveToTeachMon
+{
+	msgbox("Aww man. I can't teach that guy any
+			moves. Maybe come back when it's a
+			little stronger? Then I'll be able to
+			help you out.")
+	clearflag(FLAG_EGG_MOVES_TUTOR)
+	closemessage
+	release
+}
+
+script EventScript_FallarborTown_MoveRelearnersHouse_NoEggMoveToTeachMon
+{
+	msgbox("Woahh man. I don't know any egg moves
+			that guy can learn! Total bummer. Its
+			parents didn't even bother. Probably
+			just raised itself. Kinda badass,
+			honestly.
+			Anyway, come back whenever you need
+			any move re-learning.")
+	clearflag(FLAG_EGG_MOVES_TUTOR)
+	closemessage
+	release
+}
+
+movement MoveRelearnerWoah {
+	emote_exclamation_mark
+}
