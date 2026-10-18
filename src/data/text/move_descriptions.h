@@ -1485,8 +1485,12 @@ static const u8 sHarvestMoonDescription[] = _(
 static const u8 sEclipseDescription[] = _(
     "The user covers the world\n"
     "in dark. May lower ACCURACY.");
-    
-    
+static const u8 sQueenGambitDescription[] = _(
+    "Recklessly baits attacks,\n"
+    "lowering target's DEFENSES. ");
+static const u8 sKingsRansomDescription[] = _(
+    "Prove the target guilty,\n"
+    "stealing stat boosts.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1867,6 +1871,8 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_METEOR_BLAST - 1] = sMeteorBlastDescription,
     [MOVE_HARVEST_MOON - 1] = sHarvestMoonDescription,
     [MOVE_ECLIPSE - 1] = sEclipseDescription,
+    [MOVE_QUEEN_GAMBIT - 1] = sQueenGambitDescription,
+    [MOVE_KINGS_RANSOM - 1] = sKingsRansomDescription,
     
     
     

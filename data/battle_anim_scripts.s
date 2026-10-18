@@ -393,6 +393,8 @@ gBattleAnims_Moves::
 	.4byte Move_METEOR_BLAST
 	.4byte Move_HARVEST_MOON
 	.4byte Move_ECLIPSE
+	.4byte Move_QUEEN_GAMBIT
+	.4byte Move_KINGS_RANSOM
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -4917,6 +4919,49 @@ Move_HOWL:
 	delay 30
 	end
 
+Move_QUEEN_GAMBIT:
+	loadspritegfx ANIM_TAG_NOISE_LINE
+	loadspritegfx ANIM_TAG_ANGER
+	loadspritegfx ANIM_TAG_IMPACT
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_ROAR
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, ANIM_ATTACKER, 1
+	delay 12
+	call RoarEffect
+	createvisualtask SoundTask_PlayCryHighPitch, 2, ANIM_ATTACKER, 3
+	waitforvisualfinish
+	delay 20
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -28
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	delay 12
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, 20, -28
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	delay 10
+	createvisualtask AnimTask_SwayMon, 5, 0, 16, 6144, 8, ANIM_TARGET
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
+	delay 2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 0, x=20, y=-16, relative_to=ANIM_ATTACKER, animation=2
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 5
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 5
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
+	delay 2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 0, x=-24, y=-12, relative_to=ANIM_ATTACKER, animation=2
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 5
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 5
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
+	delay 2
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 0, x=-18, y=16, relative_to=ANIM_ATTACKER, animation=2
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	delay 5
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	waitforvisualfinish
+	end
+
+
 Move_BULK_UP:
 	loadspritegfx ANIM_TAG_BREATH
 	createvisualtask AnimTask_GrowAndShrink, 2
@@ -5163,7 +5208,6 @@ Move_MIND_READER:
 	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_TARGET
 	createsprite gOpeningEyeSpriteTemplate, ANIM_ATTACKER, 5, 0, 0, 1, 0
 	createsprite gWhiteHaloSpriteTemplate, ANIM_ATTACKER, 5
-	delay 40
 	playsewithpan SE_M_LEER, SOUND_PAN_TARGET
 	blend_color_cycle priority=2, selector=F_PAL_BG, delay=1, num_blends=2, initial_blend_y=0, target_blend_y=10, color=RGB_BLACK
 	call MindReaderEyeSpikeEffect
@@ -5194,6 +5238,80 @@ MindReaderEyeSpikeEffect:
 	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 35, 40, 6
 	delay 2
 	return
+
+
+
+Move_KINGS_RANSOM:
+	loadspritegfx ANIM_TAG_TEAL_ALERT
+	loadspritegfx ANIM_TAG_OPENING_EYE
+	loadspritegfx ANIM_TAG_ROUND_WHITE_HALO
+	loadspritegfx ANIM_TAG_AMNESIA
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES
+	monbg ANIM_TARGET
+	createsprite gQuestionMarkSpriteTemplate, ANIM_TARGET, 0
+	playsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER
+	delay 24
+	loopsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER, 16, 3
+	waitforvisualfinish
+	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_TARGET
+	createsprite gOpeningEyeSpriteTemplate, ANIM_ATTACKER, 5, 0, 0, 1, 0
+	createsprite gWhiteHaloSpriteTemplate, ANIM_ATTACKER, 5
+	delay 60
+	blend_color_cycle priority=2, selector=F_PAL_BG, delay=1, num_blends=2, initial_blend_y=0, target_blend_y=10, color=RGB_BLACK
+	call KingsRansomEyeSpikeEffect
+	playsewithpan SE_M_LEER, SOUND_PAN_TARGET
+	delay 8
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 40, 1
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=0
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=1
+	delay 8
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=2
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=3
+	delay 8
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=0
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=1
+	delay 8
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=2
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=3
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=0
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=1
+	delay 8
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=2
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=3
+	delay 8
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=0
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=1
+	delay 8
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=2
+	create_tear_drop_sprite ANIM_TARGET, 2, relative_to=ANIM_TARGET, type=3
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	end
+
+KingsRansomEyeSpikeEffect:
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 70, 0, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 40, 40, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 10, -60, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -50, -40, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -40, 40, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 50, -50, 6
+	delay 5
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 50, -30, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 60, 10, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 0, 60, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 0, -40, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -60, 20, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -60, -30, 6
+	delay 5
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -50, 50, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -60, 20, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, -40, -40, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 20, -60, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 50, -50, 6
+	createsprite gTealAlertSpriteTemplate, ANIM_ATTACKER, 4, 35, 40, 6
+	delay 5
+	return
+
 
 Move_ICE_PUNCH:
 	monbg ANIM_DEF_PARTNER

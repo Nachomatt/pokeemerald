@@ -378,6 +378,8 @@
 #define MOVE_METEOR_BLAST 374
 #define MOVE_HARVEST_MOON 375
 #define MOVE_ECLIPSE 376
+#define MOVE_QUEEN_GAMBIT 377
+#define MOVE_KINGS_RANSOM 378
 
 
 
@@ -390,7 +392,9 @@
 
 
 
-#define MOVES_COUNT 377
+
+
+#define MOVES_COUNT 379
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

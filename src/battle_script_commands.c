@@ -215,6 +215,7 @@ static void Cmd_stockpiletohpheal(void);
 static void Cmd_negativedamage(void);
 static void Cmd_statbuffchange(void);
 static void Cmd_normalisebuffs(void);
+static void Cmd_resetOpponent(void);
 static void Cmd_setbide(void);
 static void Cmd_confuseifrepeatingattackends(void);
 static void Cmd_setmultihitcounter(void);
@@ -252,6 +253,7 @@ static void Cmd_remaininghptopower(void);
 static void Cmd_tryspiteppreduce(void);
 static void Cmd_healpartystatus(void);
 static void Cmd_cursetarget(void);
+static void Cmd_queengambit(void);
 static void Cmd_trysetspikes(void);
 static void Cmd_setforesight(void);
 static void Cmd_trysetperishsong(void);
@@ -266,6 +268,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void);
 static void Cmd_setsunny(void);
 static void Cmd_maxattackhalvehp(void);
 static void Cmd_copyfoestats(void);
+static void Cmd_stealfoestats(void);
 static void Cmd_rapidspinfree(void);
 static void Cmd_setdefensecurlbit(void);
 static void Cmd_recoverbasedonsunlight(void);
@@ -472,6 +475,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
         [B_SCR_OP_NEGATIVEDAMAGE] = Cmd_negativedamage,                                   // 0x88
         [B_SCR_OP_STATBUFFCHANGE] = Cmd_statbuffchange,                                   // 0x89
         [B_SCR_OP_NORMALISEBUFFS] = Cmd_normalisebuffs,                                   // 0x8A
+        [B_SCR_OP_RESETOPPONENT] = Cmd_resetOpponent,                                     // 0x8A
         [B_SCR_OP_SETBIDE] = Cmd_setbide,                                                 // 0x8B
         [B_SCR_OP_CONFUSEIFREPEATINGATTACKENDS] = Cmd_confuseifrepeatingattackends,       // 0x8C
         [B_SCR_OP_SETMULTIHITCOUNTER] = Cmd_setmultihitcounter,                           // 0x8D
@@ -509,6 +513,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
         [B_SCR_OP_TRYSPITEPPREDUCE] = Cmd_tryspiteppreduce,                               // 0xAD
         [B_SCR_OP_HEALPARTYSTATUS] = Cmd_healpartystatus,                                 // 0xAE
         [B_SCR_OP_CURSETARGET] = Cmd_cursetarget,                                         // 0xAF
+        [B_SCR_OP_QUEENGAMBIT] = Cmd_queengambit,                                         // 0xAF
         [B_SCR_OP_TRYSETSPIKES] = Cmd_trysetspikes,                                       // 0xB0
         [B_SCR_OP_SETFORESIGHT] = Cmd_setforesight,                                       // 0xB1
         [B_SCR_OP_TRYSETPERISHSONG] = Cmd_trysetperishsong,                               // 0xB2
@@ -523,6 +528,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
         [B_SCR_OP_SETSUNNY] = Cmd_setsunny,                                               // 0xBB
         [B_SCR_OP_MAXATTACKHALVEHP] = Cmd_maxattackhalvehp,                               // 0xBC
         [B_SCR_OP_COPYFOESTATS] = Cmd_copyfoestats,                                       // 0xBD
+        [B_SCR_OP_STEALFOESTATS] = Cmd_stealfoestats,                                       // 0xBD
         [B_SCR_OP_RAPIDSPINFREE] = Cmd_rapidspinfree,                                     // 0xBE
         [B_SCR_OP_SETDEFENSECURLBIT] = Cmd_setdefensecurlbit,                             // 0xBF
         [B_SCR_OP_RECOVERBASEDONSUNLIGHT] = Cmd_recoverbasedonsunlight,                   // 0xC0
@@ -7178,6 +7184,20 @@ static void Cmd_normalisebuffs(void)
     gBattlescriptCurrInstr++;
 }
 
+static void Cmd_resetOpponent(void)
+{
+    s32 i;
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+        {
+            if(gBattleMons[gBattlerTarget].statStages[i] > DEFAULT_STAT_STAGE)
+            {
+                gBattleMons[gBattlerTarget].statStages[i] = DEFAULT_STAT_STAGE;
+            }
+        }
+    gBattlescriptCurrInstr++;
+}
+
+
 static void Cmd_setbide(void)
 {
     gBattleMons[gBattlerAttacker].status2 |= STATUS2_MULTIPLETURNS;
@@ -8528,6 +8548,17 @@ static void Cmd_cursetarget(void)
     }
 }
 
+static void Cmd_queengambit(void)
+{
+    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+
+        gBattlescriptCurrInstr += 5;
+    
+}
+
+
 static void Cmd_trysetspikes(void)
 {
     u8 targetSide = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
@@ -8853,6 +8884,35 @@ static void Cmd_copyfoestats(void)
         gBattleMons[gBattlerAttacker].statStages[i] = gBattleMons[gBattlerTarget].statStages[i];
     }
 
+    gBattlescriptCurrInstr += 5; // Has an unused jump ptr(possibly for a failed attempt) parameter.
+}
+
+static void Cmd_stealfoestats(void)
+{
+    s32 i;
+    //If opponent's stat is negative, ignore it
+    //If your stat is lowered and theirs is positive or neutral, set it to yours
+    //If your stat + their stat is smaller than the max, add it to yours
+    //If your stat + their stat exceeds the max, set it to max
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
+    {
+        if(gBattleMons[gBattlerTarget].statStages[i] < DEFAULT_STAT_STAGE)
+        {
+            
+        }
+        else if((gBattleMons[gBattlerAttacker].statStages[i] < DEFAULT_STAT_STAGE && gBattleMons[gBattlerTarget].statStages[i] >= DEFAULT_STAT_STAGE))
+        {
+            gBattleMons[gBattlerAttacker].statStages[i] = gBattleMons[gBattlerTarget].statStages[i];
+        }
+        else if((gBattleMons[gBattlerAttacker].statStages[i] + gBattleMons[gBattlerTarget].statStages[i]) < MAX_STAT_STAGE)
+        {
+            gBattleMons[gBattlerAttacker].statStages[i] += gBattleMons[gBattlerTarget].statStages[i];
+        }
+        else if(gBattleMons[gBattlerAttacker].statStages[i] + gBattleMons[gBattlerTarget].statStages[i] > MAX_STAT_STAGE)
+        {
+            gBattleMons[gBattlerAttacker].statStages[i] = MAX_STAT_STAGE;
+        }
+    }
     gBattlescriptCurrInstr += 5; // Has an unused jump ptr(possibly for a failed attempt) parameter.
 }
 

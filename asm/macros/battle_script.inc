@@ -755,6 +755,10 @@
 	.byte B_SCR_OP_NORMALISEBUFFS
 	.endm
 
+	.macro resetOpponent
+	.byte B_SCR_OP_RESETOPPONENT
+	.endm
+
 	.macro setbide
 	.byte B_SCR_OP_SETBIDE
 	.endm
@@ -924,6 +928,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro queengambit ptr:req
+	.byte B_SCR_OP_QUEENGAMBIT
+	.4byte \ptr
+	.endm
+
 	.macro trysetspikes ptr:req
 	.byte B_SCR_OP_TRYSETSPIKES
 	.4byte \ptr
@@ -984,6 +993,11 @@
 
 	.macro copyfoestats ptr:req
 	.byte B_SCR_OP_COPYFOESTATS
+	.4byte \ptr
+	.endm
+
+	.macro stealfoestats ptr:req
+	.byte B_SCR_OP_STEALFOESTATS
 	.4byte \ptr
 	.endm
 

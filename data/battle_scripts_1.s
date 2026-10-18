@@ -239,6 +239,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSheerCold			 	 @ EFFECT_SPEED_DOWN_HIT_2
 	.4byte BattleScript_EffectLunarBeam				 @ EFFECT_LUNAR_BEAM
 	.4byte BattleScript_EffectBurnHit			 	 @ EFFECT_METEOR_BLAST
+	.4byte BattleScript_EffectQueenGambit			 @ EFFECT_QUEEN_GAMBIT
+	.4byte BattleScript_EffectKingsRansom			 @ EFFECT_KINGS_RANSOM
+	
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -608,6 +611,20 @@ BattleScript_EffectHaze::
 	printstring STRINGID_STATCHANGESGONE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectKingsRansom::
+	attackcanceler
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+	stealfoestats BattleScript_ButItFailed
+	resetOpponent
+	printstring STRINGID_PKMNBEENFOUNDGUILTY
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+
 
 BattleScript_EffectBide::
 	attackcanceler
@@ -2881,6 +2898,43 @@ BattleScript_CantLowerMultipleStats::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+
+BattleScript_EffectQueenGambit::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_QueenGambitDoMoveAnim
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_CantLowerMultipleStats
+BattleScript_QueenGambitDoMoveAnim::
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	attackanimation
+	waitanimation
+	queengambit BattleScript_ButItFailed
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_PKMNFELLFORQUEENSGAMBIT
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_ATTACKER
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_MULTIPLE_STATS
+	playstatchangeanimation BS_TARGET, BIT_DEF, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_DEF, 2, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_QueenGambitTryLowerSpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_QueenGambitTryLowerSpDef
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_QueenGambitTryLowerSpDef::
+	playstatchangeanimation BS_TARGET, BIT_SPDEF, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_SPDEF, 2, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_QueenGambitEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_QueenGambitEnd
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_QueenGambitEnd::
+	goto BattleScript_MoveEnd
+
+
 BattleScript_EffectCosmicPower::
 	attackcanceler
 	attackstring
@@ -4428,6 +4482,7 @@ BattleScript_IlluminateActivatesLoop:
 	trygetilluminatetarget BattleScript_IlluminateActivatesReturn
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IlluminateActivatesLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IlluminatePrevented
+	jumpifability BS_TARGET, ABILITY_IRON_BODY, BattleScript_IlluminatePrevented
 	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IlluminatePrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IlluminatePrevented
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_IlluminateActivatesLoopIncrement
