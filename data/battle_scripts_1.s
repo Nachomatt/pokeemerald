@@ -241,6 +241,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBurnHit			 	 @ EFFECT_METEOR_BLAST
 	.4byte BattleScript_EffectQueenGambit			 @ EFFECT_QUEEN_GAMBIT
 	.4byte BattleScript_EffectKingsRansom			 @ EFFECT_KINGS_RANSOM
+	.4byte BattleScript_EffectHibernation			 @ EFFECT_HIBERNATION
 	
 
 BattleScript_EffectHit::
@@ -788,6 +789,22 @@ BattleScript_EffectLightScreen::
 BattleScript_EffectTriAttack::
 	setmoveeffect MOVE_EFFECT_TRI_ATTACK
 	goto BattleScript_EffectHit
+
+
+BattleScript_EffectHibernation::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
+	jumpifcantmakeasleep BattleScript_RestCantSleep
+	tryhibernate BattleScript_AlreadyAtFullHp
+	pause B_WAIT_TIME_SHORT
+	printfromtable gRestUsedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_ATTACKER
+	waitstate
+	goto BattleScript_PresentHealTarget
+
 
 BattleScript_EffectRest::
 	attackcanceler

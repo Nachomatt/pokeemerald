@@ -395,6 +395,7 @@ gBattleAnims_Moves::
 	.4byte Move_ECLIPSE
 	.4byte Move_QUEEN_GAMBIT
 	.4byte Move_KINGS_RANSOM
+	.4byte Move_HIBERNATION
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -5360,6 +5361,33 @@ Move_REST:
 	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
 	waitforvisualfinish
 	end
+
+Move_HIBERNATION:
+	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
+	loadspritegfx ANIM_TAG_LETTER_Z
+	loadspritegfx ANIM_TAG_NOISE_LINE
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_ROAR
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, ANIM_ATTACKER, 1
+	delay 12
+	call RoarEffect
+	createvisualtask SoundTask_PlayCryHighPitch, 2, ANIM_ATTACKER, 3
+	waitforvisualfinish
+	delay 15
+	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
+	delay 20
+	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
+	delay 20
+	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
+	delay 20
+	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
+	delay 20
+	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
+	delay 20
+	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
+	waitforvisualfinish
+	end
+
+
 
 Move_CONFUSION:
 	monbg ANIM_DEF_PARTNER

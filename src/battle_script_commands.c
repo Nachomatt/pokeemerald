@@ -206,6 +206,7 @@ static void Cmd_setreflect(void);
 static void Cmd_setseeded(void);
 static void Cmd_manipulatedamage(void);
 static void Cmd_trysetrest(void);
+static void Cmd_tryhibernate(void);
 static void Cmd_jumpifnotfirstturn(void);
 static void Cmd_nop(void);
 static void Cmd_jumpifcantmakeasleep(void);
@@ -466,6 +467,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
         [B_SCR_OP_SETSEEDED] = Cmd_setseeded,                                             // 0x7F
         [B_SCR_OP_MANIPULATEDAMAGE] = Cmd_manipulatedamage,                               // 0x80
         [B_SCR_OP_TRYSETREST] = Cmd_trysetrest,                                           // 0x81
+        [B_SCR_OP_TRYHIBERNATE] = Cmd_tryhibernate,                                           // 0x81
         [B_SCR_OP_JUMPIFNOTFIRSTTURN] = Cmd_jumpifnotfirstturn,                           // 0x82
         [B_SCR_OP_NOP] = Cmd_nop,                                                         // 0x83
         [B_SCR_OP_JUMPIFCANTMAKEASLEEP] = Cmd_jumpifcantmakeasleep,                       // 0x84
@@ -6832,6 +6834,30 @@ static void Cmd_trysetrest(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_REST;
 
         gBattleMons[gBattlerTarget].status1 = STATUS1_SLEEP_TURN(3);
+        BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gBattlescriptCurrInstr += 5;
+    }
+}
+
+static void Cmd_tryhibernate(void)
+{
+    const u8 *failJump = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    gActiveBattler = gBattlerTarget = gBattlerAttacker;
+    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP * (-1);
+
+    if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
+    {
+        gBattlescriptCurrInstr = failJump;
+    }
+    else
+    {
+        if (gBattleMons[gBattlerTarget].status1 & ((u8)(~STATUS1_SLEEP)))
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_REST_STATUSED;
+        else
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_REST;
+
+        gBattleMons[gBattlerTarget].status1 = STATUS1_SLEEP_TURN(5);
         BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 5;

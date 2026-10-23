@@ -1491,6 +1491,9 @@ static const u8 sQueenGambitDescription[] = _(
 static const u8 sKingsRansomDescription[] = _(
     "Prove the target guilty,\n"
     "stealing stat boosts.");
+static const u8 sHiberNationDescription[] = _(
+    "Sleeps deeply for 4 turns,\n"
+    "restoring HP and status.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1873,6 +1876,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_ECLIPSE - 1] = sEclipseDescription,
     [MOVE_QUEEN_GAMBIT - 1] = sQueenGambitDescription,
     [MOVE_KINGS_RANSOM - 1] = sKingsRansomDescription,
+    [MOVE_HIBERNATION - 1] = sHiberNationDescription,
     
     
     

@@ -713,6 +713,11 @@
 	.4byte \ptr
 	.endm
 
+	.macro tryhibernate ptr:req
+	.byte B_SCR_OP_TRYHIBERNATE
+	.4byte \ptr
+	.endm
+
 	.macro jumpifnotfirstturn ptr:req
 	.byte B_SCR_OP_JUMPIFNOTFIRSTTURN
 	.4byte \ptr

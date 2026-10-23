@@ -380,6 +380,7 @@
 #define MOVE_ECLIPSE 376
 #define MOVE_QUEEN_GAMBIT 377
 #define MOVE_KINGS_RANSOM 378
+#define MOVE_HIBERNATION 379
 
 
 
@@ -394,7 +395,8 @@
 
 
 
-#define MOVES_COUNT 379
+
+#define MOVES_COUNT 380
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
